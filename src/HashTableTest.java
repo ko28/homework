@@ -84,18 +84,21 @@ public class HashTableTest{
             HashTableADT htIntegerKey = new HashTable<Integer,String>();
             ArrayList<Integer> list = new ArrayList<Integer>();
             for(int i = 0; i < 200; i++) {
-            	int temp = (int) Math.random()*10000;
+            	int temp = (int) (Math.random()*10000);
             	if(!list.contains(temp)) {
             		list.add(temp);
             		htIntegerKey.insert(temp, temp + "  i:" + i);
             	}
-            	else {
-            		i--;
-            	}
             }
-            for(int i = 0; i < 200; i++) {
-            	htIntegerKey.remove(list.get(i));
-            	list.remove(i);
+            int z = list.size();
+            for(int i = z; i > -1; i--) {
+            	System.out.println(i);
+            	htIntegerKey.remove(list.get(0));
+            	list.remove(0);
+            }
+            if(htIntegerKey.numKeys() != 0) {
+            	System.out.println(htIntegerKey.numKeys());
+            	fail();
             }
         } 
         catch (Exception e) {
