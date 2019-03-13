@@ -62,7 +62,7 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 		}
 
 		// Check if table is past our load threshold
-		if (numOfElements >= loadFactorThreshold * tableSize) {
+		if ((double)numOfElements >= loadFactorThreshold * (double)tableSize) {
 			this.resize();
 		}
 
@@ -101,7 +101,8 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 	 */
 	private void resize() {
 		// New double(ish), pseudo prime sized table
-		hashPair[] newTable = new hashPair[tableSize * 2 + 1];
+		tableSize = tableSize * 2 + 1;
+		hashPair[] newTable = new hashPair[tableSize];
 
 		// Rehashing and moving values to new table
 		for (int i = 0; i < table.length; i++) {
@@ -126,22 +127,29 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 	 */
 	@Override
 	public boolean remove(K key) throws IllegalNullKeyException {
-		// Check if key is null
+		// Case #00: Check if key is null
 		if(key == null) {
 			throw new IllegalNullKeyException();
 		}
 		
-		// Case #01: First item in the list is key
+		// Case #01: Linked list at hash index is empty
+		if(table[this.calculateHashIndex(key)] == null) {
+			return false;
+		}
+		
+		// Case #02: First item in the list is key
 		if(table[this.calculateHashIndex(key)].key.equals(key)) {
 			table[this.calculateHashIndex(key)] = table[this.calculateHashIndex(key)].chain;
+			numOfElements--;
 			return true;
 		}
 		
-		// Case #02: Iterate through linked list to search for key
+		// Case #03: Iterate through linked list to search for key
 		hashPair temp = table[this.calculateHashIndex(key)];
 		while(temp.chain != null) {
 			if(temp.chain.equals(key)) {
 				temp = temp.chain.chain;
+				numOfElements--;
 				return true;
 			}
 			temp = temp.chain;
