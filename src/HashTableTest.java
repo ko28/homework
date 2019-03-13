@@ -7,7 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
- 
+
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -25,7 +26,7 @@ public class HashTableTest{
     // TODO: add code that runs before each test method
     @Before
     public void setUp() throws Exception {
-
+    	
     }
 
     // TODO: add code that runs after each test method
@@ -57,7 +58,7 @@ public class HashTableTest{
             fail("collision resolution must be indicated with 1-9");
     }
         
-    /** IMPLEMENTED AS EXAMPLE FOR YOU
+    /** 
      * Tests that insert(null,null) throws IllegalNullKeyException
      */
     @Test
@@ -74,5 +75,31 @@ public class HashTableTest{
     }
     
     // TODO add your own tests of your implementation
-    
+    /** 
+     * Tests that insert(null,null) throws IllegalNullKeyException
+     */
+    @Test
+    public void test002_Insert_and_Remove() {
+        try {
+            HashTableADT htIntegerKey = new HashTable<Integer,String>();
+            ArrayList<Integer> list = new ArrayList<Integer>();
+            for(int i = 0; i < 200; i++) {
+            	int temp = (int) Math.random()*10000;
+            	if(!list.contains(temp)) {
+            		list.add(temp);
+            		htIntegerKey.insert(temp, temp + "  i:" + i);
+            	}
+            	else {
+            		i--;
+            	}
+            }
+            for(int i = 0; i < 200; i++) {
+            	htIntegerKey.remove(list.get(i));
+            	list.remove(i);
+            }
+        } 
+        catch (Exception e) {
+            fail("should not throw exception "+e.getClass().getName());
+        }
+    }
 }
