@@ -1,28 +1,31 @@
-// TODO: add the header 
+/////////////////////////////////////////////////////////////////////////////////////////
+//
+// Title: Hash Table 
+// Files: HashTable.java, HashTableTest.java, HashTableADT.java, 
+//	      DuplicateKeyException.java, IllegalNullKeyException.java, 
+//		  KeyNotFoundException.java, DataStructureADT.java
+//
+// Course: CS400, Spring, 2019
+// Due Date: 3/14/2019
+//
+// Author: Daniel Ko
+// Email: ko28@wisc.edu
+// Lecturer's Name: Deb Deppeler (Lecture 002)
+//
+/////////////////////////////////////////////////////////////////////////////////////////
 
-// TODO: comment and complete your HashTableADT implementation
-// DO ADD UNIMPLEMENTED PUBLIC METHODS FROM HashTableADT and DataStructureADT TO YOUR CLASS
-// DO IMPLEMENT THE PUBLIC CONSTRUCTORS STARTED
-// DO NOT ADD OTHER PUBLIC MEMBERS (fields or methods) TO YOUR CLASS
-//
-// TODO: implement all required methods
-//
-// TODO: describe the collision resolution scheme you have chosen
-// identify your scheme as open addressing or bucket
-//
-// TODO: explain your hashing algorithm here 
-// NOTE: you are not required to design your own algorithm for hashing,
-//       since you do not know the type for K,
-//       you must use the hashCode provided by the <K key> object
-//       and one of the techniques presented in lecture
-//
 /**
- * TODO: talk about O(1) and O(N) and shit
+ * HashTable.java is a data structure that generates a unique hash index for a 
+ * given key and stores the key,value pair in that index. Hash table's goal is 
+ * to be extremely fast, having an average search, insert, and delete of O(1).
+ * Its worse case scenario is O(N). If two keys have the same index, buckets 
+ * of linked lists will be used. Each key,value pair will act as a singly linked
+ * node in a linked list. 
  * 
  * @author Daniel Ko
  *
- * @param <K>
- * @param <V>
+ * @param <K> - key
+ * @param <V> - value
  */
 public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V> {
 
@@ -46,7 +49,6 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 	 * @param initialCapacity
 	 * @param loadFactorThreshold
 	 */
-	// TODO: wtf about initial capacity, loadfactorthreshold. throw exception?
 	public HashTable(int initialCapacity, double loadFactorThreshold) {
 		// Initialize instance variables
 		tableSize = initialCapacity;
@@ -54,6 +56,14 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 		table = new hashPair[tableSize];
 	}
 
+	/**
+	 * Add the key,value pair to the data structure and increase the number of keys.
+	 * 
+	 * @param key   - the key of key,value pair we want to add
+	 * @param value - the value of key,value pair we want to add
+	 * @throws IllegalNullKeyException if key is null
+	 * @throws DuplicateKeyException   if key is already inside the hash table
+	 */
 	@Override
 	public void insert(K key, V value) throws IllegalNullKeyException, DuplicateKeyException {
 		// Check if key is not null
@@ -62,7 +72,7 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 		}
 
 		// Check if table is past our load threshold
-		if ((double)numOfElements >= loadFactorThreshold * (double)tableSize) {
+		if ((double) numOfElements >= loadFactorThreshold * (double) tableSize) {
 			this.resize();
 		}
 
@@ -76,7 +86,6 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 
 		// Case #02: pair is already at hash location, must use linked list bucket
 		// method
-		// TODO: make sure this actually works
 		else {
 			hashPair temp = table[pair.hashIndex];
 			while (temp.chain != null) {
@@ -121,40 +130,44 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 	}
 
 	/**
-	 * If key is found, remove the key,value pair from the data structure 
-	 * decrease number of keys. return true If key is null, throw
-	 * IllegalNullKeyException If key is not found, return false
+	 * Remove the key,value pair from the data structure if key is found and
+	 * decrease number of keys.
+	 * 
+	 * @param key - the key which hashPair we want to remove
+	 * @return true if key is removed, false if key does not exist
+	 * @throws IllegalNullKeyException if key is null
 	 */
 	@Override
 	public boolean remove(K key) throws IllegalNullKeyException {
 		// Case #00: Check if key is null
-		if(key == null) {
+		if (key == null) {
 			throw new IllegalNullKeyException();
 		}
-		
+
 		// Case #01: Linked list at hash index is empty
-		if(table[this.calculateHashIndex(key)] == null) {
+		if (table[this.calculateHashIndex(key)] == null) {
+			numOfElements--;
 			return false;
 		}
-		
+
 		// Case #02: First item in the list is key
-		if(table[this.calculateHashIndex(key)].key.equals(key)) {
+		if (table[this.calculateHashIndex(key)].key.equals(key)) {
 			table[this.calculateHashIndex(key)] = table[this.calculateHashIndex(key)].chain;
 			numOfElements--;
 			return true;
 		}
-		
+
 		// Case #03: Iterate through linked list to search for key
 		hashPair temp = table[this.calculateHashIndex(key)];
-		while(temp.chain != null) {
-			if(temp.chain.equals(key)) {
+		while (temp.chain != null) {
+			if (temp.chain.equals(key)) {
 				temp = temp.chain.chain;
 				numOfElements--;
 				return true;
 			}
 			temp = temp.chain;
 		}
-		
+
 		// Case #03: No key was found
 		return false;
 	}
@@ -189,7 +202,7 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 	}
 
 	/**
-	 * @return number of elements in this table
+	 * @return number of elements/hashPair in this table
 	 */
 	@Override
 	public int numKeys() {
@@ -219,7 +232,7 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 	 */
 	@Override
 	public double getLoadFactor() {
-		return numOfElements / tableSize;
+		return (double) numOfElements / (double) tableSize;
 	}
 
 	/**
@@ -285,10 +298,10 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 	 * Class for data type that will hold our key,value pair
 	 */
 	private class hashPair<K extends Comparable<K>, V> {
-		private K key;
-		private V value;
-		private int hashIndex;
-		private hashPair chain;
+		private K key; // Key for key,value pair
+		private V value; // Value for key,value pair
+		private int hashIndex; // Hash Index from hashCode % table size
+		private hashPair chain; // Next node in linked list
 
 		/**
 		 * Constructor for hashPair
