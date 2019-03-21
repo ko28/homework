@@ -1,0 +1,19 @@
+p3b CONCLUSIONS.TXT
+
+Complete p3b and answer the following questions using results of running
+Java Flight Recorder and Java Mission Control to justify your conclusions..
+
+1) What can you tell about the performance of your hash table implementation compared to Java's tree map? 
+Explain why (or when) your hash table is better or worse than Java's Tree Map.
+
+
+2) What did you observe in java mission control to come to the conclusion above?
+
+
+3) SCREENSHOT_001.PNG NOTES: Briefly describe what this image 001 shows
+
+
+4) SCREENSHOT_002.PNG NOTES: Briefly describe what this image 002 shows
+
+
+5) Describe other screenshots if you include them in your submission.
