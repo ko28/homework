@@ -15,6 +15,7 @@
  */
 
 // Used as the data structure to test our hash table against
+
 import java.util.TreeMap;
 
 /**
@@ -70,8 +71,14 @@ public class MyProfiler<K extends Comparable<K>, V> {
             // execute the insert method of profile as many times as numElements
             // execute the retrieve method of profile as many times as numElements
             // See, ProfileSample.java for example.
+            MyProfiler<Integer, Integer> profile = new MyProfiler<Integer, Integer>();
+            for(int i = 0; i < numElements; i++) {
+            	profile.insert(i, i);
+            }
+            for(int i = 0; i < numElements; i++) {
+            	profile.retrieve(i);
+            }
             
-        
             String msg = String.format("Inserted and retreived %d (key,value) pairs", numElements);
             System.out.println(msg);
         }
