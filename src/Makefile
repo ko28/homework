@@ -4,10 +4,10 @@ SAMPLE_PROFILE_SETTINGS = java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder
 SAMPLE_HEAP_STATS_SETTINGS = java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder \
  -XX:FlightRecorderOptions=defaultrecording=true,dumponexit=true,dumponexitpath=./sample_heap_stats_profile.jfr,settings=heap_stats.jfc
 
-MY_PROFILE_SETTINGS = java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder \
+MY_PROFILE_SETTINGS = java -Xmx4096m -XX:+UnlockCommercialFeatures -XX:+FlightRecorder \
  -XX:FlightRecorderOptions=defaultrecording=true,dumponexit=true,dumponexitpath=./my_profile.jfr,settings=profile
 
-MY_HEAP_STATS_SETTINGS = java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder \
+MY_HEAP_STATS_SETTINGS = java -Xmx4096m -XX:+UnlockCommercialFeatures -XX:+FlightRecorder \
  -XX:FlightRecorderOptions=defaultrecording=true,dumponexit=true,dumponexitpath=./my_heap_stats_profile.jfr,settings=heap_stats.jfc
 
 

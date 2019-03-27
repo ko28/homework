@@ -54,12 +54,32 @@ public class MyProfiler<K extends Comparable<K>, V> {
     	treemap.put(key, value);
     }
     
+    /**
+     * 
+     * @param key
+     * @throws IllegalNullKeyException
+     * @throws KeyNotFoundException
+     */
     public void retrieve(K key) throws IllegalNullKeyException, KeyNotFoundException {
         // get value V for key K from data structures
     	hashtable.get(key);
     	treemap.get(key);
     }
     
+    /**
+     * 
+     * @param key
+     * @throws IllegalNullKeyException
+     */
+    public void remove(K key) throws IllegalNullKeyException{
+    	hashtable.remove(key);
+    	treemap.remove(key);
+    }
+    
+    /**
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             int numElements = Integer.parseInt(args[0]);
@@ -77,6 +97,9 @@ public class MyProfiler<K extends Comparable<K>, V> {
             }
             for(int i = 0; i < numElements; i++) {
             	profile.retrieve(i);
+            }
+            for(int i = 0; i< numElements; i++) {
+            	profile.remove(i);
             }
             
             String msg = String.format("Inserted and retreived %d (key,value) pairs", numElements);
