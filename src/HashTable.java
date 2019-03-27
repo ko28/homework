@@ -1,18 +1,18 @@
-/////////////////////////////////////////////////////////////////////////////////////////
-//
-// Title: Hash Table 
-// Files: HashTable.java, HashTableTest.java, HashTableADT.java, 
-//	      DuplicateKeyException.java, IllegalNullKeyException.java, 
-//		  KeyNotFoundException.java, DataStructureADT.java
-//
-// Course: CS400, Spring, 2019
-// Due Date: 3/14/2019
-//
-// Author: Daniel Ko
-// Email: ko28@wisc.edu
-// Lecturer's Name: Deb Deppeler (Lecture 002)
-//
-/////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Filename:   HashTable.java
+ * Project:    p3b-performance 
+ * Authors:    Daniel Ko, Lecture 002
+ *
+ * Semester:   Spring 2019
+ * Course:     CS400
+ * 
+ * Due Date:   11:59pm March 28 
+ * Version:    1.0
+ * 
+ * Credits:    n/a
+ * 
+ * Bugs:       n/a
+ */
 
 /**
  * HashTable.java is a data structure that generates a unique hash index for a 
@@ -22,7 +22,6 @@
  * of linked lists will be used. Each key,value pair will act as a singly linked
  * node in a linked list. 
  * 
- * @author Daniel Ko
  *
  * @param <K> - key
  * @param <V> - value
