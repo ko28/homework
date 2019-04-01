@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -8,15 +9,21 @@ import java.util.Set;
  * Authors:    
  * 
  * Directed and unweighted graph implementation
+ * using adjacency list 
+ * @param <T> TODO: IS THIS LEGAL?????
  */
 
 public class Graph implements GraphADT {
+	ArrayList<GraphNode<String>> vertices; // 
+	ArrayList<ArrayList<Integer>> successors; // Adjacency List
+	
 	
 	/*
 	 * Default no-argument constructor
 	 */ 
 	public Graph() {
-		
+		vertices = new ArrayList<GraphNode<String>>();
+		successors = new ArrayList<ArrayList<Integer>>();
 	}
 
 	/**
@@ -31,6 +38,15 @@ public class Graph implements GraphADT {
      * 2. vertex is not already in the graph 
      */
 	public void addVertex(String vertex) {
+		// Case 0a: Vertex is null
+		if(vertex == null) {
+			return;
+		}
+		// Case 0b: Graph contains vertex
+		if(vertices)) {
+			return;
+		}
+		
 		
 	}
 
@@ -112,4 +128,16 @@ public class Graph implements GraphADT {
 	public int order() {
         return -1;
     }
+	
+	/**
+	 * 
+	 * @author Daniel Ko
+	 *
+	 * @param <T>
+	 */
+	private class GraphNode<T>{
+		private T data;
+		private boolean visted;
+		private List<GraphNode<T>> neighbors;
+	}
 }
