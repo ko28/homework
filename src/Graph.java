@@ -6,24 +6,21 @@ import java.util.Set;
 /**
  * Filename:   Graph.java
  * Project:    p4
- * Authors:    
+ * Authors:    Daniel Ko
  * 
  * Directed and unweighted graph implementation
  * using adjacency list 
- * @param <T> TODO: IS THIS LEGAL?????
  */
 
 public class Graph implements GraphADT {
-	ArrayList<GraphNode<String>> vertices; // 
-	ArrayList<ArrayList<Integer>> successors; // Adjacency List
-	
+	ArrayList<GraphNode> adjacencyList; // Adjacency List
 	
 	/*
 	 * Default no-argument constructor
+	 * Instantiates adjacencyList
 	 */ 
 	public Graph() {
-		vertices = new ArrayList<GraphNode<String>>();
-		successors = new ArrayList<ArrayList<Integer>>();
+		adjacencyList = new ArrayList<GraphNode>();
 	}
 
 	/**
@@ -42,11 +39,16 @@ public class Graph implements GraphADT {
 		if(vertex == null) {
 			return;
 		}
+		
 		// Case 0b: Graph contains vertex
-		if(vertices)) {
-			return;
+		for(GraphNode n : adjacencyList) {
+			if(n.data.equals(vertex)) {
+				return;
+			}
 		}
 		
+		// Case 1: Added to graph, no edges yet
+		adjacencyList.add(new GraphNode(vertex));
 		
 	}
 
@@ -63,8 +65,24 @@ public class Graph implements GraphADT {
      * 2. vertex is not already in the graph 
      */
 	public void removeVertex(String vertex) {
-
+		 
+		// Case 0a: Vertex is null
+		if(vertex == null) {
+			return;
+		}
+				
+		// Case 0b: Graph contains vertex
+		for(GraphNode n : adjacencyList) {
+			if(n.data.equals(vertex)) {
+				return;
+			}
+		}
+		
+		
+		
+		
 	}
+
 
 	/**
      * Add the edge from vertex1 to vertex2
@@ -135,9 +153,14 @@ public class Graph implements GraphADT {
 	 *
 	 * @param <T>
 	 */
-	private class GraphNode<T>{
-		private T data;
-		private boolean visted;
-		private List<GraphNode<T>> neighbors;
+	private class GraphNode{
+		private String data;
+		private List<String> neighbors;
+		
+		public GraphNode(String input) {
+			this.data = input;
+			neighbors = new ArrayList<String>();
+		}
+		
 	}
 }
