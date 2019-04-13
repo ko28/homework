@@ -248,6 +248,6 @@ public class Graph implements GraphADT {
 		public GraphNode(String input) {
 			this.data = input;
 			neighbors = new ArrayList<String>();
-		}
+			}
 	}
 }

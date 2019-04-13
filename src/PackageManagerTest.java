@@ -39,5 +39,18 @@ public class PackageManagerTest {
 			fail();
 		}
 	}
+	
+	public void test002_() {
+		try {
+			pm.constructGraph("src/valid.json");
+			pm.getInstallationOrderForAllPackages();
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CycleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 

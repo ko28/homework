@@ -1,8 +1,11 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -102,7 +105,8 @@ public class PackageManager {
      * dependency graph.
      */
     public List<String> getInstallationOrder(String pkg) throws CycleException, PackageNotFoundException {
-        return null;
+        
+    	return null;
     }
     
     /**
@@ -141,7 +145,48 @@ public class PackageManager {
      * @throws CycleException if you encounter a cycle in the graph
      */
     public List<String> getInstallationOrderForAllPackages() throws CycleException {
-        return null;
+    	// List of all vertices
+    	List<String> vertices = new ArrayList<String>(graph.getAllVertices());
+    	// List that will hold all the sorted nodes 
+    	List<String> ordered = new ArrayList<String>(); 
+    	// 
+    	boolean[] visited = new boolean[graph.order()];
+    	boolean[] tempMark = new boolean[graph.order()];
+    	
+    	for(String n : this.graph.getAllVertices()) {
+    		this.visit(n, vertices, ordered, visited, tempMark);
+    	}
+    	return ordered;
+    }
+    
+    /**
+     * 
+     * @param vertex
+     * @param vertices
+     * @param ordered
+     * @param visited
+     * @param tempMark
+     * @throws CycleException
+     */
+    private void visit(String vertex, List<String> vertices, List<String> ordered, boolean[] visited, boolean[] tempMark) throws CycleException {
+    	int currIndex = vertices.indexOf(vertex);
+    	// We have been here before
+    	if(visited[currIndex]) {
+    		return;
+    	}
+    	// Cycle is detected here, not a directed acyclic graph
+    	if(tempMark[currIndex]) {
+    		throw new CycleException();
+    	}
+    	
+    	tempMark[currIndex] = true;
+    	for(String dunno : graph.getAdjacentVerticesOf(vertex)) {
+    		visit(dunno, vertices, ordered, visited, tempMark);
+    	}
+    	tempMark[currIndex] = false;
+    	
+    	visited[currIndex] = true;
+    	ordered.add(vertex);
     }
     
     /**

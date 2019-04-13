@@ -1,0 +1,32 @@
+    	int num = graph.order(); // Number of vertices
+        boolean isVisited[] = new boolean[num]; // All vertices are marked as unvisited
+        
+        // Look for vertices with no predecessor 
+        List<String> vertices = new ArrayList<String>(graph.getAllVertices());
+        int[] inDegree = new int[vertices.size()]; // # of incoming edges
+        // Iterate through vertex list, go through each adjacency list add to incomingEdges
+        for(int i = 0; i < vertices.size(); i++) {
+        	List<String> currentAdjV = graph.getAdjacentVerticesOf(vertices.get(i));
+        	for(int j = 0; i < currentAdjV.size(); j++) {
+        		inDegree[vertices.indexOf(currentAdjV.get(j))]++;
+        	}
+        }
+        
+        // If vertex's in degree is 0, add to queue
+        Stack<String> st = new Stack<String>(); 
+        for(int a = 0; a < inDegree.length; a++) {
+        	if(inDegree[a]==0) {
+        		isVisited[a] = true;
+        		st.add(vertices.get(a));
+        	}
+        }
+        
+        while(!st.empty()) {
+        	String curr = st.peek();
+        	List<String> currAdjList = graph.getAdjacentVerticesOf(curr);
+        	for(int b = 0; b < currAdjList.size(); b++) {
+        		if(!isVisited[vertices.indexOf(currAdjList.get(b))]) {
+        			
+        		}
+        	}
+        }
