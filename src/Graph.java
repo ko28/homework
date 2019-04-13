@@ -13,7 +13,9 @@ import java.util.Set;
  */
 
 public class Graph implements GraphADT {
-	ArrayList<GraphNode> adjacencyList; // Adjacency List
+	ArrayList<GraphNode> adjacencyList; // Adjacency List 
+	int size; // Number of vertexes 
+	int order; //Number of edges
 	
 	/*
 	 * Default no-argument constructor
@@ -21,6 +23,8 @@ public class Graph implements GraphADT {
 	 */ 
 	public Graph() {
 		adjacencyList = new ArrayList<GraphNode>();
+		size = 0;
+		order = 0;
 	}
 
 	/**
@@ -49,7 +53,7 @@ public class Graph implements GraphADT {
 		
 		// Case 1: Added to graph, no edges yet
 		adjacencyList.add(new GraphNode(vertex));
-		
+		size++;
 	}
 
 	/**
@@ -78,9 +82,24 @@ public class Graph implements GraphADT {
 			}
 		}
 		
-		
-		
-		
+		// Case 1: Remove vertex of graph
+		for(int i = 0; i < adjacencyList.size(); i++) {
+			// Case 1a: Found vertex and removed
+			if(adjacencyList.get(i).data.equals(vertex)) {
+				adjacencyList.remove(i);
+				size--;
+			}
+			else {
+				// Case 1b: Iterate through edges and remove if vertex from it
+				for(int z = 0; z < adjacencyList.get(i).neighbors.size(); z++) {
+					if(adjacencyList.get(i).neighbors.get(z).equals(vertex)) {
+						adjacencyList.get(i).neighbors.remove(z);
+						order--;
+						break;
+					}
+				}
+			}
+		}
 	}
 
 
@@ -98,7 +117,36 @@ public class Graph implements GraphADT {
      * 3. the edge is not in the graph
 	 */
 	public void addEdge(String vertex1, String vertex2) {
+		// Case 0a: Vertex input(s) are null
+		if(vertex1 == null || vertex2 == null) {
+			return;
+		}
 		
+			// Store index of vertex1 and vertex 2 if found 
+			int v1 = -1; 
+			int v2 = -1;
+			
+		// Case 0b: Vertex does not exist
+		for(int i = 0; i < adjacencyList.size(); i++) {
+			if(adjacencyList.get(i).data.equals(vertex1)) {
+				v1 = i;
+			}
+			if(adjacencyList.get(i).data.equals(vertex2)) {
+				v2 = i;
+			}
+		}
+			// Vertex was not found 
+			if(v1 == -1 || v2 == -1) {
+				return;
+			}
+		
+		// Case 0c: Edge already exists from vertex 1 to vertex 2
+		if(adjacencyList.get(v1).neighbors.contains(vertex2)) {
+			return;
+		}
+		
+		// Case 1: Add edge from vertex 1 to vertex 2
+		adjacencyList.get(v1).neighbors.add(vertex2);
 	}
 	
 	/**
@@ -130,6 +178,7 @@ public class Graph implements GraphADT {
      *
 	 */
 	public List<String> getAdjacentVerticesOf(String vertex) {
+		
 		return null;
 	}
 	
@@ -137,21 +186,18 @@ public class Graph implements GraphADT {
      * Returns the number of edges in this graph.
      */
     public int size() {
-        return -1;
+        return size;
     }
 
 	/**
      * Returns the number of vertices in this graph.
      */
 	public int order() {
-        return -1;
+        return order;
     }
 	
 	/**
 	 * 
-	 * @author Daniel Ko
-	 *
-	 * @param <T>
 	 */
 	private class GraphNode{
 		private String data;
@@ -161,6 +207,5 @@ public class Graph implements GraphADT {
 			this.data = input;
 			neighbors = new ArrayList<String>();
 		}
-		
 	}
 }
