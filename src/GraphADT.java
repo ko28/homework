@@ -89,7 +89,15 @@ public interface GraphADT {
     
     
     /**
-     * Get all the neighbor (adjacent) vertices of a vertex
+     * Get all the neighbor (adjacent-dependencies) of a vertex
+     * 
+     * 4/9 Clarification of getAdjacentVerticesOf method: 
+     * For the example graph, A->[B, C], D->[A, B] 
+     *     getAdjacentVerticesOf(A) should return [B, C]. 
+     * 
+     * In terms of packages, this list contains the immediate 
+     * dependencies of A and depending on your graph structure, 
+     * this could be either the predecessors or successors of A.
      * 
      * @param vertex the specified vertex
      * @return an List<String> of all the adjacent vertices for specified vertex
