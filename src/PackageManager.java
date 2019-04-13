@@ -1,8 +1,12 @@
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -54,7 +58,10 @@ public class PackageManager {
      * @throws ParseException if the given json cannot be parsed 
      */
     public void constructGraph(String jsonFilepath) throws FileNotFoundException, IOException, ParseException {
-        
+        //https://www.geeksforgeeks.org/parse-json-java/
+    	JSONObject jo = (JSONObject) new JSONParser().parse(new FileReader("JSONExample.json")); 
+    	JSONArray packages = (JSONArray) jo.get("packages");
+    	
     }
     
     /**

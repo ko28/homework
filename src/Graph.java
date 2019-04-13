@@ -117,9 +117,10 @@ public class Graph implements GraphADT {
 			return;
 		}
 		
-		// Case 1:
+		// Case 1: Add vertices (if already in graph its fine) and edge btwn them
 		this.addVertex(vertex1);
 		this.addVertex(vertex2);
+		// Search if edge is already between the two vertices
 		for(GraphNode n : adjacencyList) {
 			if(n.data.equals(vertex1) && !(n.neighbors.contains(vertex1))) {
 				n.neighbors.add(vertex2);
@@ -233,12 +234,17 @@ public class Graph implements GraphADT {
     }
 	
 	/**
-	 * 
+	 * Class for node that will hold data and list of edges 
 	 */
 	private class GraphNode{
-		private String data;
-		private List<String> neighbors;
+		private String data; 
+		private List<String> neighbors; // List of edges 
 		
+		/**
+		 * Constructor for GraphNode. 
+		 * 
+		 * @param input - data to hold
+		 */
 		public GraphNode(String input) {
 			this.data = input;
 			neighbors = new ArrayList<String>();
