@@ -59,9 +59,20 @@ public class PackageManager {
      */
     public void constructGraph(String jsonFilepath) throws FileNotFoundException, IOException, ParseException {
         //https://www.geeksforgeeks.org/parse-json-java/
-    	JSONObject jo = (JSONObject) new JSONParser().parse(new FileReader("JSONExample.json")); 
-    	JSONArray packages = (JSONArray) jo.get("packages");
-    	
+    	// Convert file into something java can read
+    	JSONObject jo = (JSONObject) new JSONParser().parse(new FileReader(jsonFilepath));
+    	JSONArray pkg = (JSONArray) jo.get("packages"); // Convert into array of packages 
+    	// Iterate through all packages 
+    	for(int i = 0; i < pkg.size(); i++) {
+    		JSONObject jsonPkg = (JSONObject) pkg.get(i);
+    		String pkgName = (String) jsonPkg.get("name");
+    		graph.addVertex(pkgName); // Add package to graph
+    		JSONArray jsonDep = (JSONArray) jsonPkg.get("dependencies");
+    		// Iterate through all the dependencies of this package 
+    		for(int j = 0; j < jsonDep.size(); j++) {
+    			graph.addEdge(pkgName, (String)jsonDep.get(j));
+    		}
+    	}
     }
     
     /**
@@ -70,7 +81,7 @@ public class PackageManager {
      * @return Set<String> of all the packages
      */
     public Set<String> getAllPackages() {
-        return null;
+    	return graph.getAllVertices();
     }
     
     /**
