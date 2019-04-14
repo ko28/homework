@@ -1,0 +1,6 @@
+http://www.keithschwarz.com/interesting/code/topological-sort/TopologicalSort.java.html
+
+https://en.wikipedia.org/wiki/Topological_sorting#Depth-first_search
+
+https://www.gradescope.com/courses/37000/assignments/190273/submissions/16828367
+https://canvas.wisc.edu/courses/143052/pages/p4-package-manager

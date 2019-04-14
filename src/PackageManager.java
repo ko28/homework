@@ -2,10 +2,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -105,8 +103,23 @@ public class PackageManager {
      * dependency graph.
      */
     public List<String> getInstallationOrder(String pkg) throws CycleException, PackageNotFoundException {
-        
-    	return null;
+    	// List of all vertices
+    	List<String> vertices = new ArrayList<String>(graph.getAllVertices());
+    	int index = vertices.indexOf(pkg);
+    	// Package is not in list of of all vertices
+    	if(index < 0) {
+    		throw new PackageNotFoundException();
+    	}
+    	// List that will hold all the sorted nodes 
+    	List<String> ordered = new ArrayList<String>(); 
+    	
+    	// Arrays that will help us keep track of visited nodes
+    	boolean[] visited = new boolean[graph.order()];
+    	boolean[] tempMark = new boolean[graph.order()];
+    
+    	this.visit(pkg, vertices, ordered, visited, tempMark);
+    	
+    	return ordered;
     }
     
     /**
@@ -129,7 +142,12 @@ public class PackageManager {
      * do not exist in the dependency graph.
      */
     public List<String> toInstall(String newPkg, String installedPkg) throws CycleException, PackageNotFoundException {
-        return null;
+        List<String> installed = getInstallationOrder(installedPkg);
+        List<String> toInstall = getInstallationOrder(newPkg);
+        for(int i = 0; i < installed.size(); i++) {
+        	toInstall.remove(installed.get(i));
+        }
+    	return toInstall;
     }
     
     /**
@@ -149,11 +167,13 @@ public class PackageManager {
     	List<String> vertices = new ArrayList<String>(graph.getAllVertices());
     	// List that will hold all the sorted nodes 
     	List<String> ordered = new ArrayList<String>(); 
-    	// 
+    	// Arrays that will help us keep track of visited nodes
     	boolean[] visited = new boolean[graph.order()];
     	boolean[] tempMark = new boolean[graph.order()];
     	
-    	for(String n : this.graph.getAllVertices()) {
+    	
+    	for(String n : vertices) {
+    		//
     		this.visit(n, vertices, ordered, visited, tempMark);
     	}
     	return ordered;
@@ -203,7 +223,28 @@ public class PackageManager {
      * @throws CycleException if you encounter a cycle in the graph
      */
     public String getPackageWithMaxDependencies() throws CycleException {
-        return "";
+    	// List of all vertices
+    	List<String> vertices = new ArrayList<String>(graph.getAllVertices());
+    	// Integers used for searching for max value
+    	int indexMax = -1;
+    	int maxValue = -1;
+    	// Finding number of dependencies 
+    	for(int i = 0; i < vertices.size(); i++) {
+    		try {
+				List<String> order = this.getInstallationOrder(vertices.get(i));
+				// Greater value than current max is found
+				if(order.size() > maxValue) {
+					indexMax = i;
+					maxValue = order.size();
+				}
+			} 
+    		// This should never happen as all the vertices should be in the graph
+    		catch (PackageNotFoundException e) {
+    			e.printStackTrace(); 
+			}
+    	}
+    	
+    	return vertices.get(indexMax);
     }
 
     public static void main (String [] args) {
