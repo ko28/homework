@@ -34,13 +34,14 @@ import org.json.simple.parser.ParseException;
  * installed before any given package can be installed.
  * all of the packages in
  * 
- * You may add a main method, but we will test all methods with
- * our own Test classes.
+ * All methods related to topological order is implemented using
+ * depth first search. 
+ * https://en.wikipedia.org/wiki/Topological_sorting#Depth-first_search
  */
 
 public class PackageManager {
     
-    private Graph graph;
+    private Graph graph; // Used to hold all packages 
     
     /*
      * Package Manager default no-argument constructor.
@@ -89,10 +90,15 @@ public class PackageManager {
      * Given a package name, returns a list of packages in a
      * valid installation order.  
      * 
+     * Calls the helper method visit to get the topological of 
+     * this pkg only
+     * 
      * Valid installation order means that each package is listed 
      * before any packages that depend upon that package.
      * 
      * @return List<String>, order in which the packages have to be installed
+     * 
+     * @see visit 
      * 
      * @throws CycleException if you encounter a cycle in the graph while finding
      * the installation order for a particular package. Tip: Cycles in some other
@@ -117,6 +123,7 @@ public class PackageManager {
     	boolean[] visited = new boolean[graph.order()];
     	boolean[] tempMark = new boolean[graph.order()];
     
+    	// Gets topological order
     	this.visit(pkg, vertices, ordered, visited, tempMark);
     	
     	return ordered;
@@ -142,8 +149,9 @@ public class PackageManager {
      * do not exist in the dependency graph.
      */
     public List<String> toInstall(String newPkg, String installedPkg) throws CycleException, PackageNotFoundException {
-        List<String> installed = getInstallationOrder(installedPkg);
-        List<String> toInstall = getInstallationOrder(newPkg);
+        List<String> installed = getInstallationOrder(installedPkg); // Topological order for installedPkg
+        List<String> toInstall = getInstallationOrder(newPkg); // Toplogical order for newPkg
+        // Iterate through all installed pkg and remove them from the toInstall list
         for(int i = 0; i < installed.size(); i++) {
         	toInstall.remove(installed.get(i));
         }
@@ -171,22 +179,24 @@ public class PackageManager {
     	boolean[] visited = new boolean[graph.order()];
     	boolean[] tempMark = new boolean[graph.order()];
     	
-    	
+    	// Call dfs on each node 
     	for(String n : vertices) {
-    		//
     		this.visit(n, vertices, ordered, visited, tempMark);
     	}
     	return ordered;
     }
     
     /**
+     * Recursive helper method to sort pkg in topological order.
+     * Goes to the deepest node with no outgoing edges and adds it 
+     * to the ordered list. Implements depth first search. 
      * 
-     * @param vertex
-     * @param vertices
-     * @param ordered
-     * @param visited
-     * @param tempMark
-     * @throws CycleException
+     * @param vertex - current vertex
+     * @param vertices - all nodes in the graph
+     * @param ordered - list that holds the topological order
+     * @param visited - tells us not to come here again 
+     * @param tempMark - allows us to know this graph is cyclic 
+     * @throws CycleException 
      */
     private void visit(String vertex, List<String> vertices, List<String> ordered, boolean[] visited, boolean[] tempMark) throws CycleException {
     	int currIndex = vertices.indexOf(vertex);
@@ -199,14 +209,15 @@ public class PackageManager {
     		throw new CycleException();
     	}
     	
+    	// If we return to this node while in the loop below, we know its cyclic
     	tempMark[currIndex] = true;
+    	// Call dfs on each outgoing edge
     	for(String dunno : graph.getAdjacentVerticesOf(vertex)) {
     		visit(dunno, vertices, ordered, visited, tempMark);
     	}
-    	tempMark[currIndex] = false;
-    	
-    	visited[currIndex] = true;
-    	ordered.add(vertex);
+    	tempMark[currIndex] = false; // remove temp tag
+    	visited[currIndex] = true; // Don't return to this node 
+    	ordered.add(vertex); // This pkg is next to install
     }
     
     /**
@@ -242,13 +253,7 @@ public class PackageManager {
     		catch (PackageNotFoundException e) {
     			e.printStackTrace(); 
 			}
-    	}
-    	
+    	}	
     	return vertices.get(indexMax);
     }
-
-    public static void main (String [] args) {
-        System.out.println("PackageManager.main()");
-    }
-    
 }

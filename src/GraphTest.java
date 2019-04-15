@@ -6,7 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Tests functionality of Graph
@@ -43,11 +45,11 @@ public class GraphTest {
 	@Test
 	public void test002_addOneVertex() {
 		graph.addVertex("hello");
-		if (graph.size() != 1) {
-			fail("size is not 1");
-		}
-		if (graph.order() != 0) {
+		if (graph.size() != 0) {
 			fail("size is not 0");
+		}
+		if (graph.order() != 1) {
+			fail("order is not 1");
 		}
 	}
 
@@ -68,8 +70,11 @@ public class GraphTest {
 
 	}
 	
+	/**
+	 * See if removing null throws anything 
+	 */
 	@Test
-	public void test003_removeNullVertex() {
+	public void test004_removeNullVertex() {
 		graph.addVertex("test1");
 		graph.removeVertex(null);
 		graph.addVertex("test2");
@@ -79,14 +84,76 @@ public class GraphTest {
 		if(graph.size() != 0 && graph.order() != 3) {
 			fail("size != 0 and order != 3");
 		}
-		System.out.println(graph.size());
 		graph.removeVertex("test1");
-		System.out.println(graph.size());
 		graph.removeVertex("test3");
-		System.out.println(graph.size());
 		graph.removeVertex("test3");
-		System.out.println(graph.size());
 		
 	}
-
+	
+	/**
+	 * Try to add an edge
+	 */
+	@Test
+	public void test005_addEdge() {
+		graph.addEdge("ay", "vertex2");
+		if(graph.size() != 1 && graph.order() != 2) {
+			fail("Size != 1 and order != 2");
+		}
+	}
+	
+	/**
+	 * Try to add an edge and remove
+	 */
+	@Test
+	public void test006_addEdgeAndRemove() {
+		graph.addEdge("ay", "vertex2");
+		if(graph.size() != 1 && graph.order() != 2) {
+			fail("Size != 1 and order != 2");
+		}
+		graph.removeEdge("ay", "vertex2");
+		if(graph.size() != 0 && graph.order() != 2) {
+			fail("Size != 0 and order != 2");
+		}
+	}
+	
+	/**
+	 * Add 3 vertices and get all vertices 
+	 */
+	@Test
+	public void test007_getAllVertices() {
+		graph.addEdge("ay", "vertex2");
+		graph.addEdge("lmao", "vertex2");
+		graph.addVertex("when im with the homies");
+		Set<String> getVertices = graph.getAllVertices();
+		if(getVertices.size() != 4){
+			fail("not all vertices were retrieved");
+		}
+		getVertices.remove("ay");
+		getVertices.remove("vertex2");
+		getVertices.remove("lmao");
+		getVertices.remove("when im with the homies");
+		if(getVertices.size() != 0) {
+			fail("Vertices were not the vertices inserted");
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void test008_getAdjacentVerticesOf() {
+		graph.addEdge("ay", "vertex2");
+		graph.addEdge("lmao", "vertex2");
+		graph.addVertex("when im with the homies");
+		graph.addEdge("ay", "when im with the homies");
+		List<String> adjV = graph.getAdjacentVerticesOf("ay");
+		if(adjV.size() != 2){
+			fail("not all adjacent vertices were retrieved");
+		}
+		adjV.remove("vertex2");
+		adjV.remove("when im with the homies");
+		if(adjV.size() != 0){
+			fail("adjacent vertices were not the inputted adjacent vertices");
+		}
+	}
 }

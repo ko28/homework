@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Tests functionality of Graph
+ * Tests functionality of PackageManager
  */
 public class PackageManagerTest {
 	PackageManager pm;
@@ -31,15 +31,14 @@ public class PackageManagerTest {
 	@Test
 	public void test001_constructGraph() {
 		try {
-			pm.constructGraph("src/valid.json");
-			System.out.println(pm.getAllPackages());
-			
+			pm.constructGraph("src/valid.json");			
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
 	
+	@Test
 	public void test002_() {
 		try {
 			pm.constructGraph("src/valid.json");
