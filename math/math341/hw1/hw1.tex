@@ -1,0 +1,47 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+
+\makeatletter
+\newenvironment{Dequation}
+  {%
+  \def\tagform@##1{%
+    \maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+  \ignorespaces
+  }
+  {%
+  \def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+  \ignorespacesafterend
+  }
+\makeatother
+
+\title{Math 341: Homework 1}
+\author{Daniel Ko}
+\date{Spring 2020}
+
+\begin{document}
+\maketitle
+
+\section{A}
+\begin{enumerate}[label=\alph*.]
+	\item{
+		$(p \lor q \Leftrightarrow p \land r) \Rightarrow ((p \Rightarrow p) \land (p \Rightarrow r))$\\
+		\begin{align*}
+			(p \lor q \Leftrightarrow p \land r) & \Rightarrow (p \Rightarrow r) \tag{Transitivity}\\
+			[(p \lor q \Rightarrow p \land r) \land (p \land r \Rightarrow p \lor q)] & \Rightarrow (p \Rightarrow r) \tag{Def. of bicondtional}\\
+			\lnot [(p \lor q \Rightarrow p \land r) \land (p \land r \Rightarrow p \lor q)] & \lor (\lnot p \lor r) \tag{Material Implication}\\
+
+		\end{align*}	
+	}
+\end{enumerate}
+\end{document}
