@@ -421,6 +421,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebbx10.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr9.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebbx10.tfm
 INPUT hw1.aux
 INPUT ./hw1.out
 INPUT ./hw1.out
@@ -430,3 +432,4 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb
+INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb

@@ -35,13 +35,109 @@
 \section{A}
 \begin{enumerate}[label=\alph*.]
 	\item{
+		$p \Rightarrow (p \lor q)$
+		\begin{center}
+		\begin{displaymath}
+		\begin{array}{|c|c|c|c|}
+			\hline
+			p & q & p \lor q & p \Rightarrow (p \lor q) \\ 
+			\hline
+			T & T & T & T\\
+			T & F & T & T\\
+			F & T & T & T\\
+			F & F & F & T\\
+			\hline
+		\end{array}
+		\end{displaymath}
+		\end{center}
+		}
+	\item{
+		$p \lor F \Leftrightarrow F$
+		\begin{center}
+		\begin{displaymath}
+		\begin{array}{|c|c|c|c|}
+			\hline
+			p & F & p \lor F & p \lor F \Leftrightarrow F \\ 
+			\hline
+			T & F & T & T\\
+			F & F & F & T\\
+			\hline
+		\end{array}
+		\end{displaymath}
+		\end{center}
+		}
+	\item{
+		$p \land \lnot p \Leftrightarrow F$
+		\begin{center}
+		\begin{displaymath}
+		\begin{array}{|c|c|c|c|}
+			\hline
+			p & \lnot p & p \land \lnot p & p \land \lnot p \Leftrightarrow F\\ 
+			\hline
+			T & F & F & T\\
+			F & T & F & T\\
+			\hline
+		\end{array}
+		\end{displaymath}
+		\end{center}
+		}
+\end{enumerate}
+
+\section{B}
+\begin{enumerate}[label=\alph*.]
+	\item{
 		$(p \lor q \Leftrightarrow p \land r) \Rightarrow ((p \Rightarrow p) \land (p \Rightarrow r))$\\
 		\begin{align*}
 			(p \lor q \Leftrightarrow p \land r) & \Rightarrow (p \Rightarrow r) \tag{Transitivity}\\
 			[(p \lor q \Rightarrow p \land r) \land (p \land r \Rightarrow p \lor q)] & \Rightarrow (p \Rightarrow r) \tag{Def. of bicondtional}\\
 			\lnot [(p \lor q \Rightarrow p \land r) \land (p \land r \Rightarrow p \lor q)] & \lor (\lnot p \lor r) \tag{Material Implication}\\
-
+			\lnot [(\lnot (p \lor q) \lor (p \land r)) \land (\lnot(p \lor r) \lor (p \lor q))] & \lor (\lnot p \lor r) \tag{Material Implication}\\
+			[\lnot(\lnot (p \lor q) \lor (p \land r)) \lor \lnot(\lnot(p \lor r) \lor (p \lor q))] & \lor (\lnot p \lor r) \tag{De Morgan's Law}\\
+			(\lnot \lnot (p \lor q) \land \lnot (p \land r)) \lor (\lnot \lnot(p \lor r) \land \lnot (p \lor q)) & \lor (\lnot p \lor r) \tag{De Morgan's Law}\\
+			((p \lor q) \land \lnot (p \land r)) \lor ((p \lor r) \land \lnot (p \lor q)) & \lor (\lnot p \lor r) \tag{Double negation}\\
+			(\lnot p \lor r) \lor ((p \lor q) \land \lnot (p \land r)) \lor ((p \lor r) & \land \lnot (p \lor q)) \tag{Commutative}\\
+			((\lnot p \lor r) \lor (p \lor q)) \land ((\lnot p \lor r) \lor \lnot (p \land r)) \lor ((p \lor r) & \land \lnot (p \lor q)) \tag{Distributive} \\
+			(True \land True) \lor ((p \lor r) &\land \lnot (p \lor q)) \tag{Excluded middle}\\
+			True
 		\end{align*}	
 	}
+	\item{
+		$[(p \Rightarrow \lnot q) \land (r \Rightarrow q)] \Rightarrow (p \Rightarrow \lnot r)$
+		\begin{align*}
+			\lnot [(\lnot p \lor \lnot q) \land (\lnot r \land q)] & \lor \lnot p \lor \lnot r \tag{Material Implication}\\
+			\lnot (\lnot p \lor \lnot q) \lor \lnot(\lnot r \land q) & \lor \lnot p \lor \lnot r \tag{De Morgan's Law}\\
+			(p \land q) \lor (r \land \lnot q) & \lor \lnot p \lor \lnot r \tag{De Morgan's Law}\\
+			\lnot p \lor (p \land q) \lor \lnot r \lor (r \land \lnot q) \tag{Commutative}\\
+			[(\lnot p \lor p) \land (\lnot p \lor q)] \lor [(\lnot r \lor r) \land (\lnot r \lor \lnot q)] \tag{Distributive}\\
+			[(True) \land (\lnot p \lor q)] \lor [(True) \land (\lnot r \lor \lnot q)] \tag{Excluded middle}\\
+			\lnot p \lor q \lor \lnot r \lor \lnot q \tag{Excluded middle}\\
+			True 
+		\end{align*}
+		}
+	\item{
+		$(p \Rightarrow q) \Rightarrow [\lnot(q \land r) \Rightarrow \lnot(p \land r)]$	
+		\begin{align*}
+			\lnot(\lnot p \lor q) \lor [\lnot \lnot(q \land r) \lor \lnot(p \land r)] \tag{De Morgan's Law}\\
+			(p \land \lnot q) \lor (q \land r) \lor (\lnot p \lor \lnot r) \tag{De Morgan's Law + Negation}\\
+			\lnot p \lor (p \land \lnot q) \lor \lnot r \lor (q \land r) \tag{Commutative}\\
+			[(\lnot p \lor p) \land (\lnot p \lor \lnot q)] \lor [(\lnot r \lor q) \land (\lnot r \lor r)] \tag{Distributive}\\
+			[(True) \land (\lnot p \lor \lnot q)] \lor [(\lnot r \lor q) \land (True)] \tag{Excluded middle}\\
+			\lnot p \lor \lnot q \lor \lnot r \lor q \tag{Excluded middle}\\
+			True
+		\end{align*}
+		}
+	\item{
+		$[(p \Rightarrow \lnot q) \land (\lnot r \lor q) \land r] \Rightarrow \lnot p$
+		\begin{align*}
+			\lnot [(\lnot p \lor \lnot q) \land (\lnot r \lor q) \land r] \lor \lnot p \tag{Material Implication}\\
+			\lnot (\lnot p \lor \lnot q) \lor \lnot (\lnot r \lor q) \lor \lnot r \lor \lnot p \tag{De Morgan's Law}\\
+			(p \land q) \lor (r \land \lnot q) \lor \lnot r \lor \lnot p \tag{De Morgan's Law}\\
+			\lnot p \lor (p \land q) \lor \lnot r \lor (r \land \lnot q)  \tag{Commutative}\\
+			[(\lnot p \lor p) \land (\lnot p \lor q)] \lor [(\lnot r \lor r) \land (\lnot r \lor \lnot q)] \tag{Distributive}\\
+			[(True) \land (\lnot p \lor q)] \lor [(True) \land (\lnot r \lor \lnot q)] \tag{Excluded middle}\\
+			\lnot p \lor q \lor \lnot r \lor \lnot q \tag{Excluded middle} \\
+			True \tag{Excluded middle} \\
+		\end{align*}
+		}
 \end{enumerate}
 \end{document}
