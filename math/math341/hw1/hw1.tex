@@ -199,7 +199,35 @@
 
 
 \section{C}
-loren ipsum or something 
+\begin{enumerate}[label=\alph*.]
+	\item{
+			Proposition r means q is true if p(x) is true for one x. \\
+			Proposition s means q is true if p(x) is true for all x.
+		}
+	\item{
+			\begin{Dequation}
+			\begin{align*}
+				r & \Leftrightarrow (\forall x)(p(x) \Rightarrow q)\\
+				\lnot r & \Leftrightarrow \lnot [(\forall x)(p(x) \Rightarrow q)]\\
+						& \Leftrightarrow \exists x \lnot (p(x) \Rightarrow q) \tag{Quantifer Negation}\\
+						& \Leftrightarrow \exists x \lnot (\lnot p(x) \lor q) \tag{Material Implication}\\
+						& \Leftrightarrow \exists x (\lnot \lnot p(x) \land \lnot q) \tag{De Morgan's Law}\\
+						& \Leftrightarrow \exists x (p(x) \land \lnot q) \tag{Double Negation}\\
+			\end{align*}
+			\end{Dequation}
+		\begin{Dequation}
+			\begin{align*}
+				s & \Leftrightarrow ((\forall x)p(x)) \Rightarrow q \\
+				\lnot s & \Leftrightarrow \lnot[((\forall x)p(x)) \Rightarrow q]\\
+				& \Leftrightarrow \lnot[\lnot ((\forall x)p(x)) \lor q] \tag{Material Implication}\\
+				& \Leftrightarrow ((\forall x)p(x)) \land \lnot q \tag{De Morgan's Law}
+			\end{align*}
+			\end{Dequation}
+		}
+	\item{
+			s $\Rightarrow$ r is a tautology. If s is true, then r would be true because s requires p(x) to be true for all x while r only requires p(x) for one x to be true. If s is false, then the whole statement would be vacuously true.   
+		}
+\end{enumerate}
 
 \section{D}
 \begin{corollary*}
@@ -268,9 +296,9 @@ Prove that diagonal matrices (as defined in your book in Example 3, Section 1.3)
 
 \section{G}
 Prove that \\
-$W_1 = {(a_1, a_2,\cdots,a_n) \in F^n : a_1 + a_2 + \cdots + a_n= 0$ \\
+$W_1 = \{(a_1, a_2,\cdots,a_n) \in F^n : a_1 + a_2 + \cdots + a_n= 0 \}$ \\
 is a subspace of $F_n$, but\\
-$W_2 = {(a_1, a_2,\cdots,a_n) \in F^n : a_1 + a_2 + \cdots + a_n= 1$ \\
+$W_2 =\{(a_1, a_2,\cdots,a_n) \in F^n : a_1 + a_2 + \cdots + a_n= 1\}$ \\
 is not.
 \begin{proof}
 	Proof that $W_1$ is a subspace of $F^n$
@@ -280,7 +308,8 @@ is not.
 		\begin{Dequation}
 		\begin{align*}
 			\text{Let} \ a_1, a_2, \cdots, a_n & = 0\\
-			0 + 0 + \cdots + 0 & = 0 \in W_1
+			0 + 0 + \cdots + 0 & = 0 \\
+			\text{So the 0 vector: }(0, 0, \cdots, 0) & \in W_1
 		\end{align*}
 		\end{Dequation}
 		}
@@ -313,5 +342,23 @@ is not.
 	}
 	\end{enumerate}
 \end{proof}
+\begin{proof}
+$W_2 =\{(a_1, a_2,\cdots,a_n) \in F^n : a_1 + a_2 + \cdots + a_n= 1\}$ is not a subspace of $F^n$\\
+If $W_2$ is a subspace, there must be closure under vector addition.
+\begin{Dequation}
+	\begin{align*}
+			X = (x_1, x_2, \cdots, x_n) & \quad Y = (y_1, y_2, \cdots, y_n) \\
+			X + Y & = (x_1 + y_1, x_2 + y_2, \cdots, x_n + y_n)\\
+			\sum_{i = 1}^{n} x_i + y_i & = x_1 + y_1 + x_2 + y_2 + \cdots + x_n + y_n\\
+			& = (x_1 + x_2 + \cdots + x_n) + (y_1 + y_2 + \cdots + y_n)\\
+			& = 1 + 1 \\
+			& = 2 \notin W_2 
+	\end{align*}
+\end{Dequation}
+$\therefore W_2$ is not a subspace of $F^n$.\\
+Additionally, there is no 0 vector in $W_2$. 0 vector for polynomial space only exiss if each component in a vector is 0. This is not possible in $W_2$ because the sum of the components must equal 1. 
+\end{proof}
 
+\section{H}
+$W = \{f(x) \in P(F) : f(x) = 0 \text{ or } f(x) \text{ has degree } n\}$
 \end{document}

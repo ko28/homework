@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1580266111 "hw1.tex" "hw1.pdf" "hw1" 1580266111
+["pdflatex"] 1580348779 "hw1.tex" "hw1.pdf" "hw1" 1580348781
   "../../evan.sty" 1580144086 18873 d766cda457a2c03ee9f28997dee0c06e ""
   "/etc/texmf/web2c/texmf.cnf" 1578934342 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
@@ -232,13 +232,13 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1578934385 2700761 ac0584cc9514ab21918550a6948c4ee2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1578934409 4127540 67c6239e9a03bcb77780f889796a9b3c ""
-  "hw1.aux" 1580266022 1851 e53dba64d0ed46e1535ae024ccd464f8 ""
-  "hw1.out" 1580266022 252 a4932d99ad6c9c1c8e07abee7ce40124 ""
-  "hw1.pre" 1580266021 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "hw1.tex" 1580266110 10713 8de692f46e2c156ff54d98a058ff952a ""
+  "hw1.aux" 1580348781 1926 6b179a9a66e3ccb64eddb7f5ef9eedc0 ""
+  "hw1.out" 1580348781 288 8d5626c4fe6763d4a7a5db22250a2e08 ""
+  "hw1.pre" 1580348780 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "hw1.tex" 1580348779 13005 bdadc18f252a3faa185ea1a75d27db8f ""
   (generated)
-  "hw1.aux"
   "hw1.pre"
+  "hw1.aux"
+  "hw1.out"
   "hw1.log"
   "hw1.pdf"
-  "hw1.out"
