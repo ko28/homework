@@ -322,8 +322,11 @@ is not.
 			\sum_{i = 1}^{n} x_i + y_i & = x_1 + y_1 + x_2 + y_2 + \cdots + x_n + y_n\\
 			& = (x_1 + x_2 + \cdots + x_n) + (y_1 + y_2 + \cdots + y_n)\\
 			& = 0 + 0 \\
-			& = 0 \in W_1
+			& = 0 
 		\end{align*}
+		\begin{gather*}
+			\therefore X + Y \in W_1
+		\end{gather*}
 		\end{Dequation}
 		}
 	\item{
@@ -333,11 +336,13 @@ is not.
 		X & = (x_1, x_2, \cdots, x_n) \\
 		cX & = (cx_1, cx_2, \cdots, cx_n) \\
 		\sum_{i = 1}^{n} cx_i & = cx_1 +  cx_2 + \cdots + cx_n \\
-		& = (x_1 + x_2 + \cdots + x_n) + (y_1 + y_2 + \cdots + y_n)\\
-		& = c(x_1, x_2, \cdots, x_n) \\
+		& = c(x_1 + x_2 + \cdots + x_n) \\
 		& = c(0) \\
-		& = 0 \in W_1
+		& = 0 
 	\end{align*}
+	\begin{gather*}
+		\therefore cX \in W_1
+	\end{gather*}
 	\end{Dequation}
 	}
 	\end{enumerate}
@@ -352,13 +357,43 @@ If $W_2$ is a subspace, there must be closure under vector addition.
 			\sum_{i = 1}^{n} x_i + y_i & = x_1 + y_1 + x_2 + y_2 + \cdots + x_n + y_n\\
 			& = (x_1 + x_2 + \cdots + x_n) + (y_1 + y_2 + \cdots + y_n)\\
 			& = 1 + 1 \\
-			& = 2 \notin W_2 
+			& = 2 \neq 1 
 	\end{align*}
+	\begin{gather*}
+	X + Y \notin W_2 \\
+	\therefore W_2 \text{ is not a subspace of $F^n$.}
+	\end{gather*}
 \end{Dequation}
-$\therefore W_2$ is not a subspace of $F^n$.\\
-Additionally, there is no 0 vector in $W_2$. 0 vector for polynomial space only exiss if each component in a vector is 0. This is not possible in $W_2$ because the sum of the components must equal 1. 
+Additionally, there is no 0 vector in $W_2$. 0 vector for polynomial space only exists if each component in a vector is 0. This is not possible in $W_2$ because the sum of the components must equal 1. 
 \end{proof}
 
 \section{H}
-$W = \{f(x) \in P(F) : f(x) = 0 \text{ or } f(x) \text{ has degree } n\}$
+Let $P(F)$ be the set of all polynomials in $F$.\\
+$W = \{f(x) \in P(F) : f(x) = 0 \text{ or } f(x) \text{ has degree } n\}$ is not a subspace of $P(F)$ if $n \geq 1$
+\begin{proof}
+If $W$ is a subspace, there must be closure under vector addition.\\
+Let $f(x) = a_n x^n + a_{n-1} x^{n-1}$ and $g(x) = -a_n x^n + (a_{n-1} + 1) x^{n-1}$\\
+$f(x) + g(x) = (a_n - a_n) x^n + (a_{n-1} + a_{n-1} + 1) x^{n-1} $ \\
+$= (0) x^n + (a_{n-1} + a_{n-1} + 1) x^{n-1} $\\
+$= (a_{n-1} + a_{n-1} + 1) x^{n-1}$\\
+This polynomial is not the 0 vector nor has degree n. Therefore, $W$ is not a subspace of $P(F)$ when $n \geq 1$
+\end{proof}
+
+\section{I}
+Prove that $A^T + A$ is symmetric for any square matrix $A$
+\begin{proof}
+	We first need to prove $A^{TT} = A $ and $(A + B)^T = A^T + B^T$\\
+	\-\\
+	The definition of the transpose of a matrix is for any value of row i and column j in A, transpose of A will have that value in row j and column i. The transpose of the tranpose of A will have that value in row i and column j which is the same as the original matrix.   
+	$A_{i,j} = (A^T)_{j,i} = (A^{TT})_{i,j} = A_{i,j}$\\
+	Thus, the matrix $A^{TT}$ is equivalent to $A$ \\
+	\-\\
+	The transpose of A + B for any value of at row i and column j is the sum of A + B at j,i. $((A + B)^T)_{i,j} = A_{j,i} + B_{j,i}$. By definition of transpose, $A_{i,j} = (A^{T})_{j,i} \Leftrightarrow A_{j,i} = (A^{T})_{i,j}$. So we can rewrite $((A + B)^T)_{i,j} = A_{j,i} + B_{j,i}$ as $((A + B)^T)_{i,j} = (A^T)_{i,j} + (B^T)_{i,j}$.\\
+	Thus, $(A + B)^T = A^T + B^T$\\
+	\-\\
+	For a matrix to be symmetric, the matrix and its transpose must be the same. \\
+	$(A^T + A)^T = A^{TT} + A^T = A + A^T = A^T + A$\\
+	Thus, $A^T + A$ is symmetric for any square matrix A.
+\end{proof}
+
 \end{document}

@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1580348779 "hw1.tex" "hw1.pdf" "hw1" 1580348781
+["pdflatex"] 1580366455 "hw1.tex" "hw1.pdf" "hw1" 1580366457
   "../../evan.sty" 1580144086 18873 d766cda457a2c03ee9f28997dee0c06e ""
   "/etc/texmf/web2c/texmf.cnf" 1578934342 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
@@ -37,6 +37,7 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb" 1480098740 34889 a5ba8b20a45b3437534c87396d980b48 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb" 1480098740 34876 8d4b38ed6a8c31221cdb5873a0ca9f5c ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb" 1480098740 41093 104c39afc438ce3e69f72093c24579bd ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb" 1480098740 41671 840970fb437fbd0481bc0a18eff9ce7a ""
   "/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1480098806 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1480098815 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/oberdiek/catchfile.sty" 1480098815 8493 e586100f117d095256a1a5c630c3fa25 ""
@@ -232,13 +233,13 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1578934385 2700761 ac0584cc9514ab21918550a6948c4ee2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1578934409 4127540 67c6239e9a03bcb77780f889796a9b3c ""
-  "hw1.aux" 1580348781 1926 6b179a9a66e3ccb64eddb7f5ef9eedc0 ""
-  "hw1.out" 1580348781 288 8d5626c4fe6763d4a7a5db22250a2e08 ""
-  "hw1.pre" 1580348780 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "hw1.tex" 1580348779 13005 bdadc18f252a3faa185ea1a75d27db8f ""
+  "hw1.aux" 1580366457 2000 afe2a19baf504e66ab9918d133b93cf9 ""
+  "hw1.out" 1580366457 324 88198c6ecb1e856042fc676a9336d825 ""
+  "hw1.pre" 1580366456 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "hw1.tex" 1580366454 14771 9d14ac3ef92b8c117e8548d81b1f0d7f ""
   (generated)
-  "hw1.pre"
-  "hw1.aux"
   "hw1.out"
-  "hw1.log"
+  "hw1.aux"
+  "hw1.pre"
   "hw1.pdf"
+  "hw1.log"
