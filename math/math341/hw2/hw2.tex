@@ -1,0 +1,205 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+
+\makeatletter
+\newenvironment{Dequation}
+  {%
+  \def\tagform@##1{%
+    \maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+  \ignorespaces
+  }
+  {%
+  \def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+  \ignorespacesafterend
+  }
+\makeatother
+
+\title{Math 341: Homework 2}
+\author{Daniel Ko}
+\date{Spring 2020}
+
+\begin{document}
+\maketitle
+
+\section{A}
+Let $D$ be the set of all differentiable functions defined on $\mathbb{R}$. Note that $D$ is a subset of $C$ because differentiable functions are continuous.
+
+\begin{proof}
+$D$ is a subspace of $C$
+\begin{enumerate}[label=\alph*.]
+	\item{
+			$0 \in D$\\
+			$\text{Zero vector is defined as } f(x) = 0 \text{ where } x \in \mathbb{R} $
+			\begin{Dequation}
+			\begin{align*}
+				f'(x) & = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}\\
+					  & = \lim_{h \to 0} \frac{0 - 0}{0} \\
+					  & = 0
+			\end{align*}
+			\end{Dequation}
+			Because the derivative of $f(x) = 0$ exists, $0 \in D$
+		}
+	\item{
+			$f + g \in D \text{ where } f,g \in D $
+			\begin{Dequation}
+			\begin{align*}
+				(f + g)'(x) & = \lim_{h \to 0} \frac{(f(x+h) + g(x+h)) - (f(x)+g(x))}{h}\\
+							& = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} + \lim_{h \to 0} \frac{g(x+h)-g(x)}{h}\\
+					  & = f'(x) + g'(x)
+			\end{align*}
+			\end{Dequation}
+			Because the derivative of $f + g$ exists, $f + g \in D$
+		}
+	\item{
+			$cf \in D \text { where } c \in \mathbb{R} \text{ and } f \in D$
+			\begin{Dequation}
+			\begin{align*}
+				cf'(x) & = \lim_{h \to 0} \frac{cf(x+h) - cf(x)}{h}\\
+				& = c \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+			\end{align*}
+			\end{Dequation}
+			Because the derivative of $cf$ exists, $cf \in D$
+		}
+\end{enumerate}
+\begin{center}
+$\therefore D \text{ is a subspace of } C$
+\end{center}
+\end{proof}
+
+\section{B}
+Prove the set of even functions in $F(F_1, F_2)$ and odd functions in $F(F_1, F_2)$ are subspaces of $F(F_1, F_2)$ 
+\begin{proof}
+Let $O$ be the set of all odd functions in $F(F_1, F_2)$ and $E$ be the set of all even functions in $F(F_1, F_2)$.
+\begin{enumerate}[label=\alph*.]
+	\item{
+			$0 \in O$ and $0 \in E$\\
+			$\text{Zero function is defined as } g(x) = 0$\\
+			\\$0\in O$ is odd: 
+			\begin{Dequation}
+			\begin{align*}
+				g(-x) & = 0\\
+				-g(x) & = 0\\
+				g(-x) & = -g(x)
+			\end{align*}
+			\end{Dequation}
+
+			\-\\$0\in E$ is even: 
+			\begin{Dequation}
+			\begin{align*}
+				g(x) & = 0\\
+				g(-x) & = 0\\
+				g(x) & = g(-x)
+			\end{align*}
+			\end{Dequation}
+		}
+	
+	\item{
+		$X + Y \in O \text{ where } X,Y \in O$ and $t \in F_1$
+		\begin{Dequation}
+		\begin{align*}
+			(X + Y)(-t) & = X(-t) + Y(-t) \\
+						& = -X(t) + -Y(t)\tag{$X,Y \in O$}\\
+			& = -(X + Y)(t)
+		\end{align*}
+		\end{Dequation}
+		$X + Y \in E \text{ where } X,Y \in E$ and $t \in F_1$
+		\begin{Dequation}
+		\begin{align*}
+			(X + Y)(t) & = X(t) + Y(t) \\
+						& = X(-t) + Y(-t)\tag{$X,Y \in E$}\\
+			& = (X + Y)(-t)
+		\end{align*}
+		\end{Dequation}
+		}
+	\item{
+			$cX \in O \text{ where } c \in F \text{ and } X \in O \text{ and } t \in F_1$
+			\begin{Dequation}
+			\begin{align*}
+				(cX)(-t) & = cX(-t) \\
+						 & = -cX(t) \\
+			\end{align*}
+			\end{Dequation}
+			
+			$cY \in E \text{ where } c \in F \text{ and } Y \in E \text{ and } t \in F_1$
+			\begin{Dequation}
+			\begin{align*}
+				(cY)(t) & = cY(t) \\
+						 & = cY(-t) \\
+			\end{align*}
+			\end{Dequation}
+		}
+	\end{enumerate}	
+	Therefore, $O$ and $E$ are subspaces of $F(F_1,F_1)$
+\end{proof}
+
+\section{C}
+$W_1 = \{(a_1, a_2, \cdots, a_n) \in F^n : a_n = 0 \}$ \\
+$W_2 = \{(a_1, a_2, \cdots, a_n) \in F^n : a_1 = a_2 = \cdots = a_{n-1} = 0 \}$ \\
+Show $F^n$ = $W_1 \oplus W_2$
+\begin{proof}
+Definition of direct sum is $W_1 \cap W_2 = \{0\}$ and $W_1 + W_2 = F^n$
+\begin{enumerate}[label=\alph*.]
+	\item{
+		$W_1 \cap W_2 = \{0\}$\\
+		\-\\Let $v \in W_1,W_2$\\
+		$v = (a_1, a_2, \cdots, a_n)$\\
+		$v \in W_1 \Rightarrow a_n = 0$\\
+		$v \in W_2 \Rightarrow a_1 = a_2 = \cdots = a_{n-1} = 0 $\\
+		$\therefore v = (0, 0, \cdots, 0) \Rightarrow W_1 \cap W_2 = \{0\}$
+		}
+	\item{
+		$W_1 + W_2 = F^n$\\
+		\-\\ Let $v \in F^n$\\
+		$v = (a_1, a_2, \cdots, a_n)$\\
+		Let $w_1 \in W_1$ and $w_2 \in W_2$\\
+		$w_1 = (a_1, a_2, \cdots, a_{n-1}, 0)$\\
+		$w_2 = (0, 0, \cdots, a_n)$\\
+		$w_1 + w_2 = (a_1, a_2, \cdots, a_n) = v$\\
+		Thus, any vector in $F^n$ can be expressed as a sum of vectors in $W_1$ and $W_2$\\
+		$\therefore W_1 + W_2 = F^n$
+		}
+\end{enumerate}
+$\therefore F^n = W_1 \oplus W_2$
+\end{proof}
+
+\section{D}
+In $M_{mxn}(F)$\\
+$W_1 = \{A\in M_{mxn}(F): A_{i,j} = 0 \text{ whenever }i>j\}$\\
+$W_2 = \{B\in M_{mxn}(F): B_{i,j} = 0 \text{ whenever }i \leq j\}$\\
+Show that $M_{mxn}(F) = W_1 \oplus W_2$
+\begin{proof}
+\-\
+\begin{enumerate}[label=\alph*.]
+	\item{
+			$W_1 \cap W_2 = \{0\}$\\
+			\-\\ Let $m \in W_1, W_2$\\
+			$m \in W_1 \Rightarrow m_{i,j} = 0 \text{ whenever }i>j$\\
+			$m \in W_2 \Rightarrow m_{i,j} = 0 \text{ whenever }i \leq j$\\
+			Thus, $(\forall i,j)(m_{i,j} = 0)$ which is \{0\}\\
+			$\therefore W_1 \cap W_2 = \{0\}$\\
+		}	
+	\item{
+			$W_1 + W_2 = M_{mxn}(F)$\\
+			\-\\ Let $m \in M_{mxn}(F)$\\
+			$v = (a_1, a_2, \cdots, a_n)$\\
+			Let $w_1 \in W_1$ and $w_2 \in W_2$\\
+			$w_1 = (a_1, a_2, \cdots, a_{n-1}, 0)$\\
+			$w_2 = (0, 0, \cdots, a_n)$\\
+			$w_1 + w_2 = (a_1, a_2, \cdots, a_n) = v$\\
+		}	
+\end{enumerate}
+T O BE CONTINUED 
+\end{proof}
+
+\end{document}
