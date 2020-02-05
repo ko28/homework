@@ -430,6 +430,7 @@ INPUT hw2.aux
 INPUT ./hw2.out
 INPUT ./hw2.out
 INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb
