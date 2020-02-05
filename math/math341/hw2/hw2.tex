@@ -219,17 +219,62 @@ For any $v \in V$ the set $\{v\} + W = \{v + w : w \in W \}$ is the coset $W$ co
 			$v \in W$\\ 
 			\-\\
 			$v \in W \Rightarrow v + W$ is in the subspace of $V$.
-			\begin{enumerate}
-		\item{
+			\begin{enumerate}[i.]
+			\item{
 			$0 \in v + W$\\
 			$w \in W$ and let $v = -w$\\
 			$v + w = 0$\\
 			Thus, $0 \in v + W$
 			}
-
+			\item{
+			$a + b \in v + W$ where $a,b \in v + W$\\
+			Let $a = v + w_a, w_a \in W$ and $b = v + w_b, w_b \in W$ \\
+			$a + b = v + w_a + v + w_b$\\
+			Because $v \in W$, $w_a + v + w_b \in W$.\\
+			Thus, $a + b \in v + W$
+			}
+		\item{
+			$ca \in v + w, a \in v+W, c \in F$\\
+			Let $a = v + w_a, w_a \in W$\\
+			$ca = c(v + w_a)$\\
+			$= cv + cw_a$\\
+			$= v + cv + cw_a - v$\\
+			$cv + c_wa - v \in W$ by closure under scalar multplication and vector addition.\\
+			Thus, $ca \in v + w$
+			}
 		\end{enumerate}
 		\end{proof}
-	}
+	\item{
+		 Prove that $v_1 + W = v_2 + W$ if and only if $v_1 - v_2 \in W$
+		 \begin{proof}
+			 \-\
+			\begin{enumerate}[i.]
+			\item{
+				$v_1 + W = v_2 + W \Rightarrow v_1 - v_2 \in W$\\
+				Let $w_1, w_2 \in W$\\
+				$v_1 + w_1 = v_2 + w_2$\\
+				$v_1 - v_2 = w_2 - w_1$\\
+				Since, $w_2 - w_1 \in W$ (clourse under addition)\\
+				Therefore, $v_1 - v_2 \in W$
+				}
+			\item{
+				$v_1 - v_2 \in W \Rightarrow v_1 + W = v_2 + W $\\
+				This means $v_1 - v_2 = w$ where $w \in W \ (*)$\\
+				Now let $x \in v_1 + W$\\
+				By definition, $\exists w_x \in W : x = v_1 + w_x$\\
+				By $(*) \ v_1 = v_2 + w$\\
+				So, $x = v_2 + w + w_x$\\
+				Since, $w + w_x \in W$ (closure under addition)\\
+				We have $x \in v_2 + W$\\
+				So, $v_1 + W \subseteq v_2 + W$\\
+				Similarly, we can show $v_2 + W \subseteq v_1 + W$\\
+				Therefore, $v_1 + W = v_2 + W$
+
+				}
+			\end{enumerate}
+		 \end{proof}
+		}
+	}	
 \end{enumerate}
 
 \section{F}
