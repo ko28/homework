@@ -274,7 +274,80 @@ For any $v \in V$ the set $\{v\} + W = \{v + w : w \in W \}$ is the coset $W$ co
 			\end{enumerate}
 		 \end{proof}
 		}
+	\item{
+			Show that if $v_1 + W = v'_1 + W$ and $v_2 + W = v'_2 + W$, then \\
+			$(v_1 + W) + (v_2 + W) = (v'_1 + W) + (v'_2 + W)$ and \\
+			$a(v_1 + W) = a(v'_1 + W)$ for all $a \in F$
+			\begin{proof}
+				\-\
+			\begin{enumerate}[i.]
+				\item{
+					$(v_1 + W) + (v_2 + W) = (v'_1 + W) + (v'_2 + W)$\\
+					Let $q \in (v_1 + W) + (v_2 + W)$\\
+					$q \in (v_1 + v_2) + W$ by definition of vector addition \\
+					So, $q = v_1 + v_2 + w_q$ where $w_q \in W$\\
+					$ = v_1 + v_2 + w_q + v'_1 - v'_1 + v'_2 - v'_2$\\
+					$ = v'_1 + v'_2 + w_q + v_1 - v'_1 + v_2 - v'_2$\\
+					From b. i, $v_1 - v'_1$ and $v_2 - v'_2 \in W$\\
+					Which means, $(v_1 - v'_1) + (v_2 - v'_2) \in W$\\
+					Thus, $w_q + v_1 - v'_1 + v_2 - v'_2 \in W$\\
+					So, $q \in (v'_1 + v'_2) + W$\\
+					So, $(v_1 + W) + (v_2 + W) \subseteq (v'_1 + W) + (v'_2 + W)$\\
+					Similarly, we can show $(v'_1 + W) + (v'_2 + W) \subseteq (v_1 + W) + (v_2 + W)$\\
+					Therefore, $(v_1 + W) + (v_2 + W) = (v'_1 + W) + (v'_2 + W)$\\
+					
+				
+				}
+				\item{	
+				$a(v_1 + W) = a(v'_1 + W)$\\
+				Let $q \in a(v_1 + W)$\\
+				$q \in av_1 + W$ by definition of scalar multplication.\\
+				So, $q = av_1 + w_q$ where $w_q \in W$\\
+				$ = av_1 + w_q + av'_1 - av'_1$\\
+				$ = av'_1 + w_q + av_1 - av'_1$\\
+				$ = av'1 + a(v_1 - v'_1) + w_q$\\
+				From b. i, $a(v_1 - v'_1) \in W$\\ 
+				$a(v_1 - v'_1) + w_q \in W$ because closure under vector addition.\\
+				So, $q \in av'_1 + W$\\
+				So, $a(v_1 + W) \subseteq a(v'_1 + W)$\\
+				Similarly, we can show $a(v'_1 + W) \subseteq a(v_1 + W)$\\
+				Therefore, $a(v_1 + W)  = (v'_1 + W)$
+				}
+			\end{enumerate}
+			\end{proof}
+		}
 	}	
+\item{
+		Prove that the set $S$ is a vector space with the operations defined in (c).	
+	\begin{enumerate}[i.]
+	\item{
+		$0 \in S$\\
+		The zero vector in $S$ is $ 0 = v_0 + W$\\
+		Let $s \in S$\\
+	    So $s = v_s + W$\\
+		If the zero vector exists we should be able to show, $s + 0 = s$\\
+		$s + 0 = s \Leftrightarrow (v_s + W) + (v_0 + W) = v_s + W$\\
+		$(v_s + v_0) + W = v_s + W$ by definition of addition\\
+		Thus $v_0 = 0$ and the zero vector is $0 + W$ which is just $W$\\
+		Therefore, the zero vector is $W$.\\
+		}
+	\item{
+		$X + Y \in S$ where $X,Y \in S$\\
+	    This means $X = v_x + W$ \quad $Y = v_y + W$\\	
+		$X + Y = (v_x + W) + (v_y + W)$
+		$= (v_x + v_y) + W$ by defintion of addition.\\
+		$(v_x + v_y) \in V$ by closure under vector addition.\\
+		Therefore $X + Y \in S$\\
+		}
+	\item{
+		$aX \in S \quad a \in F$\\
+		$aX = a(v_x + W)$\\
+		$= av_x + W$\\
+		$av_x \in V$ by closure under vector addition.\\
+		Therefore, $aX \in S$
+		}
+	\end{enumerate}
+	}
 \end{enumerate}
 
 \section{F}
@@ -333,6 +406,12 @@ then the span of $\{M_1, M_2, M_3\}$ is the set of all symmetric $2x2$ matrices.
 	$\therefore Sym(M_{2x2}(F)) = span(\{M_1, M_2, M_3\})$
 \end{proof}
 
+\section{G}
 
+\section{H}
+
+\section{I}
+
+\section{J}
 
 \end{document}
