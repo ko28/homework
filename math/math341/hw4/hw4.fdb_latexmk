@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1580366455 "hw1.tex" "hw1.pdf" "hw1" 1580432081
+["pdflatex"] 1582089021 "hw4.tex" "hw4.pdf" "hw4" 1582089022
   "../../evan.sty" 1580144086 18873 d766cda457a2c03ee9f28997dee0c06e ""
   "/etc/texmf/web2c/texmf.cnf" 1578934342 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
@@ -26,7 +26,6 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr10.tfm" 1480098701 3092 5e77de0b5834ec014abfb4fbde93bc09 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr8.tfm" 1480098701 3088 df8733075b5d59d6a51b781a657af119 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr9.tfm" 1480098701 3096 ebe6c9bc1ae47ff13b7faf2f3617a299 ""
-  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebsr8.tfm" 1480098701 3100 9427b5f5e6742a1c68cb403468941918 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm" 1480098717 688 37338d6ab346c2f1466b29e195316aa4 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs5.tfm" 1480098717 684 3a51bd4fd9600428d5264cf25f04bb9a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs7.tfm" 1480098717 692 1b6510779f0f05e9cbf03e0f6c8361e6 ""
@@ -233,13 +232,13 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1578934385 2700761 ac0584cc9514ab21918550a6948c4ee2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1578934409 4127540 67c6239e9a03bcb77780f889796a9b3c ""
-  "hw1.aux" 1580366457 2000 afe2a19baf504e66ab9918d133b93cf9 ""
-  "hw1.out" 1580366457 324 88198c6ecb1e856042fc676a9336d825 ""
-  "hw1.pre" 1580366456 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "hw1.tex" 1580366521 14771 9d14ac3ef92b8c117e8548d81b1f0d7f ""
+  "hw4.aux" 1582089022 1516 c498d72db9e19e43496b41a51eee1ce6 ""
+  "hw4.out" 1582089022 362 65e90c6f77df4112f64a193209d2b2be ""
+  "hw4.pre" 1582089021 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "hw4.tex" 1582089018 14067 164dde8bae0ceed58836a2067c6273c0 ""
   (generated)
-  "hw1.pdf"
-  "hw1.aux"
-  "hw1.out"
-  "hw1.pre"
-  "hw1.log"
+  "hw4.out"
+  "hw4.aux"
+  "hw4.pdf"
+  "hw4.pre"
+  "hw4.log"

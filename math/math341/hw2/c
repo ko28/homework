@@ -25,7 +25,7 @@
   }
 \makeatother
 
-\title{Math 341: Homework 4}
+\title{Math 341: Homework 2}
 \author{Daniel Ko}
 \date{Spring 2020}
 
@@ -33,43 +33,115 @@
 \maketitle
 
 \section{A}
-Let V be a vector space having dimension n, and let S be a subset of V that generates V.
+Let $D$ be the set of all differentiable functions defined on $\mathbb{R}$. Note that $D$ is a subset of $C$ because differentiable functions are continuous.
 
+\begin{proof}
+$D$ is a subspace of $C$
 \begin{enumerate}[label=\alph*.]
 	\item{
-			Prove that there is a subset of S that is a basis for V. (Be careful not to assume that S is finite).
-			\begin{proof}
-			\-\\
-			Since V is finite dimensional, there exists a basis for V.\\
-			$B = \{v_1, v_2, \cdots, v_n\}$\\
-			Any $v \in B$ can be expressed as a linear combination of S because span(S) = V.\\
-			%$v_i = \{s_1, s_2, \cdots, s_m\}$
-			Let the subset of S that generates $v_i$ be $S_i$\\
-			$v_i = \sum_{j=1}^{m^k} a_j^k s_j^k$ where $a\in F$ and $s \in S_i$\\
-			The span of the union of the sets that generates v, $\text{span(} \bigcup_{i=1}^{n}S_i \text{)} = V$\\ 
-			Corollary 2(a) of Theorem 1.10 states that a generating set for V that contains exactly n vectors is a basis for V.
-			The set above, which is a subset of S, contains exactly n vectors and generates V. Therefore, there is subset of S that is a basis for V. 
-			\end{proof}
-
-	}
+			$0 \in D$\\
+			$\text{Zero vector is defined as } f(x) = 0 \text{ where } x \in \mathbb{R} $
+			\begin{Dequation}
+			\begin{align*}
+				f'(x) & = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}\\
+					  & = \lim_{h \to 0} \frac{0 - 0}{0} \\
+					  & = 0
+			\end{align*}
+			\end{Dequation}
+			Because the derivative of $f(x) = 0$ exists, $0 \in D$
+		}
 	\item{
-			Prove that S contains at least n vectors.
-			\begin{proof}
-			\-\\
-			From (a) we know there is a subset of S that forms a basis. Since that subset contains n vectors, S must contain n or more vectors. 
-			\end{proof}
+			$f + g \in D \text{ where } f,g \in D $
+			\begin{Dequation}
+			\begin{align*}
+				(f + g)'(x) & = \lim_{h \to 0} \frac{(f(x+h) + g(x+h)) - (f(x)+g(x))}{h}\\
+							& = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} + \lim_{h \to 0} \frac{g(x+h)-g(x)}{h}\\
+					  & = f'(x) + g'(x)
+			\end{align*}
+			\end{Dequation}
+			Because the derivative of $f + g$ exists, $f + g \in D$
+		}
+	\item{
+			$cf \in D \text { where } c \in \mathbb{R} \text{ and } f \in D$
+			\begin{Dequation}
+			\begin{align*}
+				cf'(x) & = \lim_{h \to 0} \frac{cf(x+h) - cf(x)}{h}\\
+				& = c \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+			\end{align*}
+			\end{Dequation}
+			Because the derivative of $cf$ exists, $cf \in D$
 		}
 \end{enumerate}
-
-\section{B}
-Let $f(x)$ be a polynomial of degree n in $P_n(R)$. Prove that for any $g(x) \in P_n(R)$ there exists scalars $c_0, c_1, \cdots, c_n$ such that
-$$g(x) = c_0f(x) + c_1f'(x) + c_2f''(x) + \cdots + c_nf^{(n)}(x)$$
-\begin{proof}
-	\-\\
-	If $\{f, f', f'', \cdots, f^{(n)}\}$ form a basis we can express any $g(x) \in P_n(R)$ as seen above (a linear combination).\\
-
+\begin{center}
+$\therefore D \text{ is a subspace of } C$
+\end{center}
 \end{proof}
 
+\section{B}
+Prove the set of even functions in $F(F_1, F_2)$ and odd functions in $F(F_1, F_2)$ are subspaces of $F(F_1, F_2)$ 
+\begin{proof}
+Let $O$ be the set of all odd functions in $F(F_1, F_2)$ and $E$ be the set of all even functions in $F(F_1, F_2)$.
+\begin{enumerate}[label=\alph*.]
+	\item{
+			$0 \in O$ and $0 \in E$\\
+			$\text{Zero function is defined as } g(x) = 0$\\
+			\\$0\in O$ is odd: 
+			\begin{Dequation}
+			\begin{align*}
+				g(-x) & = 0\\
+				-g(x) & = 0\\
+				g(-x) & = -g(x)
+			\end{align*}
+			\end{Dequation}
+
+			\-\\$0\in E$ is even: 
+			\begin{Dequation}
+			\begin{align*}
+				g(x) & = 0\\
+				g(-x) & = 0\\
+				g(x) & = g(-x)
+			\end{align*}
+			\end{Dequation}
+		}
+	
+	\item{
+		$X + Y \in O \text{ where } X,Y \in O$ and $t \in F_1$
+		\begin{Dequation}
+		\begin{align*}
+			(X + Y)(-t) & = X(-t) + Y(-t) \\
+						& = -X(t) + -Y(t)\tag{$X,Y \in O$}\\
+			& = -(X + Y)(t)
+		\end{align*}
+		\end{Dequation}
+		$X + Y \in E \text{ where } X,Y \in E$ and $t \in F_1$
+		\begin{Dequation}
+		\begin{align*}
+			(X + Y)(t) & = X(t) + Y(t) \\
+						& = X(-t) + Y(-t)\tag{$X,Y \in E$}\\
+			& = (X + Y)(-t)
+		\end{align*}
+		\end{Dequation}
+		}
+	\item{
+			$cX \in O \text{ where } c \in F \text{ and } X \in O \text{ and } t \in F_1$
+			\begin{Dequation}
+			\begin{align*}
+				(cX)(-t) & = cX(-t) \\
+						 & = -cX(t) \\
+			\end{align*}
+			\end{Dequation}
+			
+			$cY \in E \text{ where } c \in F \text{ and } Y \in E \text{ and } t \in F_1$
+			\begin{Dequation}
+			\begin{align*}
+				(cY)(t) & = cY(t) \\
+						 & = cY(-t) \\
+			\end{align*}
+			\end{Dequation}
+		}
+	\end{enumerate}	
+	Therefore, $O$ and $E$ are subspaces of $F(F_1,F_1)$
+\end{proof}
 
 \section{C}
 $W_1 = \{(a_1, a_2, \cdots, a_n) \in F^n : a_n = 0 \}$ \\
