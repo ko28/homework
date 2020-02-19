@@ -138,7 +138,7 @@ $$g(x) = c_0f(x) + c_1f'(x) + c_2f''(x) + \cdots + c_nf^{(n)}(x)$$
 	\item{
 			Let W 1 and W 2 be finite-dimensional subspaces of a vector space V, and let V = W 1 + W 2 . Deduce that V
 			is the direct sum of W 1 and W 2 if and only if dim(V = dim)W 1 )( + dimW 2 ())\\
-			$V = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)
+			$V = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)$
 			\begin{proof}
 				\-\\
 				$V = W_1 \oplus W_2 \Rightarrow dim(V) = dim(W_1) + dim(W_2)$\\
@@ -159,7 +159,7 @@ $$g(x) = c_0f(x) + c_1f'(x) + c_2f''(x) + \cdots + c_nf^{(n)}(x)$$
 				This means $ W_1 \cap W_2 = \{0\}$\\
 				Thus, $dim(V) = dim(W_1) + dim(W_2)$ \\
 				\-\\
-				Therefore, $V = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)
+				Therefore, $V = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)$
 			\end{proof}
 		}
 \end{enumerate}
@@ -196,12 +196,37 @@ T and U are called the left shift and right shift operators o)n V respectively.
 		\end{proof}
 		}
 		\item{
-			T is onto but not one to one\\
-			Let $v \in V$
-
+			T is onto but not one to one
+			\begin{proof}
+			\-\\
+			T is onto if $\forall y \in V \ \exists x \in V$ such that $f(x)=y$\\
+			Let $y = (a_1, a_2, \cdots)$ be arbitrary\\
+			$f(x) = y = (a_1, a_2, \cdots)$\\
+		 	$x = (a_0, a_1, a_2, \cdots)$\\
+			Since y was chosen arbitrarily, there exists an x for any y.\\
+			Therefore, T is onto.\\
+			\-\\
+			T is one to one if $\forall a,b \in V, T(a) = T(b) \Rightarrow a = b$\\
+			Let $ a = (u_{\alpha}, u_2, u_3, \cdots) \quad b = (u_{\gamma}, u_2, u_3, \cdots) \quad \text{where } u_{\alpha} \neq u_{\gamma} \Leftrightarrow a \neq b$\\
+			$T(a) = (u_2, u_3, \cdots) \quad T(b) = (u_2, u_3, \cdots)$\\
+			Therefore, T is not one to one because $T(a) = T(b) \text{ and }a \neq b$.
+			\end{proof}
 			}
 		\item{
 			U is one to one but not onto.
+			\begin{proof}
+			\-\\
+			U is one to one if $\forall a,b \in V, U(a) = U(b) \Rightarrow a = b$\\
+			Let $U(a) = (0, u_1, u_2, \cdots) = U(b) = (0, v_1, v_2, \cdots)$\\
+			This means $u_1 = v_1, u_2 = v_2, \cdots$\\
+			So, $ a = (u_1, u_2, u_3, \cdots) \quad b = (v_1, v_2, v_3, \cdots)$\\
+			Hence, $a = b$\\
+			Therefore, U is one to one because $U(a) = U(b) \text{ and }a = b$.\\
+			\-\\
+			U is onto if $\forall y \in V \ \exists x \in V$ such that $f(x)=y$\\
+			Let $y = (a_1, a_2, \cdots) \quad \text{where } a_1 \neq 0$\\
+			There is no $x$ such that $U(x) = y$ because the linear transformation always makes the first term always zero.	Therefore, T is not onto.
+			\end{proof}
 			}
 \end{enumerate}
 	
@@ -232,23 +257,20 @@ $T^{m-1}(x) \neq 0$ for some positive m. Show that $x,T(x),T^2(x),\cdots ,T^{m-1
 \begin{proof}
 	\-\\
 	The linear combination of the above set is $$ a_0x + a_1T(x) + a_2T^2(x) + \cdots + a_{n-1}T^{m-1}(x) = 0$$
-	Notice that $T^n(x) = 0$ for all $n > m$.\\
+	Notice that $T^n(x) = 0$ for all $n \geq m$.\\
 	$T^{m+1}(x) = T(T^{m}(x)) = T(0) = 0$\\
 	Let's take $T^{m-1}$ on both sides of the linear combination.	
+	\begin{Dequation}
 	\begin{align*}
 		T^{m-1}(a_0x + a_1T(x) + a_2T^2(x) + \cdots + a_{n-1}T^{m-1}(x)) &= T^{m-1}(0)\\
-		T^{m-1}(a_0x)&= 0 \\
+		T^{m-1}(a_0x) + T^{m-1}(a_1T(x)) + T^{m-1}(a_2T^2(x)) + \cdots + T^{m-1}(a_{n-1}T^{m-1}(x)) &= 0 \\
+		T^{m-1}(a_0x) + 0 + 0 + \cdots + 0 &= 0\\
+		T^{m-1}(a_0x) &= 0\\
+		a_0 = \frac{0}{T^{m-1}(x)} &= 0
 	\end{align*}
-	So $z_1 = \sum_{i=1}^{n}a_ix_i$ where $a \in F$ and $x \in S_1$\\
-	%$z_2 = \sum_{i=1}^{n}b_iy_i$ where $b \in F$ and $y \in S_2$\\
-	If $S_1 \subseteq S_2$, then $x \in S_2$\\
-	So $z_1 \in \text{span}(S_2)$ because we can write $z_1$ as a linear combination of $S_2$\\
-	Therefore, if  $S_1 \subseteq S_2$ then $\text{span}(S_1) \subseteq \text{span}(S_2) \quad (*)$\\
-	%As defined in the problem $S_2 \subseteq V$\\
-	Defined in the problem, span($S_1$) = $V$\\
-	By $(*)$, span($S_1$) $= V \subseteq$ span($S_2$)\\
-	Using theorem 1.5, span($S_2$) $\subseteq V$\\
-	Therefore, span($S_2$) $\subseteq V \subseteq$ span($S_2$) $\Leftrightarrow V = $ span($S_2$)
+	\end{Dequation}
+	By back substitution we know that $a_0 = a_1 = \cdots = a_{n-1} = 0$\\
+	Therefore, $x,T(x),T^2(x),\cdots ,T^{m-1}(x)$ are linearly independent.
 \end{proof}
 
 \section{H} 
@@ -290,11 +312,11 @@ Let $T: R^3 \rightarrow R^3$
 	$$(a,b,c) + \lambda (1,0,1) = (x,y,0)$$
 	is minimum. Writing the equation above as a system:
 	\[
-	\begin{align*}
+	\begin{aligned}
 		a + \lambda &= x\\
 		b &= y\\
 		c + \lambda &= 0
-	\end{align*}
+	\end{aligned}
 	\]
 	Solving this system gives us, $x = a - c, y = b$\\ 
 	Therefore, the projection on the xy-plane along the line L will be $(a-c,b,0)$.\\
