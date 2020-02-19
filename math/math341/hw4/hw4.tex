@@ -11,6 +11,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{setspace}
+\usepackage{systeme}
 
 \makeatletter
 \newenvironment{Dequation}
@@ -66,280 +67,178 @@ Let $f(x)$ be a polynomial of degree n in $P_n(R)$. Prove that for any $g(x) \in
 $$g(x) = c_0f(x) + c_1f'(x) + c_2f''(x) + \cdots + c_nf^{(n)}(x)$$
 \begin{proof}
 	\-\\
-	If $\{f, f', f'', \cdots, f^{(n)}\}$ form a basis we can express any $g(x) \in P_n(R)$ as seen above (a linear combination).\\
+	Let $B = \{f, f', f'', \cdots, f^{(n)}\}$.\\
+	If $B$ forms a basis we can express any $g(x) \in P_n(R)$ in the format above (a linear combination).\\
+	We can determine if $B$ is basis by seeing if it is linearly independent by using a matrix.\\
+	$\mu_0f + \mu_1f' + \mu_2f'' + \cdots + \mu_nf^{(n)} = 0$\\
 
+	\[
+	\begin{bmatrix}
+	a_n & a_{n-1} & \cdots & \cdots & a_0 \\
+  	& na_n & \cdots & \cdots & a_1\\
+  	& \ddots & \cdots & \cdots & \vdots \\
+ 	& & \ddots & \cdots & \vdots \\
+	& & & n!a_n & (n-1)!a_{n-1} \\
+ 	& & & & n!a_n
+	\end{bmatrix}
+	\begin{bmatrix}
+		\mu_0\\
+		\mu_1\\
+		\vdots\\
+		\vdots\\
+		\mu_{n-1}\\
+		\mu_{n}\\
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		0\\
+		0\\
+		\vdots\\
+		\vdots\\
+		0\\
+		0\\
+	\end{bmatrix}
+	\]
+	Solving this system of equations:\\
+	Looking at the bottom row, $n!a_n \mu_n = 0$\\
+	$\mu_n = \frac{0}{n!a_n} = 0$, $a_n$ is non zero because f is a nth degree polynomial and $a_n$ is its coefficient.\\
+	Looking at row n - 1,$n!a_n \mu_{n-1} + (n-1)!a_{n-1} \mu{n} = 0$\\
+	Because $\mu_n = 0$, $n!a_n \mu_{n-1} + 0 = 0$\\
+	$\mu_{n-1} = \frac{0}{n!a_n} = 0$\\
+	By back substitution, $\mu_n = \mu_{n-1} = \cdots = \mu_1 = \mu_0 = 0$\\
+	This means that B is linearly independent, which also means that B is a basis.\\
+	Therefore, any $g(x) \in P_n(R)$ can be a linear combination of B with the scalars $c_0, c_1, \cdots, c_n$
 \end{proof}
 
 
 \section{C}
-$W_1 = \{(a_1, a_2, \cdots, a_n) \in F^n : a_n = 0 \}$ \\
-$W_2 = \{(a_1, a_2, \cdots, a_n) \in F^n : a_1 = a_2 = \cdots = a_{n-1} = 0 \}$ \\
-Show $F^n$ = $W_1 \oplus W_2$
-\begin{proof}
-Definition of direct sum is $W_1 \cap W_2 = \{0\}$ and $W_1 + W_2 = F^n$
 \begin{enumerate}[label=\alph*.]
 	\item{
-		$W_1 \cap W_2 = \{0\}$\\
-		\-\\Let $v \in W_1,W_2$\\
-		$v = (a_1, a_2, \cdots, a_n)$\\
-		$v \in W_1 \Rightarrow a_n = 0$\\
-		$v \in W_2 \Rightarrow a_1 = a_2 = \cdots = a_{n-1} = 0 $\\
-		$\therefore v = (0, 0, \cdots, 0) \Rightarrow W_1 \cap W_2 = \{0\}$
-		}
-	\item{
-		$W_1 + W_2 = F^n$\\
-		\-\\ Let $v \in F^n$\\
-		$v = (a_1, a_2, \cdots, a_n)$\\
-		Let $w_1 \in W_1$ and $w_2 \in W_2$\\
-		$w_1 = (a_1, a_2, \cdots, a_{n-1}, 0)$\\
-		$w_2 = (0, 0, \cdots, a_n)$\\
-		$w_1 + w_2 = (a_1, a_2, \cdots, a_n) = v$\\
-		Thus, any vector in $F^n$ can be expressed as a sum of vectors in $W_1$ and $W_2$\\
-		$\therefore W_1 + W_2 = F^n$
-		}
-\end{enumerate}
-$\therefore F^n = W_1 \oplus W_2$
-\end{proof}
-
-\section{D}
-In $M_{mxn}(F)$\\
-$W_1 = \{A\in M_{mxn}(F): A_{i,j} = 0 \text{ whenever }i>j\}$\\
-$W_2 = \{B\in M_{mxn}(F): B_{i,j} = 0 \text{ whenever }i \leq j\}$\\
-Show that $M_{mxn}(F) = W_1 \oplus W_2$
-\begin{proof}
-\-\
-\begin{enumerate}[label=\alph*.]
-	\item{
-			$W_1 \cap W_2 = \{0\}$\\
-			\-\\ Let $m \in W_1, W_2$\\
-			$m \in W_1 \Rightarrow m_{i,j} = 0 \text{ whenever }i>j$\\
-			$m \in W_2 \Rightarrow m_{i,j} = 0 \text{ whenever }i \leq j$\\
-			Thus, $(\forall i,j)(m_{i,j} = 0)$ which is \{0\}\\
-			$\therefore W_1 \cap W_2 = \{0\}$\\
-		}	
-	\item{
-			$W_1 + W_2 = M_{mxn}(F)$\\
-			\-\\ Let $q \in M_{mxn}(F)$\\
-			%$q = (a_1, a_2, \cdots, a_n)$\\
-			Let $w_1 \in W_1$ and $w_2 \in W_2$\\
-			$w_1 = \{(w_1)_{i,j} = 0 \text{ whenever }i>j \}$\\ 
-			$w_2 = \{(w_2)_{i,j} = 0 \text{ whenever }i\leq j \}$\\ 
-			$w_1 + w_2 = \{(w_1)_{i,j} \text{ wherever } i \leq j \text{ and } (w_2)_{i,j} \text{ wherever } i>j \} = q$\\
-			Thus, any matrix in $M_{mxn}(F)$ can be expressed as a sum of matrices in $W_1$ and $W_2$\\
-			$\therefore W_1 + W_2 = M_{mxn}(F)$
-		}	
-\end{enumerate}
-$\therefore M_{mxn}(F) = W_1 \oplus W_2$
-\end{proof}
-
-\section{E}
-Let $W$ be a subspace of a vector space $V$ over a field $F$.\\
-For any $v \in V$ the set $\{v\} + W = \{v + w : w \in W \}$ is the coset $W$ containing $v$.
-\begin{enumerate}[label=\alph*.]
-	\item{
-		Prove that $v + W$ is in the subspace of $V$ if and only if $v \in W$.
-		\begin{proof}
-			\-\\
-			$v + W$ is in the subspace of $V \Rightarrow v \in W$.\\
-			$0 \in v + W$ because $v + W$ is a subspace.\\
-			$0 = v + w, w \in W$\\
-			$v = -w$\\
-			$v \in W$\\ 
-			\-\\
-			$v \in W \Rightarrow v + W$ is in the subspace of $V$.
-			\begin{enumerate}[i.]
-			\item{
-			$0 \in v + W$\\
-			$w \in W$ and let $v = -w$\\
-			$v + w = 0$\\
-			Thus, $0 \in v + W$
-			}
-			\item{
-			$a + b \in v + W$ where $a,b \in v + W$\\
-			Let $a = v + w_a, w_a \in W$ and $b = v + w_b, w_b \in W$ \\
-			$a + b = v + w_a + v + w_b$\\
-			Because $v \in W$, $w_a + v + w_b \in W$.\\
-			Thus, $a + b \in v + W$
-			}
-		\item{
-			$ca \in v + w, a \in v+W, c \in F$\\
-			Let $a = v + w_a, w_a \in W$\\
-			$ca = c(v + w_a)$\\
-			$= cv + cw_a$\\
-			$= v + cv + cw_a - v$\\
-			$cv + c_wa - v \in W$ by closure under scalar multplication and vector addition.\\
-			Thus, $ca \in v + w$
-			}
-		\end{enumerate}
-		\end{proof}
-	\item{
-		 Prove that $v_1 + W = v_2 + W$ if and only if $v_1 - v_2 \in W$
-		 \begin{proof}
-			 \-\
-			\begin{enumerate}[i.]
-			\item{
-				$v_1 + W = v_2 + W \Rightarrow v_1 - v_2 \in W$\\
-				Let $w_1, w_2 \in W$\\
-				$v_1 + w_1 = v_2 + w_2$\\
-				$v_1 - v_2 = w_2 - w_1$\\
-				Since, $w_2 - w_1 \in W$ (clourse under addition)\\
-				Therefore, $v_1 - v_2 \in W$
-				}
-			\item{
-				$v_1 - v_2 \in W \Rightarrow v_1 + W = v_2 + W $\\
-				This means $v_1 - v_2 = w$ where $w \in W \ (*)$\\
-				Now let $x \in v_1 + W$\\
-				By definition, $\exists w_x \in W : x = v_1 + w_x$\\
-				By $(*) \ v_1 = v_2 + w$\\
-				So, $x = v_2 + w + w_x$\\
-				Since, $w + w_x \in W$ (closure under addition)\\
-				We have $x \in v_2 + W$\\
-				So, $v_1 + W \subseteq v_2 + W$\\
-				Similarly, we can show $v_2 + W \subseteq v_1 + W$\\
-				Therefore, $v_1 + W = v_2 + W$
-
-				}
-			\end{enumerate}
-		 \end{proof}
-		}
-	\item{
-			Show that if $v_1 + W = v'_1 + W$ and $v_2 + W = v'_2 + W$, then \\
-			$(v_1 + W) + (v_2 + W) = (v'_1 + W) + (v'_2 + W)$ and \\
-			$a(v_1 + W) = a(v'_1 + W)$ for all $a \in F$
+			prove blah blah
 			\begin{proof}
-				\-\
-			\begin{enumerate}[i.]
-				\item{
-					$(v_1 + W) + (v_2 + W) = (v'_1 + W) + (v'_2 + W)$\\
-					Let $q \in (v_1 + W) + (v_2 + W)$\\
-					$q \in (v_1 + v_2) + W$ by definition of vector addition \\
-					So, $q = v_1 + v_2 + w_q$ where $w_q \in W$\\
-					$ = v_1 + v_2 + w_q + v'_1 - v'_1 + v'_2 - v'_2$\\
-					$ = v'_1 + v'_2 + w_q + v_1 - v'_1 + v_2 - v'_2$\\
-					From b. i, $v_1 - v'_1$ and $v_2 - v'_2 \in W$\\
-					Which means, $(v_1 - v'_1) + (v_2 - v'_2) \in W$\\
-					Thus, $w_q + v_1 - v'_1 + v_2 - v'_2 \in W$\\
-					So, $q \in (v'_1 + v'_2) + W$\\
-					So, $(v_1 + W) + (v_2 + W) \subseteq (v'_1 + W) + (v'_2 + W)$\\
-					Similarly, we can show $(v'_1 + W) + (v'_2 + W) \subseteq (v_1 + W) + (v_2 + W)$\\
-					Therefore, $(v_1 + W) + (v_2 + W) = (v'_1 + W) + (v'_2 + W)$\\
-					
-				
-				}
-				\item{	
-				$a(v_1 + W) = a(v'_1 + W)$\\
-				Let $q \in a(v_1 + W)$\\
-				$q \in av_1 + W$ by definition of scalar multplication.\\
-				So, $q = av_1 + w_q$ where $w_q \in W$\\
-				$ = av_1 + w_q + av'_1 - av'_1$\\
-				$ = av'_1 + w_q + av_1 - av'_1$\\
-				$ = av'1 + a(v_1 - v'_1) + w_q$\\
-				From b. i, $a(v_1 - v'_1) \in W$\\ 
-				$a(v_1 - v'_1) + w_q \in W$ because closure under vector addition.\\
-				So, $q \in av'_1 + W$\\
-				So, $a(v_1 + W) \subseteq a(v'_1 + W)$\\
-				Similarly, we can show $a(v'_1 + W) \subseteq a(v_1 + W)$\\
-				Therefore, $a(v_1 + W)  = (v'_1 + W)$
-				}
-			\end{enumerate}
+			\-\\
+			$W_1$ and $W_2$ are finite dimensional subspaces of $V \Rightarrow $ subspace $W_1 + W_2$ is finite dimensional and $\text{dim}(W_1 + W_2) = \text{dim}(W_1) + \text{dim}(W_2) - \text{dim}(W_1 \cap W_2)$\\
+			Let $B_{1\cap 2}$ be a basis for $W_1 \cap W_2$\\
+			$B_{1\cap 2} = \{u_1, u_2, \cdots, u_k\}$\\
+			By using the replacement theorem, we can extend $B_{1\cap 2}$ to be a basis for $W_1$\\
+			So the basis for $W_1$ is $B_1$\\
+			$B_1 = \{u_1, u_2, \cdots, u_k, v_1, v_2, \cdots, v_m\}$\\
+			Likewise, we can extend $B_{1\cap 2}$ to be a basis for $W_2$\\
+			$B_2 = \{u_1, u_2, \cdots, u_k, w_1, w_2, \cdots, w_p\}$\\
+			Basis for $W_1 + W_2$ will be $B_1 \cup B_2$, however they may contain the same vectors twice.\\
+			To prevent double counting, we must subtract $B_1 \cap B_2$ from $B_1 \cup B_2$\\
+			Thus the basis for $W_1 + W_2$ is\\
+			$B_{1+2} = \{u_1, u_2, \cdots, u_k, v_1, v_2, \cdots, v_m, w_1, w_2, \cdots, w_p\}$\\
+			$W_1 + W_2$ is finite dimensional because its basis contains only a finite amount of vectors. \\
+			$\text{dim}(W_1 + W_2) = \text{dim}(W_1) + \text{dim}(W_2) - \text{dim}(W_1 \cap W_2)$\\
+			$k + m + p = k + m + k + p - k$\\
+			$k + m + p = k + m + p$
 			\end{proof}
 		}
-	}	
-\item{
-		Prove that the set $S$ is a vector space with the operations defined in (c).	
-	\begin{enumerate}[i.]
 	\item{
-		$0 \in S$\\
-		The zero vector in $S$ is $ 0 = v_0 + W$\\
-		Let $s \in S$\\
-	    So $s = v_s + W$\\
-		If the zero vector exists we should be able to show, $s + 0 = s$\\
-		$s + 0 = s \Leftrightarrow (v_s + W) + (v_0 + W) = v_s + W$\\
-		$(v_s + v_0) + W = v_s + W$ by definition of addition\\
-		Thus $v_0 = 0$ and the zero vector is $0 + W$ which is just $W$\\
-		Therefore, the zero vector is $W$.\\
+			Let W 1 and W 2 be finite-dimensional subspaces of a vector space V, and let V = W 1 + W 2 . Deduce that V
+			is the direct sum of W 1 and W 2 if and only if dim(V = dim)W 1 )( + dimW 2 ())\\
+			$V = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)
+			\begin{proof}
+				\-\\
+				$V = W_1 \oplus W_2 \Rightarrow dim(V) = dim(W_1) + dim(W_2)$\\
+				From the definition of direct sum, $W_1 \cap W_2 = \{0\}$\\
+				This means $dim(W_1 \cap W_2) = 0$\\
+				From (a), we proved that $dim(V) = dim(W_1) + dim(W_2) - dim(W_1 \cap W_2)$\\
+				$ = dim(W_1) + dim(W_2) - 0$\\
+				$ = dim(W_1) + dim(W_2)$\\
+				\-\\
+				$dim(V) = dim(W_1) + dim(W_2) \Rightarrow V = W_1 \oplus W_2 $\\
+				$V = W_1 \oplus W_2$ if and only if $V = W_1 + W_2 $ and $ W_1 \cap W_2 = \{0\}$\\
+				$V = W_1 + W_2$ is true by the definition of the problem.\\
+				From part (a), $dim(V) = dim(W_1) + dim(W_2) - dim(W_1 \cap W_2)$\\
+				Our antecedent is $dim(V) = dim(W_1) + dim(W_2)$\\ 
+				Setting the two equations equal to each other:\\
+				$dim(W_1) + dim(W_2) - dim(W_1 \cap W_2) = dim(W_1) + dim(W_2)$\\ 
+				$dim(W_1 \cap W_2) = 0$\\
+				This means $ W_1 \cap W_2 = \{0\}$\\
+				Thus, $dim(V) = dim(W_1) + dim(W_2)$ \\
+				\-\\
+				Therefore, $V = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)
+			\end{proof}
 		}
-	\item{
-		$X + Y \in S$ where $X,Y \in S$\\
-	    This means $X = v_x + W$ \quad $Y = v_y + W$\\	
-		$X + Y = (v_x + W) + (v_y + W)$
-		$= (v_x + v_y) + W$ by defintion of addition.\\
-		$(v_x + v_y) \in V$ by closure under vector addition.\\
-		Therefore $X + Y \in S$\\
-		}
-	\item{
-		$aX \in S \quad a \in F$\\
-		$aX = a(v_x + W)$\\
-		$= av_x + W$\\
-		$av_x \in V$ by closure under vector addition.\\
-		Therefore, $aX \in S$
-		}
-	\end{enumerate}
-	}
 \end{enumerate}
 
-\section{F}
-Show that if 
-\[
-M_1 = 
-\begin{pmatrix}
-1 & 0 \\
-0 & 0 
-\end{pmatrix},
-M_2 = 
-\begin{pmatrix}
-0 & 0 \\
-0 & 1 
-\end{pmatrix},
-\
-M_3 = 
-\begin{pmatrix}
-0 & 1 \\
-1 & 0 
-\end{pmatrix}
-\]
-then the span of $\{M_1, M_2, M_3\}$ is the set of all symmetric $2x2$ matrices.
+\section{D}
 
+\section{E}
+Let V be the vector space of sequences. Define the functions T,U : V → V by
+T(a 1 ,a 2 ,.. . = ()a 2 ,a 3 ,.. .) and U(a 1 ,a 2 ,.. .) = (0,a 1 ,a 2 ,.. .
+T and U are called the left shift and right shift operators o)n V respectively.
+\begin{enumerate}[label=\alph*.]
+	\item{
+		Prove that T and U are linear.
+		\begin{proof}
+			\-\\
+			T is linear if and only if $T(x+y) = T(x) + T(y)$ and $T(cx) = cT(x)$\\	
+			Let $x,y \in V \quad c \in F$\\
+			$x = (x_1, x_2, \cdots) \quad y = (y_1, y_2, \cdots)$\\
+			$x + y = (x_1 + y_1, x_2 + y_2, \cdots)$ \\
+			$T(x + y) = (x_2 + y_2, x_3 + y_3, \cdots)$ \\
+			$T(x) = (x_2, x_3, \cdots)$\\
+			$T(y) = (y_2, y_3, \cdots)$\\
+			$T(x) + T(y) = (x_2 + y_2, x_3 + y_3, \cdots)$ \\
+			Thus, $T(x + y) = T(x) + T(y)$\\
+			\-\\
+			$x = (x_1, x_2, \cdots)$\\
+			$cx = (cx_1, cx_2, \cdots)$\\
+			$T(cx) = (cx_2, cx_3, \cdots)$\\
+			$T(x) = (x_2, x_3, \cdots)$\\
+			$cT(x) = (cx_2, cx_3, \cdots)$\\
+			Thus, $T(cx) = cT(x)$\\
+			\-\\
+			Therefore, T is linear. The proof for U being linear is similiar.
+		\end{proof}
+		}
+		\item{
+			T is onto but not one to one\\
+			Let $v \in V$
+
+			}
+		\item{
+			U is one to one but not onto.
+			}
+\end{enumerate}
+	
+
+\section{F}
+Let S be the subspace of $M_{nxn}(R)$ generated by all matrices of the form $AB - BA$ with $A$ and $B$ in $M_{nxn}(R)$.
+Prove that dim$(S) = n^{2} - 1$. (You may want to use the trace together with the rank-nullity theorem)
 \begin{proof}
 	\-\\
-	$Sym(M_{2x2}(F)) = \{m \in M_{2x2}(F): m = \begin{pmatrix} a & b \\ b & c \end{pmatrix}  \Leftrightarrow m = m^t\}$
-	\begin{Dequation}
-	\begin{align*}
-		m \in span(\{M_1, M_2, M_3\}) \text{ if } m & = c_1 
-	\begin{pmatrix}
-	1 & 0 \\
-	0 & 0 
-	\end{pmatrix}+
-	c_2
-	\begin{pmatrix}
-	0 & 0 \\
-	0 & 1 
-	\end{pmatrix}+
-	c_3
-	\begin{pmatrix}
-	0 & 1 \\
-	1 & 0 
-	\end{pmatrix}, \text{where } c_1, c_2, c_3 \in F\\
-	& =\begin{pmatrix}
-	c_1 & c_3 \\
-	c_3 & c_2 
-	\end{pmatrix}\\
-		m^t & = 
-	\begin{pmatrix}
-	c_1 & c_3 \\
-	c_3 & c_2 
-	\end{pmatrix}
-	\end{align*}
-	\end{Dequation}
-	$\therefore Sym(M_{2x2}(F)) = span(\{M_1, M_2, M_3\})$
+	Trace is a linear transformation.\\
+	$\text{Tr}: M_{nxn}(R) \rightarrow R $\\
+	The subspace S is defined as $\{AB - BA : A,B \in M_{nxn}(R)\}$\\
+	$\text{Tr}(AB - BA) = \text{Tr}(AB) - \text{Tr} (BA)$\\
+	$= \text{Tr}(AB) - \text{Tr} (AB)$\\
+	$= 0$\\
+	All matrices that can be expressed as $AB - BA$ is in the null space of Tr. This means that N(Tr)$ = S$.\\
+	The rank-nullity theorem states:\\
+	dim(N(Tr)) + dim(R(Tr)) = dim($M_{nxn}(R)$)\\
+	N(Tr)$ = S$, so dim(S) + dim(R(Tr)) = dim($M_{nxn}(R)$)\\
+	dim(S) = dim($M_{nxn}(R)$) - dim(R(Tr))\\
+	= $n^2 - $ dim(R)\\
+	= $n^2 - $ 1 \\
 \end{proof}
 
 \section{G}
-Show that if $S_1$ and $S_2$ are subsets of the vector space $V$ such that $S_1 \subseteq S_2$ then span($S_1$) $\subseteq$ span($S_2$). 
-In particular, if $S_1 \subseteq S_2$ and span($S_1$) = $V$, deduce that span($S_2$) = $V$
+Let T be a linear transformation of a vector space V into itself. Suppose that $x \in V$ is such that $T^m (x) = 0$, and
+$T^{m-1}(x) \neq 0$ for some positive m. Show that $x,T(x),T^2(x),\cdots ,T^{m-1}(x)$ are linearly independent.
 \begin{proof}
 	\-\\
-	Let $z_1 \in \text{span}(S_1)$ \\ %and $z_2 \in \text{span}(S_2)$ \\
+	The linear combination of the above set is $$ a_0x + a_1T(x) + a_2T^2(x) + \cdots + a_{n-1}T^{m-1}(x) = 0$$
+	Notice that $T^n(x) = 0$ for all $n > m$.\\
+	$T^{m+1}(x) = T(T^{m}(x)) = T(0) = 0$\\
+	Let's take $T^{m-1}$ on both sides of the linear combination.	
+	\begin{align*}
+		T^{m-1}(a_0x + a_1T(x) + a_2T^2(x) + \cdots + a_{n-1}T^{m-1}(x)) &= T^{m-1}(0)\\
+		T^{m-1}(a_0x)&= 0 \\
+	\end{align*}
 	So $z_1 = \sum_{i=1}^{n}a_ix_i$ where $a \in F$ and $x \in S_1$\\
 	%$z_2 = \sum_{i=1}^{n}b_iy_i$ where $b \in F$ and $y \in S_2$\\
 	If $S_1 \subseteq S_2$, then $x \in S_2$\\
@@ -353,25 +252,59 @@ In particular, if $S_1 \subseteq S_2$ and span($S_1$) = $V$, deduce that span($S
 \end{proof}
 
 \section{H} 
-Show that $P_n(F)$ is generated by $\{1, x, \cdots, x^n\}$
-\begin{proof}
+Let $T: R^3 \rightarrow R^3$
+\begin{enumerate}[label=\alph*.]
+	\item{
+	If T(a,b,c) = (a,b,0), show that T is the projection on the xy-plane along the z-axis.	
+	\begin{proof}
 	\-\\
-	Definition of generates is span($\{1, x, \cdots, x^n\}$) = $P_n(F)$\\
-	%$x \in P_n(F) \Leftrightarrow x \in \text{span}(\{1, x, \cdots, x^n\}) $\\
+	We want to projection to be on the xy-plane along the z-axis. Let the projection be (x,y,0).\\
+	To minimize the distance, we must choose x and y such that
+	$$(a - x)^2 + (b - y)^2 + (c - 0)^2$$
+	is minimum.
+	Since the equation above is a difference of squares, x = a and b = y will give us the minimum value.
+	Therefore, the projection on the xy-plane will be (a,b,0), which is T.
+	\end{proof}
+	}
+	
+	\item{
+	Find a formula for T(a,b,c), where T represents the projection on the z-axis along the xy-plane.
+	\begin{proof}
 	\-\\
-	First let's show that $\text{span}(\{1, x, \cdots, x^n\}) \subseteq P_n(F)$\\
-	By theorem 1.5, this is true because $\{1, x, \cdots, x^n\} \subset P_n(F)$\\
+	We want to projection to be on the z-axis along the xy-plane. Let the projection be (0,0,z).\\
+	To minimize the distance, we must choose z such that
+	$$(a - 0)^2 + (b - 0)^2 + (c - z)^2$$
+	is minimum.
+	z = c will give us the minimum value.
+	Therefore, the equation for T will be T(a,b,c)=(0,0,c).
+	\end{proof}
+	}
+
+	\item{
+	If T(a,b,c) = (a-c,b,0), show that T is the projection on the xy-plane along the line L $= \{(a,0,a):a \in R\}$
+	\begin{proof}
 	\-\\
-	Now let's show that $P_n(F) \subseteq \text{span}(\{1, x, \cdots, x^n\})$\\
-	Let $w \in P_n(F)$\\
-	$w = a_nx^n + a_{n-1}x^{n-1} + \cdots + a_0x^0$ where $a\in F$\\
-	Let $ v\in \text{span}(\{1, x, \cdots, x^n\})$ where $b \in F$\\
-	$v = b_01 + b_2x + \cdots + b_n x^n$ \\
-	Any w can be expressed as a v, if we fix $a_0 = b_0, \cdots, a_n = b_n$.\\	
-	Thus, $P_n(F) \subseteq \text{span}(\{1, x, \cdots, x^n\})$\\
-	\-\\
-	Therefore, $P_n(F)$ is generated by $\{1, x, \cdots, x^n\}$
-\end{proof}
+	We want to projection to be on the xy-plane along the line L. Let the projection be $(x,y,0)$.\\
+	A vector that is on L is $(1,0,1)$.
+	To minimize the distance, we must choose $\lambda$ such that
+	$$(a,b,c) + \lambda (1,0,1) = (x,y,0)$$
+	is minimum. Writing the equation above as a system:
+	\[
+	\begin{align*}
+		a + \lambda &= x\\
+		b &= y\\
+		c + \lambda &= 0
+	\end{align*}
+	\]
+	Solving this system gives us, $x = a - c, y = b$\\ 
+	Therefore, the projection on the xy-plane along the line L will be $(a-c,b,0)$.\\
+	\end{proof}
+	}
+
+\end{enumerate}
+
+
+
 \section{I} 
 In $M_{mxn}(F)$, let $E^{ij}$ denote the matrix whose only nonzero entry is 1 in the $i$th row and $j$th column. Prove that $\{E^{ij}: 1 \leq i \leq m,
 1 \leq j \leq n\}$ is linearly independent.
