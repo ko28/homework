@@ -110,11 +110,11 @@ $$g(x) = c_0f(x) + c_1f'(x) + c_2f''(x) + \cdots + c_nf^{(n)}(x)$$
 	Therefore, any $g(x) \in P_n(R)$ can be a linear combination of B with the scalars $c_0, c_1, \cdots, c_n$
 \end{proof}
 
-
 \section{C}
 \begin{enumerate}[label=\alph*.]
 	\item{
-			prove blah blah
+ Prove that if W 1 and W 2 are finite-dimensional subspaces of a vector space V,then the subspace W 1 +W 2 is
+ finite-dimensional, and dim(W 1 + W 2  = di)m(W 1 )+dimW 2 )(−dimW 1 ∩ W 2 (. ))
 			\begin{proof}
 			\-\\
 			$W_1$ and $W_2$ are finite dimensional subspaces of $V \Rightarrow $ subspace $W_1 + W_2$ is finite dimensional and $\text{dim}(W_1 + W_2) = \text{dim}(W_1) + \text{dim}(W_2) - \text{dim}(W_1 \cap W_2)$\\
@@ -165,6 +165,99 @@ $$g(x) = c_0f(x) + c_1f'(x) + c_2f''(x) + \cdots + c_nf^{(n)}(x)$$
 \end{enumerate}
 
 \section{D}
+\begin{enumerate}[label=\alph*.]
+	\item{
+			Prove that if $W_1$ is any subspace of a finite-dimensional vector space $V$, then there exists a subspace $W_2$ of	$V$ such that $V = W_1 \oplus W_2 $
+			\begin{proof}
+			\-\\
+			Since $W_1$ is a subspace, let $B_1$ be its basis.
+			$$B_1 = \{u_1, u_2, \cdots, u_k\}$$
+			Using the replacement theorem, we can extend $B_1$ to be a basis for $V$. Let this basis for $V$ be $B_v$.
+			$$B_v = \{u_1, u_2, \cdots, u_k, u_{k+1}, \cdots, u_n\}$$
+			Let the set of the vectors we added to $B_1$ to create $B_v$ be called $B_2$. 
+			$$B_2 = \{u_{k+1}, \cdots, u_n\}$$
+			Let $W_2$ be the subspace where its span is $B_2$.\\
+			To prove $W_1 \oplus W_2 = V$ we need to show that $W_1 \cap W_2 = \{0\} \text{ and } W_1 + W_2 = V$.
+			\begin{enumerate}[label=\roman*.]
+				\item{
+				$W_1 \cap W_2 = \{0\}\ $\\
+				\-\\
+				Let $v \in W_1$ and $v \in W_2$
+				$$ v = a_1u_1 + a_2u_2 + \cdots a_ku_k = b_{k+1}u_{k+1} b_{k+2}u_{k+2} + \cdots + b_nu_n \quad \text{where } a,b \in F $$
+				$$ v = a_1u_1 + a_2u_2 + \cdots a_ku_k -(b_{k+1}u_{k+1} b_{k+2}u_{k+2} + \cdots + b_nu_n) = 0 $$
+				Notice that $v$ is written as a linear combination of $B_v$, which means that all the constants equal 0: $a_1 = a_2 = \cdots = a_k = b_{k+1} = b_{k+2} + \cdots = b_{n} = 0$\\
+				So, $v = 0$.\\
+				Therefore, $W_1 \cap W_2 = \{0\}\ $
+				}
+				\item{
+				$W_1 + W_2 = V$\\
+				\-\\
+				Let $v \in V$
+				$$ v = \sum_{i=1}^{n}a_iu_i \quad \text{where } a \in F$$
+				$v$ can also be expressed as the sum of $B_1$ and $B_2$\\
+				$$ v = \sum_{i=1}^{k}a_iu_i + \sum_{k+1}^{n}a_iu_i $$
+				Thus, any vector in $V$ and be expressed as a sum of vectors in $W_1$ and $W_2$.\\
+				Therefore, $W_1 + W_2 = V$
+				}
+			\end{enumerate}
+			Therefore, $W_1 \oplus W_2 = V$
+			\end{proof}
+		}
+	\item{
+			Let $V = R^2$ and $W_1 = \{(a_1,0):a_1\in R\}$. Give examples of two different subspaces $W_2$ and $W_2^'$ such that $V = W_1 \oplus W_2$ 
+			and $V = W_1 \oplus W_2^'$
+			\begin{proof}
+			\-\\
+			Let $W_2 = \{(0,a_2):a_2 \in R\}$
+			\begin{enumerate}[label=\roman*.]
+				\item{
+				$W_1 \cap W_2 = \{0\}\ $\\
+				\-\\
+				Let $v \in W_1$ and $v \in W_2$
+				$$ v = (a_1,0) = (0,a_2)$$
+				$$ a_1 = 0, a_2 = 0$$
+				So, $v = (0,0)$.\\
+				Therefore, $W_1 \cap W_2 = \{0\}\ $
+				}
+				\item{
+				$W_1 + W_2 = V$\\
+				\-\\
+				Let $v \in V$
+				$$ v = (u_1,u_2)$$
+				$v$ can also be expressed as the sum of vectors in $W_1$ and $W_2$\\
+				Let $x = (a_1,0) \in W_1$ and $y = (0, a_2)\in W_2$.
+				$$v = c_1x + c_2y = (c_1a_1,c_2a_2), \text{ where } c \in F \text{ and } c_1 = \frac{v_1}{a_1}, c_2 = \frac{v_2}{a_2}$$
+				Thus, any vector in $V$ and be expressed as a sum of vectors in $W_1$ and $W_2$.\\
+				Therefore, $W_1 + W_2 = V$\\
+				}
+			Therefore, $V = W_1 \oplus W_2$ \\
+			\-\\
+			Let $W'_2 = \{(d,d):d \in R\}$
+			\begin{enumerate}[label=\roman*.]
+				\item{
+				$W_1 \cap W'_2 = \{0\}\ $\\
+				\-\\
+				Let $v \in W_1$ and $v \in W'_2$
+				$$ v = (a_1,0) = (d,d)$$
+				$$ a_1 = d, d = 0$$
+				So, $v = (0,0)$.\\
+				Therefore, $W_1 \cap W'_2 = \{0\}\ $
+				}
+				\item{
+				$W_1 + W'_2 = V$\\
+				\-\\
+				Let $v \in V$
+				$$ v = (u_1,u_2)$$
+				$v$ can also be expressed as the sum of vectors in $W_1$ and $W'_2$\\
+				Let $x = (u_1 - u_2,0) \in W_1$ and $y = (u_2, u_2)\in W'_2$.
+				$$x + y = (u_1 - u_2 + u_2, 0 +u_2) = (u_1, u_2)$$
+				Thus, any vector in $V$ and be expressed as a sum of vectors in $W_1$ and $W'_2$.\\
+				Therefore, $W_1 + W'_2 = V$\\
+				}
+				Therefore, $V = W_1 \oplus W'_2$
+			\end{proof}
+		}
+\end{enumerate}
 
 \section{E}
 Let V be the vector space of sequences. Define the functions T,U : V → V by
@@ -340,27 +433,47 @@ In $M_{mxn}(F)$, let $E^{ij}$ denote the matrix whose only nonzero entry is 1 in
 	%Given the definition of $E^{ij}$, we can rewrite the above sum as $\sum_{i=1}^{m} a_{i0} + \sum_{j=1}^{n}a_{0j}$ 
 \end{proof}
 \section{J}
-Let $u$ and $v$ be distinct vectors in a vector space $V$. Show that $\{u,v\}$ is linearly dependent if and only if $u$ or $v$ is a
-multiple of the other.
+Let $V$ be a finite-dimensional vector space and $T: V \rightarrow V$ be linear.
 
-\begin{proof}
-\-\\
-	Let's first show that if $u$ or $v$ is a multiple of the other then $\{u,v\}$ is linearly dependent.\\
-	Being a mutiple means $u = nv$ or $v = nu$ where $n \in F$ \\
-	If $\{u,v\}$ is linearly dependent then $a_1u + a_2v = 0$ where $a \in F$\\
-	Using definition of mutiple $a_1u + a_2nu = 0$\\
-	Factoring, $u(a_1 + a_2n) = 0$\\
-	This means $(a_1 + a_2n) = 0$\\	
-	So, $n = \frac{-a_1}{a_2}$ which is a solution for linearly dependency.\\
-	Without loss of generality, we can prove the case where $ v = nu$\\
-	Therefore, $\{u,v\}$ is linearly dependent.\\
-	\-\\
-	Now let's show that if $\{u,v\}$ is linearly dependent then $u$ or $v$ is a multiple of the other.\\
-	If $\{u,v\}$ is linearly dependent then $a_1u + a_2v = 0$ where $a \in F$\\
-	We can rewrite the equation above as $a_1u = -a_2v$\\
-	$u = \frac{-a_2}{a_1}v$\\
-	Thus, $u$ is a multiple of $v$.\\
-	Without loss of generality, we can prove $v$ is a multiple of $u$.\\
-	Therefore, $u$ or $v$ is a mutiple of the other.
-\end{proof}
+\begin{enumerate}[label=\alph*.]
+	\item{
+			Suppose that $V = R(T) + N(T)$. Prove that $V = R(T) \oplus N(T)$
+			\begin{proof}
+			\-\\
+			Recall the properties of dimensions we proved in problem C.
+			$$\text{dim}(R(T) + N(T)) = \text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(R(T) \cap N(T))$$
+			dim$(R(T))$ and dim$(N(T))$ must be finite because dim$(V)$ is finite.
+			Because we are supposing that $V = R(T) + N(T)$ we can rewrite the equation above as 
+			\begin{Dequation}
+			\begin{align*}
+				\text{dim}(V) &= \text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(R(T) \cap N(T))\\
+				\text{dim}((R(T) \cap N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(V)\\
+				\text{dim}((R(T) \cap N(T)) &= 0 
+			\end{align*}
+			\end{Dequation}
+			$\text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(V)$ is equal to zero because of the rank nullity theorem and that V is finite dimensional.
+			$\text{dim}((R(T) \cap N(T)) = 0$ means that $R(T) \cap N(T) = \{0\}$\\
+			Therefore, $V = R(T) \oplus N(T)$ because $R(T) \cap N(T) = \{0\}$ and $V = R(T) + N(T)$. 
+			\end{proof}
+		}
+	\item{
+			Suppose that $R(T) \cap N(T) = \{0\}$. Prove that $V = R(T) \oplus N(T)$.
+			\begin{proof}
+				\-\\
+			dim$(R(T))$ and dim$(N(T))$ must be finite because dim$(V)$ is finite.
+			\begin{Dequation}
+			\begin{align*}
+				\text{dim}(R(T) + N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(R(T) \cap N(T))\\
+				\text{dim}(R(T) + N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(\{0\})\\
+				\text{dim}(R(T) + N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T)) - 0\\
+				\text{dim}(R(T) + N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T)) 
+			\end{align*}
+			\end{Dequation}
+			Given that $V$ is finite dimensional and using the rank nullity theorem:
+			$$\text{dim}(V) = \text{dim}(R(T) + N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T))$$
+			This means that $V = R(T) + N(T)$.\\
+			Therefore, $V = R(T) \oplus N(T)$ because $V = R(T) + N(T)$ and $R(T) \cap N(T) = \{0\}$. 
+			\end{proof}
+		}
+\end{enumerate}
 \end{document}
