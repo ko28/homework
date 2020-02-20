@@ -421,17 +421,30 @@ Let $T: R^3 \rightarrow R^3$
 
 
 \section{I} 
-In $M_{mxn}(F)$, let $E^{ij}$ denote the matrix whose only nonzero entry is 1 in the $i$th row and $j$th column. Prove that $\{E^{ij}: 1 \leq i \leq m,
-1 \leq j \leq n\}$ is linearly independent.
+Suppose that the linear transformation $T : V \rightarrow V$ is the projection on $W \subset V$ along some subspace $W' \subset V$.
+Prove that $W$ is T-invariant and that $T_W = I_W$
 \begin{proof}
 	\-\\
-	If $E^{ij}$ is linearly independent then $a_{1,1}E^{1,1} + \cdots + a_{m,n}E^{m,n} \neq 0$\\
-	This sum can only equal the 0 matrix if all a are 0.\\
-	Therefore, $E^{ij}$ is linearly independent.
-	%If $E^{ij}$ is linearly independent then $\sum_{/i=1}^{m} \sum_{j=1}^{n} a_{ij}E_{ij} \neq 0$ where not all a are 0.\\
-	%The only time where the above sum equals the 0 matrix is if all a are 0. 
-	%Given the definition of $E^{ij}$, we can rewrite the above sum as $\sum_{i=1}^{m} a_{i0} + \sum_{j=1}^{n}a_{0j}$ 
+\begin{enumerate}[label=\alph*.]
+	\item{
+		$W$ is T-invariant.\\
+		\-\\
+		We need to show that $T(x) \in W$ for every $x \in W$.
+		$$x = x_1 + x_2, T(x) = T(x_1 + x_2) = x_1 \text{ where } x_1 \in W, x_2 \in W'$$
+		It is trivial to see that $T$ restricts to the identity on W.\\
+		Therefore, $W$ is T-invariant.
+		}
+	\item{
+		$T_W = I_W$\\
+		\-\\
+		For any $w \in W$, we can express $w$ as $w = w + 0$ where $0 \in W'$ because $W'$ is a subspace.\\
+		Because $W_1$ and $W_2$ are a direct sum, there is no way to express $w$ as the sum of a vector in one and a vector in the other.\\
+		$T(w + 0) = w$, shows that $T_w$ is the same as the indentity tranformation $I_W$.\\
+		Therefore, $T_W = I_W$.
+		}
+\end{enumerate}
 \end{proof}
+
 \section{J}
 Let $V$ be a finite-dimensional vector space and $T: V \rightarrow V$ be linear.
 

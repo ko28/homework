@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  19 FEB 2020 23:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  20 FEB 2020 00:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1865,8 +1865,13 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
  [5] [6] [7]
-./hw4.tex:473: Misplaced alignment tab character &.
-l.473 ...\text{dim}(V) = \text{dim}(R(T) + N(T)) &
+Underfull \hbox (badness 10000) in paragraph at lines 427--428
+
+ []
+
+[8]
+./hw4.tex:486: Misplaced alignment tab character &.
+l.486 ...\text{dim}(V) = \text{dim}(R(T) + N(T)) &
                                                   = \text{dim}(R(T)) + \text...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1875,32 +1880,32 @@ up above has ended a previous alignment prematurely,
 you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
-[8] [9]
+[9]
 
-./hw4.tex:479: LaTeX Error: \begin{proof} on input line 209 ended by \end{document}.
+./hw4.tex:492: LaTeX Error: \begin{proof} on input line 209 ended by \end{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.479 \end{document}
+l.492 \end{document}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 479.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 479.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 492.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 492.
 (./hw4.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 479.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 479.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 492.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 492.
 Package rerunfilecheck Info: File `hw4.out' has not changed.
 (rerunfilecheck)             Checksum: 65E90C6F77DF4112F64A193209D2B2BE;362.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 479.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 492.
  )
 (\end occurred inside a group at level 3)
 
@@ -1909,18 +1914,18 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 479.
 ### semi simple group (level 1) entered at line 168 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 38640 strings out of 492982
- 755466 string characters out of 6134896
- 964971 words of memory out of 5000000
+ 38642 strings out of 492982
+ 755484 string characters out of 6134896
+ 964969 words of memory out of 5000000
  41529 multiletter control sequences out of 15000+600000
  552720 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,21n,114p,10414b,1009s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb>
-Output written on hw4.pdf (9 pages, 130419 bytes).
+Output written on hw4.pdf (9 pages, 131918 bytes).
 PDF statistics:
- 193 PDF objects out of 1000 (max. 8388607)
- 153 compressed objects within 2 object streams
- 40 named destinations out of 1000 (max. 500000)
+ 195 PDF objects out of 1000 (max. 8388607)
+ 155 compressed objects within 2 object streams
+ 42 named destinations out of 1000 (max. 500000)
  16573 words of extra memory for PDF output out of 17280 (max. 10000000)
 

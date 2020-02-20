@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1582177760 "hw4.tex" "hw4.pdf" "hw4" 1582177760
+["pdflatex"] 1582180565 "hw4.tex" "hw4.pdf" "hw4" 1582180565
   "../../evan.sty" 1580144086 18873 d766cda457a2c03ee9f28997dee0c06e ""
   "/etc/texmf/web2c/texmf.cnf" 1578934342 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
@@ -238,10 +238,10 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1578934385 2700761 ac0584cc9514ab21918550a6948c4ee2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1578934409 4127540 67c6239e9a03bcb77780f889796a9b3c ""
-  "hw4.aux" 1582177700 1516 beb41c5ee49a76427d0601d94495873d ""
-  "hw4.out" 1582177700 362 65e90c6f77df4112f64a193209d2b2be ""
-  "hw4.pre" 1582177699 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "hw4.tex" 1582177759 19122 51a4fded67ad06be1c37be848a3d6452 ""
+  "hw4.aux" 1582180555 1516 beb41c5ee49a76427d0601d94495873d ""
+  "hw4.out" 1582180555 362 65e90c6f77df4112f64a193209d2b2be ""
+  "hw4.pre" 1582180554 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "hw4.tex" 1582180563 19317 0fbabf5d5b7bf13ecc759de3d47896cf ""
   (generated)
   "hw4.pre"
   "hw4.log"
