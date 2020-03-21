@@ -1,0 +1,492 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+
+\makeatletter
+\newenvironment{Dequation}
+  {%
+  \def\tagform@##1{%
+    \maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+  \ignorespaces
+  }
+  {%
+  \def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+  \ignorespacesafterend
+  }
+\makeatother
+
+\title{Math 341: Midterm 1}
+\author{Daniel Ko}
+\date{Spring 2020}
+
+\begin{document}
+\maketitle
+
+\section{A}
+Let V be a vector space having dimension n, and let S be a subset of V that generates V.
+
+\begin{enumerate}[label=\alph*.]
+	\item{
+			Prove that there is a subset of S that is a basis for V. (Be careful not to assume that S is finite).
+			\begin{proof}
+			\-\\
+			Since V is finite dimensional, there exists a basis for V.\\
+			$B = \{v_1, v_2, \cdots, v_n\}$\\
+			Any $v \in B$ can be expressed as a linear combination of S because span(S) = V.\\
+			%$v_i = \{s_1, s_2, \cdots, s_m\}$
+			Let the subset of S that generates $v_i$ be $S_i$\\
+			$v_i = \sum_{j=1}^{m^k} a_j^k s_j^k$ where $a\in F$ and $s \in S_i$\\
+			The span of the union of the sets that generates v, $\text{span(} \bigcup_{i=1}^{n}S_i \text{)} = V$\\ 
+			Corollary 2(a) of Theorem 1.10 states that a generating set for V that contains exactly n vectors is a basis for V.
+			The set above, which is a subset of S, contains exactly n vectors and generates V. Therefore, there is subset of S that is a basis for V. 
+			\end{proof}
+
+	}
+	\item{
+			Prove that S contains at least n vectors.
+			\begin{proof}
+			\-\\
+			From (a) we know there is a subset of S that forms a basis. Since that subset contains n vectors, S must contain n or more vectors. 
+			\end{proof}
+		}
+\end{enumerate}
+
+\section{B}
+Let $f(x)$ be a polynomial of degree n in $P_n(R)$. Prove that for any $g(x) \in P_n(R)$ there exists scalars $c_0, c_1, \cdots, c_n$ such that
+$$g(x) = c_0f(x) + c_1f'(x) + c_2f''(x) + \cdots + c_nf^{(n)}(x)$$
+\begin{proof}
+	\-\\
+	Let $B = \{f, f', f'', \cdots, f^{(n)}\}$.\\
+	If $B$ forms a basis we can express any $g(x) \in P_n(R)$ in the format above (a linear combination).\\
+	We can determine if $B$ is basis by seeing if it is linearly independent by using a matrix.\\
+	$\mu_0f + \mu_1f' + \mu_2f'' + \cdots + \mu_nf^{(n)} = 0$\\
+
+	\[
+	\begin{bmatrix}
+	a_n & a_{n-1} & \cdots & \cdots & a_0 \\
+  	& na_n & \cdots & \cdots & a_1\\
+  	& \ddots & \cdots & \cdots & \vdots \\
+ 	& & \ddots & \cdots & \vdots \\
+	& & & n!a_n & (n-1)!a_{n-1} \\
+ 	& & & & n!a_n
+	\end{bmatrix}
+	\begin{bmatrix}
+		\mu_0\\
+		\mu_1\\
+		\vdots\\
+		\vdots\\
+		\mu_{n-1}\\
+		\mu_{n}\\
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		0\\
+		0\\
+		\vdots\\
+		\vdots\\
+		0\\
+		0\\
+	\end{bmatrix}
+	\]
+	Solving this system of equations:\\
+	Looking at the bottom row, $n!a_n \mu_n = 0$\\
+	$\mu_n = \frac{0}{n!a_n} = 0$, $a_n$ is non zero because f is a nth degree polynomial and $a_n$ is its coefficient.\\
+	Looking at row n - 1,$n!a_n \mu_{n-1} + (n-1)!a_{n-1} \mu{n} = 0$\\
+	Because $\mu_n = 0$, $n!a_n \mu_{n-1} + 0 = 0$\\
+	$\mu_{n-1} = \frac{0}{n!a_n} = 0$\\
+	By back substitution, $\mu_n = \mu_{n-1} = \cdots = \mu_1 = \mu_0 = 0$\\
+	This means that B is linearly independent, which also means that B is a basis.\\
+	Therefore, any $g(x) \in P_n(R)$ can be a linear combination of B with the scalars $c_0, c_1, \cdots, c_n$
+\end{proof}
+
+\section{C}
+\begin{enumerate}[label=\alph*.]
+	\item{
+ Prove that if W 1 and W 2 are finite-dimensional subspaces of a vector space V,then the subspace W 1 +W 2 is
+ finite-dimensional, and dim(W 1 + W 2  = di)m(W 1 )+dimW 2 )(−dimW 1 ∩ W 2 (. ))
+			\begin{proof}
+			\-\\
+			$W_1$ and $W_2$ are finite dimensional subspaces of $V \Rightarrow $ subspace $W_1 + W_2$ is finite dimensional and $\text{dim}(W_1 + W_2) = \text{dim}(W_1) + \text{dim}(W_2) - \text{dim}(W_1 \cap W_2)$\\
+			Let $B_{1\cap 2}$ be a basis for $W_1 \cap W_2$\\
+			$B_{1\cap 2} = \{u_1, u_2, \cdots, u_k\}$\\
+			By using the replacement theorem, we can extend $B_{1\cap 2}$ to be a basis for $W_1$\\
+			So the basis for $W_1$ is $B_1$\\
+			$B_1 = \{u_1, u_2, \cdots, u_k, v_1, v_2, \cdots, v_m\}$\\
+			Likewise, we can extend $B_{1\cap 2}$ to be a basis for $W_2$\\
+			$B_2 = \{u_1, u_2, \cdots, u_k, w_1, w_2, \cdots, w_p\}$\\
+			Basis for $W_1 + W_2$ will be $B_1 \cup B_2$, however they may contain the same vectors twice.\\
+			To prevent double counting, we must subtract $B_1 \cap B_2$ from $B_1 \cup B_2$\\
+			Thus the basis for $W_1 + W_2$ is\\
+			$B_{1+2} = \{u_1, u_2, \cdots, u_k, v_1, v_2, \cdots, v_m, w_1, w_2, \cdots, w_p\}$\\
+			$W_1 + W_2$ is finite dimensional because its basis contains only a finite amount of vectors. \\
+			$\text{dim}(W_1 + W_2) = \text{dim}(W_1) + \text{dim}(W_2) - \text{dim}(W_1 \cap W_2)$\\
+			$k + m + p = k + m + k + p - k$\\
+			$k + m + p = k + m + p$
+			\end{proof}
+		}
+	\item{
+			Let W 1 and W 2 be finite-dimensional subspaces of a vector space V, and let V = W 1 + W 2 . Deduce that V
+			is the direct sum of W 1 and W 2 if and only if dim(V = dim)W 1 )( + dimW 2 ())\\
+			$V = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)$
+			\begin{proof}
+				\-\\
+				$V = W_1 \oplus W_2 \Rightarrow dim(V) = dim(W_1) + dim(W_2)$\\
+				From the definition of direct sum, $W_1 \cap W_2 = \{0\}$\\
+				This means $dim(W_1 \cap W_2) = 0$\\
+				From (a), we proved that $dim(V) = dim(W_1) + dim(W_2) - dim(W_1 \cap W_2)$\\
+				$ = dim(W_1) + dim(W_2) - 0$\\
+				$ = dim(W_1) + dim(W_2)$\\
+				\-\\
+				$dim(V) = dim(W_1) + dim(W_2) \Rightarrow V = W_1 \oplus W_2 $\\
+				$V = W_1 \oplus W_2$ if and only if $V = W_1 + W_2 $ and $ W_1 \cap W_2 = \{0\}$\\
+				$V = W_1 + W_2$ is true by the definition of the problem.\\
+				From part (a), $dim(V) = dim(W_1) + dim(W_2) - dim(W_1 \cap W_2)$\\
+				Our antecedent is $dim(V) = dim(W_1) + dim(W_2)$\\ 
+				Setting the two equations equal to each other:\\
+				$dim(W_1) + dim(W_2) - dim(W_1 \cap W_2) = dim(W_1) + dim(W_2)$\\ 
+				$dim(W_1 \cap W_2) = 0$\\
+				This means $ W_1 \cap W_2 = \{0\}$\\
+				Thus, $dim(V) = dim(W_1) + dim(W_2)$ \\
+				\-\\
+				Therefore, $V = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)$
+			\end{proof}
+		}
+\end{enumerate}
+
+\section{D}
+\begin{enumerate}[label=\alph*.]
+	\item{
+			Prove that if $W_1$ is any subspace of a finite-dimensional vector space $V$, then there exists a subspace $W_2$ of	$V$ such that $V = W_1 \oplus W_2 $
+			\begin{proof}
+			\-\\
+			Since $W_1$ is a subspace, let $B_1$ be its basis.
+			$$B_1 = \{u_1, u_2, \cdots, u_k\}$$
+			Using the replacement theorem, we can extend $B_1$ to be a basis for $V$. Let this basis for $V$ be $B_v$.
+			$$B_v = \{u_1, u_2, \cdots, u_k, u_{k+1}, \cdots, u_n\}$$
+			Let the set of the vectors we added to $B_1$ to create $B_v$ be called $B_2$. 
+			$$B_2 = \{u_{k+1}, \cdots, u_n\}$$
+			Let $W_2$ be the subspace where its span is $B_2$.\\
+			To prove $W_1 \oplus W_2 = V$ we need to show that $W_1 \cap W_2 = \{0\} \text{ and } W_1 + W_2 = V$.
+			\begin{enumerate}[label=\roman*.]
+				\item{
+				$W_1 \cap W_2 = \{0\}\ $\\
+				\-\\
+				Let $v \in W_1$ and $v \in W_2$
+				$$ v = a_1u_1 + a_2u_2 + \cdots a_ku_k = b_{k+1}u_{k+1} b_{k+2}u_{k+2} + \cdots + b_nu_n \quad \text{where } a,b \in F $$
+				$$ v = a_1u_1 + a_2u_2 + \cdots a_ku_k -(b_{k+1}u_{k+1} b_{k+2}u_{k+2} + \cdots + b_nu_n) = 0 $$
+				Notice that $v$ is written as a linear combination of $B_v$, which means that all the constants equal 0: $a_1 = a_2 = \cdots = a_k = b_{k+1} = b_{k+2} + \cdots = b_{n} = 0$\\
+				So, $v = 0$.\\
+				Therefore, $W_1 \cap W_2 = \{0\}\ $
+				}
+				\item{
+				$W_1 + W_2 = V$\\
+				\-\\
+				Let $v \in V$
+				$$ v = \sum_{i=1}^{n}a_iu_i \quad \text{where } a \in F$$
+				$v$ can also be expressed as the sum of $B_1$ and $B_2$\\
+				$$ v = \sum_{i=1}^{k}a_iu_i + \sum_{k+1}^{n}a_iu_i $$
+				Thus, any vector in $V$ and be expressed as a sum of vectors in $W_1$ and $W_2$.\\
+				Therefore, $W_1 + W_2 = V$
+				}
+			\end{enumerate}
+			Therefore, $W_1 \oplus W_2 = V$
+			\end{proof}
+		}
+	\item{
+			Let $V = R^2$ and $W_1 = \{(a_1,0):a_1\in R\}$. Give examples of two different subspaces $W_2$ and $W_2^'$ such that $V = W_1 \oplus W_2$ 
+			and $V = W_1 \oplus W_2^'$
+			\begin{proof}
+			\-\\
+			Let $W_2 = \{(0,a_2):a_2 \in R\}$
+			\begin{enumerate}[label=\roman*.]
+				\item{
+				$W_1 \cap W_2 = \{0\}\ $\\
+				\-\\
+				Let $v \in W_1$ and $v \in W_2$
+				$$ v = (a_1,0) = (0,a_2)$$
+				$$ a_1 = 0, a_2 = 0$$
+				So, $v = (0,0)$.\\
+				Therefore, $W_1 \cap W_2 = \{0\}\ $
+				}
+				\item{
+				$W_1 + W_2 = V$\\
+				\-\\
+				Let $v \in V$
+				$$ v = (u_1,u_2)$$
+				$v$ can also be expressed as the sum of vectors in $W_1$ and $W_2$\\
+				Let $x = (a_1,0) \in W_1$ and $y = (0, a_2)\in W_2$.
+				$$v = c_1x + c_2y = (c_1a_1,c_2a_2), \text{ where } c \in F \text{ and } c_1 = \frac{v_1}{a_1}, c_2 = \frac{v_2}{a_2}$$
+				Thus, any vector in $V$ and be expressed as a sum of vectors in $W_1$ and $W_2$.\\
+				Therefore, $W_1 + W_2 = V$\\
+				}
+			Therefore, $V = W_1 \oplus W_2$ \\
+			\-\\
+			Let $W'_2 = \{(d,d):d \in R\}$
+			\begin{enumerate}[label=\roman*.]
+				\item{
+				$W_1 \cap W'_2 = \{0\}\ $\\
+				\-\\
+				Let $v \in W_1$ and $v \in W'_2$
+				$$ v = (a_1,0) = (d,d)$$
+				$$ a_1 = d, d = 0$$
+				So, $v = (0,0)$.\\
+				Therefore, $W_1 \cap W'_2 = \{0\}\ $
+				}
+				\item{
+				$W_1 + W'_2 = V$\\
+				\-\\
+				Let $v \in V$
+				$$ v = (u_1,u_2)$$
+				$v$ can also be expressed as the sum of vectors in $W_1$ and $W'_2$\\
+				Let $x = (u_1 - u_2,0) \in W_1$ and $y = (u_2, u_2)\in W'_2$.
+				$$x + y = (u_1 - u_2 + u_2, 0 +u_2) = (u_1, u_2)$$
+				Thus, any vector in $V$ and be expressed as a sum of vectors in $W_1$ and $W'_2$.\\
+				Therefore, $W_1 + W'_2 = V$\\
+				}
+				Therefore, $V = W_1 \oplus W'_2$
+			\end{proof}
+		}
+\end{enumerate}
+
+\section{E}
+Let V be the vector space of sequences. Define the functions T,U : V → V by
+T(a 1 ,a 2 ,.. . = ()a 2 ,a 3 ,.. .) and U(a 1 ,a 2 ,.. .) = (0,a 1 ,a 2 ,.. .
+T and U are called the left shift and right shift operators o)n V respectively.
+\begin{enumerate}[label=\alph*.]
+	\item{
+		Prove that T and U are linear.
+		\begin{proof}
+			\-\\
+			T is linear if and only if $T(x+y) = T(x) + T(y)$ and $T(cx) = cT(x)$\\	
+			Let $x,y \in V \quad c \in F$\\
+			$x = (x_1, x_2, \cdots) \quad y = (y_1, y_2, \cdots)$\\
+			$x + y = (x_1 + y_1, x_2 + y_2, \cdots)$ \\
+			$T(x + y) = (x_2 + y_2, x_3 + y_3, \cdots)$ \\
+			$T(x) = (x_2, x_3, \cdots)$\\
+			$T(y) = (y_2, y_3, \cdots)$\\
+			$T(x) + T(y) = (x_2 + y_2, x_3 + y_3, \cdots)$ \\
+			Thus, $T(x + y) = T(x) + T(y)$\\
+			\-\\
+			$x = (x_1, x_2, \cdots)$\\
+			$cx = (cx_1, cx_2, \cdots)$\\
+			$T(cx) = (cx_2, cx_3, \cdots)$\\
+			$T(x) = (x_2, x_3, \cdots)$\\
+			$cT(x) = (cx_2, cx_3, \cdots)$\\
+			Thus, $T(cx) = cT(x)$\\
+			\-\\
+			Therefore, T is linear. The proof for U being linear is similiar.
+		\end{proof}
+		}
+		\item{
+			T is onto but not one to one
+			\begin{proof}
+			\-\\
+			T is onto if $\forall y \in V \ \exists x \in V$ such that $f(x)=y$\\
+			Let $y = (a_1, a_2, \cdots)$ be arbitrary\\
+			$f(x) = y = (a_1, a_2, \cdots)$\\
+		 	$x = (a_0, a_1, a_2, \cdots)$\\
+			Since y was chosen arbitrarily, there exists an x for any y.\\
+			Therefore, T is onto.\\
+			\-\\
+			T is one to one if $\forall a,b \in V, T(a) = T(b) \Rightarrow a = b$\\
+			Let $ a = (u_{\alpha}, u_2, u_3, \cdots) \quad b = (u_{\gamma}, u_2, u_3, \cdots) \quad \text{where } u_{\alpha} \neq u_{\gamma} \Leftrightarrow a \neq b$\\
+			$T(a) = (u_2, u_3, \cdots) \quad T(b) = (u_2, u_3, \cdots)$\\
+			Therefore, T is not one to one because $T(a) = T(b) \text{ and }a \neq b$.
+			\end{proof}
+			}
+		\item{
+			U is one to one but not onto.
+			\begin{proof}
+			\-\\
+			U is one to one if $\forall a,b \in V, U(a) = U(b) \Rightarrow a = b$\\
+			Let $U(a) = (0, u_1, u_2, \cdots) = U(b) = (0, v_1, v_2, \cdots)$\\
+			This means $u_1 = v_1, u_2 = v_2, \cdots$\\
+			So, $ a = (u_1, u_2, u_3, \cdots) \quad b = (v_1, v_2, v_3, \cdots)$\\
+			Hence, $a = b$\\
+			Therefore, U is one to one because $U(a) = U(b) \text{ and }a = b$.\\
+			\-\\
+			U is onto if $\forall y \in V \ \exists x \in V$ such that $f(x)=y$\\
+			Let $y = (a_1, a_2, \cdots) \quad \text{where } a_1 \neq 0$\\
+			There is no $x$ such that $U(x) = y$ because the linear transformation always makes the first term always zero.	Therefore, T is not onto.
+			\end{proof}
+			}
+\end{enumerate}
+	
+
+\section{F}
+Let S be the subspace of $M_{nxn}(R)$ generated by all matrices of the form $AB - BA$ with $A$ and $B$ in $M_{nxn}(R)$.
+Prove that dim$(S) = n^{2} - 1$. (You may want to use the trace together with the rank-nullity theorem)
+\begin{proof}
+	\-\\
+	Trace is a linear transformation.\\
+	$\text{Tr}: M_{nxn}(R) \rightarrow R $\\
+	The subspace S is defined as $\{AB - BA : A,B \in M_{nxn}(R)\}$\\
+	$\text{Tr}(AB - BA) = \text{Tr}(AB) - \text{Tr} (BA)$\\
+	$= \text{Tr}(AB) - \text{Tr} (AB)$\\
+	$= 0$\\
+	All matrices that can be expressed as $AB - BA$ is in the null space of Tr. This means that N(Tr)$ = S$.\\
+	The rank-nullity theorem states:\\
+	dim(N(Tr)) + dim(R(Tr)) = dim($M_{nxn}(R)$)\\
+	N(Tr)$ = S$, so dim(S) + dim(R(Tr)) = dim($M_{nxn}(R)$)\\
+	dim(S) = dim($M_{nxn}(R)$) - dim(R(Tr))\\
+	= $n^2 - $ dim(R)\\
+	= $n^2 - $ 1 \\
+\end{proof}
+
+\section{G}
+Let T be a linear transformation of a vector space V into itself. Suppose that $x \in V$ is such that $T^m (x) = 0$, and
+$T^{m-1}(x) \neq 0$ for some positive m. Show that $x,T(x),T^2(x),\cdots ,T^{m-1}(x)$ are linearly independent.
+\begin{proof}
+	\-\\
+	The linear combination of the above set is $$ a_0x + a_1T(x) + a_2T^2(x) + \cdots + a_{n-1}T^{m-1}(x) = 0$$
+	Notice that $T^n(x) = 0$ for all $n \geq m$.\\
+	$T^{m+1}(x) = T(T^{m}(x)) = T(0) = 0$\\
+	Let's take $T^{m-1}$ on both sides of the linear combination.	
+	\begin{Dequation}
+	\begin{align*}
+		T^{m-1}(a_0x + a_1T(x) + a_2T^2(x) + \cdots + a_{n-1}T^{m-1}(x)) &= T^{m-1}(0)\\
+		T^{m-1}(a_0x) + T^{m-1}(a_1T(x)) + T^{m-1}(a_2T^2(x)) + \cdots + T^{m-1}(a_{n-1}T^{m-1}(x)) &= 0 \\
+		T^{m-1}(a_0x) + 0 + 0 + \cdots + 0 &= 0\\
+		T^{m-1}(a_0x) &= 0\\
+		a_0 = \frac{0}{T^{m-1}(x)} &= 0
+	\end{align*}
+	\end{Dequation}
+	By back substitution we know that $a_0 = a_1 = \cdots = a_{n-1} = 0$\\
+	Therefore, $x,T(x),T^2(x),\cdots ,T^{m-1}(x)$ are linearly independent.
+\end{proof}
+
+\section{H} 
+Let $T: R^3 \rightarrow R^3$
+\begin{enumerate}[label=\alph*.]
+	\item{
+	If T(a,b,c) = (a,b,0), show that T is the projection on the xy-plane along the z-axis.	
+	\begin{proof}
+	\-\\
+	We want to projection to be on the xy-plane along the z-axis. Let the projection be (x,y,0).\\
+	To minimize the distance, we must choose x and y such that
+	$$(a - x)^2 + (b - y)^2 + (c - 0)^2$$
+	is minimum.
+	Since the equation above is a difference of squares, x = a and b = y will give us the minimum value.
+	Therefore, the projection on the xy-plane will be (a,b,0), which is T.
+	\end{proof}
+	}
+	
+	\item{
+	Find a formula for T(a,b,c), where T represents the projection on the z-axis along the xy-plane.
+	\begin{proof}
+	\-\\
+	We want to projection to be on the z-axis along the xy-plane. Let the projection be (0,0,z).\\
+	To minimize the distance, we must choose z such that
+	$$(a - 0)^2 + (b - 0)^2 + (c - z)^2$$
+	is minimum.
+	z = c will give us the minimum value.
+	Therefore, the equation for T will be T(a,b,c)=(0,0,c).
+	\end{proof}
+	}
+
+	\item{
+	If T(a,b,c) = (a-c,b,0), show that T is the projection on the xy-plane along the line L $= \{(a,0,a):a \in R\}$
+	\begin{proof}
+	\-\\
+	We want to projection to be on the xy-plane along the line L. Let the projection be $(x,y,0)$.\\
+	A vector that is on L is $(1,0,1)$.
+	To minimize the distance, we must choose $\lambda$ such that
+	$$(a,b,c) + \lambda (1,0,1) = (x,y,0)$$
+	is minimum. Writing the equation above as a system:
+	\[
+	\begin{aligned}
+		a + \lambda &= x\\
+		b &= y\\
+		c + \lambda &= 0
+	\end{aligned}
+	\]
+	Solving this system gives us, $x = a - c, y = b$\\ 
+	Therefore, the projection on the xy-plane along the line L will be $(a-c,b,0)$.\\
+	\end{proof}
+	}
+
+\end{enumerate}
+
+
+
+\section{I} 
+Suppose that the linear transformation $T : V \rightarrow V$ is the projection on $W \subset V$ along some subspace $W' \subset V$.
+Prove that $W$ is T-invariant and that $T_W = I_W$
+\begin{proof}
+	\-\\
+\begin{enumerate}[label=\alph*.]
+	\item{
+		$W$ is T-invariant.\\
+		\-\\
+		We need to show that $T(x) \in W$ for every $x \in W$.
+		$$x = x_1 + x_2, T(x) = T(x_1 + x_2) = x_1 \text{ where } x_1 \in W, x_2 \in W'$$
+		It is trivial to see that $T$ restricts to the identity on W.\\
+		Therefore, $W$ is T-invariant.
+		}
+	\item{
+		$T_W = I_W$\\
+		\-\\
+		For any $w \in W$, we can express $w$ as $w = w + 0$ where $0 \in W'$ because $W'$ is a subspace.\\
+		Because $W_1$ and $W_2$ are a direct sum, there is no way to express $w$ as the sum of a vector in one and a vector in the other.\\
+		$T(w + 0) = w$, shows that $T_w$ is the same as the indentity tranformation $I_W$.\\
+		Therefore, $T_W = I_W$.
+		}
+\end{enumerate}
+\end{proof}
+
+\section{J}
+Let $V$ be a finite-dimensional vector space and $T: V \rightarrow V$ be linear.
+
+\begin{enumerate}[label=\alph*.]
+	\item{
+			Suppose that $V = R(T) + N(T)$. Prove that $V = R(T) \oplus N(T)$
+			\begin{proof}
+			\-\\
+			Recall the properties of dimensions we proved in problem C.
+			$$\text{dim}(R(T) + N(T)) = \text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(R(T) \cap N(T))$$
+			dim$(R(T))$ and dim$(N(T))$ must be finite because dim$(V)$ is finite.
+			Because we are supposing that $V = R(T) + N(T)$ we can rewrite the equation above as 
+			\begin{Dequation}
+			\begin{align*}
+				\text{dim}(V) &= \text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(R(T) \cap N(T))\\
+				\text{dim}((R(T) \cap N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(V)\\
+				\text{dim}((R(T) \cap N(T)) &= 0 
+			\end{align*}
+			\end{Dequation}
+			$\text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(V)$ is equal to zero because of the rank nullity theorem and that V is finite dimensional.
+			$\text{dim}((R(T) \cap N(T)) = 0$ means that $R(T) \cap N(T) = \{0\}$\\
+			Therefore, $V = R(T) \oplus N(T)$ because $R(T) \cap N(T) = \{0\}$ and $V = R(T) + N(T)$. 
+			\end{proof}
+		}
+	\item{
+			Suppose that $R(T) \cap N(T) = \{0\}$. Prove that $V = R(T) \oplus N(T)$.
+			\begin{proof}
+				\-\\
+			dim$(R(T))$ and dim$(N(T))$ must be finite because dim$(V)$ is finite.
+			\begin{Dequation}
+			\begin{align*}
+				\text{dim}(R(T) + N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(R(T) \cap N(T))\\
+				\text{dim}(R(T) + N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T)) - \text{dim}(\{0\})\\
+				\text{dim}(R(T) + N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T)) - 0\\
+				\text{dim}(R(T) + N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T)) 
+			\end{align*}
+			\end{Dequation}
+			Given that $V$ is finite dimensional and using the rank nullity theorem:
+			$$\text{dim}(V) = \text{dim}(R(T) + N(T)) &= \text{dim}(R(T)) + \text{dim}(N(T))$$
+			This means that $V = R(T) + N(T)$.\\
+			Therefore, $V = R(T) \oplus N(T)$ because $V = R(T) + N(T)$ and $R(T) \cap N(T) = \{0\}$. 
+			\end{proof}
+		}
+\end{enumerate}
+\end{document}
