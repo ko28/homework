@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  23 MAR 2020 15:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  13 MAR 2020 11:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/daniel/homework/math/math341/hw6/hw6.tex
-(/home/daniel/homework/math/math341/hw6/hw6.tex
+**hw5.tex
+(./hw5.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
@@ -87,7 +87,7 @@ LaTeX Info: Redefining \textsubscript on input line 4161.
 \c@table=\count87
 Class scrartcl Info: Redefining `\numberline' on input line 5319.
 \bibindent=\dimen102
-) (/home/daniel/homework/math/math341/hw6/../../evan.sty
+) (../../evan.sty
 
 LaTeX Warning: You have requested package `../../evan',
                but the package provides `evan'.
@@ -157,7 +157,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (/usr/share/texmf/tex/latex/asymptote/asymptote.sty
 Package: asymptote 2016/11/26 v1.33 Asymptote style file for LaTeX
- (/home/daniel/homework/math/math341/hw6/hw6.pre)
+ (./hw5.pre)
 \ASYbox=\box30
 \ASYdimen=\dimen112
 \c@asy=\count100
@@ -207,7 +207,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 ))
-\openout4 = `hw6.pre'.
+\openout4 = `hw5.pre'.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
@@ -280,7 +280,8 @@ Package atveryend Info: \enddocument detected (standard20110627).
 Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
 Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
 Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
-) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
@@ -601,7 +602,8 @@ Package: needspace 2010/09/12 v1.3d reserve vertical space
 \mdf@subsubtitlebelowskip@length=\skip108
 \mdf@subsubtitleinneraboveskip@length=\skip109
 \mdf@subsubtitleinnerbelowskip@length=\skip110
- (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+ (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
 \pgfutil@everybye=\toks31
 \pgfutil@tempdima=\dimen152
 \pgfutil@tempdimb=\dimen153
@@ -730,7 +732,8 @@ File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
 \pgfnodeparttextbox=\box53
 ) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
-) (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
 \pgf@nodesepstart=\dimen187
 \pgf@nodesepend=\dimen188
@@ -1579,8 +1582,8 @@ Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 \SYSeqnum=\count324
 )
 Package: systeme 2018/01/01 v0.31 Mise en forme de systemes d'equations (CT)
-) (/home/daniel/homework/math/math341/hw6/hw6.aux)
-\openout1 = `hw6.aux'.
+) (./hw5.aux)
+\openout1 = `hw5.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
 LaTeX Font Info:    ... okay on input line 33.
@@ -1639,9 +1642,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 33.
 LaTeX Info: Redefining \pageref on input line 33.
 LaTeX Info: Redefining \nameref on input line 33.
- (/home/daniel/homework/math/math341/hw6/hw6.out) (/home/daniel/homework/math/math341/hw6/hw6.out)
+ (./hw5.out) (./hw5.out)
 \@outlinefile=\write7
-\openout7 = `hw6.out'.
+\openout7 = `hw5.out'.
 
  ABD: EveryShipout initializing macros
 
@@ -1745,42 +1748,54 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <10.95> not available
-(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 68.
+(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 44.
  [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (17.47331pt too wide) in paragraph at lines 110--115
-[]\T1/cmbr/m/n/10.95 (-20) By The-o-rem 3.5, we know that rank($\OML/cmbrm/m/it/10.95 B$\T1/cmbr/m/n/10.95 (-20) ) = dim($\OML/cmbrm/m/it/10.95 R\OT1/cmbr/m/n/10.95 (-20) (\OML/cmbrm/m/it/10.95 L[]\OT1/cmbr/m/n/10.95 (-20) )$\T1/cmbr/m/n/10.95 (-20) ), where $\OML/cmbrm/m/it/10.95 R\OT1/cmbr/m/n/10.95 (-20) (\OML/cmbrm/m/it/10.95 L[]\OT1/cmbr/m/n/10.95 (-20) ) = [](\OML/cmbrm/m/it/10.95 B[]; B[]; []  ; B[]\OT1/cmbr/m/n/10.95 (-20) )$
+./hw5.tex:87: Missing } inserted.
+<inserted text> 
+                }
+l.87 \end{enumerate}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (12.69872pt too wide) in paragraph at lines 120--122
+[]\T1/cmbr/m/n/10.95 (-20) Using your in-duc-tive def-i-ni-tion, prove that for all $\OML/cmbrm/m/it/10.95 x; y \OMS/cmbrs/m/n/10.95 2 f\OT1/cmbr/m/n/10.95 (-20) 0\OML/cmbrm/m/it/10.95 ; \OT1/cmbr/m/n/10.95 (-20) 1\OMS/cmbrs/m/n/10.95 g[]$\T1/cmbr/m/n/10.95 (-20) , re-verse(xy) = re-verse(y)reverse(x). 
  []
 
-[2] [3] [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 272.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 272.
- (/home/daniel/homework/math/math341/hw6/hw6.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 272.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 272.
-Package rerunfilecheck Info: File `hw6.out' has not changed.
-(rerunfilecheck)             Checksum: 65E90C6F77DF4112F64A193209D2B2BE;362.
+[2]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 140.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 140.
+ (./hw5.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 140.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 140.
+Package rerunfilecheck Info: File `hw5.out' has not changed.
+(rerunfilecheck)             Checksum: 73307F4B6DCD6DD7F078F8DDA8D16E8C;72.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 272.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 140.
  ) 
 Here is how much of TeX's memory you used:
- 38634 strings out of 492982
- 756023 string characters out of 6134896
- 961971 words of memory out of 5000000
- 41540 multiletter control sequences out of 15000+600000
- 552133 words of font info for 105 fonts, out of 8000000 for 9000
+ 38549 strings out of 492982
+ 754282 string characters out of 6134896
+ 957969 words of memory out of 5000000
+ 41488 multiletter control sequences out of 15000+600000
+ 551668 words of font info for 99 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,21n,114p,10453b,1227s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb>
-Output written on /home/daniel/homework/math/math341/hw6/hw6.pdf (4 pages, 113717 bytes).
+ 87i,20n,114p,10414b,716s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb>
+Output written on hw5.pdf (2 pages, 91688 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
- 129 compressed objects within 2 object streams
- 31 named destinations out of 1000 (max. 500000)
- 16061 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 107 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
+ 12 named destinations out of 1000 (max. 500000)
+ 15997 words of extra memory for PDF output out of 17280 (max. 10000000)
 
