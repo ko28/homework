@@ -428,10 +428,10 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebbx10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmo10.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr8.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebbx10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr8.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr8.tfm
 INPUT /home/daniel/homework/math/math341/hw6/hw6.aux
 INPUT /home/daniel/homework/math/math341/hw6/hw6.out
 INPUT /home/daniel/homework/math/math341/hw6/hw6.out

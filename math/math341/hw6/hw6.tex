@@ -99,18 +99,14 @@ transforms A into an upper triangular matrix.
 Complete the proof of the corollary to Theorem 3.4 by showing that elementary column operations preserve rank.
 \begin{proof}
 	If B is obtained from a matrix A by an elementary column operation,
-	then there exists an elementary matrix E such that B = AE. By Theorem 3.2
-	(p. 150), E is invertible, and hence rank(B) = rank(A) by Theorem 3.4. 
+	then there exists an elementary matrix E such that B = AE. By Theorem 3.2, 
+	E is invertible, and hence rank(B) = rank(A) by Theorem 3.4. 
 \end{proof}
 	
 
 \section{E}
 Let $B$ and $B'$ is an $mxn$ matrix submatrix of B. Prove that rank($B$) = $r$, then rank($B'$) = $r - 1$
 \begin{proof}
-By Theorem 3.5, we know that rank($B$) = dim($R(L_B)$), where $R(L_B) = \text{span}(B_1,B_2,\cdots,B_{n+1})$
-and $B_i$ is the $i$th column of $B$. In other words, is the rank is the number of linearly independent
-rows/columns in a matrix. Notice that $B'$ has one less linear independent row/column than $B$. It follows
-that rank of $B'$ would be 1 less than the rank of $B$. Therefore, rank($B'$)$= r - 1$.
 Consider the matrix 
 \[
 M=
@@ -173,7 +169,7 @@ to $D$ by elementary column operations.
 			we get that $x_1, x_2, x_4$ are the pivot variables and $x_3, x_5$ are the 
 			free variables. So solutions are in the form 
 			$(x_3+3x_5,-2x_3+x_5, x_3, -2x_5,x_5)$. From this, we are able to 
-			construct a basis for Ax=0, $(1,-2,1,0,0),(3,1,0,-2,1)$.
+			construct a basis for Ax=0, $\{(1,-2,1,0,0),(3,1,0,-2,1)\}$.
 			Define   
 			\[			
 				M=
@@ -201,54 +197,190 @@ to $D$ by elementary column operations.
 
 \section{H} 
 For each of the following linear transformations $T$, determine whether $T$ is invertible, and compute $T^{-1}$ if it exists.
+
+\-\\
+Let $\alpha$ be the standard basis for the domain and $\gamma$ be the standard basis for the codomain for 
+each of these tranformations below. For each of these problems, we can use theorem 2.18 and
+its corollaries to determine if the transformations are invertible, namely we need to show 
+that $[T]_{\alpha}^{\gamma}$ is invertible.
 \begin{enumerate}[label=\alph*.]
 	\item{
 	$T : P_2(R) \rightarrow P_2(R)$ defined by $T(f(x)) = f''(x) + 2f'(x) - f(x)$
 	\begin{proof}
-	\-\\
-	We want to projection to be on the xy-plane along the z-axis. Let the projection be (x,y,0).\\
-	To minimize the distance, we must choose x and y such that
-	$$(a - x)^2 + (b - y)^2 + (c - 0)^2$$
-	is minimum.
-	Since the equation above is a difference of squares, x = a and b = y will give us the minimum value.
-	Therefore, the projection on the xy-plane will be (a,b,0), which is T.
-	\end{proof}
-	}
-	
-	\item{
-	Find a formula for T(a,b,c), where T represents the projection on the z-axis along the xy-plane.
-	\begin{proof}
-	\-\\
-	We want to projection to be on the z-axis along the xy-plane. Let the projection be (0,0,z).\\
-	To minimize the distance, we must choose z such that
-	$$(a - 0)^2 + (b - 0)^2 + (c - z)^2$$
-	is minimum.
-	z = c will give us the minimum value.
-	Therefore, the equation for T will be T(a,b,c)=(0,0,c).
+	\begin{align*}
+	[T]_{\alpha}^{\gamma} & = [[T(1)]_{\gamma}, [T(x)]_{\gamma}, [T(x^2)]_{\gamma}]\\
+	& = [[-1]_{\gamma}, [-x + 2]_{\gamma}, [-x^2 + 4x + 2]_{\gamma}]\\
+	& = \begin{bmatrix}
+		-1 & 2 & 2\\
+		0 & -1 & 4 \\ 
+		0 & 0 & -1 \\
+	\end{bmatrix}
+	\end{align*}
+	To see if the matrix above is invertible, we can use an agumented matrix 
+	$([T]_{\alpha}^{\gamma}|I_3)$ and apply elementary row operations to tranform it 
+	into the form of $(I_3|[T^{-1}]_{\alpha}^{\gamma})$.
+	\begin{align*}
+	([T]_{\alpha}^{\gamma}|I_3)=
+	\left[\begin{array}{ccc|ccc}
+	-1 & 2 & 2 & 1 & 0 & 0 \\ 
+	0 & -1 & 4 & 0 & 1 & 0 \\ 
+	0 & 0 & -1 & 0 & 0 & 1 \\ 
+	\end{array}\right]\\
+	r_1 \leftarrow -r_1,\quad r_2 \leftarrow -r_2, \quad r_3 \leftarrow -r_3\\
+	\left[\begin{array}{ccc|ccc}
+	1 & 2 & 2 & -1 & 0 & 0 \\ 
+	0 & 1 & 4 & 0 & -1 & 0 \\ 
+	0 & 0 & 1 & 0 & 0 & -1 \\ 
+	\end{array}\right]\\
+	r_1 \leftarrow 2r_2 + r_1\\
+	\left[\begin{array}{ccc|ccc}
+	1 & 0 & -10 & -1 & -2 & 0 \\ 
+	0 & 1 & -4 & 0 & -1 & 0 \\ 
+	0 & 0 & 1 & 0 & 0 & -1 \\ 
+	\end{array}\right]\\
+	r_1 \leftarrow 10r_3 + r_1, \quad r_2 \leftarrow 4r_3 + r_2\\
+	(I_3|[T^-1]_{\alpha}^{\gamma})=
+	\left[\begin{array}{ccc|ccc}
+	1 & 0 & 0 & -1 & -2 & -10 \\ 
+	0 & 1 & 0 & 0 & -1 & -4 \\ 
+	0 & 0 & 1 & 0 & 0 & -1 \\ 
+	\end{array}\right]\\
+	\end{align*}	
+	Therefore, the inverse of $T$ exists and is \\$T^{-1}(a_0 + a_1x + a_2x^2) 
+	=-a_0 -2a_2 -10a_2 + (-a_1 - 4a_2)x -a_2x^2$
 	\end{proof}
 	}
 
 	\item{
-	If T(a,b,c) = (a-c,b,0), show that T is the projection on the xy-plane along the line L $= \{(a,0,a):a \in R\}$
+	$T : P_2(R) \rightarrow P_2(R)$ defined by $T(f(x)) = (x + 1)f'(x)$
 	\begin{proof}
 	\-\\
-	We want to projection to be on the xy-plane along the line L. Let the projection be $(x,y,0)$.\\
-	A vector that is on L is $(1,0,1)$.
-	To minimize the distance, we must choose $\lambda$ such that
-	$$(a,b,c) + \lambda (1,0,1) = (x,y,0)$$
-	is minimum. Writing the equation above as a system:
+	Similiar to (a), we will calculate $[T]_{\alpha}^{\gamma}$.
 	\[
-	\begin{aligned}
-		a + \lambda &= x\\
-		b &= y\\
-		c + \lambda &= 0
-	\end{aligned}
+	[T]_{\alpha}^{\gamma} = 
+	\begin{bmatrix}
+		0 & 1 & 0\\
+		0 & 1 & 2\\ 
+		0 & 0 & 2\\
+	\end{bmatrix}
 	\]
-	Solving this system gives us, $x = a - c, y = b$\\ 
-	Therefore, the projection on the xy-plane along the line L will be $(a-c,b,0)$.\\
+	Notice that the rank of this matrix is 2, which means rank($[T]_{\alpha}^{\gamma}$) $\neq 3$.
+	Therefore, there is no inverse for this matrix by the remark in chapter 3.2,
+	"an $nxn$ matrix is invertible if and only if its rank is $n$".
 	\end{proof}
 	}
 
+	\item{
+	$T:R^3 \rightarrow R^3$ defined by $T(a_1, a_2, a_3) =
+	(a_1 + 2a_2 + a_3, -a_1 + a_2 + 2a_3, a_1 + a_3)$ 
+	\begin{proof}
+	\-\\
+	Similiar to (a), we will calculate $[T]_{\alpha}^{\gamma}$.
+	\[
+	[T]_{\alpha}^{\gamma} = 
+	\begin{bmatrix}
+		1 & 2 & 1\\
+		-1 & 1 & 2\\
+		1 & 0 & 1 \\
+	\end{bmatrix}
+	\]
+	We can calculate the inverse of $T$ by following the same steps we did in (a).
+	\[
+	[T^{-1}]_{\alpha}^{\gamma} = 
+	\begin{bmatrix}
+		\frac16 & -\frac13 & \frac12\\
+		\frac12 & 0 & -\frac12\\
+		-\frac16 & \frac13 & \frac12 \\
+	\end{bmatrix}
+	\]
+	Therefore, the inverse of $T$ exists and is \\$T^{-1}(a_1, a_2, a_3) 
+	=(\frac16a_1 -\frac13a_2 + \frac12a_3,\frac12a_1 -\frac12a_3,
+	-\frac16a_1 + \frac13a_2 + \frac12a_3)$
+	\end{proof}
+	}
+
+	\item{
+		$T:R^3 \rightarrow P_2(R)$ defined by $T(a_1, a_2, a_3) =
+		(a_1 + a_2 + a_3) + (a_1 - a_2 + a_3)x + a_1x^2$ 
+		\begin{proof}
+		\-\\
+		Similiar to (a), we will calculate $[T]_{\alpha}^{\gamma}$.
+		\[
+		[T]_{\alpha}^{\gamma} = 
+		\begin{bmatrix}
+			1 & 1 & 1\\
+			1 & -1 & 1\\
+			1 & 0 & 0 \\
+		\end{bmatrix}
+		\]
+		We can calculate the inverse of $T$ by following the same steps we did in (a).
+		\[
+		[T^{-1}]_{\alpha}^{\gamma} = 
+		\begin{bmatrix}
+			0 & 0 & 1\\
+			\frac12 & -\frac12 & 0\\
+			\frac12 & \frac12 & -1\\
+		\end{bmatrix}
+		\]
+		Therefore, the inverse of $T$ exists and is \\$T^{-1}(a_1 + a_2x + a_3x^2) 
+		=(a_3, \frac12a_1 - \frac12a_2, \frac12a_1 + \frac12a_2 -a_3)$
+		\end{proof}
+	
+	}
+
+	\item{
+		$T:P_2(R) \rightarrow R^3$ defined by $T(f(x)) = (f(-1),f(0),f(1))$
+		\begin{proof}
+		\-\\
+		Similiar to (a), we will calculate $[T]_{\alpha}^{\gamma}$.
+		\[
+		[T]_{\alpha}^{\gamma} = 
+		\begin{bmatrix}
+			1 & -1 & 1\\
+			1 & 0 & 0\\
+			1 & 1 & 1 \\
+		\end{bmatrix}
+		\]
+		We can calculate the inverse of $T$ by following the same steps we did in (a).
+		\[
+		[T^{-1}]_{\alpha}^{\gamma} = 
+		\begin{bmatrix}
+			0 & 1 & 0\\
+			-\frac12 & 0 & \frac12\\
+			\frac12 & -1 & \frac12\\
+		\end{bmatrix}
+		\]
+		Therefore, the inverse of $T$ exists and is \\$T^{-1}(a_1, a_2, a_3) 
+		=a_2 + (-\frac12 a_1 + \frac12 a_3)x + (\frac12a_1 -a_2 + \frac12a_3)x^2$
+		\end{proof}
+		}
+
+		\item{
+		$T:M_{2x2}(R) \rightarrow R^4$ defined by $T(A) = (tr(A), tr(A^t), tr(EA), tr(AE))$
+		where 
+		$E = 
+		\begin{bmatrix}
+		0 & 1 \\
+		1 & 0 \\ 
+		\end{bmatrix}
+		$
+		\begin{proof}
+		\-\\
+		Similiar to (a), we will calculate $[T]_{\alpha}^{\gamma}$.
+		\[
+		[T]_{\alpha}^{\gamma} = 
+		\begin{bmatrix}
+			1 & 0 & 0 & 1\\
+			1 & 0 & 0 & 1\\
+			0 & 1 & 1 & 0\\
+			0 & 1 & 1 & 0\\
+		\end{bmatrix}
+		\]
+		Notice that the rank of this matrix is 2, which means rank($[T]_{\alpha}^{\gamma}$) $\neq 4$.
+		Therefore, there is no inverse for this matrix by the remark in chapter 3.2,
+		"an $nxn$ matrix is invertible if and only if its rank is $n$".
+		\end{proof}
+		}
 \end{enumerate}
 
 
@@ -264,9 +396,32 @@ $
 $
 as a product of elementary matrices
 \begin{proof}
-
+Theorem 3.6 states that there exists
+ Theorem 3.6
+ \begin{align*}
+	(M|I)=
+	\left[\begin{array}{ccc|ccc}
+	1 & 2 & 1 & 1 & 0 & 0 \\ 
+	1 & 0 & 1 & 0 & 1 & 0 \\ 
+	1 & 1 & 2 & 0 & 0 & 1 \\ 
+	\end{array}\right]\\
+	(M_1|E_1)=
+	\left[\begin{array}{ccc|ccc}
+	1 & 2 & 1 & 1 & 0 & 0 \\ 
+	1 & 0 & 1 & 0 & 1 & 0 \\ 
+	0 & 1 & 1 & 0 & -1 & 1 \\ 
+	\end{array}\right]
+\end{align*}
 \end{proof}
 
 \section{J}
 Suppose that $A$ and $B$ are matrices having $n$ rows. Prove that $M(A|B) = (MA|MB)$ for any $mxn$ matrix
+\begin{proof}
+Let $A$ have $a$ number of columns and $B$ have $b$ number of columns. \\
+Notice for $1 \leq j \leq a$:
+$(M(A|B))_{i,j} = \sum_{k=1}^{n} M_{i,k}A_{k,j} = (MA)_{i,j} = (MA|MB)_{i,j}$\\
+Similarily for $a < j \leq a + b$:
+$(M(A|B))_{i,j} = \sum_{k=1}^{n} M_{i,k}B_{k,j} = (MB)_{i,j} = (MA|MB)_{i,j}$\\
+Therefore, $M(A|B) = (MA|MB)$ for any $mxn$ matrix.
+\end{proof}
 \end{document}
