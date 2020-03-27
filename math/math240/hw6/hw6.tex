@@ -1,0 +1,157 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+
+\makeatletter
+\newenvironment{Dequation}
+{%
+	\def\tagform@##1{%
+	\maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+	\ignorespaces
+}
+{%
+	\def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+	\ignorespacesafterend
+}
+\makeatother
+
+\title{Math 240: Homework 6}
+\author{Daniel Ko}
+\date{Spring 2020}
+
+\begin{document}
+\maketitle
+
+\section{1}
+\begin{enumerate}[label=\alph*.]
+	\item{
+		Prove that the above algorithm satisfies partial correctness.
+		\begin{proof}
+			Let $p$ be the proposition
+			$a = dq + r \land r \geq 0$.\\
+			Let's prove that $p$ is the loop invarient by induction.
+			\begin{enumerate}[label=\roman*.]
+			\item{
+				Base case: When the loop condition is tested for the first time, $p$ holds\\
+				\-\\
+				$r=a$ and $q=0$ before the loop is run. 
+				When the loop condition is first tested $a = dq + r$ holds because $q=0$, so
+				$a = 0 + r = r$. \\
+				$r \geq 0$ also holds because $a \in \mathbb{N}$. 
+			}
+			\item{
+				Inductive step: If $p$ and the loop condition both hold at the beginning of an
+				iteration of the loop, then $p$ holds right after said iteration\\
+				\-\\
+				Let $a = dq + r \land r \geq 0$ at some $n-1$ iteration of the loop (inductive hypothesis).
+				Let $r_n$ and $q_n$ be the value of $r$ and $q$ at the $n$th iteration respectively. \\
+				So at the $n$th iteration, $a=dq_n + r_n$. We know $q_n = q + 1$ and $r_n = r - d$.
+				\begin{align*}
+				a & = dq_n + r_n\\	
+				& = d(q + 1) + r - d\\
+				& = dq + d + r - d \\
+				& = dq + r 
+				\end{align*}
+				We know that $r_n = r - d$. 
+				Our loop condition is $r \geq d$, thus $r_n \geq 0$.
+			}
+			\end{enumerate}
+		Therefore, $p$ is a loop invarient. \\
+		Now we must show that loop invariant holds
+		and the loop condition fails, then the output is correct. Suppose the loop halts at the 
+		$n$th iteration, which is when $r < d$. 
+		By our loop invarient, we have that $r \geq 0$. Combining the two statements
+		above, we get $0 \leq r < d$. Also by our loop invariant, we have $a = dq + r$. 
+		Therefore, this algorithm satisfies partial correctness.
+		\end{proof}
+	}
+	\item{
+		Prove that the above algorithm satisfies termination.
+		\begin{proof}
+			Our termination condition is $r < d$. $r$ is set to $a$ then decreases by 
+			$d$ after each iteration. Since $d \in \mathbb{N}$, the sequence of the values of $r$ is 
+			strictly decreasing. We also know that $r \geq 0$ by our loop invarient.
+			Therefore, by the well-ordering principle, the algorithm satisfies termination.
+		\end{proof}
+	}
+\end{enumerate}
+
+
+\section{2}
+Prove that for all $n \in \mathbb{N}$, SQ($n$) halts and returns $n^2$.
+\begin{proof}
+	We proceed by strong induction on $n$. Let P($n$) be the predicate 
+	“SQ($n$) halts and returns $n^2$”. Domain: $\mathbb{N}$.
+	\begin{enumerate}[label=\alph*.]
+		\item{
+			Base case:\\
+			We prove P($0$). Observe that P($0$) halts and returns $0$, which is equal to $0^2$.
+		}
+		\item{
+			Inductive step:\\
+			Suppose $n \in \mathbb{N}$ and P holds for all integers between 0 and $n$, inclusive. 
+			We show that P($n+1$) holds.
+			\begin{align*}
+				\text{SQ}(n+1)  & = \text{SQ}(n-1) + 2n - 1 \\
+								& = (n-1)^2 + 2n - 1 \tag{Strong inductive hypothesis}\\
+								& = n^2 -2n + 1 + 2n -1\\
+								& = n^2
+			\end{align*}
+			By the strong inductive hypothesis P($n-1$), SQ($n-1$) halts. Thus, SQ($n+1$) halts.
+		}
+	\end{enumerate}
+	Therefore, by strong induction we have proved that for all $n \in \mathbb{N}$, SQ($n$) halts and returns $n^2$.
+\end{proof}
+
+\section{3}
+Prove that POW is correct.
+\begin{proof}
+	We proceed by strong induction on $b \in \mathbb{N}$. Let $P(b)$ be the following predicate 
+	"$POW(a,b)$ halts and returns $a^b$, where $a$ is a fixed nonzero integer".
+	\begin{enumerate}[label=\alph*.]
+		\item{
+			Base case:\\
+			We prove $P(0)$. $POW(a,0) = 1$.
+			Observe that P($0$) halts and returns $1$, which is equal to $a^0$.
+		}
+		\item{
+			Inductive step:\\
+			Suppose $n \in \mathbb{N}$ and P holds for all integers between 0 and $n$, inclusive. 
+			We show that P($n+1$) holds.\\
+			Case 1: $n+1$ is odd
+			\begin{align*}
+			POW(a,n+1) & = a \cdot (POW(a, \lfloor (n+1)/2 \rfloor))^2\\
+			& = a \cdot (a^{\lfloor (n+1)/2 \rfloor)})^2 \tag{Strong inductive hypothesis}\\
+			& = a \cdot (a^{n/2})^2 \tag{n is even}\\
+			& = a \cdot a^n \\
+			& = a^{n+1}
+			\end{align*}
+			We know that $(POW(a, \lfloor (n+1)/2 \rfloor))$ halts by our strong induction hypothesis so  
+			$POW(a,n+1)$ halts as well.\\
+			\-\\
+			Case 2: if $n+1 > 0$ and $n+1$ is even
+			\begin{align*}
+				POW(a,n+1) & = (POW(a, \lfloor (n+1)/2 \rfloor))^2\\
+				& = (a^{\lfloor (n+1)/2 \rfloor})^2 \tag{Strong inductive hypothesis}\\
+				& = (a^{(n+1)/2})^2  \tag{n + 1 is even}\\
+				& = a^{n+1}
+			\end{align*}
+			We know that $(POW(a, \lfloor (n+1)/2 \rfloor))$ halts by our strong induction hypothesis so  
+			$POW(a,n+1)$ halts as well.\\
+		}
+		Therefore, by strong induction we have proved that $POW$ is correct.
+	\end{enumerate}
+\end{proof}
+
+\end{document}
