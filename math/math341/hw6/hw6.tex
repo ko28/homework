@@ -38,26 +38,81 @@ Find the rank of the following matrices.
 
 \begin{enumerate}[label=\alph*.]
 	\item{
-			2
-			show work later
+			Corollary 2a of Theorem 3.6 states that rank($A^t$) = rank($A$).
+			It is clear that the rank of $A^t$ is 2 because the first and third
+			columns are the same. So rank(A)=2.
 	}
 	\item{
-			3
+		We will calculate the rank by performing row reduction on our matrix.  
+		\begin{align*}
+		A=
+		\begin{bmatrix}
+			1 & 1 & 0\\
+			2 & 1 & 1\\
+			1 & 1 & 1 \\
+		\end{bmatrix}\\
+		r_2 \leftarrow r_2 - 2r_1
+		\begin{bmatrix}
+			1 & 2 & 1\\
+			0 & -1 & 1\\
+			1 & 1 & 1 \\
+		\end{bmatrix}\\ 
+		r_3 \leftarrow r_3 - r_1
+		\begin{bmatrix}
+			1 & 2 & 1\\
+			0 & -1 & 1\\
+			0 & -1 & 0 \\
+		\end{bmatrix}\\ 
+		\end{align*}
+		There are three linearly independent rows, so rank(A)=3.
 		}
 	\item{
-			2
+		Corollary 2a of Theorem 3.6 states that rank($A^t$) = rank($A$).
+		It is clear that the rank of $A^t$ is 2 because the second column
+		has a zero in its second row. So rank(A)=2.
 	}
 	\item{
-			1
+		\begin{align*}
+			A=
+			\begin{bmatrix}
+				1 & 2 & 1\\
+				2 & 4 & 2\\
+			\end{bmatrix}\\
+			r_2 \leftarrow r_2 - 2r_1
+			\begin{bmatrix}
+				1 & 2 & 1\\
+				0 & 0 & 0\\
+			\end{bmatrix}
+		\end{align*}
+		There is one linearly independent row, so rank(A)=1.
 		}
 	\item{
-			3
+		Similiarly to (a) and (b), by performing row reduction we get the matrix
+		\[
+		\begin{bmatrix}
+			1 & 0 & 6 & 1 & 0\\
+			0 & 1 & -\frac32 & 0 & \frac12\\
+			0 & 0 & -6 & -1 & 0\\
+			0 & 0 & 0 & 0 & 0\\
+		\end{bmatrix}
+		\]
+		There are three linearly independent columns, so rank(A)=3.
 		}
 	\item{
-			3
+		Similiarly to (a) and (b), by performing row reduction we get the matrix
+		\[
+		\begin{bmatrix}
+			1 & 2 & 0 & 1 & 0\\
+			0 & 0 & 1 & 1 & 0\\
+			0 & 0 & 0 & 0 & 1\\
+			0 & 0 & 0 & 0 & 0\\
+		\end{bmatrix}
+		\]
+		There are three linearly independent columns, so rank(A)=3.
 	}
 	\item{
-			1
+		It is clear that the rank of $A$ is 1 because the three columns
+		are the same and the other column is just zero. 
 		}
 \end{enumerate}
 
@@ -218,7 +273,7 @@ that $[T]_{\alpha}^{\gamma}$ is invertible.
 	\end{align*}
 	To see if the matrix above is invertible, we can use an agumented matrix 
 	$([T]_{\alpha}^{\gamma}|I_3)$ and apply elementary row operations to tranform it 
-	into the form of $(I_3|[T^{-1}]_{\alpha}^{\gamma})$.
+	into the form of $(I_3|[T^{-1}]_{\gamma}^{\alpha})$.
 	\begin{align*}
 	([T]_{\alpha}^{\gamma}|I_3)=
 	\left[\begin{array}{ccc|ccc}
@@ -265,7 +320,7 @@ that $[T]_{\alpha}^{\gamma}$ is invertible.
 	\end{bmatrix}
 	\]
 	Notice that the rank of this matrix is 2, which means rank($[T]_{\alpha}^{\gamma}$) $\neq 3$.
-	Therefore, there is no inverse for this matrix by the remark in chapter 3.2,
+	Therefore, there is no inverse for this matrix exists by the remark in chapter 3.2,
 	"an $nxn$ matrix is invertible if and only if its rank is $n$".
 	\end{proof}
 	}
@@ -286,7 +341,7 @@ that $[T]_{\alpha}^{\gamma}$ is invertible.
 	\]
 	We can calculate the inverse of $T$ by following the same steps we did in (a).
 	\[
-	[T^{-1}]_{\alpha}^{\gamma} = 
+	[T^{-1}]_{\gamma}^{\alpha} = 
 	\begin{bmatrix}
 		\frac16 & -\frac13 & \frac12\\
 		\frac12 & 0 & -\frac12\\
@@ -315,7 +370,7 @@ that $[T]_{\alpha}^{\gamma}$ is invertible.
 		\]
 		We can calculate the inverse of $T$ by following the same steps we did in (a).
 		\[
-		[T^{-1}]_{\alpha}^{\gamma} = 
+		[T^{-1}]_{\gamma}^{\alpha} = 
 		\begin{bmatrix}
 			0 & 0 & 1\\
 			\frac12 & -\frac12 & 0\\
@@ -343,7 +398,7 @@ that $[T]_{\alpha}^{\gamma}$ is invertible.
 		\]
 		We can calculate the inverse of $T$ by following the same steps we did in (a).
 		\[
-		[T^{-1}]_{\alpha}^{\gamma} = 
+		[T^{-1}]_{\gamma}^{\alpha} = 
 		\begin{bmatrix}
 			0 & 1 & 0\\
 			-\frac12 & 0 & \frac12\\
@@ -377,7 +432,7 @@ that $[T]_{\alpha}^{\gamma}$ is invertible.
 		\end{bmatrix}
 		\]
 		Notice that the rank of this matrix is 2, which means rank($[T]_{\alpha}^{\gamma}$) $\neq 4$.
-		Therefore, there is no inverse for this matrix by the remark in chapter 3.2,
+		Therefore, there is no inverse for this matrix exists by the remark in chapter 3.2,
 		"an $nxn$ matrix is invertible if and only if its rank is $n$".
 		\end{proof}
 		}
@@ -396,22 +451,59 @@ $
 $
 as a product of elementary matrices
 \begin{proof}
-Theorem 3.6 states that there exists
- Theorem 3.6
+Corollary 1 of Theorem 3.6 states that for any invertible matrix $A$\\
+$I_n= A^{-1}A = E_p E_{p-1} \cdots E_1 A$, where $E_i$ are invertible elementary matrices. 
+So, $A = E_1^{-1} \cdots E_{p-1}^{-1} E_p^{-1}$.
+To calcuate the values of $E_i$, we can use an agumented matrix 
+$(A|I_3)$ and apply elementary row operations to tranform it 
+into the form of $(I_3|A^{-1})$. Each transformation to the right matrix will be our $E$. 
+
  \begin{align*}
-	(M|I)=
+	(A|I_3)=
 	\left[\begin{array}{ccc|ccc}
 	1 & 2 & 1 & 1 & 0 & 0 \\ 
 	1 & 0 & 1 & 0 & 1 & 0 \\ 
 	1 & 1 & 2 & 0 & 0 & 1 \\ 
 	\end{array}\right]\\
-	(M_1|E_1)=
+	r_3 \leftarrow r_3 - r_2
 	\left[\begin{array}{ccc|ccc}
 	1 & 2 & 1 & 1 & 0 & 0 \\ 
 	1 & 0 & 1 & 0 & 1 & 0 \\ 
 	0 & 1 & 1 & 0 & -1 & 1 \\ 
-	\end{array}\right]
+	\end{array}\right]\\
+	r_2 \leftarrow r_2 - r_1
+	\left[\begin{array}{ccc|ccc}
+	1 & 2  & 1 & 1  & 0  & 0 \\ 
+	0 & -2 & 0 & -1 & 1  & 0 \\ 
+	0 & 1  & 1 & 0  & -1 & 1 \\ 
+	\end{array}\right]\\
+	r_1 \leftarrow r_1 + r_2
+	\left[\begin{array}{ccc|ccc}
+	1 & 0  & 1 & 0  & 1  & 0 \\ 
+	0 & -2 & 0 & -1 & 1  & 0 \\ 
+	0 & 1  & 1 & 0  & -1 & 1 \\ 
+	\end{array}\right]\\
+	r_2 \leftarrow -\frac12r_2
+	\left[\begin{array}{ccc|ccc}
+	1 & 0 & 1 & 0  & 1  & 0 \\ 
+	0 & 1 & 0 & \frac12 & -\frac12  & 0 \\ 
+	0 & 1 & 1 & 0  & -1 & 1 \\ 
+	\end{array}\right]\\
+	r_3 \leftarrow r_3 - r_2
+	\left[\begin{array}{ccc|ccc}
+	1 & 0 & 1 & 0  & 1  & 0 \\ 
+	0 & 1 & 0 & \frac12 & -\frac12 & 0 \\ 
+	0 & 0 & 1 & -\frac12 & -\frac12 & 1 \\ 
+	\end{array}\right]\\
+	r_1 \leftarrow r_1 - r_3
+	\left[\begin{array}{ccc|ccc}
+	1 & 0 & 0 & \frac12 & \frac32  & -1 \\ 
+	0 & 1 & 0 & \frac12 & -\frac12 & 0 \\ 
+	0 & 0 & 1 & -\frac12 & -\frac12 & 1 \\ 
+	\end{array}\right]\\
 \end{align*}
+By construction, $A$ is the product of the inverse of the elementary matrices on the right 
+of the agumented matrix starting the first matrix shown above. 
 \end{proof}
 
 \section{J}
@@ -424,4 +516,91 @@ Similarily for $a < j \leq a + b$:
 $(M(A|B))_{i,j} = \sum_{k=1}^{n} M_{i,k}B_{k,j} = (MB)_{i,j} = (MA|MB)_{i,j}$\\
 Therefore, $M(A|B) = (MA|MB)$ for any $mxn$ matrix.
 \end{proof}
+
+\section{1}
+Let $V = P_n(F)$, and let $c_0, c_1, \cdots, c_n$ be distinct scalars in $F$\\
+For $0 \leq i \leq n$, define $f_i \in V^*$ by $f_i(p(x)) = p(c_i)$. Prove that 
+$\{f_0, f_1, \cdots, f_n\}$ is a basis for $V^*$.
+\begin{proof}
+	To prove that $\{f_0, f_1, \cdots, f_n\}$ is a basis for $V^*$, we must show
+	$f_i$ is linear, the cardinality of the set is equal to the dimension of
+	$V^*$, and that the set is linearly independent by Theorem 1.10 corollary 2.
+	\begin{enumerate}[label=\roman*.]
+	\item{
+		$f_i$ is linear\\
+		\-\\
+		Show that $f_i(g(x) + ch(x)) = f_i(g(x)) + cf_i(h(x))$ 
+		where $g(x), h(x) \in P_n(F)$ and $c \in F$.
+	\begin{align*}	
+	f_i(g(x) + ch(x)) &= g(c_i) + ch(c_i)\\
+	&= f_i(g(x)) + cf_i(h(x))
+	\end{align*}
+	}
+	\item{
+		Cardinality of the set is equal to the dimension of	$V^*$ \\
+		\-\\
+		By the corollary to Theorem 2.20, we know dim($V^*$) = dim($L(V,F)$) = 
+		dim($V$) $\cdot$ dim($F$) = dim($V$). So, dim($V^*$) = dim($V$) = $n + 1$ because $V = P_n(F)$.
+		So cardinality of the set is equal to the dimension of $V^*$.
+	}
+	\item{
+		Set is linearly independent\\
+		\-\\
+		Let $c_0f_0(p(x)) + c_1f_1(p(x)) + \cdots + c_nf_n(p(x)) = 0$ for some $c_i$. \\
+		Let $p_i(x) = \Pi_{i \neq j}(x-c_j)$, where $p_i(c_j) = 0$ and $p_i(c_i) \neq 0$.\\
+		Thus, $c_0f_0(p(x)) + c_1f_1(p(x)) + \cdots + c_nf_n(p(x)) =
+		c_0f_0(c_0) + c_1f_1(c_1) + \cdots + c_nf_n(c_1)$\\
+		Because $f_0(c_0), f_1(c_1), \cdots, f_n(c_n) \neq 0$, $c_0$ must equal zero and 
+		all $c_i$ must be zero as well. Therefore, this set is linearly independent.
+	}
+	\end{enumerate}
+\end{proof}
+
+\section{2}
+Use the corollary to Theorem 2.26 and (a) to show that there exist unique polynomials
+$p_0(x), p_1(x), \cdots, p_n(x)$ such that $p_i(c_j) = \delta_{ij}$ for $0 \leq i \leq n$.
+These polynomials are the Lagrange polynomials defined in Section 1.6
+\begin{proof}
+Corollary to Theorem 2.26 states that every ordered basis for $V^*$, $\{f_0, f_1, \cdots, f_n\}$, 
+is the dual basis for some basis, $\beta = \{p_0, p_1, \cdots, p_m\}$, for $V$ such that 
+$p_i(c_j) = \delta_{ij}$ for $0 \leq i \leq n$. Define polynomial $z \in V$ such that 
+$z(c_{j}) = \delta_{kj}$. Since $\beta$ is a basis for $V$ we can write $z$ as a linear
+combination of $V$. So $z=\sum_{i=0}^{n}a_ip_i$. Notice that when $z(c_0) = 1 = \sum_{i=0}^{n}a_ip_i = a_1$ and
+$z(c_j) = 0 = \sum_{i=0}^{n}a_ip_i = a_j$ when $j \neq 1$. Thus, by definition, $z=p_0$ and is unique because it was
+constructed from basis $\beta$. Without loss of generality, we can define $p_1, p_2, \cdots, p_n$ in the same way. 
+\end{proof}
+
+\section{3}
+For any scalars $a_0, a_1, \cdots, a_n$ (not necessarily distinct), deduce that
+there exists a unique polynomial $q(x)$ of degree at most $n$ such that
+$q(c_i) = a_i$ for $0 \leq i \leq n$. In fact, $q(x)=\sum_{i=0}^n a_ip_i(x)$
+
+\begin{proof}
+Let $\beta = \{p_0, p_1, \cdots, p_m\}$. Let $q_0(c_i), q_1(c_i) \in V$. We define them as:\\
+$q_0(x)=\sum_{i=0}^n a^0_ip_i(x)$\\
+$q_1(x)=\sum_{i=0}^n a^1_ip_i(x)$\\
+Notice that  $a^0_i = q_1(c_i) = \sum_{i=0}^n a^1_ip_i(x) = a^1_i$
+Therefore, $q_0 = q_1$ and $q_0$ is unique.
+\end{proof}
+
+\section{4}
+\begin{proof}
+Substitute $a^0_i$ with $p_1(c_i)$ from the equation in question 3.
+\end{proof}
+
+\section{5}
+Prove that $$\int_a^b p(t)dt = \sum_{i=0}^n p(c_i)d_i$$
+where $$d_i= \int_a^b p_i(t)dt$$
+Suppose now that $$c_i = a + \frac{i(b-a)}{n} \text{ for } i = 0, 1, \cdots, n $$
+For $n = 1$,the preceding result yields the trapezoidal rule for evaluating the definite integral of a polynomial. For
+$n = 2$, this result yields Simpson’s rule for evaluating the definite integral of a polynomial.
+\begin{proof}
+	\begin{align*}
+	\int_a^b p(t)dt & = \int_a^b \sum_{i=0}^n p(c_i)p_i(x)dt\\
+	& = \sum_{i=0}^n \int_a^b p(c_i)p_i(x)dt\\
+	& = \sum_{i=0}^n \int_a^b p(c_i)d_i \\
+	& = \sum_{i=0}^n p(c_i)d_i 
+	\end{align*}
+\end{proof}
+
 \end{document}
