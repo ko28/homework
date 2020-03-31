@@ -530,23 +530,33 @@ Using the results of Exercise 2, find all solutions to the following systems.
 			\]
 		\end{proof}	
 	}
-
 \end{enumerate}
 
 \section{C}
-Let A be an $mxn$ matrix. Prove that there exists a sequence of elementary row operations of types 1 and 3 that
-transforms A into an upper triangular matrix.
+Prove that the system of linear equations $Ax = b$ has a solution if and only if $b \in R(L_A)$.
 \begin{proof}
-	Iterate through each column, let this variable be c. If $A_{c,c}$ equals 0, go through all the elements in that column below
-	$A_{c,c}$ and find the first non zero element. Perform a type 1 row operation on row $c$ and the row the non zero element
-	was found. If there is no non zero element, do nothing and go to the next column. \\
-	\-\\
-	If $A_{c,c}$ does not equal 0, perform a type 3 row operation on each row below $A_{c,c}$. Multiply 
-	$- \frac{A_{r,c}}{A_{c,c}}$ by the $c$th row to the $r$th row, where $r$ is every row below $c$.  
+	Let $A$ be an $mxn$ matrix.
+	\begin{enumerate}[i.]
+		\item{
+			$Ax = b$ has a solution $\Rightarrow b \in R(L_A)$.\\\-\\
+			Let $s$ be a solution to $Ax = b$. This means $A_1s_1 + \cdots + A_ns_n = b$. 
+			Notice that $b$ is a linear combination of the columns of $A$, 
+			which is equivalent to $R(L_A)$ by the proof given in Theorem 3.5. 
+			Therefore, $b \in R(L_A)$.
+		}
+		\item{
+			$b \in R(L_A) \Rightarrow Ax = b$ has a solution.\\\-\\
+			$b \in R(L_A)$ means that $b$ is a linear combination of the columns of $A$. 
+			So, $b = A_1s_1 + \cdots + A_ns_n$. 
+			This means there exists an $x$, composed of the $s_1, \cdots, s_n$ as seen in the previous equation, such that $Ax = b$.  
+			Therfore, $Ax = b$ has a solution.
+		}
+	\end{enumerate}
 \end{proof}
 
 \section{D}
-Complete the proof of the corollary to Theorem 3.4 by showing that elementary column operations preserve rank.
+Prove or give a counterexample to the following statement: If the comatrix of a system of $m$ linear equations in
+$n$ unknowns has rank $m$, then the system has a solution.
 \begin{proof}
 	If B is obtained from a matrix A by an elementary column operation,
 	then there exists an elementary matrix E such that B = AE. By Theorem 3.2, 
