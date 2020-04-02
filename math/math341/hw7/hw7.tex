@@ -573,26 +573,225 @@ Suppose that the augmented matrix of a system $Ax = b$ is transformed into a mat
 echelon form by a finite sequence of elementary row operations.
 \begin{enumerate}[label=\alph*.]
 	\item{
-		Prove that rank($A'$), rank$(A'|b')$ if and only if $(A'|b')$ contains a row in which the only nonzero entry lies
+		Prove that rank($A'$) $\neq$ rank$(A'|b')$ if and only if $(A'|b')$ contains a row in which the only nonzero entry lies
 		in the last column.
-
+		\begin{proof}\
+			\begin{enumerate}[i.]
+				\item{
+					rank($A'$) $\neq$ rank$(A'|b')$ $\Rightarrow$ $(A'|b')$ contains a row in which the only nonzero entry lies
+					in the last column.\\\-\\
+					If rank($A'$) $\neq$  rank$(A'|b')$, then we know that $b'$ is a linearly independent vector to $A'$.
+					This must mean that $(A'|b')$ contains a row in which the only nonzero entry lies
+					in the last column, which is $b'$.
+				}
+				\item{
+					$(A'|b')$ contains a row in which the only nonzero entry lies
+					in the last column $\Rightarrow$ rank($A'$) $\neq$ rank$(A'|b')$ \\\-\\
+					$(A'|b')$ contains a row in which the only nonzero entry lies
+					in the last column means that $b'$ is a linearly independent vector to $A'$. Then this means that 
+					rank($A'$) $\neq$ rank$(A'|b')$.
+				}
+			\end{enumerate}
+		\end{proof}
 	}
 	\item{
 		Deduce that $Ax = b$ is consistent if and only if $(A'|b')$ contains no row in which the only nonzero entry lies
 		in the last column.
+		\begin{proof}\
+			\begin{enumerate}[i.]
+				\item{
+					$Ax = b$ is consistent $\Rightarrow$  $(A'|b')$ contains no row in which the only nonzero entry lies
+					in the last column.\\
+					In problem C, we proved that 
+					$Ax = b$ is consistent means that $b$ is a linear combination of the columns in $A$, i.e. linearly dependent. This also must mean that
+					$b'$ is a linearly dependent of the columns in $A'$	because row reduction is a 
+					rank and row space preserving operation. Thus, $(A'|b')$ contains no row in which the only nonzero entry lies in the last column
+					because $b'$ is a linearly dependent.
+				}
+				\item{
+					$(A'|b')$ contains no row in which the only nonzero entry lies
+					in the last column $\Rightarrow$ $Ax = b$ is consistent.\\
+					From part (a), we know that the above premise is equivalent to rank($A'$) $\neq$ rank$(A'|b')$. By Theorem 3.11, 
+					we know that $A'x=b'$ must be consistent. $Ax = b$ must also be consistent because row reduced echelon form preserves rank and row space.
+				}
+			\end{enumerate}
+		\end{proof}
 	}
 \end{enumerate}
 
 
 \section{F}
+Let the reduced row echelon form of $A$ be
+\[ R = \begin{bmatrix}
+	1 & 0 & 2 & 0 & -2 \\
+	0 & 1 & -5 & 0 & -3 \\
+	0 & 0 & 0 & 1 & 6
+\end{bmatrix}\]
+Determine $A$ if the first, second, and fourth columns of $A$ are
+$$
+\begin{bmatrix}
+1 \\
+-1 \\
+3
+\end{bmatrix}, \quad \begin{bmatrix}
+0 \\
+-1 \\
+1
+\end{bmatrix}, \text { and } \begin{bmatrix}
+1 \\
+-2 \\
+0
+\end{bmatrix}
+$$
+\begin{proof}
+Notice that $r_{j_{3}} = 2r_{j_{1}} - 5r_{j_{2}}$ and $r_{j_{5}} = -2r_{j_{1}} - 3r_{j_{2}} + 6r_{j_{4}}$ where $r_{j_{i}}$ is the 
+$i$th column of $R$. Using Theorem 3.16(c) and (d) we can compute $A$. 
+
+\[ A = \begin{bmatrix}
+	1  & 0  & 2  & 1  & 4\\
+	-1 & -1 & 3 & -2 & -7 \\
+	3  & 1  & 1  & 0  & -9
+\end{bmatrix}\]
+
+\end{proof}
 
 \section{G}
+Let the reduced row echelon form of $A$ be
+\[ 
+R = \begin{bmatrix}
+1 & -3 & 0 & 4 & 0 & 5 \\
+0 & 0 & 1 & 3 & 0 & 2 \\
+0 & 0 & 0 & 0 & 1 & -1 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+Determine $A$ if the first, third, and sixth columns of $A$ are
+$$
+\begin{bmatrix}
+	1 \\
+	-2 \\
+	-1 \\
+	3
+	\end{bmatrix}, \quad \begin{bmatrix}
+	-1 \\
+	1 \\
+	2 \\
+	-4
+	\end{bmatrix}, \text { and } \begin{bmatrix}
+	3 \\
+	-9 \\
+	2 \\
+	5
+\end{bmatrix}
+$$
+\begin{proof}
+	Notice that 
+	$r_{j_{2}} = -3r_{j_{1}}$,
+	$r_{j_{4}} = 4r_{j_{1}} + 3r_{j_{3}}$, and 
+	$r_{j_{5}} = 5r_{j_{1}} + 2r_{j_{3}} - r_{j_{6}}$
+	where $r_{j_{i}}$ is the 
+	$i$th column of $R$. Using Theorem 3.16(c) and (d) we can compute $A$. 
+	\[ 
+		A = \begin{bmatrix}
+		1 & -3 & -1 & 1 & 0 & 3 \\
+		-2 & 6 & 1 & -5 & 1 & -9\\
+		-1 & 3 & 2 & 2 & -3 & 2\\
+		3 & -9 & -4 & 0 & 2 & 5
+		\end{bmatrix}
+		\]
+\end{proof}
 
 \section{H} 
+Let $W$ be the subspace of $M_{2 \times 2}(R)$ consisting of the symmetric $2 \times 2$ matrices. The set
+$$
+S=\left\{\left(\begin{array}{rr}
+0 & -1 \\
+-1 & 1
+\end{array}\right),\left(\begin{array}{cc}
+1 & 2 \\
+2 & 3
+\end{array}\right),\left(\begin{array}{cc}
+2 & 1 \\
+1 & 9
+\end{array}\right),\left(\begin{array}{rr}
+1 & -2 \\
+-2 & 4
+\end{array}\right),\left(\begin{array}{rr}
+-1 & 2 \\
+2 & -1
+\end{array}\right)\right\}
+$$
+generates $W$. Find a subset of $S$ that is a basis for $W$.
+\begin{proof}
+We put $S$ in an augmented matrix.
+\[
+A=
+\begin{bmatrix}
+	0 & 1 & 2 & 1 & -1 \\
+	-1 & 2 & 1 & -2 & 2 \\
+	-1 & 2 & 1 & -2 & 2 \\
+	1 & 3 & 9 & 4 & -1
+\end{bmatrix}
+\]
+Then we compute reduced row echelon form of this matrix. 
+\[
+R=
+\begin{bmatrix}
+	1 & 0 & 3 & 0 & 4\\
+	0 & 1 & 2 & 0 & 1\\
+	0 & 0 & 0 & 1 & -2 \\
+	0 & 0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+Notice that the first, second, and fourth columns of R is linearly independent. 
+Then, the cooresponding columns in A would be the linearly independent subset by Theorem 3.16.
+\[
+S'=\left\{\left(\begin{array}{rr}
+	0 & -1 \\
+	-1 & 1
+	\end{array}\right),\left(\begin{array}{cc}
+	1 & 2 \\
+	2 & 3
+	\end{array}\right),\left(\begin{array}{rr}
+	1 & -2 \\
+	-2 & 4
+	\end{array}\right)\right\}
+\]
+forms a basis for $W$.
+\end{proof}
 
 \section{I} 
 Prove the corollary to Theorem 3.16: The reduced row echelon form of a matrix is unique.
 \begin{proof}
+	\begin{lemma}
+		The pivot columns of matrix $A$'s reduced row echelon form is unique
+		\begin{proof}
+			We proceed by induction on $n \in \mathbb{N}$. Let $P(n)$ be the following predicate 
+			"pivot columns of matrix $A$'s reduced row echelon form is unique, where matrix $A$ has $n$ columns".
+			\begin{enumerate}[label=\alph*.]
+				\item{
+					Base case:\\
+					We prove $P(1)$.
+					There is only one column so it must be unique.
+				}
+				\item{
+					Inductive step:\\
+					Suppose $P(k)$ holds. 
+					We show that P($k+1$) holds.\\
+					Let $A = [A'|u_{k+1}]$ where $A'$ is a matrix which as $k$ columns and has unique pivot columns in its reduced row echelon form.
+					Consider two cases: where $u_{k+1}$ is linearly dependent to $A'$ and where it is linearly independent to $A'$.\\\-\\
+					Case 1: $u_{k+1}$ is linearly dependent to $A'$\\
+					If $u_{k+1}$ is linearly dependent it means that rank$(A) = $ rank($A'$). That must mean that $A$ has a unique amount of pivot columns because $A'$
+					has a unique amount of pivot columns by our induction hypothesis.\-\\
+	
+					Case 2: $u_{k+1}$ is linearly independent to $A'$\\
+					If $u_{k+1}$ is linearly independent it means that rank($A$) = rank($A') + 1 = r$, where $r$ is just some fixed integer. 
+				}
+			\end{enumerate}
+			Therefore, by induction we have proved this lemma.
+			\end{proof}
+	\end{lemma}
+
 Let's assume for the sake of contradiction that matrix $A$ has two unique reduced row echelon forms, $B$ and $B'$.
 Theorem 3.16(b) states that "For each $k = 1, 2, \cdots, n$, if column $k$ of $B$ is $d_1e_1 + d_2e_2 + \cdots + d_re_r $, 
 then column $k$ of $A$ is $d_1a_{j_1} + d_2a_{j_2} + \cdots + d_ra_{j_r}$. Let's the $k$ column of $B$ be $d_1e_1 + d_2e_2 + \cdots + d_re_r$
