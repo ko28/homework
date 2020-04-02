@@ -762,7 +762,7 @@ forms a basis for $W$.
 
 \section{I} 
 Prove the corollary to Theorem 3.16: The reduced row echelon form of a matrix is unique.
-\begin{proof}
+\begin{proof}\\
 	\begin{lemma}
 		The pivot columns of matrix $A$'s reduced row echelon form is unique
 		\begin{proof}
@@ -781,22 +781,26 @@ Prove the corollary to Theorem 3.16: The reduced row echelon form of a matrix is
 					Let $A = [A'|u_{k+1}]$ where $A'$ is a matrix which as $k$ columns and has unique pivot columns in its reduced row echelon form.
 					Consider two cases: where $u_{k+1}$ is linearly dependent to $A'$ and where it is linearly independent to $A'$.\\\-\\
 					Case 1: $u_{k+1}$ is linearly dependent to $A'$\\
-					If $u_{k+1}$ is linearly dependent it means that rank$(A) = $ rank($A'$). That must mean that $A$ has a unique amount of pivot columns because $A'$
+					If $u_{k+1}$ is linearly dependent it means that rank$(A) = $ rank($A'$). So the reduced row echelon form of $A$ is 
+					$[R'|b]$ where $R'$ are the pivot columns from $A'$. That must mean that $A$ has a unique amount of pivot columns because $A'$
 					has a unique amount of pivot columns by our induction hypothesis.\-\\
 	
 					Case 2: $u_{k+1}$ is linearly independent to $A'$\\
 					If $u_{k+1}$ is linearly independent it means that rank($A$) = rank($A') + 1 = r$, where $r$ is just some fixed integer. 
+					This must mean that $A$ has one more pivot column than $A'$. The reduced row echelon form of $A$ is 
+					$[R'|b]$, and $b$ must be $e_r$	by Theorem 3.16(b) and the fact that it is the right most column.
+					That must mean that $A$ has a unique amount of pivot columns.
 				}
 			\end{enumerate}
 			Therefore, by induction we have proved this lemma.
 			\end{proof}
 	\end{lemma}
-
 Let's assume for the sake of contradiction that matrix $A$ has two unique reduced row echelon forms, $B$ and $B'$.
-Theorem 3.16(b) states that "For each $k = 1, 2, \cdots, n$, if column $k$ of $B$ is $d_1e_1 + d_2e_2 + \cdots + d_re_r $, 
-then column $k$ of $A$ is $d_1a_{j_1} + d_2a_{j_2} + \cdots + d_ra_{j_r}$. Let's the $k$ column of $B$ be $d_1e_1 + d_2e_2 + \cdots + d_re_r$
-and the $k$ column of $B'$ be $d'_1e_1 + d'_2e_2 + \cdots + d'_re_r$ where $kth$ column of $B$ does not equal the $kth$ column of $B'$ because they are both unique.
-However, this would be that the $k$th column of the original matrix $A$ are different depending if you compute using $B$ or $B'$. Thus, this is a contradiction
+Theorem 3.16(d) states that "For each $k = 1, 2, \cdots, n$, if column $k$ of $B$ is $d_1e_1 + d_2e_2 + \cdots + d_re_r $, 
+then column $k$ of $A$ is $d_1a_{j_1} + d_2a_{j_2} + \cdots + d_ra_{j_r}$. Let's the $k$th column of $B$ be $d_1e_1 + d_2e_2 + \cdots + d_re_r$
+and the $k$th column of $B'$ be $d'_1e_1 + d'_2e_2 + \cdots + d'_re_r$ where $k$th column of $B$ does not equal the $k$th column of $B'$ because they are both unique.
+We know that the $e_1, e_2, \cdots, e_r$ are unique by our lemma.
+However, this would imply that the $k$th column of the original matrix $A$ are different depending if you compute using $B$ or $B'$. Thus, this is a contradiction
 and $A$ must have a unique reduced row echelon form. 
 \end{proof}
 \end{document}
