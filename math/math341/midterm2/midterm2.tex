@@ -72,30 +72,29 @@ Let
 			      \left[\begin{array}{cc|c}
 					      a & b & e                   \\
 					      0 & 1 & \frac{af-ce}{ad-cb}
-					  \end{array}\right] \\
-				R_1 \leftarrow R_1 - bR_2
-				\left[\begin{array}{cc|c}
-					a & 0 & e -b \frac{af-ce}{ad-cb} \\
-					0 & 1 & \frac{af-ce}{ad-cb}
-				\end{array}\right] \\
-				R_1 \leftarrow \frac{R_1}{a}
-				\left[\begin{array}{cc|c}
-					1 & 0 & \frac{1}{a}(e -b \frac{af-ce}{ad-cb})\\
-					0 & 1 & \frac{af-ce}{ad-cb}
-				\end{array}\right] \\
-				\left[\begin{array}{cc|c}
-					1 & 0 & \frac{de-bf}{ad-cb} \\
-					0 & 1 & \frac{af-ce}{ad-cb}
-				\end{array}\right]
-			  \end{align*}
-			
-			\[x = 
-			\begin{bmatrix}
-			\frac{de-bf}{ad-cb}\\
-			\frac{af-ce}{ad-cb}
-			\end{bmatrix} \quad \text{ where } ad-cb \neq 0
-			\]
-			
+				      \end{array}\right] \\
+			      R_1 \leftarrow R_1 - bR_2
+			      \left[\begin{array}{cc|c}
+					      a & 0 & e -b \frac{af-ce}{ad-cb} \\
+					      0 & 1 & \frac{af-ce}{ad-cb}
+				      \end{array}\right] \\
+			      R_1 \leftarrow \frac{R_1}{a}
+			      \left[\begin{array}{cc|c}
+					      1 & 0 & \frac{1}{a}(e -b \frac{af-ce}{ad-cb}) \\
+					      0 & 1 & \frac{af-ce}{ad-cb}
+				      \end{array}\right] \\
+			      \left[\begin{array}{cc|c}
+					      1 & 0 & \frac{de-bf}{ad-cb} \\
+					      0 & 1 & \frac{af-ce}{ad-cb}
+				      \end{array}\right]
+		      \end{align*}
+
+		      \[x =
+			      \begin{bmatrix}
+				      \frac{de-bf}{ad-cb} \\
+				      \frac{af-ce}{ad-cb}
+			      \end{bmatrix} \quad \text{ where } ad-cb \neq 0
+		      \]
 	      \end{proof}
 	      }
 	\item{
@@ -112,14 +111,38 @@ Let
 					      0 & b & e
 				      \end{array}\right]
 		      \]
-		      and compute the rref, using c as
+		      and compute the rref, assuming that $b\neq0$. We obtain the rref,
+		      \[
+			      \left[\begin{array}{cc|c}
+					      1 & 0 & \frac{bf-de}{bc} \\
+					      0 & 1 & \frac{e}{b}
+				      \end{array}\right]
+		      \]
 	      \end{proof}
 	      }
 	\item{
 	      If $a = 0$, $c=0$, but $b \neq 0$, $d \neq 0$,
 	      what are the conditions on $e$ and $f$ such that the system $\mathbf{Ax=b}$ has a solution?
 	      Is the solution unique?  (\textbf{Hint:} recall that $\mathbf{Ax = b}$ has a solution if and only if
-	      $\mathbf{b}$ can be written as a linear combination of the columns of $\mathbf{A}$)
+		  $\mathbf{b}$ can be written as a linear combination of the columns of $\mathbf{A}$)
+		  \begin{proof}
+			If $a = 0$, $c=0$, $b \neq 0$, $d \neq 0$, we get the augmented matrix 
+			\[
+				\left[\begin{array}{cc|c}
+						0 & b & e \\
+						0 & d & f
+					\end{array}\right]
+			\]
+			Performing row reduction,
+			\[
+				\left[\begin{array}{cc|c}
+						0 & 1 & \frac{e}{b} \\
+						0 & 1 & \frac{f}{d}
+					\end{array}\right]
+			\]
+			So the condition of the solution is, $$x_2 = \frac{e}{b} = \frac{f}{d}$$
+			Thus, there exists a infinite amount of solution. 
+		  \end{proof}
 	      }
 	\item{
 	      Solve the system
