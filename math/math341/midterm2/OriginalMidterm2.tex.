@@ -1,0 +1,276 @@
+% Exam Template for MIT Math Department courses
+%
+% Using Philip Hirschhorn's exam.cls: http://www-math.mit.edu/~psh/#ExamCls
+%
+% run pdflatex on a finished exam at least three times to do the grading table on front page.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{exam}
+\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
+\RequirePackage{tikz, pgflibraryplotmarks}
+
+
+\usepackage[margin=1in]{geometry}
+
+
+\def\Z{{\mathbb Z}}
+\def\F{{\mathbb F}}
+\def\Zp{{\mathbb Z/p}}
+\def\Fp{{\mathbb F_{p}}}
+
+
+\def\AA{{\mathbb A}}
+\def\CC{{\mathbb C}}
+\def\DD{{\mathbb D}}
+\def\GG{{\mathbb G}}
+\def\HH{{\mathbb H}}
+\def\II{{\mathbb I}}
+\def\JJ{{\mathbb J}}
+\def\KK{{\mathbb K}}
+\def\MM{{\mathbb M}}
+\def\NN{{\mathbb N}}
+\def\OOO{{\mathbb O}}
+\def\PP{{\mathbb P}}
+\def\QQ{{\mathbb Q}}
+\def\RR{{\mathbb R}}
+\def\SS{{\mathbb S}}
+\def\TT{{\mathbb T}}
+\def\VV{{\mathbb V}}
+\def\XX{{\mathbb X}}
+\def\ZZ{{\mathbb Z}}
+%
+% Here's where you edit the Class, Exam, Date, etc.
+\newcommand{\class}{Math 341}
+\newcommand{\term}{Spring 2020}
+\newcommand{\examnum}{Midterm 2}
+\newcommand{\examdate}{4/2/2020}
+\newcommand{\timelimit}{1 week}
+
+\newcommand\bbR{{\mathbb R}}
+
+
+% For an exam, single spacing is most appropriate
+\singlespacing
+% \onehalfspacing
+% \doublespacing
+
+% For an exam, we generally want to turn off paragraph indentation
+\parindent 0ex
+
+\begin{document}
+
+% These commands set up the running header on the top of the exam pages
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\examnum\ - Page \thepage\ of \numpages}{\examdate}
+\runningheadrule
+
+\begin{flushright}
+\begin{tabular}{p{2.8in} r l}
+\textbf{\class} & \textbf{Name (Print):} & \makebox[2in]{\hrulefill}\\
+\textbf{\term} &&\\
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\textbf{Time Limit: \timelimit} & Student ID & \makebox[2in]{\hrulefill}
+\end{tabular}\\
+\end{flushright}
+\rule[1ex]{\textwidth}{.1pt}
+
+
+This exam contains \numpages\ pages (including this cover page) and
+\numquestions\ problems.  Check to see if any pages are missing.  Enter
+all requested information on the top of this page, and put your initials
+on the top of every page, in case the pages become separated.\\
+
+You are required to show your work on each problem on this exam.  The following rules apply:\\
+
+\begin{minipage}[t]{3.7in}
+\vspace{0pt}
+\begin{itemize}
+
+\item \textbf{If you use a ``theorem'' you must indicate this} and explain
+why the theorem may be applied.
+
+\item \textbf{Organize your work} in a neat and coherent way. Work scattered 
+all over the page without a clear ordering will receive very little credit. 
+
+\item \textbf{Mysterious or unsupported answers will not receive full
+credit}.  A correct answer, unsupported by calculations, explanation,
+or algebraic work will receive no credit; an incorrect answer supported
+by substantially correct calculations and explanations might still receive
+partial credit.
+
+
+\item This is an open book, take-home midterm, are free to collaborate; however, 
+you need to disclaim your sources, and more importantly you need to write 
+\textbf{your own solutions}.
+
+\item You will submit your \texttt{.tex} and \texttt{.pdf} files online 
+before Thursday April 9th at 23:59.
+
+\end{itemize}
+
+Do not write in the table to the right.
+\end{minipage}
+\hfill
+\begin{minipage}[t]{2.3in}
+\vspace{0pt}
+%\cellwidth{3em}
+\gradetablestretch{2}
+\vqword{Problem}
+\addpoints % required here by exam.cls, even though questions haven't started yet.
+\gradetable[v]%[pages]  % Use [pages] to have grading table by page instead of question
+
+\end{minipage}
+
+\newpage
+\begin{questions}
+
+\addpoints
+\question Let
+\begin{equation}
+\mathbf{A} = \left [ \begin{array}{cc}
+            			a & b \\
+            			c & d
+    				  \end{array} \right ],
+    \mbox{ and  } \mathbf{b} = \left ( \begin{array}{c}
+            							e \\
+            							f
+    									\end{array} \right ).
+\end{equation}
+\begin{parts}
+\part[10]
+Suppose that $a\neq 0 $, compute the solution of $\mathbf{Ax = b}$ using row reduction and provide the conditions on $a,b,c,d$ such that your computations are valid. Express the result as a simplified expression. (\textbf{Hint:} recall that you can not divide by zero.)
+
+%% Write your solutions here 
+
+% \newpage
+\part[5] If $a = 0$, and $c\neq 0$, is your above computation still valid? How would you modify it? (explain briefly)  (\textbf{Hint:} recall that you can swap the equations and the result is the same.)
+
+%% Write your solutions here 
+
+% \newpage
+\part[5] If $a = 0$, $c=0$, but $b \neq 0$, $d \neq 0$, what are the conditions on $e$ and $f$ such that the system $\mathbf{Ax=b}$ has a solution? Is the solution unique?  (\textbf{Hint:} recall that $\mathbf{Ax = b}$ has a solution if and only if $\mathbf{b}$ can be written as a linear combination of the columns of $\mathbf{A}$.)
+
+% \newpage
+\part[5] Solve the system
+\begin{equation}
+\left [ \begin{array}{cc}
+            \sqrt{2} & 3\sqrt{2}  \\
+            2\sqrt{2} & \sqrt{2}
+    \end{array} \right ] \left ( \begin{array}{c}
+            x_1 \\
+            x_2
+    \end{array} \right ) = \left ( \begin{array}{c}
+            5\sqrt{2} \\
+            5\sqrt{2}
+    \end{array} \right ).
+\end{equation}
+(\textbf{Hint:} You may want to use the formula you just deduced.)
+
+\end{parts}% Question with parts
+
+%%%%%%%%%%%%%%%%%%%%%% Second Question %%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\addpoints
+\question Let
+\begin{equation}
+    \mathbf{A} = \left [ \begin{array}{cccc}
+            0 & - \alpha & 2       & 0 \\
+            1 &  1        & 0       & 1 \\
+            2 &  2        & 2       & 3 \\
+           -2 & -2        & 4  & 2\alpha \\
+            0 & \alpha   & -1  & 2\alpha + 1/2
+    \end{array} \right ], \qquad  \mbox{and }
+    \mathbf{b} =  \left [ \begin{array}{c}
+            2    \\
+            1  \\
+            4        \\
+            2 + \alpha \\
+            2 \beta + \alpha -2
+    \end{array} \right ]
+\end{equation}
+What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A} \mathbf{x} = \mathbf{b}$:
+
+\begin{parts}
+\part[5] has no solution?
+
+% \newpage
+\part[5] has an unique solution? Find the solution. (\textbf{Hint:} you will need to row reduce the augmented system to echelon form, and then use the theorems seen in class to impose the conditions on $\alpha$ and $\beta$.)
+% \newpage
+
+\part[10] has infinite amount of solutions? Find the solution set in parametric form. (\textbf{Hint:} You may have one equations for $\alpha$ and one for $\beta$ that have to be satisfied simultaneously)
+
+
+\end{parts}
+
+
+%%%%%%%%%%%%%%%%%%%%%% Third Question %%%%%%%%%%%%%%%%%%%%%%%
+\newpage 
+\question 
+Let $A \in M_{n\times n}(F)$, for a field $F$. We want to prove that $rank(A^2) - rank(A^3) \leq rank(A) - rank(A^2)$. 
+The solution to this exercise requires the notion of quotient spaces. Even though you should already be familiar with quotient spaces we will prove a few properties that will be useful. 
+
+Let \(\mathrm{W}\) be a subspace of a vector space \(\mathrm{V}\) over a field \(F .\) For any \(v \in \mathrm{V}\) the set \(\{v\}+\mathrm{W}=\{v+w: w \in \mathrm{W}\}\) is called the coset of W containing \(v .\) It is customary to denote this coset by \(v+W\) rather than \(\{v\}+W\).
+Following this notation we write $\mathrm{V}/\mathrm{W} = \{ v + \mathrm{W}: v \in \mathrm{V} \}$, which is usually called the quotient space $\mathrm{V}$ module $\mathrm{W}$. Addition and scalar multiplication by scalars can be defined in the collection \(\mathrm{V}/\mathrm{W}\) as follows:
+$$
+\left(v_{1}+\mathrm{W}\right)+\left(v_{2}+\mathrm{W}\right)=\left(v_{1}+v_{2}\right)+\mathrm{W}
+$$
+for all \(v_{1}, v_{2} \in \mathrm{V}\) and
+$$
+a(v+W)=a v+W
+$$
+for all \(v \in \mathrm{V}\) and \(a \in F\)
+
+\begin{parts}
+\part [5] Prove that \(v_{1}+\mathrm{W}=v_{2}+\mathrm{W}\) if and only if \(v_{1}-v_{2} \in \mathrm{W}\). (\textbf{Hint}: recall that $v_{1}+\mathrm{W}$ is a set, thus you need to prove equality between sets.)
+
+\part [5] Show that \(\mathrm{V}/\mathrm{W}\) with the operations defined above is a linear vector space. 
+
+\part [5] Prove that if $\mathrm{V} < \infty$ then $dim(\mathrm{V}/\mathrm{W}) = dim(\mathrm{V}) - dim(\mathrm{W})$. (Hint: Define a linear map $T:\mathrm{V} \rightarrow \mathrm{V}/\mathrm{W}$ such that the range of $T$ is $\mathrm{V}/\mathrm{W}$, and then use the rank-nullity theorem.)
+
+\part[5] Let $K = F^n$, define $AK = R(L_A)$, and $A^2K = R(L_{A^2})$. Show that $AK/A^2K$ is a vector space of dimension $rank(A) - rank(A^2)$. 
+
+\part[5] Show that $A^2K/A^3K$ is a vector space of dimension $rank(A^2) - rank(A^3)$, where $A^3K= R(L_{A^3})$.
+
+\part[5] Define $T: AK/A^2K \rightarrow A^2K/A^3K$, by $T(v) = L_A(v)$, i.e, we left multiply each element of $v$ by the matrix $A$. Show that $R(T) = A^2V/A^3V$.
+
+\part[5] Use the rank-nullity theorem on $T$ to conclude that $rank(A^2) - rank(A^3) \leq rank(A) - rank(A^2)$.
+
+
+\end{parts}
+
+%%%%%%%%%%%%%%%%%%%%%% Fourth Question %%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\question 
+
+Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two linear transformations from $\mathrm{V}$ to itself, such that $T^2= P^2 = 0$, and $T \circ P + P \circ T = I$, where $I$ is the identity in $\mathrm{V}$.
+
+\begin{parts}
+
+\part[5] Denote $N_T = N(T)$ and $N_P = N(P)$, the null spaces of $T$ and $P$, respectively. Show that $N_P = P(N_T)$, and $N_T = T(N_P)$, where $T(N_P) = \{ T(v): v \in N_P \}$ and $P(N_T) = \{ P(v): v \in N_T \}$.
+
+\part[5] Show that $\mathrm{V} = N_T \oplus N_P$.
+
+\part[5] Prove that the dimension of $\mathrm{V}$ is even. 
+
+\part[5] Suppose that the dimension of $\mathrm{V}$ is two. Prove that $\mathrm{V}$ has a basis $\beta$, such that
+\begin{equation}
+	[T]_{\beta} = \left [ \begin{array}{cc}
+						0 & 1 \\
+						0 & 0 
+						\end{array} \right] \qquad \text{ and} 	[P]_{\beta} = \left [ \begin{array}{cc}
+						0 & 0 \\
+						1 & 0 
+						\end{array} \right] .
+\end{equation}
+
+
+
+
+\end{parts}
+
+\end{questions}
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+
+\makeatletter
+\newenvironment{Dequation}
+{%
+  \def\tagform@##1{%
+    \maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+  \ignorespaces
+  }
+  {%
+  \def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+  \ignorespacesafterend
+  }
+\makeatother
+
+\title{Math 341: Midterm 2}
+\author{Daniel Ko}
+\date{Spring 2020}
+
+\begin{document}
+\maketitle
+
+%problem 1
+\section{}
+Let
+\begin{equation}
+	\mathbf{A} = \left [ \begin{array}{cc}
+			a & b \\
+			c & d
+		\end{array} \right ],
+	\mbox{ and  } \mathbf{b} = \left ( \begin{array}{c}
+			e \\
+			f
+		\end{array} \right )
+\end{equation}
+\begin{enumerate}[label=\alph*.]
+	\item{
+	      Suppose that $a\neq 0 $, compute the solution of $\mathbf{Ax = b}$
+	      using row reduction and provide the conditions on $a,b,c,d$ such that your computations are valid.
+	      Express the result as a simplified expression. (\textbf{Hint:} recall that you can not divide by zero)
+	      \begin{proof}
+		      We perform reduced row echelon form (rref) on the augmented matrix
+		      \begin{align*}
+			      (A|b)=
+			      \left[\begin{array}{cc|c}
+					      a & b & e \\
+					      c & d & f
+				      \end{array}\right] \\
+			      R_2 \leftarrow R_2 - \frac{c}{a} R_1
+			      \left[\begin{array}{cc|c}
+					      a & b                & e                \\
+					      0 & d - \frac{cb}{a} & f - \frac{ce}{a}
+				      \end{array}\right] \\
+			      \left[\begin{array}{cc|c}
+					      a & b               & e               \\
+					      0 & \frac{ad-cb}{a} & \frac{af-ce}{a}
+				      \end{array}\right] \\
+			      R_2 \leftarrow \frac{a}{ad-cb}R_2 \quad \text{Assuming that $ab-cd \neq 0$} \quad
+			      \left[\begin{array}{cc|c}
+					      a & b & e                   \\
+					      0 & 1 & \frac{af-ce}{ad-cb}
+					  \end{array}\right] \\
+				R_1 \leftarrow R_1 - bR_2
+				\left[\begin{array}{cc|c}
+					a & 0 & e -b \frac{af-ce}{ad-cb} \\
+					0 & 1 & \frac{af-ce}{ad-cb}
+				\end{array}\right] \\
+				R_1 \leftarrow \frac{R_1}{a}
+				\left[\begin{array}{cc|c}
+					1 & 0 & \frac{1}{a}(e -b \frac{af-ce}{ad-cb})\\
+					0 & 1 & \frac{af-ce}{ad-cb}
+				\end{array}\right] \\
+				\left[\begin{array}{cc|c}
+					1 & 0 & \frac{de-bf}{ad-cb} \\
+					0 & 1 & \frac{af-ce}{ad-cb}
+				\end{array}\right]
+			  \end{align*}
+			
+			\[x = 
+			\begin{bmatrix}
+			\frac{de-bf}{ad-cb}\\
+			\frac{af-ce}{ad-cb}
+			\end{bmatrix} \quad \text{ where } ad-cb \neq 0
+			\]
+			
+	      \end{proof}
+	      }
+	\item{
+	      If $a = 0$, and $c\neq 0$, is your above computation still valid?
+	      How would you modify it? (explain briefly)
+	      (\textbf{Hint:} recall that you can swap the equations and the result is the same)
+	      \begin{proof}
+		      If $a = 0$, and $c\neq 0$, then the above computation will not be valid as we
+		      divided by $a$ multiple times when we computed the rref. I would swap the first
+		      and second rows so that it would look like
+		      \[
+			      \left[\begin{array}{cc|c}
+					      c & d & f \\
+					      0 & b & e
+				      \end{array}\right]
+		      \]
+		      and compute the rref, using c as
+	      \end{proof}
+	      }
+	\item{
+	      If $a = 0$, $c=0$, but $b \neq 0$, $d \neq 0$,
+	      what are the conditions on $e$ and $f$ such that the system $\mathbf{Ax=b}$ has a solution?
+	      Is the solution unique?  (\textbf{Hint:} recall that $\mathbf{Ax = b}$ has a solution if and only if
+	      $\mathbf{b}$ can be written as a linear combination of the columns of $\mathbf{A}$)
+	      }
+	\item{
+	      Solve the system
+	      \begin{equation}
+		      \left [ \begin{array}{cc}
+				      \sqrt{2}  & 3\sqrt{2} \\
+				      2\sqrt{2} & \sqrt{2}
+			      \end{array} \right ] \left ( \begin{array}{c}
+				      x_1 \\
+				      x_2
+			      \end{array} \right ) = \left ( \begin{array}{c}
+				      5\sqrt{2} \\
+				      5\sqrt{2}
+			      \end{array} \right ).
+	      \end{equation}
+	      (\textbf{Hint:} You may want to use the formula you just deduced)
+	      }
+	      \begin{proof}
+		      \begin{align*}
+			      x_1 & = \frac{de-bf}{ad-cb}                                                        \\
+			          & = \frac{\sqrt2(5\sqrt2) - 3\sqrt2(5\sqrt2)}{\sqrt2\sqrt2 - 3\sqrt2(2\sqrt2)} \\
+			          & = \frac{10 - 30}{2-12}                                                       \\
+			          & = \frac{-20}{-10}                                                            \\
+			          & = 2                                                                          \\
+			          &                                                                              \\
+			      x_2 & = \frac{\sqrt2(5\sqrt2) - 2\sqrt2(5\sqrt2)}{\sqrt2\sqrt2 - 3\sqrt2(2\sqrt2)} \\
+			          & = \frac{10-20}{-10}                                                          \\
+			          & = 1
+		      \end{align*}
+	      \end{proof}
+\end{enumerate}
+
+
+
+
+\section{}
+
+\section{}
+
+
+\section{}
+
+\end{document}
