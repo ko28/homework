@@ -124,25 +124,25 @@ Let
 	      If $a = 0$, $c=0$, but $b \neq 0$, $d \neq 0$,
 	      what are the conditions on $e$ and $f$ such that the system $\mathbf{Ax=b}$ has a solution?
 	      Is the solution unique?  (\textbf{Hint:} recall that $\mathbf{Ax = b}$ has a solution if and only if
-		  $\mathbf{b}$ can be written as a linear combination of the columns of $\mathbf{A}$)
-		  \begin{proof}
-			If $a = 0$, $c=0$, $b \neq 0$, $d \neq 0$, we get the augmented matrix 
-			\[
-				\left[\begin{array}{cc|c}
-						0 & b & e \\
-						0 & d & f
-					\end{array}\right]
-			\]
-			Performing row reduction,
-			\[
-				\left[\begin{array}{cc|c}
-						0 & 1 & \frac{e}{b} \\
-						0 & 1 & \frac{f}{d}
-					\end{array}\right]
-			\]
-			So the condition of the solution is, $$x_2 = \frac{e}{b} = \frac{f}{d}$$
-			Thus, there exists a infinite amount of solution. 
-		  \end{proof}
+	      $\mathbf{b}$ can be written as a linear combination of the columns of $\mathbf{A}$)
+	      \begin{proof}
+		      If $a = 0$, $c=0$, $b \neq 0$, $d \neq 0$, we get the augmented matrix
+		      \[
+			      \left[\begin{array}{cc|c}
+					      0 & b & e \\
+					      0 & d & f
+				      \end{array}\right]
+		      \]
+		      Performing row reduction,
+		      \[
+			      \left[\begin{array}{cc|c}
+					      0 & 1 & \frac{e}{b} \\
+					      0 & 1 & \frac{f}{d}
+				      \end{array}\right]
+		      \]
+		      So the condition of the solution is, $$x_2 = \frac{e}{b} = \frac{f}{d}$$
+		      Thus, there exists a infinite amount of solution.
+	      \end{proof}
 	      }
 	\item{
 	      Solve the system
@@ -175,10 +175,167 @@ Let
 	      \end{proof}
 \end{enumerate}
 
-
-
-
+%problem 2
 \section{}
+Let
+\begin{equation}
+	\mathbf{A} = \left [ \begin{array}{cccc}
+			0  & - \alpha & 2  & 0             \\
+			1  & 1        & 0  & 1             \\
+			2  & 2        & 2  & 3             \\
+			-2 & -2       & 4  & 2\alpha       \\
+			0  & \alpha   & -1 & 2\alpha + 1/2
+		\end{array} \right ], \qquad  \mbox{and }
+	\mathbf{b} =  \left [ \begin{array}{c}
+			2          \\
+			1          \\
+			4          \\
+			2 + \alpha \\
+			2 \beta + \alpha -2
+		\end{array} \right ]
+\end{equation}
+What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A} \mathbf{x} = \mathbf{b}$:
+\begin{enumerate}[label=\alph*.]
+	\item{
+	      Has no solution?
+	      \begin{proof}
+		      We begin by putting the augmented matrix $(\mathbf{A}|\mathbf{b})$ in its reduced form.
+		      \begin{align*}
+			      (\mathbf{A}|\mathbf{b})=
+			      \left [ \begin{array}{cccc|c}
+					      0  & - \alpha & 2  & 0             & 2                  \\
+					      1  & 1        & 0  & 1             & 1                  \\
+					      2  & 2        & 2  & 3             & 4                  \\
+					      -2 & -2       & 4  & 2\alpha       & 2 + \alpha         \\
+					      0  & \alpha   & -1 & 2\alpha + 1/2 & 2\beta + \alpha -2
+				      \end{array} \right ] \\
+			      R_5 \leftarrow R_5 + R_1
+			      \left [ \begin{array}{cccc|c}
+					      0  & - \alpha & 2 & 0             & 2               \\
+					      1  & 1        & 0 & 1             & 1               \\
+					      2  & 2        & 2 & 3             & 4               \\
+					      -2 & -2       & 4 & 2\alpha       & 2 + \alpha      \\
+					      0  & 0        & 1 & 2\alpha + 1/2 & 2\beta + \alpha
+				      \end{array} \right ] \\
+			      R_3 \leftarrow R_3 - 2R_2
+			      \left [ \begin{array}{cccc|c}
+					      0  & - \alpha & 2 & 0             & 2               \\
+					      1  & 1        & 0 & 1             & 1               \\
+					      0  & 0        & 2 & 1             & 2               \\
+					      -2 & -2       & 4 & 2\alpha       & 2 + \alpha      \\
+					      0  & 0        & 1 & 2\alpha + 1/2 & 2\beta + \alpha
+				      \end{array} \right ] \\
+			      R_4 \leftarrow R_4 + 2 R_2
+			      \left [ \begin{array}{cccc|c}
+					      0 & - \alpha & 2 & 0             & 2               \\
+					      1 & 1        & 0 & 1             & 1               \\
+					      0 & 0        & 2 & 1             & 2               \\
+					      0 & 0        & 4 & 2\alpha  +2   & 4 + \alpha      \\
+					      0 & 0        & 1 & 2\alpha + 1/2 & 2\beta + \alpha
+				      \end{array} \right ] \\
+			      R_4 \leftarrow R_4 - 2R_3,R_5 \leftarrow R_5 - \frac12R_3
+			      \left [ \begin{array}{cccc|c}
+					      0 & - \alpha & 2 & 0       & 2                   \\
+					      1 & 1        & 0 & 1       & 1                   \\
+					      0 & 0        & 2 & 1       & 2                   \\
+					      0 & 0        & 0 & 2\alpha & \alpha              \\
+					      0 & 0        & 0 & 2\alpha & 2\beta + \alpha + 1
+				      \end{array} \right ] \\
+			      R_5 \leftarrow R_5 - R_4
+			      \left [ \begin{array}{cccc|c}
+					      0 & - \alpha & 2 & 0       & 2          \\
+					      1 & 1        & 0 & 1       & 1          \\
+					      0 & 0        & 2 & 1       & 2          \\
+					      0 & 0        & 0 & 2\alpha & \alpha     \\
+					      0 & 0        & 0 & 0       & 2\beta - 1
+				      \end{array} \right ] \\
+			      R_1 \leftrightarrow R_2
+			      \left [ \begin{array}{cccc|c}
+					      1 & 1        & 0 & 1       & 1          \\
+					      0 & - \alpha & 2 & 0       & 2          \\
+					      0 & 0        & 2 & 1       & 2          \\
+					      0 & 0        & 0 & 2\alpha & \alpha     \\
+					      0 & 0        & 0 & 0       & 2\beta - 1
+				      \end{array} \right ]
+		      \end{align*}
+		      Thus this system will have no solution if $2\beta - 1 \neq 0$, which is when $\beta \neq \frac12$.
+		      expain more...
+	      \end{proof}
+	      }
+	\item{
+	      Has an unique solution? Find the solution.
+	      (\textbf{Hint:} you will need to row reduce the augmented system to echelon form,
+	      and then use the theorems seen in class to impose the conditions on $\alpha$ and $\beta$).
+	      \begin{proof}
+		      Combining Theorem 3.10 and the corollary to Theorem 4.7, we get that a system has a
+		      unique solution if and only if det$(\mathbf{A}) \neq 0$.
+		      The determinant of an upper triangular matrix is the product of its diagonal
+		      entries by property 4 of determinants in section 4.4.
+		      %IF the above fact is not allowed, I will write out the full recursive definition 
+		      So, this is when
+		      \begin{align*}
+			      1*-\alpha*2*2\alpha & \neq 0 \\
+			      -4\alpha^2          & \neq 0 \\
+			      \alpha              & \neq 0
+		      \end{align*}
+		      and from (a), $\beta = \frac12$. Combining these two conditions we get the following system,
+		      \[
+			      \left [ \begin{array}{cccc|c}
+					      1 & 1        & 0 & 1       & 1      \\
+					      0 & - \alpha & 2 & 0       & 2      \\
+					      0 & 0        & 2 & 1       & 2      \\
+					      0 & 0        & 0 & 2\alpha & \alpha \\
+					      0 & 0        & 0 & 0       & 0
+				      \end{array} \right ]
+		      \]
+		      So the generic solution will be
+		      \[
+			      x = \begin{bmatrix}
+				      \frac12 + \frac{1}{2\alpha} \\
+				      -\frac{1}{2\alpha}          \\
+				      \frac34                     \\
+				      \frac12                     \\
+				      0
+			      \end{bmatrix}
+		      \]
+	      \end{proof}
+	      }
+
+	\item{
+	      Has infinite amount of solutions? Find the solution set in parametric form.
+	      (\textbf{Hint:} You may have one equations for $\alpha$ and one for $\beta$ that have to be satisfied simultaneously).
+		  \begin{proof}
+			Having an infinite amount of solutions is by definition another way of saying
+			that a system that is consistent and that the solutions are not unique.
+			A system is consistent if $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$
+			by Theorem 3.11. A solution is not unique if det$(\mathbf{A}) = 0$ by 
+			Theorem 3.10 and the corollary to Theorem 4.7.
+
+			  If det$(\mathbf{A}) = 0$, 
+			  \begin{align*}
+				1*-\alpha*2*2\alpha & = 0 \\
+				-4\alpha^2          & = 0 \\
+				\alpha              & = 0
+				\end{align*}
+			  Given that $\alpha = 0$, and that $\beta = \frac12$ from part (a)
+			  we get the following system,
+
+		      \[
+			      \left [ \begin{array}{cccc|c}
+					      1 & 1 & 0 & 1 & 1          \\
+					      0 & 0 & 2 & 0 & 2          \\
+					      0 & 0 & 2 & 1 & 2          \\
+					      0 & 0 & 0 & 0 & 0          \\
+					      0 & 0 & 0 & 0 & 0
+				      \end{array} \right ]
+			  \]
+			  It is clear that  $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$ because 
+			  $\mathbf{b}$ is a linear combination of the second and third column from 
+			  $\mathbf{A}$. 
+	      \end{proof}
+	      }
+\end{enumerate}
+
 
 \section{}
 
