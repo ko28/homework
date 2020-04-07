@@ -260,6 +260,7 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 		      \end{align*}
 		      Thus this system will have no solution if $2\beta - 1 \neq 0$, which is when $\beta \neq \frac12$.
 		      expain more...
+		      %show that b \in R(L_A) ?? 
 	      \end{proof}
 	      }
 	\item{
@@ -272,7 +273,7 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 		      The determinant of an upper triangular matrix is the product of its diagonal
 		      entries by property 4 of determinants in section 4.4.
 		      %IF the above fact is not allowed, I will write out the full recursive definition 
-		      So, this is when
+		      Using this fact we can compute the condition of $\alpha$ as such that
 		      \begin{align*}
 			      1*-\alpha*2*2\alpha & \neq 0 \\
 			      -4\alpha^2          & \neq 0 \\
@@ -288,14 +289,13 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 					      0 & 0        & 0 & 0       & 0
 				      \end{array} \right ]
 		      \]
-		      So the generic solution will be
+		      By performing back substitution we compute the generic solution as
 		      \[
 			      x = \begin{bmatrix}
 				      \frac12 + \frac{1}{2\alpha} \\
 				      -\frac{1}{2\alpha}          \\
 				      \frac34                     \\
-				      \frac12                     \\
-				      0
+				      \frac12
 			      \end{bmatrix}
 		      \]
 	      \end{proof}
@@ -304,42 +304,145 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 	\item{
 	      Has infinite amount of solutions? Find the solution set in parametric form.
 	      (\textbf{Hint:} You may have one equations for $\alpha$ and one for $\beta$ that have to be satisfied simultaneously).
-		  \begin{proof}
-			Having an infinite amount of solutions is by definition another way of saying
-			that a system that is consistent and that the solutions are not unique.
-			A system is consistent if $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$
-			by Theorem 3.11. A solution is not unique if det$(\mathbf{A}) = 0$ by 
-			Theorem 3.10 and the corollary to Theorem 4.7.
+	      \begin{proof}
+		      Having an infinite amount of solutions is by definition another way of saying
+		      that a system that is consistent and that the solutions are not unique.
+		      A system is consistent if and only if $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$
+		      by Theorem 3.11. If det$(\mathbf{A}) = 0$, the solution, if it exists, is not unique by
+		      Theorem 3.10 and the corollary to Theorem 4.7.
 
-			  If det$(\mathbf{A}) = 0$, 
-			  \begin{align*}
-				1*-\alpha*2*2\alpha & = 0 \\
-				-4\alpha^2          & = 0 \\
-				\alpha              & = 0
-				\end{align*}
-			  Given that $\alpha = 0$, and that $\beta = \frac12$ from part (a)
-			  we get the following system,
+		      Using this fact we can compute the condition of $\alpha$ as such that
+		      \begin{align*}
+			      1*-\alpha*2*2\alpha & = 0 \\
+			      -4\alpha^2          & = 0 \\
+			      \alpha              & = 0
+		      \end{align*}
+		      Given that $\alpha = 0$, and that $\beta = \frac12$ from part (a)
+		      we get the following system,
 
 		      \[
 			      \left [ \begin{array}{cccc|c}
-					      1 & 1 & 0 & 1 & 1          \\
-					      0 & 0 & 2 & 0 & 2          \\
-					      0 & 0 & 2 & 1 & 2          \\
-					      0 & 0 & 0 & 0 & 0          \\
+					      1 & 1 & 0 & 1 & 1 \\
+					      0 & 0 & 2 & 0 & 2 \\
+					      0 & 0 & 2 & 1 & 2 \\
+					      0 & 0 & 0 & 0 & 0 \\
 					      0 & 0 & 0 & 0 & 0
 				      \end{array} \right ]
-			  \]
-			  It is clear that  $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$ because 
-			  $\mathbf{b}$ is a linear combination of the second and third column from 
-			  $\mathbf{A}$. 
+		      \]
+		      It is clear that  $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$ because
+		      $\mathbf{b}$ is a linear combination of the second and third column from
+		      $\mathbf{A}$. Hence, this system is consistent. \\
+		      By performing back substitution we compute the generic solution as
+		      \[
+			      x = \begin{bmatrix}
+				      \gamma     \\
+				      1 - \gamma \\
+				      1          \\
+				      0
+			      \end{bmatrix}
+		      \]
+		      where $\gamma \in \mathbb{R}$.
 	      \end{proof}
 	      }
 \end{enumerate}
 
-
+%problem 3
 \section{}
+Let $A \in M_{n\times n}(F)$, for a field $F$.
+We want to prove that $rank(A^2) - rank(A^3) \leq rank(A) - rank(A^2)$.
+The solution to this exercise requires the notion of quotient spaces.
+Even though you should already be familiar with quotient spaces we will prove a few properties that will be useful.\\ \-\\
+Let \(\mathrm{W}\) be a subspace of a vector space \(\mathrm{V}\) over a field \(F .\) For any \(v \in \mathrm{V}\) the set \(\{v\}+\mathrm{W}=\{v+w: w \in \mathrm{W}\}\) is called the coset of W containing \(v .\) It is customary to denote this coset by \(v+W\) rather than \(\{v\}+W\).
+Following this notation we write $\mathrm{V}/\mathrm{W} = \{ v + \mathrm{W}: v \in \mathrm{V} \}$, which is usually called the quotient space $\mathrm{V}$ module $\mathrm{W}$. Addition and scalar multiplication by scalars can be defined in the collection \(\mathrm{V}/\mathrm{W}\) as follows:
+$$
+	\left(v_{1}+\mathrm{W}\right)+\left(v_{2}+\mathrm{W}\right)=\left(v_{1}+v_{2}\right)+\mathrm{W}
+$$
+for all \(v_{1}, v_{2} \in \mathrm{V}\) and
+$$
+	a(v+W)=a v+W
+$$
+for all \(v \in \mathrm{V}\) and \(a \in F\)
+\begin{enumerate}[label=\alph*.]
+	%CHECK THIS , just copied and pasted from hw2 lol
+	\item{
+	      Prove that \(v_{1}+\mathrm{W}=v_{2}+\mathrm{W}\) if and only if \(v_{1}-v_{2} \in \mathrm{W}\).
+	      (\textbf{Hint}: recall that $v_{1}+\mathrm{W}$ is a set, thus you need to prove equality between sets)
+	      \begin{proof}\-\
+		      \begin{enumerate}[i.]
+			      \item{
+			            $v_1 + W = v_2 + W \Rightarrow v_1 - v_2 \in W$\\
+			            If $v_1 + W = v_2 + W$, then $\exists w_1, w_2 \in W$ such that
+			            $v_1 + w_1 = v_2 + w_2$\\
+			            $v_1 - v_2 = w_2 - w_1$\\
+			            Since, $w_2 - w_1 \in W$ (clourse under addition)\\
+			            Therefore, $v_1 - v_2 \in W$
+			            }
+			      \item{
+			            $v_1 - v_2 \in W \Rightarrow v_1 + W = v_2 + W $\\
+			            This means $v_1 - v_2 = w$ where $w \in W \ (*)$\\
+			            Now let $x \in v_1 + W$\\
+			            By definition, $\exists w_x \in W \text{ such that } x = v_1 + w_x$\\
+			            By $(*) \ v_1 = v_2 + w$\\
+			            So, $x = v_2 + w + w_x$\\
+			            Since, $w + w_x \in W$ (closure under addition)\\
+			            We have $x \in v_2 + W$\\
+			            So, $v_1 + W \subseteq v_2 + W$\\
+			            Without loss of generality, we can show $v_2 + W \subseteq v_1 + W$\\
+			            Therefore, $v_1 + W = v_2 + W$
+			            }
+		      \end{enumerate}
+		      Therefore, \(v_{1}+\mathrm{W}=v_{2}+\mathrm{W}\) if and only if \(v_{1}-v_{2} \in \mathrm{W}\)
+	      \end{proof}
+	      }
 
+	\item{
+	      Show that \(\mathrm{V}/\mathrm{W}\) with the operations defined above is a linear vector space.
+	      \begin{enumerate}[label=VS \arabic*:]
+		      \item{
+		            For all $x, y$ in $\mathrm{V}/\mathrm{W}, x+y=y+x$ (commutativity of addition)
+		            \begin{proof}
+			            Let $x = v_x + W, y = v_y + W$ where $v_x,v_y \in V$.
+			            \begin{align*}
+				            x + y & = (v_x + W) + (v_y + W) \\
+				                  & = (v_x + v_y) + W       \\
+				                  & = (v_y + v_x) + W       \\
+				                  & = (v_y + W) + (v_x + W) \\
+				                  & = y + x
+			            \end{align*}
+		            \end{proof}
+		            }
+		      \item{
+		            For all $x, y, z$ in $\mathrm{V}/\mathrm{W},(x+y)+z=x+(y+z)$ (associativity of addition)
+		            \begin{proof}
+			            Let $x = v_x + W, y = v_y + W, z = v_z + W,$ where $v_x,v_y,v_z \in V$.
+			            \begin{align*}
+				            (x + y) + z & = ((v_x + W) + (v_y + W)) + (v_z + W) \\
+				                        & = ((v_x + v_y) + W) + (v_z + W)       \\
+				                        & = (v_y + v_x + v_z) + W               \\
+				                        & = (v_x + W) + ((v_y + v_z) + W)       \\
+				                        & = (v_x + W) + ((v_y + W) + (v_z + W)) \\
+				                        & = x + (y + z)
+			            \end{align*}
+		            \end{proof}
+		            }
+		      \item{
+					There exists an element in $\mathrm{V}/\mathrm{W}$ denoted by 0 such that $x+0=x$ for each $x$ in $\mathrm{V}/\mathrm{W}$
+					\begin{proof}
+						Let $x = v_x + W$ where $v_x \in V$. Let the zero vector in $\mathrm{V}/\mathrm{W}$ be defined
+						as $0 + W$, where $0 \in V$.
+						\begin{align*}
+							x + (0 + W) & = (v_x + W) + (0 + W)\\
+							& = (v_x + 0) + W \\
+							& = v_x + W \\
+							& = x
+						\end{align*}
+					\end{proof}
+		            }
+	      \end{enumerate}
+	      }
+\end{enumerate}
 
+%problem 4
 \section{}
 
 \end{document}
