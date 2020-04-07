@@ -332,7 +332,8 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 		      It is clear that  $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$ because
 		      $\mathbf{b}$ is a linear combination of the second and third column from
 		      $\mathbf{A}$. Hence, this system is consistent. \\
-		      By performing back substitution we compute the generic solution as
+		      By performing back substitution we compute the generic solution
+		      in parametric form as
 		      \[
 			      x = \begin{bmatrix}
 				      \gamma     \\
@@ -426,23 +427,195 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 		            \end{proof}
 		            }
 		      \item{
-					There exists an element in $\mathrm{V}/\mathrm{W}$ denoted by 0 such that $x+0=x$ for each $x$ in $\mathrm{V}/\mathrm{W}$
-					\begin{proof}
-						Let $x = v_x + W$ where $v_x \in V$. Let the zero vector in $\mathrm{V}/\mathrm{W}$ be defined
-						as $0 + W$, where $0 \in V$.
-						\begin{align*}
-							x + (0 + W) & = (v_x + W) + (0 + W)\\
-							& = (v_x + 0) + W \\
-							& = v_x + W \\
-							& = x
-						\end{align*}
-					\end{proof}
+		            There exists an element in $\mathrm{V}/\mathrm{W}$ denoted by $\mathbf{0}$ such that $x+\mathbf{0}=x$ for each $x$ in $\mathrm{V}/\mathrm{W}$
+		            \begin{proof}
+			            Let $x = v_x + W$ where $v_x \in V$. Let $\mathbf{0}$ in $\mathrm{V}/\mathrm{W}$ be defined
+			            as $0 + W$, where $0 \in V$.
+			            \begin{align*}
+				            x + \mathbf{0} & = x + (0 + W)         \\
+				                           & = (v_x + W) + (0 + W) \\
+				                           & = (v_x + 0) + W       \\
+				                           & = v_x + W             \\
+				                           & = x
+			            \end{align*}
+		            \end{proof}
+		            }
+		      \item{
+		            For each element $x$ in $\mathrm{V}/\mathrm{W}$ there exists an element $y$ in $\mathrm{V}/\mathrm{W}$ such that $x+y=\mathbf{0}$
+		            \begin{proof}
+			            Let $x = v_x + W$ where $v_x \in V$. Fix y such that $y = -v_x + W$.
+			            \begin{align*}
+				            x + y & = (v_x + W) + (-v_x + W) \\
+				                  & = (v_x - v_x) + W        \\
+				                  & = 0 + W                  \\
+				                  & = \mathbf{0}
+			            \end{align*}
+		            \end{proof}
+		            }
+		      \item{
+		            For each element $x$ in $\mathrm{V}/\mathrm{W}, 1 x=x$
+		            \begin{proof}
+			            Let $x = v_x + W$ where $v_x \in V$.
+			            \begin{align*}
+				            1x & = 1(v_x + W) \\
+				               & =(1v_x + W)  \\
+				               & = (v_x + W)  \\
+				               & = x
+			            \end{align*}
+		            \end{proof}
+		            }
+		      \item{
+		            For each pair of elements $a, b$ in $\mathbb{F}$ and each element $x$ in $\mathrm{V}/\mathrm{W}$, $(a b) x=a(b x)$
+		            \begin{proof}
+			            Let $x = v_x + W$ where $v_x \in V$.
+			            \begin{align*}
+				            (a b) x & = abv_x + W  \\
+				                    & =a(bv_x + W) \\
+				                    & =a(bx)
+			            \end{align*}
+		            \end{proof}
+		            }
+		      \item{
+		            For each element a in $\mathbb{F}$ and each pair of elements $x, y$ in $\mathrm{V}/\mathrm{W}$, $a(x+y)=a x+a y$
+		            \begin{proof}
+			            Let $x = v_x + W, y = v_y + W$ where $v_x,v_y \in V$.
+			            \begin{align*}
+				            a(x + y) & = a((v_x + v_y) + W)       \\
+				                     & =((av_x + av_y) + W )      \\
+				                     & =(av_x + W ) +  (av_y + W) \\
+				                     & =a(v_x + W ) + a(v_y + W)  \\
+				                     & =ax +ay
+			            \end{align*}
+		            \end{proof}
+		            }
+		      \item{
+		            For each pair of elements $a, b$ in $\mathbb{F}$ and each element $x$ in $\mathrm{V}/\mathrm{W}$, $(a+b) x=a x+b x$
+		            \begin{proof}
+			            Let $x = v_x + W$ where $v_x \in V$.
+			            \begin{align*}
+				            (a + b)x & = (a + b)(v_x + W)         \\
+				                     & = ((a + b)v_x) + W         \\
+				                     & = ((av_x + bv_x) + W       \\
+				                     & = (av_x + W) +  (bv_x + W) \\
+				                     & = a(v_x + W) + b(v_x + W)  \\
+				                     & = ax + bx
+			            \end{align*}
+		            \end{proof}
 		            }
 	      \end{enumerate}
+	      Therefore, $\mathrm{V}/\mathrm{W}$ is a vector space because it holds all the properties above.
+	      }
+
+	\item{
+	      Prove that if $dim(\mathrm{V}) < \infty$ then $dim(\mathrm{V}/\mathrm{W}) = dim(\mathrm{V}) - dim(\mathrm{W})$.
+	      \begin{proof}
+		      We will prove this fact by creating a basis for $\mathrm{V}/\mathrm{W}$ and computing its dimension.
+		      Since $\mathrm{V}$ is a finite dimensional vector space, so $\mathrm{W}$ is also finite dimensional by Theorem 1.11.
+		      Let the dimension of $\mathrm{V}$ and $\mathrm{W}$ be denoted by $k$ and $j$, respectively.
+		      We can construct a basis $\beta_W$ for $\mathrm{W}$, where $\beta_W = \{u_1, u_2, \cdots, u_j\}$.
+		      We can extend $\beta_W$ to be a basis for $\mathrm{V}$ by the corollary of Theorem 1.11.
+		      Let this basis be $\beta_V = \{u_1, u_2, \cdots, u_j, u_{j+1}, u_{j+2}, \cdots , u_{k}\}$.
+		      We claim that the basis for $\mathrm{V}/\mathrm{W}$ is
+		      $\beta_{V/W} = \{u_{j+1} + W, u_{j+2} + W, \cdots , u_{k} + W\}$.
+		      \begin{enumerate}[label=\roman*.]
+			      \item{
+			            $\beta_{V/W}$ is linearly independent
+			            \begin{align*}
+				            \alpha_{j+1}(u_{j+1} + W) + \alpha_{j+2}(u_{j+2} + W) + \cdots + \alpha_{k}(u_{k} + W) & = \mathbf{0} \\
+				            (\alpha_{j+1}u_{j+1} + \alpha_{j+2}u_{j+2} + \cdots + \alpha_{k}u_{k}) + W             & = 0 + W
+			            \end{align*}
+			            This means that $(\alpha_{j+1}u_{j+1} + \alpha_{j+2}u_{j+2} + \cdots + \alpha_{k}u_{k}) = 0 \in V$.
+			            We can rewrite this as $(0u_1 + 0u_2 + \cdots + 0u_j + \alpha_{j+1}u_{j+1} + \alpha_{j+2}u_{j+2} + \cdots + \alpha_{k}u_{k}) = 0$.
+			            Thus, $ \alpha_{j+1} = \alpha_{j+2} = \cdots = \alpha_{k} = 0$ because it is written in terms
+			            of the basis for $V$. So, $\beta_{V/W}$ is linearly independent.
+			            }
+			      \item{
+			            $\beta_{V/W}$ generates $\mathrm{V}/\mathrm{W}$\\\-\\
+			            Let $x = v_x + W$ where $x \in \mathrm{V}/\mathrm{W}, v_x \in V$.
+			            \begin{align*}
+				            x & = v_x + W                                                                                                                            \\
+				              & = (\alpha_1u_1 + \alpha_2u_2 + \cdots + \alpha_ju_j + \alpha_{j+1}u_{j+1} + \alpha_{j+2}u_{j+2} + \cdots + \alpha_{k}u_{k}) + W      \\
+				              & =  ((\alpha_1u_1 + \alpha_2u_2 + \cdots + \alpha_ju_j) + (\alpha_{j+1}u_{j+1} + \alpha_{j+2}u_{j+2} + \cdots + \alpha_{k}u_{k})) + W \\
+				              & = (\alpha_{j+1}u_{j+1} + \alpha_{j+2}u_{j+2} + \cdots + \alpha_{k}u_{k}) + W                                                         \\
+				              & = \alpha_{j+1}(u_{j+1} + W) + \alpha_{j+2}(u_{j+2} + W) + \cdots + \alpha_{k}(u_{k} + W)
+			            \end{align*}
+			            }
+			            Since $\alpha_1u_1 + \alpha_2u_2 + \cdots + \alpha_ju_j \in W$, it can be removed
+			            because of $\mathrm{W}$ (the fourth line). So, $\beta_{V/W}$ generates $\mathrm{V}/\mathrm{W}$.
+		      \end{enumerate}
+		      By definition, $\beta_{V/W}$ is a basis for $\mathrm{V}/\mathrm{W}$.
+		      Therefore,
+		      \begin{align*}
+			      dim(\mathrm{V}/\mathrm{W}) & =  k - j                            \\
+			                                 & = dim(\mathrm{V}) - dim(\mathrm{W})
+		      \end{align*}
+	      \end{proof}
+	      }
+
+	\item{
+	      Let $K = F^n$, define $AK = R(L_A)$, and $A^2K = R(L_{A^2})$.
+	      Show that $AK/A^2K$ is a vector space of dimension $rank(A) - rank(A^2)$.
+	      \begin{proof}
+		      We begin by proving that $AK/A^2K$ is a vector space.\\
+		      $\textbf{Not sure how to do this.}$
+
+		      It follows from part (c) and Theorem 3.5 that
+		      \begin{align*}
+			      dim(AK/A^2K) & = dim(AK) - dim(A^2K))          \\
+			                   & = dim(R(L_A)) - dim(R(L_{A^2})) \\
+			                   & = rank(A) - rank(A^2)
+		      \end{align*}
+	      \end{proof}
+	      }
+	\item{
+	      Show that $A^2K/A^3K$ is a vector space of dimension $rank(A^2) - rank(A^3)$, where $A^3K= R(L_{A^3})$.
+	      \begin{proof}
+		      Using what what we have proved in part (d)
+		      \begin{align*}
+			      dim(A^2K/A^3K) & = dim(A^2K) - dim(A^3K))            \\
+			                     & = dim(R(L_{A^2})) - dim(R(L_{A^3})) \\
+			                     & = rank(A^2) - rank(A^3)
+		      \end{align*}
+	      \end{proof}
+	      }
+	\item{
+	      Define $T: AK/A^2K \rightarrow A^2K/A^3K$, by $T(v) = L_A(v)$, i.e, we left multiply each element of $v$ by the matrix $A$.
+	      Show that $R(T) = A^2K/A^3K$.
+	      \begin{proof}
+		      To show that $R(T) = A^2K/A^3K$, is another way of saying show that $T$ is onto.
+		      We must show that $\forall x \in AK/A^2K [\exists y \in A^2K/A^3K : T(x) = y$].
+		      Let $x = Ak + A^2K$ where $k \in \mathbb{F}^5$.
+		      \begin{align*}
+			      T(x) & = T(Ak + A^2K) \\
+					   & = L_A(Ak + A^2K) \\
+					   & = L_A(Ak) + L_A(A^2K) \\
+					   & = A^2k + A^3K \in A^2K/A^3K
+			  \end{align*}
+			  Therefore, $T$ is onto and $R(T) = A^2K/A^3K$.
+	      \end{proof}
+	      }
+	\item{
+	      Use the rank-nullity theorem on $T$ to conclude that $rank(A^2) - rank(A^3) \leq rank(A) - rank(A^2)$.
+		  \begin{proof}
+			From part (d) and (e)
+			\begin{align*}
+			  rank(T) + nullity(T) & = dim(AK/A^2K) \\
+			  & = rank(A) - rank(A^2) \\
+			  rank(T) & \leq rank(A) - rank(A^2) \\ 
+			  rank(A^2) - rank(A^3) & \leq rank(A) - rank(A^2)
+			\end{align*}
+		  \end{proof}
 	      }
 \end{enumerate}
 
 %problem 4
 \section{}
+Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two linear transformations from $\mathrm{V}$ to itself, such that $T^2= P^2 = 0$, and $T \circ P + P \circ T = I$, where $I$ is the identity in $\mathrm{V}$.
+\begin{enumerate}[label=\alph*.]
+	\item{
+		Denote $N_T = N(T)$ and $N_P = N(P)$, the null spaces of $T$ and $P$, respectively. 
+		Show that $N_P = P(N_T)$, and $N_T = T(N_P)$, where $T(N_P) = \{ T(v): v \in N_P \}$ and $P(N_T) = \{ P(v): v \in N_T \}$.
+	}
+\end{enumerate}
 
 \end{document}
