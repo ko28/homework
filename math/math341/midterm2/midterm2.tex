@@ -581,30 +581,33 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 	\item{
 	      Define $T: AK/A^2K \rightarrow A^2K/A^3K$, by $T(v) = L_A(v)$, i.e, we left multiply each element of $v$ by the matrix $A$.
 	      Show that $R(T) = A^2K/A^3K$.
-	      \begin{proof}
+		  \begin{proof}
+			%DO I NEED TO PROVE THAT T IS A LINEAR TRANSFORMATION?
+			$\textbf{Not sure if i need to show that T is a linear transformation}$\\
 		      To show that $R(T) = A^2K/A^3K$, is another way of saying show that $T$ is onto.
 		      We must show that $\forall x \in AK/A^2K [\exists y \in A^2K/A^3K : T(x) = y$].
 		      Let $x = Ak + A^2K$ where $k \in \mathbb{F}^5$.
 		      \begin{align*}
-			      T(x) & = T(Ak + A^2K) \\
-					   & = L_A(Ak + A^2K) \\
-					   & = L_A(Ak) + L_A(A^2K) \\
-					   & = A^2k + A^3K \in A^2K/A^3K
-			  \end{align*}
-			  Therefore, $T$ is onto and $R(T) = A^2K/A^3K$.
+			      T(x) & = T(Ak + A^2K)              \\
+			           & = L_A(Ak + A^2K)            \\
+			           & = L_A(Ak) + L_A(A^2K)       \\
+			           & = A^2k + A^3K \in A^2K/A^3K
+		      \end{align*}
+		      Therefore, $T$ is onto and $R(T) = A^2K/A^3K$.
 	      \end{proof}
 	      }
 	\item{
+	      %DO I NEED TO PROVE THAT T IS A LINEAR TRANSFORMATION?
 	      Use the rank-nullity theorem on $T$ to conclude that $rank(A^2) - rank(A^3) \leq rank(A) - rank(A^2)$.
-		  \begin{proof}
-			From part (d) and (e)
-			\begin{align*}
-			  rank(T) + nullity(T) & = dim(AK/A^2K) \\
-			  & = rank(A) - rank(A^2) \\
-			  rank(T) & \leq rank(A) - rank(A^2) \\ 
-			  rank(A^2) - rank(A^3) & \leq rank(A) - rank(A^2)
-			\end{align*}
-		  \end{proof}
+	      \begin{proof}
+		      From part (d) and (e)
+		      \begin{align*}
+			      rank(T) + nullity(T)  & = dim(AK/A^2K)           \\
+			                            & = rank(A) - rank(A^2)    \\
+			      rank(T)               & \leq rank(A) - rank(A^2) \\
+			      rank(A^2) - rank(A^3) & \leq rank(A) - rank(A^2)
+		      \end{align*}
+	      \end{proof}
 	      }
 \end{enumerate}
 
@@ -613,9 +616,93 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two linear transformations from $\mathrm{V}$ to itself, such that $T^2= P^2 = 0$, and $T \circ P + P \circ T = I$, where $I$ is the identity in $\mathrm{V}$.
 \begin{enumerate}[label=\alph*.]
 	\item{
-		Denote $N_T = N(T)$ and $N_P = N(P)$, the null spaces of $T$ and $P$, respectively. 
-		Show that $N_P = P(N_T)$, and $N_T = T(N_P)$, where $T(N_P) = \{ T(v): v \in N_P \}$ and $P(N_T) = \{ P(v): v \in N_T \}$.
-	}
+	      Denote $N_T = N(T)$ and $N_P = N(P)$, the null spaces of $T$ and $P$, respectively.
+	      Show that $N_P = P(N_T)$, and $N_T = T(N_P)$, where $T(N_P) = \{ T(v): v \in N_P \}$ and $P(N_T) = \{ P(v): v \in N_T \}$.
+	      \begin{proof}\ $\textbf{Pretty sure this is wrong}$ %TODO: FIX!!!
+		      \begin{enumerate}[label=\roman*.]
+			      \item{
+			            Show $N_P = P(N_T)$\\\-\\
+			            Let $x \in N_P$. By definition, $P(x) = 0$.
+			            \begin{align*}
+				            P \circ T(x) + T \circ P(x) & = x    \\
+				            P \circ T(x) + T(0)         & = x    \\
+				            P \circ T(x)                & = x    \\
+				            T(x)                        & \neq 0 \\
+				            T^2(x)                      & = 0
+			            \end{align*}
+			            Thus $T(x) \in N_T$, so $x \in P(N_T$). So $N_p \subseteq P(N_T)$.\\\-\\
+			            Let $x \in P(N_T)$. This means that $P(x) = 0$ because $P^2 = 0$.\\
+			            So $x \in N_P$ and $ P(N_T)\subseteq N_P$ \\\-\\
+			            Therfore, $N_P = P(N_T)$.
+			            }
+			      \item{
+			            Show $N_T = T(N_P)$
+
+			            }
+		      \end{enumerate}
+		      %$T \circ P + P \circ T = I$
+	      \end{proof}
+	      }
+	\item{
+	      Show that $\mathrm{V} = N_T \oplus N_P$.
+	      \begin{proof}
+		      Need to prove the following two conditions.
+		      \begin{enumerate}[label=\roman*.]
+			      \item{
+			            $N_T \cap N_P = \{0\}$.	 \\\-\\
+			            Let $x \in N_T$ and $x \in N_P$. This means that $T(x) = 0$ and $P(x) = 0$.
+			            \begin{align*}
+				            x & = P \circ T(x) + T \circ P(x) \\
+				              & = P(0) + T(0)                 \\
+				              & = 0
+			            \end{align*}
+			            Thus, $N_T \cap N_P = \{0\}$.\\
+			            }
+			      \item{
+			            $N_T + N_P = \mathrm{V}$.	 \\\-\\
+			            Let $x \in V$. We know that $x = P \circ T(x) + T \circ P(x)$.\\
+			            Notice that $P \circ T(x) \in N_P$ because $P(P \circ T(x)) = 0$.\\
+			            Similarly, $T \circ P(x) \in N_T$ because $T(T \circ P(x)) = 0$.\\
+			            Thus, $N_T + N_P = \mathrm{V}$.
+			            }
+		      \end{enumerate}
+		      Therefore, by definition $\mathrm{V} = N_T \oplus N_P$.
+	      \end{proof}
+	      }
+	\item{
+	      Prove that the dimension of $\mathrm{V}$ is even.
+	      \begin{proof}\
+		      \begin{lemma}
+			      $\mathrm{V} = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)$\
+			      \begin{proof}
+				      1.6.29(b) in the textbook
+			      \end{proof}
+		      \end{lemma}
+		      By the lemma above, $dim(V) = dim(N_T) + dim(N_P)$.\\
+		      Let's construct a basis $\beta_{N_T}$ for $N_T$ and $\beta_{N_P}$ for $N_P$.\\
+		      $\beta_{N_T} = \{u_1, u_2, \cdots, u_m\}$\\
+		      $\beta_{N_P} = \{w_1, w_2, \cdots, w_n\}$\\
+		      From (a), $dim(N_T) = m = dim(P(N_T)) \leq n$ and $dim(N_P) = n = dim(T(N_P)) \leq m$\\
+			 %FIX 
+			  \[\textbf{ not sure if $dim(P(N_T)) \leq n$ holds}\]
+		      Hence, $n = m$. Therefore, $dim(V)$ is even.
+	      \end{proof}
+	      }
+	\item{
+	      Suppose that the dimension of $\mathrm{V}$ is two. Prove that $\mathrm{V}$ has a basis $\beta$, such that
+	      \begin{equation}
+		      [T]_{\beta} = \left [ \begin{array}{cc}
+				      0 & 1 \\
+				      0 & 0
+			      \end{array} \right] \qquad \text{ and } \qquad [P]_{\beta} = \left [ \begin{array}{cc}
+				      0 & 0 \\
+				      1 & 0
+			      \end{array} \right] .
+		  \end{equation}
+		  \begin{proof}
+			  
+		  \end{proof}
+	      }
 \end{enumerate}
 
 \end{document}
