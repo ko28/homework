@@ -93,7 +93,13 @@ Let
 			      \begin{bmatrix}
 				      \frac{de-bf}{ad-cb} \\
 				      \frac{af-ce}{ad-cb}
-			      \end{bmatrix} \quad \text{ where } ad-cb \neq 0
+			      \end{bmatrix} =
+			      \frac{1}{ad-cb}
+			      \begin{bmatrix}
+				      de-bf \\
+				      af-ce
+			      \end{bmatrix}
+			      \text{ where } ad-cb \neq 0
 		      \]
 	      \end{proof}
 	      }
@@ -118,6 +124,14 @@ Let
 					      0 & 1 & \frac{e}{b}
 				      \end{array}\right]
 		      \]
+		      and the solution
+		      \[
+			      x=
+			      \begin{bmatrix}
+				      \frac{bf-de}{bc} \\
+				      \frac{e}{b}
+			      \end{bmatrix} \quad \text{ where } b \neq 0
+		      \]
 	      \end{proof}
 	      }
 	\item{
@@ -140,7 +154,41 @@ Let
 					      0 & 1 & \frac{f}{d}
 				      \end{array}\right]
 		      \]
-		      So the condition of the solution is, $$x_2 = \frac{e}{b} = \frac{f}{d}$$
+		      Having an infinite amount of solutions is by definition another way of saying
+		      that a system that is consistent and that the solutions are not unique.
+
+		      It is clear that det$(\mathbf{A}) = 0$ by multiplying the diagonal entries because it is an
+		      upper triangular matrix. This means that
+		      the solution, if it exists, is not unique by
+		      Theorem 3.10 and the corollary to Theorem 4.7. A system is consistent if and only if
+		      $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$ by Theorem 3.11.
+		      For this condition to hold,
+		      \[
+			      \mathbf{b} \in span(\mathbf{A}) \Leftrightarrow
+			      \begin{pmatrix}
+				      \frac{e}{b} \\
+				      \frac{f}{d} \\
+			      \end{pmatrix}
+			      =
+			      c_1
+			      \begin{pmatrix}
+				      0 \\
+				      0 \\
+			      \end{pmatrix} +
+			      c_2
+			      \begin{pmatrix}
+				      1 \\
+				      1 \\
+			      \end{pmatrix}
+			      \text{ where } c_1,c_2 \in F
+		      \]
+		      So the condition of the solution is,
+		      \begin{align*}
+			      c_2         & = \frac{e}{b}  \\
+			      c_2         & =  \frac{f}{d} \\
+			      \frac{e}{b} & = \frac{f}{d}
+		      \end{align*}
+		      %$$x_2 = \frac{e}{b} = \frac{f}{d}$$
 		      Thus, there exists a infinite amount of solution.
 	      \end{proof}
 	      }
@@ -168,7 +216,8 @@ Let
 			          & = \frac{-20}{-10}                                                            \\
 			          & = 2                                                                          \\
 			          &                                                                              \\
-			      x_2 & = \frac{\sqrt2(5\sqrt2) - 2\sqrt2(5\sqrt2)}{\sqrt2\sqrt2 - 3\sqrt2(2\sqrt2)} \\
+			      x_2 & = \frac{af-ce}{ad-cb}                                                        \\
+			          & = \frac{\sqrt2(5\sqrt2) - 2\sqrt2(5\sqrt2)}{\sqrt2\sqrt2 - 3\sqrt2(2\sqrt2)} \\
 			          & = \frac{10-20}{-10}                                                          \\
 			          & = 1
 		      \end{align*}
@@ -249,7 +298,7 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 					      0 & 0        & 0 & 2\alpha & \alpha     \\
 					      0 & 0        & 0 & 0       & 2\beta - 1
 				      \end{array} \right ] \\
-			      R_1 \leftrightarrow R_2
+			      R_1 \leftrightarrow R_2 \quad (\mathbf{A'}|\mathbf{b'} ) = 
 			      \left [ \begin{array}{cccc|c}
 					      1 & 1        & 0 & 1       & 1          \\
 					      0 & - \alpha & 2 & 0       & 2          \\
@@ -258,8 +307,10 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 					      0 & 0        & 0 & 0       & 2\beta - 1
 				      \end{array} \right ]
 		      \end{align*}
-		      By Theorem 3.11, a system is consistent if and only if $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$.
-		      Thus this system will have no solution if $2\beta - 1 \neq 0$, which is when $\beta \neq \frac12$.
+		      By Theorem 3.11 and 3.13, a system is consistent if and only if $rank(\mathbf{A'}) = rank(\mathbf{A'}|\mathbf{b'})$.
+			  Thus this system will have no solution if $2\beta - 1 \neq 0$ because then $\mathbf{b'} \notin span(\mathbf{A'})$.
+			  
+			 This is when $\beta \neq \frac12$.
 		      We observe that there will be no conditions on $\alpha$.
 		      %show that b \in R(L_A) ?? 
 	      \end{proof}
@@ -290,7 +341,14 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 					      0 & 0        & 0 & 0       & 0
 				      \end{array} \right ]
 		      \]
-		      By performing back substitution we compute the unique solution as
+			  By performing back substitution we compute the unique solution
+			  \begin{align*}
+				2\alpha x_4 = \alpha & \Leftrightarrow x_4 = \frac12 \\
+				2x_3 + x_4 = 2 & \Leftrightarrow x_3 = \frac34   \\
+				-\alpha x_2 + 2x_3 = 2 & \Leftrightarrow x_2  = -\frac{1}{2\alpha}\\
+				x_1 + x_2 + x_4 = 1  & \Leftrightarrow x_ 1 =\frac12 + \frac{1}{2\alpha}
+			\end{align*}
+
 		      \[
 			      x = \begin{bmatrix}
 				      \frac12 + \frac{1}{2\alpha} \\
@@ -299,6 +357,7 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 				      \frac12
 			      \end{bmatrix}
 		      \]
+		      as desired.
 	      \end{proof}
 	      }
 
@@ -322,6 +381,7 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 		      we get the following system,
 
 		      \[
+				(\mathbf{A'}|\mathbf{b'})=
 			      \left [ \begin{array}{cccc|c}
 					      1 & 1 & 0 & 1 & 1 \\
 					      0 & 0 & 2 & 0 & 2 \\
@@ -330,9 +390,10 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 					      0 & 0 & 0 & 0 & 0
 				      \end{array} \right ]
 		      \]
-		      It is clear that  $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$ because
-		      $\mathbf{b}$ is a linear combination of the second and third column from
-		      $\mathbf{A}$. Hence, this system is consistent. \\
+		      It is clear that  $rank(\mathbf{A'}) = rank(\mathbf{A'}|\mathbf{b'})$ because
+		      $\mathbf{b'}$ is a linear combination of the second and third column from
+			  $\mathbf{A'}$. By Theorem 3.13, we know that the solution set for $\mathbf{A'x=b'}$
+			  is equivalent to the solution set for $\mathbf{Ax=b}$. Hence, both systems are consistent. \\
 		      We can compute a solution space to $\mathbf{Ax=b}$ as outlined in Theorem 3.9. We start by first computing the
 		      solution set to $\mathbf{Ax}=0$ denoted by $K_H$. It is clear that $rank(\mathbf{A}) = 3$ because the first two
 		      columns are the same and the rest of the columns are linearly independent from each other.
@@ -581,16 +642,31 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 			            $N(T) = W$
 			            \begin{enumerate}[label=\roman*.]
 				            \item{
-				                  $N(T) \subseteq W$\\
+								  $N(T) \subseteq W$
+								  \begin{lemma}
+									$w_1 + W = w_2 + W$ where $w_1, w_2 \in W$.
+									\begin{proof}\-\\
+										Let $x_1 \in w_1 + W$ and $x_2 \in w_2 + W$\\
+										By definition, $w_1 + W = \{w_1 + w : w \in W\}$.\\
+										We know that $w_1 +w \in W$ because $W$ is a subspace and has closure under addition.
+										Hence, $x_1 \in W$ and similarly $x_2 \in W$. Therefore, $w_1 + W \subseteq W$ and  $w_2 + W \subseteq W$.\\\-\\
+										Now consider $x_1 \in W$ and $x_2 \in W$.\\
+										$x_1 \in w_1 + W$ because $w_1 + w \in W$ by closure under addition\\
+										Similarly, $x_2 \in w_2 + W$.\\
+										Hence, $W \subseteq w_1 + W$ and $W \subseteq w_2 + W$.\\
+
+										Therefore, $w_1 + W = W$ and $W = w_2 + W$ so, $w_1 + W = w_2 + W $. 
+
+									\end{proof}
+								  \end{lemma}
 				                  Let $x \in N(T)$.\\ %By Theorem 2.1, we know that $N(T) \in V$, thus $x \in V$.\\
-				                  By definition,
+				                  By definition of $N(T)$ and using the lemma above,
 				                  \begin{align*}
 					                  T(x) & = \mathbf{0} \\
 					                       & = 0 + W      \\
-					                       & = W          \\
 					                       & = w + W
 				                  \end{align*}
-				                  where $w \in W$ and $\mathbf{0} \in \mathrm{V}/\mathrm{W}$.\\
+				                  where $0, w \in W$ and $\mathbf{0} \in \mathrm{V}/\mathrm{W}$.\\
 				                  This must mean that $x = w$ and since $w \in W$, $x \in W$. Therefore, $N(T) \subseteq W$\\
 				                  }
 				            \item{
@@ -675,7 +751,7 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 		      to prove that $AK/A^2K$ is a vector space, by part (b). It is clear that $AK$ is a subspace because $AK = R(L_A)$
 		      and Theorem 2.3. Moreover, $A^2K \subseteq AK$ because $R(L_{A^2}) \subseteq R(L_A)$. (Theorem 3.7?)
 		      $\textbf{Not sure if }  $$R(L_{A^2}) \subseteq R(L_A)$$ \textbf{ holds }$ \\
-				      Because $A^2K = R(L_{A^2})$, $A^2K$ has the properties of a vector space because of Theorem 2.1.
+		      Because $A^2K = R(L_{A^2})$, $A^2K$ has the properties of a vector space because of Theorem 2.1.
 		      It follows from part (c) that
 		      \begin{align*}
 			      dim(AK/A^2K) & = dim(AK) - dim(A^2K))          \\
@@ -842,8 +918,8 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 		      \begin{lemma}
 			      $\mathrm{V} = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)$\
 			      \begin{proof}
-					  1.6.29(b) in the textbook
-					  $\textbf{Actually remember to type this in}$
+				      1.6.29(b) in the textbook
+				      $\textbf{Actually remember to type this in}$
 			      \end{proof}
 		      \end{lemma}
 		      By the lemma above, $dim(V) = dim(N_T) + dim(N_P)$.\\
@@ -860,7 +936,7 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 		      \begin{align*}
 			      dim(V) & = dim(N_T) + dim(N_P) \\
 			             & = n + m               \\
-			             & = n + n = m + m            \\
+			             & = n + n = m + m       \\
 			             & = 2n = 2m
 		      \end{align*}
 
