@@ -674,8 +674,8 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 		      We begin by proving that $AK/A^2K$ is a vector space. It is enough to show that $A^2K$ is a subspace of $AK$
 		      to prove that $AK/A^2K$ is a vector space, by part (b). It is clear that $AK$ is a subspace because $AK = R(L_A)$
 		      and Theorem 2.3. Moreover, $A^2K \subseteq AK$ because $R(L_{A^2}) \subseteq R(L_A)$. (Theorem 3.7?)
-			  $\textbf{Not sure if }  $$R(L_{A^2}) \subseteq R(L_A)$$ \textbf{ holds }$ \\
-		      Because $A^2K = R(L_{A^2})$, $A^2K$ has the properties of a vector space because of Theorem 2.1.
+		      $\textbf{Not sure if }  $$R(L_{A^2}) \subseteq R(L_A)$$ \textbf{ holds }$ \\
+				      Because $A^2K = R(L_{A^2})$, $A^2K$ has the properties of a vector space because of Theorem 2.1.
 		      It follows from part (c) that
 		      \begin{align*}
 			      dim(AK/A^2K) & = dim(AK) - dim(A^2K))          \\
@@ -724,9 +724,9 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 		      such that $x_1, x_2 \in AK/A^2K$ and $k'_1, k'_2 \in F^n$ and $c \in F$. We use properties of matrices
 		      as outlined in Theorem 2.12.
 		      \begin{align*}
-			      T(ck'_1 + k'_2) & = L_A(ck'_1 + k'_2)                     \\
-			                      & = A(ck'_1 + k'_2)                       \\
-			                      & = A(c(Ak'_1 + A^2K) + (Ak'_2 + A^2K))   \\
+			      T(ck'_1 + k'_2) & = L_A(ck'_1 + k'_2)                    \\
+			                      & = A(ck'_1 + k'_2)                      \\
+			                      & = A(c(Ak'_1 + A^2K) + (Ak'_2 + A^2K))  \\
 			                      & = A(c(Ak'_1 + A^2K)) + A(Ak'_2 + A^2K) \\
 			                      & = c(A(Ak'_1 + A^2K)) + A(Ak'_2 + A^2K) \\
 			                      & = cL_A(k'_1)+ L_A(k'_2)                \\
@@ -751,29 +751,51 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 	\item{
 	      Denote $N_T = N(T)$ and $N_P = N(P)$, the null spaces of $T$ and $P$, respectively.
 	      Show that $N_P = P(N_T)$, and $N_T = T(N_P)$, where $T(N_P) = \{ T(v): v \in N_P \}$ and $P(N_T) = \{ P(v): v \in N_T \}$.
-	      \begin{proof}\ $\textbf{Pretty sure this is wrong}$ %TODO: FIX!!!
+	      \begin{proof}\
 		      \begin{enumerate}[label=\roman*.]
 			      \item{
-			            Show $N_P = P(N_T)$\\\-\\
-			            Let $x \in N_P$. By definition, $P(x) = 0$.
-			            \begin{align*}
-				            P \circ T(x) + T \circ P(x) & = x    \\
-				            P \circ T(x) + T(0)         & = x    \\
-				            P \circ T(x)                & = x    \\
-				            T(x)                        & \neq 0 \\
-				            T^2(x)                      & = 0
-			            \end{align*}
-			            Thus $T(x) \in N_T$, so $x \in P(N_T$). So $N_p \subseteq P(N_T)$.\\\-\\
-			            Let $x \in P(N_T)$. This means that $P(x) = 0$ because $P^2 = 0$.\\
-			            So $x \in N_P$ and $ P(N_T)\subseteq N_P$ \\\-\\
+			            Show $N_P = P(N_T)$
+			            \begin{enumerate}[label=\arabic*.]
+				            \item{
+				                  $N_P \subseteq P(N_T)$\\
+				                  Let $x \in N_P$. By definition, $P(x) = 0$.
+				                  \begin{align*}
+					                  P \circ T(x) + T \circ P(x) & = x \\
+					                  P \circ T(x) + T(0)         & = x \\
+					                  P \circ T(x)                & = x
+				                  \end{align*}
+				                  Notice that $T(x) \in N_T$, so $x \in P(N_T)$. Thus, $N_p \subseteq P(N_T)$.
+				                  }
+				            \item{
+				                  $P(N_T) \subseteq N_P $\\
+				                  Let $P(x) \in P(N_T)$ where $x \in N_T$.\\
+				                  $P \circ P(x) = 0$ so $P(x) \in N_P$. Thus, $P(N_T) \subseteq N_P$.
+				                  }
+			            \end{enumerate}
 			            Therfore, $N_P = P(N_T)$.
 			            }
 			      \item{
 			            Show $N_T = T(N_P)$
-
+			            \begin{enumerate}[label=\arabic*.]
+				            \item{
+				                  $N_T  \subseteq T(N_P)$\\
+				                  Let $x \in N_T$. By definition, $T(x) = 0$.
+				                  \begin{align*}
+					                  P \circ T(x) + T \circ P(x) & = x \\
+					                  P(0) + T \circ P(x)         & = x \\
+					                  T \circ P(x)                & = x
+				                  \end{align*}
+				                  Notice that $P(x) \in N_P$, so $x \in T(N_P)$. Thus, $N_T  \subseteq T(N_P)$.
+				                  }
+				            \item{
+				                  $T(N_P) \subseteq N_T$\\
+				                  Let $T(x) \in T(N_P)$ where $x \in N_P$.\\
+				                  $T \circ T(x) = 0$ so $T(x) \in N_T$. Thus, $T(N_P) \subseteq N_T$.
+				                  }
+			            \end{enumerate}
+			            Therfore, $N_P = P(N_T)$.
 			            }
 		      \end{enumerate}
-		      %$T \circ P + P \circ T = I$
 	      \end{proof}
 	      }
 	\item{
@@ -792,11 +814,23 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 			            Thus, $N_T \cap N_P = \{0\}$.\\
 			            }
 			      \item{
-			            $N_T + N_P = \mathrm{V}$.	 \\\-\\
-			            Let $x \in V$. We know that $x = P \circ T(x) + T \circ P(x)$.\\
-			            Notice that $P \circ T(x) \in N_P$ because $P(P \circ T(x)) = 0$.\\
-			            Similarly, $T \circ P(x) \in N_T$ because $T(T \circ P(x)) = 0$.\\
-			            Thus, $N_T + N_P = \mathrm{V}$.
+			            $N_T + N_P = \mathrm{V}$.
+			            \begin{enumerate}[label=\arabic*.]
+				            \item{
+				                  $N_T + N_P \subseteq \mathrm{V}$\\
+				                  Let $x \in N_T + N_P$. Define $x = n_t + n_p$ where $n_t \in N_T \subseteq \mathrm{V}$ and $n_p \in N_P \subseteq \mathrm{V}$
+				                  by Theorem 2.11. Since $\mathrm{V}$ is a vector space $n_t + n_p \in V$ by closure under addition.\\
+				                  Thus, $ x \in \mathrm{V}$ and it follows that $N_T + N_P \subseteq \mathrm{V}$.
+				                  }
+				            \item{
+				                  $\mathrm{V} \subseteq N_T + N_P $\\
+				                  Let $x \in V$. We know that $x = P \circ T(x) + T \circ P(x)$.\\
+				                  Notice that $P \circ T(x) \in N_P$ because $P(P \circ T(x)) = 0$.\\
+				                  Similarly, $T \circ P(x) \in N_T$ because $T(T \circ P(x)) = 0$.\\
+				                  Thus, $N_T + N_P \subseteq \mathrm{V}$.
+				                  }
+			            \end{enumerate}
+			            Therefore, $N_T + N_P = \mathrm{V}$.
 			            }
 		      \end{enumerate}
 		      Therefore, by definition $\mathrm{V} = N_T \oplus N_P$.
@@ -808,17 +842,29 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 		      \begin{lemma}
 			      $\mathrm{V} = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)$\
 			      \begin{proof}
-				      1.6.29(b) in the textbook
+					  1.6.29(b) in the textbook
+					  $\textbf{Actually remember to type this in}$
 			      \end{proof}
 		      \end{lemma}
 		      By the lemma above, $dim(V) = dim(N_T) + dim(N_P)$.\\
 		      Let's construct a basis $\beta_{N_T}$ for $N_T$ and $\beta_{N_P}$ for $N_P$.\\
 		      $\beta_{N_T} = \{u_1, u_2, \cdots, u_m\}$\\
 		      $\beta_{N_P} = \{w_1, w_2, \cdots, w_n\}$\\
-		      From (a), $dim(N_T) = m = dim(P(N_T)) \leq n$ and $dim(N_P) = n = dim(T(N_P)) \leq m$\\
+		      From (a), since $N_T = T(N_P)$, this must mean that $$span(\beta_{N_T}) = T(span(\beta_{N_P})) $$ %\subseteq span(\beta_{N_P})
+		      Thus, $dim(N_P) \leq dim(N_T)$ because  $dim(T(N_P)) \leq dim(N_P)$.\\
+		      Likewise, since $N_P = P(N_T)$, this must mean that $$span(\beta_{N_P}) = P(span(\beta_{N_T})) $$ %\subseteq span(\beta_{N_P})
+		      Thus, $dim(N_T) \leq dim(N_P)$ because  $dim(P(N_T)) \leq dim(N_T)$.\\\-\\
+		      % $dim(N_T) = m = dim(T(N_P)) \leq n$ and $dim(N_P) = n = dim(P(N_T)) \leq m$\\
 		      %FIX 
-		      \[\textbf{ not sure if $dim(P(N_T)) \leq n$ holds}\]
-		      Hence, $n = m$. Therefore, $dim(V)$ is even.
+		      Thus, $dim(N_P) = dim(N_T) = n = m$.
+		      \begin{align*}
+			      dim(V) & = dim(N_T) + dim(N_P) \\
+			             & = n + m               \\
+			             & = n + n = m + m            \\
+			             & = 2n = 2m
+		      \end{align*}
+
+		      Therefore, $dim(V)$ is even.
 	      \end{proof}
 	      }
 	\item{
