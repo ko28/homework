@@ -258,8 +258,9 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 					      0 & 0        & 0 & 0       & 2\beta - 1
 				      \end{array} \right ]
 		      \end{align*}
+		      By Theorem 3.11, a system is consistent if and only if $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$.
 		      Thus this system will have no solution if $2\beta - 1 \neq 0$, which is when $\beta \neq \frac12$.
-		      expain more...
+		      We observe that there will be no conditions on $\alpha$.
 		      %show that b \in R(L_A) ?? 
 	      \end{proof}
 	      }
@@ -289,7 +290,7 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 					      0 & 0        & 0 & 0       & 0
 				      \end{array} \right ]
 		      \]
-		      By performing back substitution we compute the generic solution as
+		      By performing back substitution we compute the unique solution as
 		      \[
 			      x = \begin{bmatrix}
 				      \frac12 + \frac{1}{2\alpha} \\
@@ -332,17 +333,58 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 		      It is clear that  $rank(\mathbf{A}) = rank(\mathbf{A}|\mathbf{b})$ because
 		      $\mathbf{b}$ is a linear combination of the second and third column from
 		      $\mathbf{A}$. Hence, this system is consistent. \\
-		      By performing back substitution we compute the generic solution
-		      in parametric form as
-		      \[
-			      x = \begin{bmatrix}
-				      \gamma     \\
-				      1 - \gamma \\
-				      1          \\
+		      We can compute a solution space to $\mathbf{Ax=b}$ as outlined in Theorem 3.9. We start by first computing the
+		      solution set to $\mathbf{Ax}=0$ denoted by $K_H$. It is clear that $rank(\mathbf{A}) = 3$ because the first two
+		      columns are the same and the rest of the columns are linearly independent from each other.
+		      By Theorem 3.8, $dim(K_H) = 4 - 3 = 1$. Thus any nonzero solution constitutes a basis for K. For example, since
+		      $$
+			      \begin{pmatrix}
+				      1  \\
+				      -1 \\
+				      0  \\
 				      0
-			      \end{bmatrix}
+			      \end{pmatrix}
+		      $$
+		      is a solution to the $\mathbf{Ax}=0$, it is a basis for $K_H$ by Corollary 2 of Theorem 1.10.
+		      So a solution set to $K_H$ would be
+		      \[
+			      K_H=
+			      \left\{
+			      t\begin{pmatrix}
+				      1  \\
+				      -1 \\
+				      0  \\
+				      0
+			      \end{pmatrix}: t \in \mathbb{R}
+			      \right\}
 		      \]
-		      where $\gamma \in \mathbb{R}$.
+		      A solution to $\mathbf{Ax=b}$ is
+		      $$
+			      \begin{pmatrix}
+				      1 \\
+				      0 \\
+				      1 \\
+				      0
+			      \end{pmatrix}
+		      $$
+		      Therefore, by Theorem 3.9 we compute solution space when this system has infinite amount of solutions, which is when $\alpha = 0$ and $\beta = \frac12$ as
+		      \[
+			      K=
+			      \left\{
+			      \begin{pmatrix}
+				      1 \\
+				      0 \\
+				      1 \\
+				      0
+			      \end{pmatrix}+
+			      t\begin{pmatrix}
+				      1  \\
+				      -1 \\
+				      0  \\
+				      0
+			      \end{pmatrix}: t \in \mathbb{R}
+			      \right\}
+		      \]
 	      \end{proof}
 	      }
 \end{enumerate}
@@ -508,7 +550,79 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 
 	\item{
 	      Prove that if $dim(\mathrm{V}) < \infty$ then $dim(\mathrm{V}/\mathrm{W}) = dim(\mathrm{V}) - dim(\mathrm{W})$.
-	      \begin{proof}
+	      (Hint: Define a linear map $T:\mathrm{V} \rightarrow \mathrm{V}/\mathrm{W}$ such that the range of $T$ is $\mathrm{V}/\mathrm{W}$, and then use the rank-nullity theorem)
+	      \begin{proof}We define the linear map $T:\mathrm{V} \rightarrow \mathrm{V}/\mathrm{W}$ by \[T(v) = v + W\]
+		      We first prove that $T$ is in fact linear, where $v_1,v_2 \in V$ and $c \in F$.
+		      \begin{align*}
+			      T(cv_1 + v_2) & = (cv_1 + v_2) + W         \\
+			                    & =  (cv_1 + W)+ ((v_2) + W) \\
+			                    & =  c(v_1 + W)+ ((v_2) + W) \\
+			                    & =  cT(v_1)+ T(v_2)
+		      \end{align*}
+		      We claim that $N(T) = W$ and $R(T) = \mathrm{V}/\mathrm{W}$
+		      \begin{enumerate}[label=\arabic*.]
+			      \item{
+			            $R(T) = \mathrm{V}/\mathrm{W}$
+			            \begin{enumerate}[label=\roman*.]
+				            \item{
+				                  $R(T) \subseteq \mathrm{V}/\mathrm{W}$\\
+				                  By Theorem 2.1\\
+				                  }
+				            \item{
+				                  $\mathrm{V}/\mathrm{W} \subseteq R(T)$\\
+				                  Let $y = v_y + W$ where $y \in \mathrm{V}/\mathrm{W}$ and $v_y \in V$.\\
+				                  For prove that $y \in N(T)$ we need to show that  $\exists x$ such that $ T(x) = y$.\\
+				                  Notice that $x = v_y$. Therfore, $y \in R(T)$ so $\mathrm{V}/\mathrm{W} \subseteq R(T)$.
+
+				                  }
+			            \end{enumerate}
+			            }
+			      \item{
+			            $N(T) = W$
+			            \begin{enumerate}[label=\roman*.]
+				            \item{
+				                  $N(T) \subseteq W$\\
+				                  Let $x \in N(T)$.\\ %By Theorem 2.1, we know that $N(T) \in V$, thus $x \in V$.\\
+				                  By definition,
+				                  \begin{align*}
+					                  T(x) & = \mathbf{0} \\
+					                       & = 0 + W      \\
+					                       & = W          \\
+					                       & = w + W
+				                  \end{align*}
+				                  where $w \in W$ and $\mathbf{0} \in \mathrm{V}/\mathrm{W}$.\\
+				                  This must mean that $x = w$ and since $w \in W$, $x \in W$. Therefore, $N(T) \subseteq W$\\
+				                  }
+				            \item{
+				                  $W \subseteq N(T)$\\
+				                  Let $w \in W$.
+				                  \begin{align*}
+					                  T(w) & = w + W      \\
+					                       & = W          \\
+					                       & = 0 + W      \\
+					                       & = \mathbf{0}
+				                  \end{align*}
+				                  }
+				                  So $w \in N(T)$. Therefore, $W \subseteq N(T)$.
+			            \end{enumerate}
+			            }
+		      \end{enumerate}
+		      Notice that $\mathrm{V}/\mathrm{W} \subseteq \mathrm{V}$
+		      so $\mathrm{V}/\mathrm{W}$ is finite dimensional.
+		      Since $T$ is a linear map and that $\mathrm{V}$ and $\mathrm{V}/\mathrm{W}$ are indeed finite dimensional vector spaces
+		      (by part b) we can use the rank-nullity theorem (Theorem 2.3).
+		      \begin{align*}
+			      dim(N(T)) + dim(R(T))               & =   dim(V)        \\
+			      dim(W) + dim(\mathrm{V}/\mathrm{W}) & = dim(V)          \\
+			      dim(\mathrm{V}/\mathrm{W})          & = dim(V) - dim(W)
+		      \end{align*}
+		      as desired.
+	      \end{proof}
+	      }
+
+	      \iffalse
+		      Alternate solution that might work but not using the hint.
+
 		      We will prove this fact by creating a basis for $\mathrm{V}/\mathrm{W}$ and computing its dimension.
 		      Since $\mathrm{V}$ is a finite dimensional vector space, so $\mathrm{W}$ is also finite dimensional by Theorem 1.11.
 		      Let the dimension of $\mathrm{V}$ and $\mathrm{W}$ be denoted by $k$ and $j$, respectively.
@@ -549,49 +663,55 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 			      dim(\mathrm{V}/\mathrm{W}) & =  k - j                            \\
 			                                 & = dim(\mathrm{V}) - dim(\mathrm{W})
 		      \end{align*}
-	      \end{proof}
-	      }
+	      \fi
+
+
 
 	\item{
 	      Let $K = F^n$, define $AK = R(L_A)$, and $A^2K = R(L_{A^2})$.
 	      Show that $AK/A^2K$ is a vector space of dimension $rank(A) - rank(A^2)$.
 	      \begin{proof}
-		      We begin by proving that $AK/A^2K$ is a vector space.\\
-		      $\textbf{Not sure how to do this.}$
-
-		      It follows from part (c) and Theorem 3.5 that
+		      We begin by proving that $AK/A^2K$ is a vector space. It is enough to show that $A^2K$ is a subspace of $AK$
+		      to prove that $AK/A^2K$ is a vector space, by part (b). It is clear that $AK$ is a subspace because $AK = R(L_A)$
+		      and Theorem 2.3. Moreover, $A^2K \subseteq AK$ because $R(L_{A^2}) \subseteq R(L_A)$. (Theorem 3.7?)
+			  $\textbf{Not sure if }  $$R(L_{A^2}) \subseteq R(L_A)$$ \textbf{ holds }$ \\
+		      Because $A^2K = R(L_{A^2})$, $A^2K$ has the properties of a vector space because of Theorem 2.1.
+		      It follows from part (c) that
 		      \begin{align*}
 			      dim(AK/A^2K) & = dim(AK) - dim(A^2K))          \\
 			                   & = dim(R(L_A)) - dim(R(L_{A^2})) \\
 			                   & = rank(A) - rank(A^2)
 		      \end{align*}
+		      as desired.
 	      \end{proof}
 	      }
 	\item{
 	      Show that $A^2K/A^3K$ is a vector space of dimension $rank(A^2) - rank(A^3)$, where $A^3K= R(L_{A^3})$.
 	      \begin{proof}
-		      Using what what we have proved in part (d)
+		      Similiar to what we did in part (d), we can prove that $A^2K/A^3K$ is a vector space.
+		      Then it follows that,
 		      \begin{align*}
 			      dim(A^2K/A^3K) & = dim(A^2K) - dim(A^3K))            \\
 			                     & = dim(R(L_{A^2})) - dim(R(L_{A^3})) \\
 			                     & = rank(A^2) - rank(A^3)
 		      \end{align*}
+		      as desired.
 	      \end{proof}
 	      }
 	\item{
 	      Define $T: AK/A^2K \rightarrow A^2K/A^3K$, by $T(v) = L_A(v)$, i.e, we left multiply each element of $v$ by the matrix $A$.
 	      Show that $R(T) = A^2K/A^3K$.
-		  \begin{proof}
-			%DO I NEED TO PROVE THAT T IS A LINEAR TRANSFORMATION?
-			$\textbf{Not sure if i need to show that T is a linear transformation}$\\
+	      \begin{proof}
+		      %DO I NEED TO PROVE THAT T IS A LINEAR TRANSFORMATION?
+
 		      To show that $R(T) = A^2K/A^3K$, is another way of saying show that $T$ is onto.
 		      We must show that $\forall x \in AK/A^2K [\exists y \in A^2K/A^3K : T(x) = y$].
-		      Let $x = Ak + A^2K$ where $k \in \mathbb{F}^5$.
+		      Let $x = Ak' + A^2K$ where $k' \in \mathbb{F}^n$.
 		      \begin{align*}
-			      T(x) & = T(Ak + A^2K)              \\
-			           & = L_A(Ak + A^2K)            \\
-			           & = L_A(Ak) + L_A(A^2K)       \\
-			           & = A^2k + A^3K \in A^2K/A^3K
+			      T(x) & = T(Ak' + A^2K)              \\
+			           & = L_A(Ak' + A^2K)            \\
+			           & = L_A(Ak') + L_A(A^2K)       \\
+			           & = A^2k' + A^3K \in A^2K/A^3K
 		      \end{align*}
 		      Therefore, $T$ is onto and $R(T) = A^2K/A^3K$.
 	      \end{proof}
@@ -600,13 +720,26 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 	      %DO I NEED TO PROVE THAT T IS A LINEAR TRANSFORMATION?
 	      Use the rank-nullity theorem on $T$ to conclude that $rank(A^2) - rank(A^3) \leq rank(A) - rank(A^2)$.
 	      \begin{proof}
-		      From part (d) and (e)
+		      We begin by proving that T is linear. We define $x_1 = Ak'_1 + A^2K$ and $x_2 = Ak'_2 + A^2K$
+		      such that $x_1, x_2 \in AK/A^2K$ and $k'_1, k'_2 \in F^n$ and $c \in F$. We use properties of matrices
+		      as outlined in Theorem 2.12.
+		      \begin{align*}
+			      T(ck'_1 + k'_2) & = L_A(ck'_1 + k'_2)                     \\
+			                      & = A(ck'_1 + k'_2)                       \\
+			                      & = A(c(Ak'_1 + A^2K) + (Ak'_2 + A^2K))   \\
+			                      & = A(c(Ak'_1 + A^2K)) + A(Ak'_2 + A^2K) \\
+			                      & = c(A(Ak'_1 + A^2K)) + A(Ak'_2 + A^2K) \\
+			                      & = cL_A(k'_1)+ L_A(k'_2)                \\
+			                      & = cT(k'_1)+ T(k'_2)
+		      \end{align*}
+		      Since T is linear, we can use rank nullity theorem. From part (d), (e), (f), and assuming that $nullity(T) \geq 0$ because the number of elements of a set cannot be negative
 		      \begin{align*}
 			      rank(T) + nullity(T)  & = dim(AK/A^2K)           \\
 			                            & = rank(A) - rank(A^2)    \\
 			      rank(T)               & \leq rank(A) - rank(A^2) \\
 			      rank(A^2) - rank(A^3) & \leq rank(A) - rank(A^2)
 		      \end{align*}
+		      as desired.
 	      \end{proof}
 	      }
 \end{enumerate}
@@ -683,8 +816,8 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 		      $\beta_{N_T} = \{u_1, u_2, \cdots, u_m\}$\\
 		      $\beta_{N_P} = \{w_1, w_2, \cdots, w_n\}$\\
 		      From (a), $dim(N_T) = m = dim(P(N_T)) \leq n$ and $dim(N_P) = n = dim(T(N_P)) \leq m$\\
-			 %FIX 
-			  \[\textbf{ not sure if $dim(P(N_T)) \leq n$ holds}\]
+		      %FIX 
+		      \[\textbf{ not sure if $dim(P(N_T)) \leq n$ holds}\]
 		      Hence, $n = m$. Therefore, $dim(V)$ is even.
 	      \end{proof}
 	      }
@@ -698,10 +831,10 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 				      0 & 0 \\
 				      1 & 0
 			      \end{array} \right] .
-		  \end{equation}
-		  \begin{proof}
-			  
-		  \end{proof}
+	      \end{equation}
+	      \begin{proof}
+
+	      \end{proof}
 	      }
 \end{enumerate}
 
