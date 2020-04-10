@@ -1,0 +1,80 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+\usepackage{algorithmic}
+
+\makeatletter
+\newenvironment{Dequation}
+{%
+	\def\tagform@##1{%
+	\maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+	\ignorespaces
+}
+{%
+	\def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+	\ignorespacesafterend
+}
+\makeatother
+
+\title{Math 240: Midterm 2 Q6d}
+\author{Daniel Ko}
+\date{Spring 2020}
+\begin{document}
+\maketitle
+
+Given positive integers $a$ and $b$, we want to compute some integers $s$ and $t$ such that
+\[\operatorname{gcd}(a, b)=s a+t b\]
+Consider the following iterative program LIN\_COMB $(a, b)$ which is supposed to accomplish this:\\
+\hspace*{10mm}Initialize variables $c=a, d=b, s_{0}=1, t_{0}=0, s_{1}=0, t_{1}=1$\\
+\hspace*{10mm}While $c \neq d,$ do the following:\\
+\hspace*{20mm}If $c<d,$ then decrement $d$ by $c,$ decrement $s_{1}$ by $s_{0},$ decrement $t_{1}$ by $t_{0}$\\
+\hspace*{20mm}Else if $c>d,$ then decrement $c$ by $d,$ decrement $s_{0}$ by $s_{1},$ decrement $t_{0}$ by $t_{1}$\\
+\hspace*{10mm}Return $s_{0}$ and $t_{0}$\\
+
+\section{6d}
+Use the well-ordering principle and (c) to prove that LIN\_COMB satisfies
+termination.
+\begin{proof}
+	We prove that LIN\_COMB terminates. Let $c_n$ and $d_n$ represent the values of $c$ and $d$ after $n$ iterations
+	respectively. Consider the following two cases
+	\begin{enumerate}[label=\arabic*.]
+		\item{
+		      $a = b$\\
+		      \hspace*{10mm}The algorithm terminates because $a = b = c = d$.
+		      }
+		\item{
+		      $a \neq b$\\
+		      \hspace*{10mm}Let $c_n$ and $d_n$ represent the values of $c$ and $d$ after $n$ iterations
+		      respectively. Suppose at the $n$th iteration, $c_n \neq d_n$.
+		      Regardless of the values of $c_n$ and $d_n$, we can observe that $c_{n+1} + d_{n+1} \leq c_n + d_n - 1$.
+		      This is because of the following statements. If $c_n > d_n$, then $c_{n+1} = c_n - d_n$.
+		      If $c_n < d_n$, then $d_{n+1} = d_n - c_n$.
+		      In (c) we have proved that $(c > 0) \land (d > 0)$ is a loop invariant.
+		      This necessarily implies that $c_{n+1} \leq c_n - 1$ or $d_{n+1} \leq d_n - 1$. So in either case,
+		      the sum of $c_{n+1}$ and $d_{n+1}$ will be at least one less the sum of $c_n$ and $d_n$.\\
+			  \hspace*{10mm}By the well ordering
+			  principle, since $c_n + d_n$ is strictly decreasing, there be an iteration $s$ such that 
+			  $c_s + d_s$ is the smallest sum which is bounded by $(c > 0) \land (d > 0)$. 
+			  When this is the case, $c_s = d_s$ because if $c_s \neq d_s$,
+			  then you can once again decrement $c$ by $d_s$ or $d$ by $c_s$ and this will lead to a contradiction.
+			  Thus, the algorithm terminates if $a \neq b$.
+		      }
+	\end{enumerate}
+	Therefore, LIN\_COMB satisfies termination.
+
+\end{proof}
+
+
+
+\end{document}

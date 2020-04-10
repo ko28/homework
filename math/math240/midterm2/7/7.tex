@@ -1,0 +1,85 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+\usepackage{algorithmic}
+
+\makeatletter
+\newenvironment{Dequation}
+{%
+	\def\tagform@##1{%
+	\maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+	\ignorespaces
+}
+{%
+	\def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+	\ignorespacesafterend
+}
+\makeatother
+
+\title{Math 240: Midterm 2 Q7}
+\author{Daniel Ko}
+\date{Spring 2020}
+\begin{document}
+\maketitle
+
+
+
+
+\section{7}
+Given $a, b \in \mathbb{N},$ we want to compute $a \cdot b$.\\
+Consider the following recursive algorithm $PROD(a, b)$ :\\
+\hspace*{10mm}If $b=0,$ return 0\\
+\hspace*{10mm}If $b$ is odd, return $PROD(a, b-1)+a$\\
+\hspace*{10mm}If $b>0$ and $b$ is even, return $PROD(a, b / 2) + PROD(a, b / 2)$\\
+Prove that $PROD$ is correct.
+\begin{proof}
+	Fix a nonzero integer $a$. We prove by strong induction on
+	$b \in \mathbb{N}$ that $PROD(a, b)$ halts and returns $a \cdot b$.
+	Suppose that $PROD(a, s)$ holds for all $s < b$. We prove that $POW(a, b)$ holds.
+	\begin{enumerate}[i.]
+		\item{
+		      Case 1: $b = 0$ (base case)\\
+		      If $b = 0$, then $PROD(a,0)$ halts and returns $0 = a \cdot 0$ as desired.
+		      }
+		\item{
+		      Case 2: $b$ is odd\\
+		      If $b$ is odd, $PROD(a,b)$ halts and returns $PROD(a, b-1)+a$. Since $ b-1 < b$,\\
+		      $PROD(a, b-1)$ halts and returns $a \cdot (b-1)$ by our strong induction hypothesis.
+		      \begin{align*}
+			      PROD(a,b) & = PROD(a, b-1)+a     \\
+			                & = a \cdot (b-1)  + a \\
+			                & = ab- a  + a         \\
+			                & = ab
+		      \end{align*}
+		      as desired.
+		      }
+		\item{
+		      Case 3: $b > 0$ and is even\\
+		      If $b > 0$ and is even, $PROD(a,b)$ halts and returns $PROD(a, b / 2) + PROD(a, b / 2)$.
+		      Since $ b/2 < b$,
+		      $PROD(a, b / 2)$ halts and returns $a \cdot (b/2)$ by our strong induction hypothesis.
+		      \begin{align*}
+			      PROD(a,b) & = PROD(a, b / 2) + PROD(a, b / 2) \\
+			                & = a \cdot (b/2) + a \cdot (b/2)   \\
+			                & = \frac{ab}{2}   + \frac{ab}{2}   \\
+			                & = ab
+			  \end{align*}
+			  as desired. 
+			  This proves the inductive step. By induction, we conclude that for all $a,b \in  \mathbb{N}$ 
+			  $PROD(a, b)$ halts and returns $a \cdot b$. Therefore, $PROD$ is correct.
+		      }
+	\end{enumerate}
+\end{proof}
+
+\end{document}
