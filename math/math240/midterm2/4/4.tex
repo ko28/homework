@@ -1,0 +1,66 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+
+\makeatletter
+\newenvironment{Dequation}
+{%
+	\def\tagform@##1{%
+	\maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+	\ignorespaces
+}
+{%
+	\def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+	\ignorespacesafterend
+}
+\makeatother
+
+\title{Math 240: Midterm 2 Q4}
+\author{Daniel Ko}
+\date{Spring 2020}
+
+\begin{document}
+\maketitle
+
+\section{a}
+Prove that $2x^3 + 3x$ is $O(x^4)$.
+\begin{proof}
+	We need to choose $C, k > 0$ such that for all $x > k$, $2x^3 + 3x \leq Cx^4$.\\
+	Choose $C = 5$ and $k = 1$. Then for all $x > 1$,
+	\begin{align*}
+		5x^4 & = 2x^4 + 3x^4         \\
+		     & > 2x^3 + 3x^4 & x > 1 \\
+		     & > 2x^3 + 3x   & x^3 > 1
+	\end{align*}
+	as desired
+\end{proof}
+
+
+\section{b}
+Prove that $x^4 + 3x$ is not $O(2x^3 + 3x)$.
+\begin{proof}
+	Given $C, k > 0$, we need to choose $x > k$ such that $x^4 + 3x > C \cdot (2x^3 + 3x)$.\\
+	Choose $x = max\{5C, k\} + 1$. Then $x > k$ and
+	\begin{align*}
+		x^4 + 3x & > 5Cx^3 & x > 5C  \text{ and } x > 0\\
+		& = 2Cx^3 + 3Cx^3 \\ 
+		& > 2Cx^3 + 3Cx & x > 0 \text{ and } C > 0\\
+		& = C \cdot (2x^3 + 3x)
+	\end{align*}
+	as desired.
+\end{proof}
+
+
+
+\end{document}
