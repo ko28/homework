@@ -1,0 +1,101 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+\usepackage{algorithmic}
+
+\makeatletter
+\newenvironment{Dequation}
+{%
+	\def\tagform@##1{%
+	\maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+	\ignorespaces
+}
+{%
+	\def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+	\ignorespacesafterend
+}
+\makeatother
+
+\title{Math 240: Midterm 2 Q6bc}
+\author{Daniel Ko}
+\date{Spring 2020}
+\begin{document}
+\maketitle
+
+Given positive integers $a$ and $b$, we want to compute some integers $s$ and $t$ such that
+\[\operatorname{gcd}(a, b)=s a+t b\]
+Consider the following iterative program LIN\_COMB $(a, b)$ which is supposed to accomplish this:\\
+\hspace*{10mm}Initialize variables $c=a, d=b, s_{0}=1, t_{0}=0, s_{1}=0, t_{1}=1$\\
+\hspace*{10mm}While $c \neq d,$ do the following:\\
+\hspace*{20mm}If $c<d,$ then decrement $d$ by $c,$ decrement $s_{1}$ by $s_{0},$ decrement $t_{1}$ by $t_{0}$\\
+\hspace*{20mm}Else if $c>d,$ then decrement $c$ by $d,$ decrement $s_{0}$ by $s_{1},$ decrement $t_{0}$ by $t_{1}$\\
+\hspace*{10mm}Return $s_{0}$ and $t_{0}$\\
+
+\section{6b}
+Assume, in addition to (a), that $gcd(a, b) = gcd(c, d)$ is a loop invariant for
+the while loop in LIN\_COMB. Prove that LIN\_COMB satisfies partial correctness.
+\begin{proof}
+	Suppose that LIN\_COMB halts. 
+	Fix $n \in \mathbb{N}$ such that exactly $n$ iterations of the while loop are executed.
+	Consider the values of $c, d, s_{0}, t_{0}$ after the $n$th iteration.  
+	Since the $(n + 1)$th iteration is not executed, the loop condition fails, which means $c = d$. 
+	This must mean that $gcd(c, d) = c = d$. Moreover, $gcd(a, b) = c$ by the given loop invariant.
+	From (a), we know $(c=s_{0} a+t_{0} b) \wedge (d=s_{1} a+t_{1} b)$ is a loop invarient.
+	Since $\operatorname{gcd}(a, b) = c=s_{0} a+t_{0} b$, we get the correct output.
+\end{proof}
+
+\section{6c}
+Prove that $(c > 0) \land (d > 0)$ is a loop invariant for the while loop in LIN\_COMB.
+\begin{proof}
+	\begin{proof}
+		Let $P(n)$ be the predicate asserting that if the while loop has run for $n$ iterations,
+		then $(c > 0) \land (d > 0)$ . 
+		Domain: $\mathbb{N}$.
+		We prove by induction that for all $k$, $P(k)$ holds.\\
+		\textbf{Base case:} Before any iteration of the loop: $c = a$ and $d = b$. 
+		$a$ and $b$ are positive integers by definition.
+		Hence, $P(0)$ holds as desired.\\
+		\textbf{Inductive step:}
+		Suppose that $n \in \mathbb{N}$ such that $P(n)$ holds. We prove that $P(n + 1)$ holds.\\
+		Suppose the loop has run for $n+ 1$ iterations. Let $c', d', s'_{0}, t'_{0}, s'_{1}, t'_{1}$
+		be the value of the variables after the loop has run for $n$ iterations.
+		Now we consider what happens in the $(n + 1)^{th}$ iteration.
+		\begin{enumerate}[i.]
+			\item{
+				  Case 1: $c'< d'$
+				  \begin{align*}
+					  c   & = c' \\
+					  d   & = d' - c'            
+				  \end{align*}
+				  By our induction hypothesis, we know that $c' > 0$, so $c > 0$ holds.
+				  Since $c' < d'$ and $c' > 0$, so $d' - c' > 0$. Because $d = d' - c'$, this means that $d >0$ holds.
+				  Thus, $P(n+1)$ holds for when $c'<d'$.
+				  }
+			\item{
+				  Case 2: $c'>d'$
+				  \begin{align*}
+					  c   & = c' - d'       \\
+					  d   & = d'            
+				  \end{align*}
+				  By our induction hypothesis, we know that $d' > 0$, so $d > 0$ holds.
+				  Since $c' > d'$ and $d' > 0$, so $c' - d' > 0$. Because $c = c' - d'$, this means that $c >0$ holds.
+				  Thus, $P(n+1)$ holds for when $c'<d'$.
+				  }
+		\end{enumerate}
+		This proves the inductive step.  By induction,  we conclude that $P(n)$ holds for all $n \in \mathbb{N}$ 
+		which makes it an loop invarient for LIN\_COMB.
+	
+	\end{proof}
+\end{proof}
+\end{document}

@@ -1,0 +1,118 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+\usepackage{algorithmic}
+
+\makeatletter
+\newenvironment{Dequation}
+{%
+	\def\tagform@##1{%
+	\maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+	\ignorespaces
+}
+{%
+	\def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+	\ignorespacesafterend
+}
+\makeatother
+
+\title{Math 240: Midterm 2 Q6a}
+\author{Daniel Ko}
+\date{Spring 2020}
+\begin{document}
+\maketitle
+
+\section{6a}
+Given positive integers $a$ and $b$, we want to compute some integers $s$ and $t$ such that
+\[\operatorname{gcd}(a, b)=s a+t b\]
+Consider the following iterative program LIN\_COMB $(a, b)$ which is supposed to accomplish this:\\
+\hspace*{10mm}Initialize variables $c=a, d=b, s_{0}=1, t_{0}=0, s_{1}=0, t_{1}=1$\\
+\hspace*{10mm}While $c \neq d,$ do the following:\\
+\hspace*{20mm}If $c<d,$ then decrement $d$ by $c,$ decrement $s_{1}$ by $s_{0},$ decrement $t_{1}$ by $t_{0}$\\
+\hspace*{20mm}Else if $c>d,$ then decrement $c$ by $d,$ decrement $s_{0}$ by $s_{1},$ decrement $t_{0}$ by $t_{1}$\\
+\hspace*{10mm}Return $s_{0}$ and $t_{0}$\\
+Prove that $(c=s_{0} a+t_{0} b) \wedge (d=s_{1} a+t_{1} b)$ is a loop invariant for the while loop in LIN\_COMB.
+\begin{proof}
+	Let $P(n)$ be the predicate asserting that if the while loop has run for $n$ iterations,
+	then $(c=s_{0} a+t_{0} b) \wedge (d=s_{1} a+t_{1} b)$. 
+	Domain: $\mathbb{N}$.
+	We prove by induction that for all $k$, $P(k)$ holds.\\
+	\textbf{Base case:} Before any iteration of the loop: $c=a, d=b, s_{0}=1, t_{0}=0, s_{1}=0, t_{1}=1$.
+	\begin{align*}
+		c & = s_{0} a+t_{0} b \\
+		  & = 1c + 0d         \\
+		  & = c               \\\-\\
+		d & =s_{1} a+t_{1} b  \\
+		  & = 0c + 1d         \\
+		  & = d
+	\end{align*}
+	Hence, $P(0)$ holds as desired.\\
+	\textbf{Inductive step:}
+	Suppose that $n \in N$ such that $P(n)$ holds. We prove that $P(n + 1)$ holds.\\
+	Suppose the loop has run for $n+ 1$ iterations. Let $c', d', s'_{0}, t'_{0}, s'_{1}, t'_{1}$
+	be the value of the variables after the loop has run for $n$ iterations.
+	Now we consider what happens in the $(n + 1)^{th}$ iteration.
+	\begin{enumerate}[i.]
+		\item{
+		      Case 1: $c'<d'$
+		      \begin{align*}
+			      c   & = c'             \\
+			      d   & = d' - c'        \\
+			      s_0 & = s'_0           \\
+			      t_0 & = t'_0           \\
+			      s_1 & = s'_1  - s'_{0} \\
+			      t_1 & = t'_1- t'_0
+		      \end{align*}
+		      By our induction hypothesis, we know that $c' =  s'_0 a  + t'_0b$ and $d'=s'_{1} a+t'_{1} b $. Thus,
+		      \begin{align*}
+			      c & =  c'                                    \\
+			        & = s'_0 a  + t'_0b                        \\
+			        & = s_0 a  + t_0b                          \\\-\\
+			      d & = d' - c'                                \\
+					& = s'_{1} a+t'_{1} b - (s'_0 a  + t'_0b) \\
+					& = s'_{1} a+t'_{1} b - s'_0 a  - t'_0b \\
+					& = (s'_{1}- s'_0) a + (t'_{1}  - t'_0)b \\
+					& = s_1a + t_1b
+		      \end{align*}
+		      as desired. So $P(n+1)$ holds for when $c'<d'$.
+		      }
+		\item{
+		      Case 2: $c'>d'$
+		      \begin{align*}
+			      c   & = c' - d'       \\
+			      d   & = d'            \\
+			      s_0 & = s'_0 - s'_{1} \\
+			      t_0 & = t'_0 - t'_1   \\
+			      s_1 & = s'_1          \\
+			      t_1 & = t'_1
+		      \end{align*}
+		      By our induction hypothesis, we know that $c' =  s'_0 a  + t'_0b$ and $d'=s'_{1} a+t'_{1} b $. Thus,
+		      \begin{align*}
+			      c & = c' - d'                                \\
+			        & =  s'_0 a  + t'_0b - (s'_{1} a+t'_{1} b) \\
+			        & = s'_0 a  + t'_0b - s'_{1} a - t'_{1} b  \\
+			        & = (s'_0 - s'_{1})a  + (t'_0  - t'_{1}) b \\
+			        & = s_0a  + t_0 b                      \\\-\\
+			      d & = d'                                     \\
+			        & = s'_{1} a+t'_{1} b                      \\
+			        & = s_{1} a+t_{1} b
+		      \end{align*}
+		      as desired. So $P(n+1)$ holds for when $c'>d'$.
+		      }
+	\end{enumerate}
+	This proves the inductive step.  By induction,  we conclude that $P(n)$ holds for all $n \in \mathbb{N}$ 
+	which makes it an loop invarient for LIN\_COMB.
+
+\end{proof}
+\end{document}
