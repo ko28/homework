@@ -26,8 +26,8 @@
   }
 \makeatother
 
-\title{Math 341: Midterm 2}
-\author{Daniel Ko}
+\title{Linear Algebra}
+\author{Dan}
 \date{Spring 2020}
 
 \begin{document}
@@ -298,7 +298,7 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 					      0 & 0        & 0 & 2\alpha & \alpha     \\
 					      0 & 0        & 0 & 0       & 2\beta - 1
 				      \end{array} \right ] \\
-			      R_1 \leftrightarrow R_2 \quad (\mathbf{A'}|\mathbf{b'} ) =
+			      R_1 \leftrightarrow R_2 \quad (\mathbf{A'}|\mathbf{b'} ) = 
 			      \left [ \begin{array}{cccc|c}
 					      1 & 1        & 0 & 1       & 1          \\
 					      0 & - \alpha & 2 & 0       & 2          \\
@@ -308,9 +308,9 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 				      \end{array} \right ]
 		      \end{align*}
 		      By Theorem 3.11 and 3.13, a system is consistent if and only if $rank(\mathbf{A'}) = rank(\mathbf{A'}|\mathbf{b'})$.
-		      Thus this system will have no solution if $2\beta - 1 \neq 0$ because then $\mathbf{b'} \notin span(\mathbf{A'})$.
-
-		      This is when $\beta \neq \frac12$.
+			  Thus this system will have no solution if $2\beta - 1 \neq 0$ because then $\mathbf{b'} \notin span(\mathbf{A'})$.
+			  
+			 This is when $\beta \neq \frac12$.
 		      We observe that there will be no conditions on $\alpha$.
 		      %show that b \in R(L_A) ?? 
 	      \end{proof}
@@ -341,13 +341,13 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 					      0 & 0        & 0 & 0       & 0
 				      \end{array} \right ]
 		      \]
-		      By performing back substitution we compute the unique solution
-		      \begin{align*}
-			      2\alpha x_4 = \alpha   & \Leftrightarrow x_4 = \frac12                     \\
-			      2x_3 + x_4 = 2         & \Leftrightarrow x_3 = \frac34                     \\
-			      -\alpha x_2 + 2x_3 = 2 & \Leftrightarrow x_2  = -\frac{1}{2\alpha}         \\
-			      x_1 + x_2 + x_4 = 1    & \Leftrightarrow x_ 1 =\frac12 + \frac{1}{2\alpha}
-		      \end{align*}
+			  By performing back substitution we compute the unique solution
+			  \begin{align*}
+				2\alpha x_4 = \alpha & \Leftrightarrow x_4 = \frac12 \\
+				2x_3 + x_4 = 2 & \Leftrightarrow x_3 = \frac34   \\
+				-\alpha x_2 + 2x_3 = 2 & \Leftrightarrow x_2  = -\frac{1}{2\alpha}\\
+				x_1 + x_2 + x_4 = 1  & \Leftrightarrow x_ 1 =\frac12 + \frac{1}{2\alpha}
+			\end{align*}
 
 		      \[
 			      x = \begin{bmatrix}
@@ -381,7 +381,7 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 		      we get the following system,
 
 		      \[
-			      (\mathbf{A'}|\mathbf{b'})=
+				(\mathbf{A'}|\mathbf{b'})=
 			      \left [ \begin{array}{cccc|c}
 					      1 & 1 & 0 & 1 & 1 \\
 					      0 & 0 & 2 & 0 & 2 \\
@@ -392,8 +392,8 @@ What are the conditions on $\alpha$ and $\beta$ such that the system $\mathbf{A}
 		      \]
 		      It is clear that  $rank(\mathbf{A'}) = rank(\mathbf{A'}|\mathbf{b'})$ because
 		      $\mathbf{b'}$ is a linear combination of the second and third column from
-		      $\mathbf{A'}$. By Theorem 3.13, we know that the solution set for $\mathbf{A'x=b'}$
-		      is equivalent to the solution set for $\mathbf{Ax=b}$. Hence, both systems are consistent. \\
+			  $\mathbf{A'}$. By Theorem 3.13, we know that the solution set for $\mathbf{A'x=b'}$
+			  is equivalent to the solution set for $\mathbf{Ax=b}$. Hence, both systems are consistent. \\
 		      We can compute a solution space to $\mathbf{Ax=b}$ as outlined in Theorem 3.9. We start by first computing the
 		      solution set to $\mathbf{Ax}=0$ denoted by $K_H$. It is clear that $rank(\mathbf{A}) = 3$ because the first two
 		      columns are the same and the rest of the columns are linearly independent from each other.
@@ -474,7 +474,7 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 	      \begin{proof}\-\
 		      \begin{enumerate}[i.]
 			      \item{
-			            $v_1 + W = v_2 + W \Rightarrow v_1 - v_2 \in W$\par
+			            $v_1 + W = v_2 + W \Rightarrow v_1 - v_2 \in W$\\
 			            If $v_1 + W = v_2 + W$, then $\exists w_1, w_2 \in W$ such that
 			            $v_1 + w_1 = v_2 + w_2$\\
 			            $v_1 - v_2 = w_2 - w_1$\\
@@ -482,7 +482,7 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 			            Therefore, $v_1 - v_2 \in W$
 			            }
 			      \item{
-			            $v_1 - v_2 \in W \Rightarrow v_1 + W = v_2 + W $\par
+			            $v_1 - v_2 \in W \Rightarrow v_1 + W = v_2 + W $\\
 			            This means $v_1 - v_2 = w$ where $w \in W \ (*)$\\
 			            Now let $x \in v_1 + W$\\
 			            By definition, $\exists w_x \in W \text{ such that } x = v_1 + w_x$\\
@@ -632,7 +632,7 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 				            \item{
 				                  $\mathrm{V}/\mathrm{W} \subseteq R(T)$\\
 				                  Let $y = v_y + W$ where $y \in \mathrm{V}/\mathrm{W}$ and $v_y \in V$.\\
-				                  For prove that $y \in R(T)$ we need to show that  $\exists x$ such that $ T(x) = y$.\\
+				                  For prove that $y \in N(T)$ we need to show that  $\exists x$ such that $ T(x) = y$.\\
 				                  Notice that $x = v_y$. Therfore, $y \in R(T)$ so $\mathrm{V}/\mathrm{W} \subseteq R(T)$.
 
 				                  }
@@ -642,21 +642,23 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 			            $N(T) = W$
 			            \begin{enumerate}[label=\roman*.]
 				            \item{
-				                  $N(T) \subseteq W$
-				                  \begin{lemma}
-					                  $w_1 + W = w_2 + W = W$ where $w_1, w_2 \in W$.
-					                  \begin{proof}\-\\
-						                  Let $x_1 \in w_1 + W$ and $x_2 \in w_2 + W$\\
-						                  By definition, $w_1 + W = \{w_1 + w : w \in W\}$.\\
-						                  We know that $w_1 +w \in W$ because $W$ is a subspace and has closure under addition.
-						                  Hence, $x_1 \in W$ and similarly $x_2 \in W$. Therefore, $w_1 + W \subseteq W$ and  $w_2 + W \subseteq W$.\par
-						                  Now consider $x_1 \in W$ and $x_2 \in W$.\\
-						                  $x_1 \in w_1 + W$ because $\exists w \text{ s.t. } w = x_1 - w_1$.
-						                  Similarly, $x_2 \in w_2 + W$.\\
-						                  Hence, $W \subseteq w_1 + W$ and $W \subseteq w_2 + W$.\par
-						                  Therefore, $w_1 + W = W$ and $W = w_2 + W$ so, $w_1 + W = w_2 + W = W$.
-					                  \end{proof}
-				                  \end{lemma}
+								  $N(T) \subseteq W$
+								  \begin{lemma}
+									$w_1 + W = w_2 + W$ where $w_1, w_2 \in W$.
+									\begin{proof}\-\\
+										Let $x_1 \in w_1 + W$ and $x_2 \in w_2 + W$\\
+										By definition, $w_1 + W = \{w_1 + w : w \in W\}$.\\
+										We know that $w_1 +w \in W$ because $W$ is a subspace and has closure under addition.
+										Hence, $x_1 \in W$ and similarly $x_2 \in W$. Therefore, $w_1 + W \subseteq W$ and  $w_2 + W \subseteq W$.\\\-\\
+										Now consider $x_1 \in W$ and $x_2 \in W$.\\
+										$x_1 \in w_1 + W$ because $w_1 + w \in W$ by closure under addition\\
+										Similarly, $x_2 \in w_2 + W$.\\
+										Hence, $W \subseteq w_1 + W$ and $W \subseteq w_2 + W$.\\
+
+										Therefore, $w_1 + W = W$ and $W = w_2 + W$ so, $w_1 + W = w_2 + W $. 
+
+									\end{proof}
+								  \end{lemma}
 				                  Let $x \in N(T)$.\\ %By Theorem 2.1, we know that $N(T) \in V$, thus $x \in V$.\\
 				                  By definition of $N(T)$ and using the lemma above,
 				                  \begin{align*}
@@ -672,6 +674,7 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 				                  Let $w \in W$.
 				                  \begin{align*}
 					                  T(w) & = w + W      \\
+					                       & = W          \\
 					                       & = 0 + W      \\
 					                       & = \mathbf{0}
 				                  \end{align*}
@@ -746,11 +749,8 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 	      \begin{proof}
 		      We begin by proving that $AK/A^2K$ is a vector space. It is enough to show that $A^2K$ is a subspace of $AK$
 		      to prove that $AK/A^2K$ is a vector space, by part (b). It is clear that $AK$ is a subspace because $AK = R(L_A)$
-		      and Theorem 2.3.\par
-		      We claim that $R(L_{A^2}) \subseteq R(L_A)$.  Let $y \in R(L_{A^2})$.
-		      By definition, $\exists x \in F^n : A^2x = y$. We can rewrite $A^2x = y$ as
-		      $A(Ax) = y$ so it follows that $y \in R(L_A)$.\par
-		      Thus, $A^2K \subseteq AK$ because $R(L_{A^2}) \subseteq R(L_A)$.
+		      and Theorem 2.3. Moreover, $A^2K \subseteq AK$ because $R(L_{A^2}) \subseteq R(L_A)$. (Theorem 3.7?)
+		      $\textbf{Not sure if }  $$R(L_{A^2}) \subseteq R(L_A)$$ \textbf{ holds }$ \\
 		      Because $A^2K = R(L_{A^2})$, $A^2K$ has the properties of a vector space because of Theorem 2.1.
 		      It follows from part (c) that
 		      \begin{align*}
@@ -778,34 +778,35 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 	      Define $T: AK/A^2K \rightarrow A^2K/A^3K$, by $T(v) = L_A(v)$, i.e, we left multiply each element of $v$ by the matrix $A$.
 	      Show that $R(T) = A^2K/A^3K$.
 	      \begin{proof}
+		      %DO I NEED TO PROVE THAT T IS A LINEAR TRANSFORMATION?
+
 		      To show that $R(T) = A^2K/A^3K$, is another way of saying show that $T$ is onto.
-		      We must show that $\forall y \in A^2K/A^2K [\exists x \in AK/A^2K : T(x) = y$].
-		      Let $y \in A^2K/A^3K$ such that $y = A^2k + A^3K$ where $k \in \mathbb{F}^n$.
-		      We claim that $T(x) = y$ where $x = Ak + A^2K$.
+		      We must show that $\forall x \in AK/A^2K [\exists y \in A^2K/A^3K : T(x) = y$].
+		      Let $x = Ak' + A^2K$ where $k' \in \mathbb{F}^n$.
 		      \begin{align*}
-			      T(x) & = T(Ak + A^2K)        \\
-			           & = L_A(Ak + A^2K)      \\
-			           & = L_A(Ak) + L_A(A^2K) \\
-			           & = A^2k + A^3K         \\
-			           & = y
+			      T(x) & = T(Ak' + A^2K)              \\
+			           & = L_A(Ak' + A^2K)            \\
+			           & = L_A(Ak') + L_A(A^2K)       \\
+			           & = A^2k' + A^3K \in A^2K/A^3K
 		      \end{align*}
-		      as desired. Therefore, $T$ is onto i.e. $R(T) = A^2K/A^3K$.
+		      Therefore, $T$ is onto and $R(T) = A^2K/A^3K$.
 	      \end{proof}
 	      }
 	\item{
+	      %DO I NEED TO PROVE THAT T IS A LINEAR TRANSFORMATION?
 	      Use the rank-nullity theorem on $T$ to conclude that $rank(A^2) - rank(A^3) \leq rank(A) - rank(A^2)$.
 	      \begin{proof}
-		      We begin by proving that T is linear. We define $x_1 = Ak_1 + A^2K$ and $x_2 = Ak_2 + A^2K$
-		      such that $x_1, x_2 \in AK/A^2K$ and $k_1, k_2 \in F^n$ and $c \in F$. We use properties of matrices
+		      We begin by proving that T is linear. We define $x_1 = Ak'_1 + A^2K$ and $x_2 = Ak'_2 + A^2K$
+		      such that $x_1, x_2 \in AK/A^2K$ and $k'_1, k'_2 \in F^n$ and $c \in F$. We use properties of matrices
 		      as outlined in Theorem 2.12.
 		      \begin{align*}
-			      T(ck_1 + k_2) & = L_A(ck_1 + k_2)                    \\
-			                    & = A(ck_1 + k_2)                      \\
-			                    & = A(c(Ak_1 + A^2K) + (Ak_2 + A^2K))  \\
-			                    & = A(c(Ak_1 + A^2K)) + A(Ak_2 + A^2K) \\
-			                    & = c(A(Ak_1 + A^2K)) + A(Ak_2 + A^2K) \\
-			                    & = cL_A(k_1)+ L_A(k_2)                \\
-			                    & = cT(k_1)+ T(k_2)
+			      T(ck'_1 + k'_2) & = L_A(ck'_1 + k'_2)                    \\
+			                      & = A(ck'_1 + k'_2)                      \\
+			                      & = A(c(Ak'_1 + A^2K) + (Ak'_2 + A^2K))  \\
+			                      & = A(c(Ak'_1 + A^2K)) + A(Ak'_2 + A^2K) \\
+			                      & = c(A(Ak'_1 + A^2K)) + A(Ak'_2 + A^2K) \\
+			                      & = cL_A(k'_1)+ L_A(k'_2)                \\
+			                      & = cT(k'_1)+ T(k'_2)
 		      \end{align*}
 		      Since T is linear, we can use rank nullity theorem. From part (d), (e), (f), and assuming that $nullity(T) \geq 0$ because the number of elements of a set cannot be negative
 		      \begin{align*}
@@ -839,8 +840,7 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 					                  P \circ T(x) + T(0)         & = x \\
 					                  P \circ T(x)                & = x
 				                  \end{align*}
-				                  $T(x) \in N_T$ because $T \circ T(x) = 0$.
-				                  So $x \in P(N_T)$. Thus, $N_p \subseteq P(N_T)$.
+				                  Notice that $T(x) \in N_T$, so $x \in P(N_T)$. Thus, $N_p \subseteq P(N_T)$.
 				                  }
 				            \item{
 				                  $P(N_T) \subseteq N_P $\\
@@ -880,7 +880,7 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 		      Need to prove the following two conditions.
 		      \begin{enumerate}[label=\roman*.]
 			      \item{
-			            $N_T \cap N_P = \{0\}$.	\par
+			            $N_T \cap N_P = \{0\}$.	 \\\-\\
 			            Let $x \in N_T$ and $x \in N_P$. This means that $T(x) = 0$ and $P(x) = 0$.
 			            \begin{align*}
 				            x & = P \circ T(x) + T \circ P(x) \\
@@ -894,7 +894,7 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 			            \begin{enumerate}[label=\arabic*.]
 				            \item{
 				                  $N_T + N_P \subseteq \mathrm{V}$\\
-				                  Let $x \in N_T + N_P$ such that $x = n_t + n_p$ where $n_t \in N_T \subseteq \mathrm{V}$ and $n_p \in N_P \subseteq \mathrm{V}$
+				                  Let $x \in N_T + N_P$. Define $x = n_t + n_p$ where $n_t \in N_T \subseteq \mathrm{V}$ and $n_p \in N_P \subseteq \mathrm{V}$
 				                  by Theorem 2.11. Since $\mathrm{V}$ is a vector space $n_t + n_p \in V$ by closure under addition.\\
 				                  Thus, $ x \in \mathrm{V}$ and it follows that $N_T + N_P \subseteq \mathrm{V}$.
 				                  }
@@ -916,92 +916,31 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 	      Prove that the dimension of $\mathrm{V}$ is even.
 	      \begin{proof}\
 		      \begin{lemma}
-			      Let $W_1 + W_2 = V$. Then, $\mathrm{V} = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)$
+			      $\mathrm{V} = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)$\
 			      \begin{proof}
-				      We begin by proving that $dim(W_1 + W_2) = dim(W_1) + dim(W_2) - dim(W_1 \cap W_2)$\\
-				      Let
-				      \[B_{1\cap 2} = \{u_1, u_2, \cdots, u_k\}\]
-				      be a basis for $W_1 \cap W_2$\\
-				      By using the replacement theorem, we can extend $B_{1\cap 2}$ to be a basis for $W_1$.\\
-				      So the basis for $W_1$ is $B_1$
-				      \[B_1 = \{u_1, u_2, \cdots, u_k, v_1, v_2, \cdots, v_m\}\]
-				      Likewise, we can extend $B_{1\cap 2}$ to be a basis for $W_2$
-				      \[B_2 = \{u_1, u_2, \cdots, u_k, w_1, w_2, \cdots, w_p\}\]
-				      Basis for $W_1 + W_2$ will be $B_1 \cup B_2$, however they may contain the same vectors twice.\\
-				      To prevent double counting, we must subtract $B_1 \cap B_2$ from $B_1 \cup B_2$\\
-				      Thus the basis for $W_1 + W_2$ is
-				      \[B_{1+2} = \{u_1, u_2, \cdots, u_k, v_1, v_2, \cdots, v_m, w_1, w_2, \cdots, w_p\}\]
-				      It follows that
-				      \[\text{dim}(W_1 + W_2) = \text{dim}(W_1) + \text{dim}(W_2) - \text{dim}(W_1 \cap W_2)\]
-				      Now we continue the proof for the lemma.
-				      \begin{enumerate}[label=\roman*.]
-					      \item{
-					            $V = W_1 \oplus W_2 \Rightarrow dim(V) = dim(W_1) + dim(W_2)$\\
-					            From the definition of direct sum, $W_1 \cap W_2 = \{0\}$\\
-					            This means $dim(W_1 \cap W_2) = 0$.
-					            Hence,
-					            \begin{align*}
-						            dim(V) & = dim(W_1) + dim(W_2) - dim(W_1 \cap W_2) \\
-						                   & = dim(W_1) + dim(W_2) - 0                 \\
-						                   & = dim(W_1) + dim(W_2)
-					            \end{align*}
-					            as desired.
-					            }
-					      \item{
-					            $dim(V) = dim(W_1) + dim(W_2) \Rightarrow V = W_1 \oplus W_2 $\\
-					            $V = W_1 \oplus W_2$ if and only if $V = W_1 + W_2 $ and $ W_1 \cap W_2 = \{0\}$\\
-					            $V = W_1 + W_2$ is a preconditon for this lemma.\\
-					            We proved earlier that, $dim(V) = dim(W_1) + dim(W_2) - dim(W_1 \cap W_2)$\\
-					            Our hypothesis is $dim(V) = dim(W_1) + dim(W_2)$\\
-					            Setting the two equations equal to each other:
-					            \begin{align*}
-						            dim(W_1) + dim(W_2) - dim(W_1 \cap W_2) & = dim(W_1) + dim(W_2) \\
-						            dim(W_1 \cap W_2)                       & = 0
-					            \end{align*}
-					            This means $ W_1 \cap W_2 = \{0\}$. Thus, $dim(V) = dim(W_1) + dim(W_2)$.
-					            Therefore, by definition $V = W_1 \oplus W_2$.
-					            }
-				      \end{enumerate}
-				      Therefore, if $W_1 + W_2 = V$, then $V = W_1 \oplus W_2 \Leftrightarrow dim(V) = dim(W_1) + dim(W_2)$
+				      1.6.29(b) in the textbook
+				      $\textbf{Actually remember to type this in}$
 			      \end{proof}
 		      \end{lemma}
-		      %It is obvious that $dim(T(N_P)) \leq dim(N_P)$. From (a), we have proved that
-		      %$T(N_P) = N_T$. This means that $dim(N_T) \leq dim(N_P)$.
-		      %Likewise, \[dim(P(N_T)) \leq dim(N_T) \Rightarrow dim(N_P) \leq dim(N_T)\]
-		      %Thus, $dim(N_P) = dim(N_T)$. 
-		      We begin by claiming that $dim(T(N_P)) \leq dim(N_P)$. Let $\beta = \{v_1, v_2, \cdots, v_n\}$
-		      be a basis for $N_P$. We want to show that $\gamma = \{T(v_1), T(v_2), \cdots, T(v_n)\}$
-		      spans $T(N_P)$ so that the above statement holds. Let $w \in T(N_P)$. This means that
-		      $\exists x \in N_P : T(x) = w$. We can write $x$ as a linear combination of $\beta$.
-		      $\exists c_1, \cdots, c_n \in F$ such that $x = c_1v_1 + c_2v_2 + \cdots + c_nv_n$ \par
-		      Applying $T$ to both sides of this equation,
+		      By the lemma above, $dim(V) = dim(N_T) + dim(N_P)$.\\
+		      Let's construct a basis $\beta_{N_T}$ for $N_T$ and $\beta_{N_P}$ for $N_P$.\\
+		      $\beta_{N_T} = \{u_1, u_2, \cdots, u_m\}$\\
+		      $\beta_{N_P} = \{w_1, w_2, \cdots, w_n\}$\\
+		      From (a), since $N_T = T(N_P)$, this must mean that $$span(\beta_{N_T}) = T(span(\beta_{N_P})) $$ %\subseteq span(\beta_{N_P})
+		      Thus, $dim(N_P) \leq dim(N_T)$ because  $dim(T(N_P)) \leq dim(N_P)$.\\
+		      Likewise, since $N_P = P(N_T)$, this must mean that $$span(\beta_{N_P}) = P(span(\beta_{N_T})) $$ %\subseteq span(\beta_{N_P})
+		      Thus, $dim(N_T) \leq dim(N_P)$ because  $dim(P(N_T)) \leq dim(N_T)$.\\\-\\
+		      % $dim(N_T) = m = dim(T(N_P)) \leq n$ and $dim(N_P) = n = dim(P(N_T)) \leq m$\\
+		      %FIX 
+		      Thus, $dim(N_P) = dim(N_T) = n = m$.
 		      \begin{align*}
-			      x    & = c_1v_1 + c_2v_2 + \cdots + c_nv_n          \\
-			      T(x) & = T(c_1v_1 + c_2v_2 + \cdots + c_nv_n)       \\
-			           & = T(c_1v_1) + T(c_2v_2) + \cdots + T(c_nv_n) \\
-			           & = c_1T(v_1) + c_2T(v_2) + \cdots + c_nT(v_n)
-			  \end{align*}
-			  Notice that $w = T(x)$. Since $w$ was picked arbitrarily, $\gamma$ spans $T(N_P)$. It directly
-			  follows that $dim(T(N_P)) \leq n$ because $dim(T(N_P))$ is only as large as its basis which is minimal 
-			  spanning set. Therefore, $dim(T(N_P)) \leq dim(N_P)$. Without loss of generality, we can show that
-			  $dim(P(N_T)) \leq dim(N_T)$ \par
-			  It follows from the claim above and from (a) that
-				\begin{align*}
-					dim(T(N_P)) & \leq dim(N_P)\\
-					dim(N_T) & \leq dim(N_P) \\ 
-					& \\
-					dim(P(N_T)) & \leq dim(N_T)\\
-					dim(N_P) & \leq dim(N_T)
-				\end{align*}
-			  This means that $dim(N_P) = dim(N_T)$ \par
-
-		      By using the lemma above,
-		      \begin{align*}
-			      dim(V) & = dim(N_T) + dim(N_P)                       \\
-			             & = dim(N_T) + dim(N_T) = dim(N_P) + dim(N_P) \\
-			             & = 2dim(N_T) = 2dim(N_P)
+			      dim(V) & = dim(N_T) + dim(N_P) \\
+			             & = n + m               \\
+			             & = n + n = m + m       \\
+			             & = 2n = 2m
 		      \end{align*}
-		      as desired. Therefore, $dim(V)$ is even.
+
+		      Therefore, $dim(V)$ is even.
 	      \end{proof}
 	      }
 	\item{
@@ -1016,57 +955,7 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 			      \end{array} \right] .
 	      \end{equation}
 	      \begin{proof}
-		      Notice that $T^2 = P^2 = 0$ implies that $T$ and $P$ are not invertible. This means that $N_T,N_P$ are
-		      nontrivial null spaces. From (b), we know that $V = N_T \oplus N_P$. Asumming that $dim(V) = 2$,
-		      we get that $2 = dim(N_T) + dim(N_P)$ by our lemma from (c). Since $N_T,N_P$ are nontrivial null spaces,
-		      this necessarily means that $dim(N_T) = dim(N_P) = 1$.\par
 
-		      Since $N_P$ is non trival, there exists a nonzero vector in $N_P$. Let $v \in N_P$ be nonzero. Since
-		      $dim(N_P) = 1$, any nonzero vector forms a basis for $N_P$ So, $\{v\}$ is a basis for $N_P$.\par
-
-		      Since $V = N_T \oplus N_P$, by definition $N_T \cap N_P = \{0\}$. So $v \notin N_T$. Thus, $T(v) \neq 0$.
-		      We know that $T(v) \in N_T$, is nonzero, and that $dim(N_T) = 1$, so $\{T(v)\}$ is a basis for $N_T$.\par
-
-		      We claim that $\beta = \{T(v), v\}$ is a basis for $V$. Notice that $|\beta| = dim(V)$ and $T(v), v \in V$.
-		      So, it is enough to show that $\beta$ is linearly independent for $\beta$ to be a basis for $V$
-		      by Theorem 1.10 Corollary 2(b). Let $c_1, c_2 \in F$.
-		      \begin{align*}
-			      c_1T(v) +  c_2v & = 0        \\
-			      c_1T(v)         & = - c_2v   \\
-			      T(c_1T(v))      & = T(-c_2v) \\
-			      c_1T(T(v))      & = -c_2T(v) \\
-			      c_10            & = -c_2T(v) \\
-			      0               & = -c_2T(v) \\
-			      \frac{0}{T(v)}  & = -c_2     \\
-			      c_1             & = c_2 = 0
-		      \end{align*}
-		      as desired. $\beta$ is a basis for $V$. \par
-		      Now we can compute $[T]_{\beta}$ and $[P]_{\beta}$.
-		      \begin{align*}
-			      [T]_{\beta} & = \Big[[T(T(v))]_{\beta} \; [T(v)]_{\beta}\Big] \\
-			                  & = \Big[[0]_{\beta} \; [T(v)]_{\beta}\Big]       \\
-			                  & = \left [ \begin{array}{cc}
-					      0 & 1 \\
-					      0 & 0
-				      \end{array} \right]
-		      \end{align*}
-		      We claim that $P(T(v)) = v$. Given that $T \circ P + P \circ T = I$,
-		      \begin{align*}
-			      P(T(v)) + T(P(v)) & = v           \\
-			      P(T(v))           & = v - T(P(v)) \\
-			                        & = v
-		      \end{align*}
-		      because $v \in N_P$.
-		      We finish with computing $[P]_{\beta}$.
-		      \begin{align*}
-			      [P]_{\beta} & = \Big[[P(T(v))]_{\beta} \; [P(v)]_{\beta}\Big] \\
-			                  & = \Big[[v]_{\beta} \;  [0]_{\beta}\Big]         \\
-			                  & = \left [ \begin{array}{cc}
-					      0 & 0 \\
-					      1 & 0
-				      \end{array} \right]
-		      \end{align*}
-		      as desired.
 	      \end{proof}
 	      }
 \end{enumerate}
