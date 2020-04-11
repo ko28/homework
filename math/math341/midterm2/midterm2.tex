@@ -980,20 +980,20 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 			      T(x) & = T(c_1v_1 + c_2v_2 + \cdots + c_nv_n)       \\
 			           & = T(c_1v_1) + T(c_2v_2) + \cdots + T(c_nv_n) \\
 			           & = c_1T(v_1) + c_2T(v_2) + \cdots + c_nT(v_n)
-			  \end{align*}
-			  Notice that $w = T(x)$. Since $w$ was picked arbitrarily, $\gamma$ spans $T(N_P)$. It directly
-			  follows that $dim(T(N_P)) \leq n$ because $dim(T(N_P))$ is only as large as its basis which is minimal 
-			  spanning set. Therefore, $dim(T(N_P)) \leq dim(N_P)$. Without loss of generality, we can show that
-			  $dim(P(N_T)) \leq dim(N_T)$ \par
-			  It follows from the claim above and from (a) that
-				\begin{align*}
-					dim(T(N_P)) & \leq dim(N_P)\\
-					dim(N_T) & \leq dim(N_P) \\ 
-					& \\
-					dim(P(N_T)) & \leq dim(N_T)\\
-					dim(N_P) & \leq dim(N_T)
-				\end{align*}
-			  This means that $dim(N_P) = dim(N_T)$ \par
+		      \end{align*}
+		      Notice that $w = T(x)$. Since $w$ was picked arbitrarily, $\gamma$ spans $T(N_P)$. It directly
+		      follows that $dim(T(N_P)) \leq n$ because $dim(T(N_P))$ is only as large as its basis which is minimal
+		      spanning set. Therefore, $dim(T(N_P)) \leq dim(N_P)$. Without loss of generality, we can show that
+		      $dim(P(N_T)) \leq dim(N_T)$ \par
+		      It follows from the claim above and from (a) that
+		      \begin{align*}
+			      dim(T(N_P)) & \leq dim(N_P) \\
+			      dim(N_T)    & \leq dim(N_P) \\
+			                  &               \\
+			      dim(P(N_T)) & \leq dim(N_T) \\
+			      dim(N_P)    & \leq dim(N_T)
+		      \end{align*}
+		      This means that $dim(N_P) = dim(N_T)$ \par
 
 		      By using the lemma above,
 		      \begin{align*}
@@ -1016,7 +1016,15 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 			      \end{array} \right] .
 	      \end{equation}
 	      \begin{proof}
-		      Notice that $T^2 = P^2 = 0$ implies that $T$ and $P$ are not invertible. This means that $N_T,N_P$ are
+		      We claim that $T^2 = P^2 = 0$ implies that $T$ and $P$ are not invertible.
+
+		      Assume for the sake of contradiction that $T$ had an inverse $U$.
+		      Then \[UT = I \Rightarrow UT(T) = IT \Rightarrow UT^2 = T \Rightarrow U0 = T \Rightarrow T=0\]
+		      which is a contradiction because the zero matrix
+			  is not left invertible. Therefore, $T$ is not invertible and without loss of generality, 
+			  $P$ is not invertible. \par
+
+		      This means that $N_T,N_P$ are
 		      nontrivial null spaces. From (b), we know that $V = N_T \oplus N_P$. Asumming that $dim(V) = 2$,
 		      we get that $2 = dim(N_T) + dim(N_P)$ by our lemma from (c). Since $N_T,N_P$ are nontrivial null spaces,
 		      this necessarily means that $dim(N_T) = dim(N_P) = 1$.\par
