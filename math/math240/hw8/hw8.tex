@@ -1,0 +1,144 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+
+\title{Math 240: Homework 8}
+\author{Daniel Ko}
+\date{Spring 2020}
+
+\begin{document}
+\maketitle
+
+\section{1}
+Prove that for all $k \in \mathbb{N}$, there is some graph $G=(V, E)$ such that $\sum_{v \in V} \operatorname{deg}(v)=2k$
+\begin{proof}
+	We proceed by induction on $k\in \mathbb{N}$. Let $P(k)$ be the predicate
+	"there is some graph $G=(V, E)$ such that $\sum_{v \in V} \operatorname{deg}(v)=2k$".\\
+	\textbf{Base case:} We prove that $P(0)$ holds. Let $G_0$ be an empty graph where $V = E = \varnothing$.
+	It follows that $$ \sum_{v \in V} \operatorname{deg}(v) = 0 = 2k = 2(0)$$
+	as desired.\\
+	\textbf{Inductive step:} Suppose that $k\in \mathbb{N}$ such that $P(k)$ holds. We prove that $P(k + 1)$ holds.
+	Consider the graph, $G = (V,E)$ from $P(k)$. Let $V' = V \cup \{u\}$ and $E' =E \cup \{\{u,v_1\},\{u,v_2\}\}$
+	where $u \notin V$, $v_1,v_2 \in V$, and $u \neq v_1 \neq v_2$. Let $G' = (V',E')$. It follows that
+	\begin{align*}
+		\sum_{v \in V'} \operatorname{deg}(v) & = \sum_{v \in V} \operatorname{deg}(v) + \operatorname{deg}(u) \\
+		                                      & = 2k + 2                                                       \\
+		                                      & = 2(k + 1)
+	\end{align*}
+	as desired. Thus there exists a graph, $G'$, such that $P(k+1)$ holds.
+	This completes the proof of the inductive step.
+	We have proved by induction that for all $k \in \mathbb{N}$,
+	there is some graph $G=(V, E)$ such that $\sum_{v \in V} \operatorname{deg}(v)=2k$
+\end{proof}
+
+\section{2}
+Let $G$ be a connected graph. For all vertices $u$ and $v$ in $G,$ we define the distance $d(u, v)$
+to be the least number $d$ such that there is a path between $u$ and $v$ of length $d .$ Prove that for all vertices $u, v$ and $w$
+$$ d(u, w) \leq d(u, v)+d(v, w) $$
+\begin{proof}
+	For the sake of contradiction, assume that $d(u, w) > d(u, v) +d(v, w)$.
+	This means that the shortest path $d(u, w)$ is greater than some path from $u$ to $v$ to $w$.
+	This is a contradiction as $d(u,w)$ would be at most $d(u, v) +d(v, w)$.
+	Therefore, $ d(u, w) \leq d(u, v)+d(v, w) $
+\end{proof}
+
+\section{3}
+Let $G$ be a bipartite graph. Prove that if $v_{1}, \ldots, v_{n}$ is a cycle in $G$ then $n$ is odd (so the cycle has even length).
+\begin{proof}
+	By definition, $G$ can be partitioned into two disjoint sets $V_1$ and $V_2$. Let's assume that $v_1 \in V_1$.
+	We know that $v_1 = v_n$ because the above sequence is a cycle.
+	Since $G$ is a bipartite graph, each following vertex in the sequence must in the opposite set.
+	This means that $v_1, v_3, \cdots, v_n \in V_1$ and $v_2, v_4, \cdots, v_{n-1} \in V_2$.
+	Every edge we take from $V_1$ leads us to $V_2$
+	because this graph is bipartite. Likewise, every edge we take from $V_2$ leads us to $V_1$. It follows that
+	to go from a vertex in $V_1$ to a vertex in $V_2$ and back to a vertex in $V_1$ we must take an even number of steps.
+	Thus any path from a vertex in $V_1$ back to itself must be an even length. It directly follows that
+	$n$ is odd because an even length path must be connected by an odd number of vertices.
+\end{proof}
+
+\section{4}
+\begin{enumerate}[label=\alph*.]
+	\item{
+	      Let $T$ be a tree. Prove that if you remove a leaf $l$ and the only edge incident with $l$ from $T$,
+	      the resulting subgraph $T^{\prime}$ is still a tree.
+	      \begin{proof}
+		      Since $T$ is a tree, it is by definition acyclic and connected. We must show that $T'$
+		      holds the property of a	tree.
+		      \begin{enumerate}[label=\roman*.]
+			      \item{
+			            $T'$ is connected \par
+			            From lecture, we know that a graph is connected if and only if there is a simple path between
+			            every two distinct vertices. If we removed a leaf and only its edge incident, we know that
+			            this cannot affect any simple path from $\{u,v\}$ in the tree. Thus, the resulting tree, $T'$,
+			            is connected.
+			            }
+			      \item{
+			            $T'$ is acyclic \par
+			            If $T$ is acylic, removing a vertex will not make it cyclic.
+			            }
+		      \end{enumerate}
+		      Therfore, $T'$ is a tree.
+	      \end{proof}
+	      }
+	\item{
+	      Prove by induction on $n \geq 1$ that if a tree $T$ has $n$ vertices, then
+	      it has exactly $n-1$ edges.
+	      \begin{proof}
+		      We proceed by induction on  $n \geq 1$. Let $P(n)$ be the predicate
+		      "if a tree $T$ has $n$ vertices, then it has exactly $n-1$ edges".\\
+		      \textbf{Base case:} We prove that $P(1)$ holds. This means that $T$
+		      has $1$ vertex. It trivially follows that $T$ has $0$, i.e. $n-1 = 1 - 1 $ edges. \\
+		      \textbf{Inductive step:} Suppose that $n \geq 1$ such that $P(n)$ holds. We prove that $P(n + 1)$ holds.
+		      Let $T = (V,E)$ be the tree with $n$ vertices. We know that the tree with $n+1$ edges, $T'$,
+		      will have a set of vertices $V' = V \cup \{u\}$, where $u$ is a vertex. Since $T'$ is a tree,
+		      $u$ adds only one edge. If it is placed as a leaf, then $u$ there is a new edge create from $u$ to its
+		      parent. If it is placed in the middle of the tree, the existing edge between the adjacent vertex will
+		      be used as one of the edges connecting $u$ and another edge must be added to finish connecting $u$ to the tree.
+		      So in either case, adding a new vertex only adds one edge. It follows then by this fact and by our induction hypothesis that
+		      \begin{align*}
+			      \sum_{v \in V'} \operatorname{deg}(v) & = \sum_{v \in V} \operatorname{deg}(v) + \operatorname{deg}(u) \\
+														& = n - 1 + \operatorname{deg}(u)  \\
+														& = n - 1 + 1 \\
+														& = n
+			  \end{align*}
+			  Therefore, $P(n+1)$ holds and this concludes our inductive step. 
+			  We have proved by induction that for all $n \geq 1$ that if a tree $T$ has $n$ vertices, then
+			  it has exactly $n-1$ edges.
+	      \end{proof}
+	      }
+	\item{
+	      Prove that if $G$ is a connected graph with $n$ vertices, then it has at least $n-1$ edges. (Hint: Spanning tree.)
+		 \begin{proof}
+			We know that a graph is connected if and only if it has a spanning tree (theorem given in the lecture).
+			Thus, that $G$ is a spanning tree. It directly follows from this fact and from part (b) that $G$ has exactly $n-1$
+			edges.
+		 \end{proof} 
+		  }
+\end{enumerate}
+
+\section{5}
+Prove that in any group of $n$ people $(n \geq 2),$ there must be two people with the same number of friends within the group. Assume friendship
+is mutual, and nobody is their own friend. 
+\begin{proof}
+	Given that there is $n$ people, the amount of friends each person will be in this set: $\{0,1,\cdots, n-1\}$, excluding $n$
+	because you cannot be friends with yourself. Consider the case when someone has $n-1$ friends. This means everyone in this group
+	has at least one friend. Also consider the case when someone has $0$ friends. This means that the most amount of friends one can
+	have is $n-2$ because you cannot be friends with yourself and with the person with $0$ friends. Thus the range of friends that 
+	a group has is actually $\{1,2,\cdots, n-1\}$ or $\{0,1,\cdots, n-2\}$. In both cases, the number possible combination of friends 
+	one can have is $n-1$. Using the pigeonhole principle, it directly follows that there must exist at least 2 people with the same 
+	number of friends in this group. 
+\end{proof}
+
+
+\end{document}

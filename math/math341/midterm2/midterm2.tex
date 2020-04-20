@@ -13,19 +13,6 @@
 \usepackage{setspace}
 \usepackage{systeme}
 
-\makeatletter
-\newenvironment{Dequation}
-{%
-  \def\tagform@##1{%
-    \maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
-  \ignorespaces
-  }
-  {%
-  \def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
-  \ignorespacesafterend
-  }
-\makeatother
-
 \title{Math 341: Midterm 2}
 \author{Daniel Ko}
 \date{Spring 2020}
@@ -626,15 +613,14 @@ for all \(v \in \mathrm{V}\) and \(a \in F\)
 			            $R(T) = \mathrm{V}/\mathrm{W}$
 			            \begin{enumerate}[label=\roman*.]
 				            \item{
-				                  $R(T) \subseteq \mathrm{V}/\mathrm{W}$\\
-				                  By Theorem 2.1\\
+				                  $R(T) \subseteq \mathrm{V}/\mathrm{W}$\par
+				                  By Theorem 2.1
 				                  }
 				            \item{
-				                  $\mathrm{V}/\mathrm{W} \subseteq R(T)$\\
-				                  Let $y = v_y + W$ where $y \in \mathrm{V}/\mathrm{W}$ and $v_y \in V$.\\
-				                  For prove that $y \in R(T)$ we need to show that  $\exists x$ such that $ T(x) = y$.\\
-				                  Notice that $x = v_y$. Therfore, $y \in R(T)$ so $\mathrm{V}/\mathrm{W} \subseteq R(T)$.
-
+				                  $\mathrm{V}/\mathrm{W} \subseteq R(T)$\par
+				                  Let $y \in \mathrm{V}/\mathrm{W}$ such that $y = v_y + W$ where $v_y \in V$.\\
+				                  To prove that $y \in R(T)$ we need to show that  $\exists x$ such that $ T(x) = y$.\\
+				                  Notice that we can fix $x = v_y$. Therfore, $y \in R(T)$ so $\mathrm{V}/\mathrm{W} \subseteq R(T)$.
 				                  }
 			            \end{enumerate}
 			            }
@@ -832,7 +818,7 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 			            Show $N_P = P(N_T)$
 			            \begin{enumerate}[label=\arabic*.]
 				            \item{
-				                  $N_P \subseteq P(N_T)$\\
+				                  $N_P \subseteq P(N_T)$\par
 				                  Let $x \in N_P$. By definition, $P(x) = 0$.
 				                  \begin{align*}
 					                  P \circ T(x) + T \circ P(x) & = x \\
@@ -843,7 +829,7 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 				                  So $x \in P(N_T)$. Thus, $N_p \subseteq P(N_T)$.
 				                  }
 				            \item{
-				                  $P(N_T) \subseteq N_P $\\
+				                  $P(N_T) \subseteq N_P $\par
 				                  Let $P(x) \in P(N_T)$ where $x \in N_T$.\\
 				                  $P \circ P(x) = 0$ so $P(x) \in N_P$. Thus, $P(N_T) \subseteq N_P$.
 				                  }
@@ -854,7 +840,7 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 			            Show $N_T = T(N_P)$
 			            \begin{enumerate}[label=\arabic*.]
 				            \item{
-				                  $N_T  \subseteq T(N_P)$\\
+				                  $N_T  \subseteq T(N_P)$\par
 				                  Let $x \in N_T$. By definition, $T(x) = 0$.
 				                  \begin{align*}
 					                  P \circ T(x) + T \circ P(x) & = x \\
@@ -864,7 +850,7 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 				                  Notice that $P(x) \in N_P$, so $x \in T(N_P)$. Thus, $N_T  \subseteq T(N_P)$.
 				                  }
 				            \item{
-				                  $T(N_P) \subseteq N_T$\\
+				                  $T(N_P) \subseteq N_T$\par
 				                  Let $T(x) \in T(N_P)$ where $x \in N_P$.\\
 				                  $T \circ T(x) = 0$ so $T(x) \in N_T$. Thus, $T(N_P) \subseteq N_T$.
 				                  }
@@ -901,8 +887,8 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 				            \item{
 				                  $\mathrm{V} \subseteq N_T + N_P $\\
 				                  Let $x \in V$. We know that $x = P \circ T(x) + T \circ P(x)$.\\
-				                  Notice that $P \circ T(x) \in N_P$ because $P(P \circ T(x)) = 0$.\\
-				                  Similarly, $T \circ P(x) \in N_T$ because $T(T \circ P(x)) = 0$.\\
+				                  Notice that $P \circ T(x) \in N_P$ because $P \circ (P \circ T(x)) = 0$.\\
+				                  Similarly, $T \circ P(x) \in N_T$ because $T \circ (T \circ P(x)) = 0$.\\
 				                  Thus, $N_T + N_P \subseteq \mathrm{V}$.
 				                  }
 			            \end{enumerate}
@@ -982,7 +968,7 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 			           & = c_1T(v_1) + c_2T(v_2) + \cdots + c_nT(v_n)
 		      \end{align*}
 		      Notice that $w = T(x)$. Since $w$ was picked arbitrarily, $\gamma$ spans $T(N_P)$. It directly
-		      follows that $dim(T(N_P)) \leq n$ because $dim(T(N_P))$ is only as large as its basis which is minimal
+		      follows that $dim(T(N_P)) \leq n$ because $dim(T(N_P))$ is only as large as its basis which is a minimal
 		      spanning set. Therefore, $dim(T(N_P)) \leq dim(N_P)$. Without loss of generality, we can show that
 		      $dim(P(N_T)) \leq dim(N_T)$ \par
 		      It follows from the claim above and from (a) that
@@ -1080,3 +1066,4 @@ Let $\mathrm{V}$ be a finite-dimensional vector space. Let $T$ and $P$ be two li
 \end{enumerate}
 
 \end{document}
+%dab on this midterm

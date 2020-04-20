@@ -1,0 +1,155 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+
+
+\title{Math 341: Homework 8}
+\author{Daniel Ko}
+\date{Spring 2020}
+
+\begin{document}
+\maketitle
+
+%5.1.6
+\section{A}
+Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $\beta$ be an ordered basis for $V$.
+Prove that $\lambda$ is an eigenvalue of $T$ if and only if $\lambda$ is an eigenvalue of $[T]_\beta$
+\begin{proof}\
+	\begin{enumerate}[label=\alph*.]
+		\item{
+		      $\lambda$ is an eigenvalue of $T \Rightarrow \lambda$ is an eigenvalue of $[T]_\beta$\par
+		      By definition, there exists a eigenvector $v \in V$ such that $T(v) = \lambda v$.
+		      Using Theorem 2.14,
+		      \begin{align*}
+			      T(v)                & = \lambda v         \\
+			      [T(v)]_\beta        & = [\lambda v]_\beta \\
+			      [T]_\beta [v]_\beta & = \lambda [v]_\beta
+		      \end{align*}
+		      as desired.
+		      Thus, $\lambda$ is an eigenvalue of $[T]_\beta$.
+		      }
+		\item{
+		      $\lambda$ is an eigenvalue of $[T]_\beta \Rightarrow \lambda$ is an eigenvalue of $T$ \par
+		      By definition, there exists a eigenvector $v \in V$ such that $[T]_\beta [v]_\beta = \lambda [v]_\beta$.
+		      Using Theorem 2.14,
+		      \begin{align*}
+			      [T]_\beta [v]_\beta & = \lambda [v]_\beta \\
+			      [T(v)]_\beta        & = [\lambda v]_\beta \\
+			      T(v)                & = \lambda v
+		      \end{align*}
+		      as desired.
+		      Thus, $\lambda$ is an eigenvalue of $T$.
+		      }
+	\end{enumerate}
+	Therefore, $\lambda$ is an eigenvalue of $T$ if and only if $\lambda$ is an eigenvalue of $[T]_\beta$.
+\end{proof}
+
+%5.1.8
+\section{B}
+\begin{enumerate}[label=\alph*.]
+	\item{
+	      Prove that a linear operator $T$ on a finite-dimensional vector space is invertible if and only if zero is not an
+	      eigenvalue of $T$.
+	      \begin{proof}\
+		      \begin{enumerate}[label=\roman*.]
+			      \item{
+			            Linear operator $T$ on a finite-dimensional vector space is invertible $\Rightarrow$ zero is not an
+			            eigenvalue of $T$.\par
+			            By the corollary of Theorem 4.7, $\text{det}(T) \neq 0$. Assume, for the sake of contradiction, suppose
+			            zero is an eigenvalue of $T$.
+			            It follows from Theorem 5.2 that
+			            \begin{align*}
+				            \text{det}(T - \lambda I) & = 0 \\
+				            \text{det}(T - 0I)        & = 0 \\
+				            \text{det}(T)             & = 0
+			            \end{align*}
+			            which is a contradiction. Thus, zero is not an eigenvalue of $T$.
+			            }
+			      \item{
+			            Zero is not an eigenvalue of $T\Rightarrow$ linear operator $T$ on a finite-dimensional vector space is invertible.\par
+			            By contrapositive, we will instead prove that if linear operator $T$ on a finite-dimensional vector space is not invertible
+			            then zero is an eigenvalue of $T$. If $T$ is not invertible then $\text{det}(T) = 0$ by corollary of Theorem 4.7.
+			            It follows from Theorem 5.2 that
+			            \begin{align*}
+				            \text{det}(T - \lambda I) & = 0
+			            \end{align*}
+			            It directly follows that zero is an eigenvalue of $T$.
+			            }
+		      \end{enumerate}
+		      Therefore, linear operator $T$ on a finite-dimensional vector space is invertible if and only if zero is not an
+		      eigenvalue of $T$.
+	      \end{proof}
+	      }
+	\item{
+	      Let $T$ be an invertible linear operator. Prove that a scalar $\lambda$ is an eigenvalue of $T$ if and only if
+	      $\lambda^{-1}$ is an eigenvalue of $T^{-1}$.
+	      \begin{proof}\
+		      \begin{enumerate}[label=\roman*.]
+			      \item{
+			            A scalar $\lambda$ is an eigenvalue of T $\Rightarrow$ $\lambda^{-1}$ is an eigenvalue of $T^{-1}$.\par
+			            By definition, there exists a eigenvector $v \in V$ such that $T(v) = \lambda v$. Given that $T$ is invertible
+			            and by definition eigenvalues are non zero,
+			            \begin{align*}
+				            T(v)          & = \lambda v         \\
+				            T^{-1}(T(v))  & = T^{-1}(\lambda v) \\
+				            v             & = T^{-1}(\lambda v) \\
+				            v             & = \lambda T^{-1}(v) \\
+				            \lambda^{-1}v & =  T^{-1}(v)
+			            \end{align*}
+			            as desired. Thus, $\lambda^{-1}$ is an eigenvalue of $T^{-1}$.
+			            }
+			      \item{
+			            $\lambda^{-1}$ is an eigenvalue of $T^{-1}$ $\Rightarrow$  a scalar $\lambda$ is an eigenvalue of T.\par
+			            By definition, there exists a eigenvector $v \in V$ such that $T^{-1}(v) = \lambda^{-1} v$.
+			            Given that $T^{-1}$ is invertible linear operator,
+			            \begin{align*}
+				            T^{-1}(v)    & = \lambda^{-1} v    \\
+				            T(T^{-1}(v)) & = T(\lambda^{-1} v) \\
+				            v            & = \lambda^{-1}T(v)  \\
+				            \lambda v    & = T(v)
+			            \end{align*}
+			            as desired. Thus, $\lambda$ is an eigenvalue of $T$.
+			            }
+		      \end{enumerate}
+		      Therefore, a scalar $\lambda$ is an eigenvalue of $T$ if and only if
+		      $\lambda^{-1}$ is an eigenvalue of $T^{-1}$.
+	      \end{proof}
+	      }
+	\item{
+	      State and prove results analogous to (a) and (b) for matrices.
+	      \begin{enumerate}[label=(\alph*)]
+		      \item{
+					A matrix $A$ is invertible if and only if zero is not an eigenvalue of $A$.
+					\begin{proof}
+						Since $A$ is an invertible matrix, the corresponding left multiplication transformation
+						is also invertible by corollary 2 of Theorem 2.18. It directly follows from the proof from (a)
+						that "matrix $A$ is invertible if and only if zero is not an eigenvalue of $A$."
+						is true.
+					\end{proof}
+		            }
+		      \item{
+		            Let $A$ be an invertible matrix.
+					$\lambda$ is an eigenvalue of $A$ if and only if $\lambda^{-1}$ is an eigenvalue of $A^{-1}$.
+					\begin{proof}
+						Since $A$ is an invertible matrix, the corresponding left multiplication transformation
+						is also invertible by corollary 2 of Theorem 2.18. It directly follows from the proof from (b)
+						that "$\lambda$ is an eigenvalue of $A$ if and only if $\lambda^{-1}$ is an eigenvalue of $A^{-1}$"
+						is true.
+					\end{proof}
+		            }
+	      \end{enumerate}
+	      }
+\end{enumerate}
+
+\end{document}
