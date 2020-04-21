@@ -126,30 +126,99 @@ Prove that $\lambda$ is an eigenvalue of $T$ if and only if $\lambda$ is an eige
 		      $\lambda^{-1}$ is an eigenvalue of $T^{-1}$.
 	      \end{proof}
 	      }
+	      %PROBABLY WRONG FIX LATER
 	\item{
 	      State and prove results analogous to (a) and (b) for matrices.
 	      \begin{enumerate}[label=(\alph*)]
 		      \item{
-					A matrix $A$ is invertible if and only if zero is not an eigenvalue of $A$.
-					\begin{proof}
-						Since $A$ is an invertible matrix, the corresponding left multiplication transformation
-						is also invertible by corollary 2 of Theorem 2.18. It directly follows from the proof from (a)
-						that "matrix $A$ is invertible if and only if zero is not an eigenvalue of $A$."
-						is true.
-					\end{proof}
+		            A matrix $A$ is invertible if and only if zero is not an eigenvalue of $A$.
+		            \begin{proof}
+			            Since $A$ is an invertible matrix, the corresponding left multiplication transformation
+			            is also invertible by corollary 2 of Theorem 2.18. It directly follows from the proof from (a)
+			            that "matrix $A$ is invertible if and only if zero is not an eigenvalue of $A$."
+			            is true.
+		            \end{proof}
 		            }
 		      \item{
 		            Let $A$ be an invertible matrix.
-					$\lambda$ is an eigenvalue of $A$ if and only if $\lambda^{-1}$ is an eigenvalue of $A^{-1}$.
-					\begin{proof}
-						Since $A$ is an invertible matrix, the corresponding left multiplication transformation
-						is also invertible by corollary 2 of Theorem 2.18. It directly follows from the proof from (b)
-						that "$\lambda$ is an eigenvalue of $A$ if and only if $\lambda^{-1}$ is an eigenvalue of $A^{-1}$"
-						is true.
-					\end{proof}
+		            $\lambda$ is an eigenvalue of $A$ if and only if $\lambda^{-1}$ is an eigenvalue of $A^{-1}$.
+		            \begin{proof}
+			            Since $A$ is an invertible matrix, the corresponding left multiplication transformation
+			            is also invertible by corollary 2 of Theorem 2.18. It directly follows from the proof from (b)
+			            that "$\lambda$ is an eigenvalue of $A$ if and only if $\lambda^{-1}$ is an eigenvalue of $A^{-1}$"
+			            is true.
+		            \end{proof}
 		            }
 	      \end{enumerate}
 	      }
 \end{enumerate}
+
+%5.1.14
+\section{C}
+For any square matrix $A$, prove that $A$ and $A^t$ have the same characteristic polynomial, and hence the same
+eigenvalues.
+\begin{proof}\
+	Let $A \in M_{nxn}(F)$. The characteristic polynomial for A is $f(t) = \text{det}(A - tI_n)$.
+	Using Theorem 4.8, Theorem 2.12, and the trivial fact that the identity matrix is symmetric,
+	\begin{align*}
+		f(t) & = det(A - tI_n)        \\
+		     & = det((A - tI_n)^t)    \\
+		     & = det(A^t - (tI_n)^t)) \\
+		     & = det(A^t - tI_n)
+	\end{align*}
+	which is exactly the characteristic polynomial for $A^t$. Therefore, $A$ and $A^t$ have the same characteristic polynomial, and hence the same
+	eigenvalues.
+\end{proof}
+
+\section{D}
+Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $c$ be any scalar.
+\begin{enumerate}[label=\alph*.]
+	\item{
+	      Determine the relationship between the eigenvalues and eigenvectors of $T$ (if any) and the eigenvalues and
+	      eigenvectors of $U = T - cI$ (where $I$ is the identity transformation) Justify your answers.
+	      \begin{proof}
+		      Suppose $v \in V$ is an eigenvector of $T$ where $\lambda$ is its eigenvalue,
+		      $$Tv = \lambda v$$
+		      Applying the transformation $U$ to $v$,
+		      \begin{align*}
+			      Uv & = (T - cI)v      \\
+			         & = Tv - cIv       \\
+			         & = \lambda v - cv \\
+			         & = (\lambda - c)v
+		      \end{align*}
+		      Thus, if $v$ is an eigenvector of $T$, then it is an eigenvector $U$ with its corresponding
+		      eigenvalue being $c$.
+	      \end{proof}
+	      }
+	\item{
+	      Prove that $T$ is diagonalizable if and only if $U$ is diagonalizable.
+	      \begin{proof}
+		      Since $T$ is diagonalizable, there exists an ordered basis $\beta$ for $V$
+		      consisting of eigenvectors of $T$ by Theorem 5.1.
+			  From (a), we know that all eigenvectors of $T$ are eigenvectors of $U$.
+			  Thus, $\beta$ is an ordered basis consisting of eigenvectors of $U$.
+			  Thus, $U$ is diagonalizable. Without loss of generality, if $U$ is diagonalizable
+			  then $T$ is diagonalizable. Therefore, $T$ is diagonalizable if and only if $U$ is diagonalizable.
+
+	      \end{proof}
+	      }
+\end{enumerate}
+
+%5.2.2 
+\section{E}
+
+%5.2.7 
+
+%5.2.9 \section{F}
+
+%5.2.9 \section{G}
+
+%5.3.17 + 5.3.18	
+
+%5.4.19
+
+%5.4.23 + 24 + 25
+
+
 
 \end{document}
