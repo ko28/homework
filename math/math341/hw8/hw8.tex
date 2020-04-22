@@ -195,10 +195,10 @@ Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $
 	      \begin{proof}
 		      Since $T$ is diagonalizable, there exists an ordered basis $\beta$ for $V$
 		      consisting of eigenvectors of $T$ by Theorem 5.1.
-			  From (a), we know that all eigenvectors of $T$ are eigenvectors of $U$.
-			  Thus, $\beta$ is an ordered basis consisting of eigenvectors of $U$.
-			  Thus, $U$ is diagonalizable. Without loss of generality, if $U$ is diagonalizable
-			  then $T$ is diagonalizable. Therefore, $T$ is diagonalizable if and only if $U$ is diagonalizable.
+		      From (a), we know that all eigenvectors of $T$ are eigenvectors of $U$.
+		      Thus, $\beta$ is an ordered basis consisting of eigenvectors of $U$.
+		      Thus, $U$ is diagonalizable. Without loss of generality, if $U$ is diagonalizable
+		      then $T$ is diagonalizable. Therefore, $T$ is diagonalizable if and only if $U$ is diagonalizable.
 
 	      \end{proof}
 	      }
@@ -206,12 +206,415 @@ Let $T$ be a linear operator on a finite-dimensional vector space $V$, and let $
 
 %5.2.2 
 \section{E}
+For each of the following matrices $A \in \mathbf{M}_{n \times n}(R),$ test $A$ for diagonalizability,
+and if $A$ is diagonalizable, find an invertible matrix $Q$ and a diagonal matrix $D$ such that $Q^{-1} A Q=D$
+\begin{enumerate}[label=\alph*.]
+	\item{
+	      $\left(\begin{array}{ll}1 & 2 \\ 0 & 1\end{array}\right)$
+	      \begin{proof}
+		      We follow "Test for Diagonalization" and example 5 in section 5.2 of our textbook.
+		      The characteristic polynomial of $A$ is
+		      \[
+			      \text{det}(A - \lambda I ) = \text{det}\left(\begin{array}{ll}1 - \lambda & 2 \\ 0 & 1 - \lambda \end{array}\right)
+			      = (1 - \lambda)^2
+		      \]
+		      which splits, so condition 1 of the test for diagonalization is satisfied.
+		      $A$ has a single eigenvalue of $\lambda_1 = 1 $. Because
+		      \[
+			      A - \lambda_1 I = \left(\begin{array}{ll}0 & 2 \\ 0 & 0 \end{array}\right)
+		      \]
+		      has rank 1, we see that $2 - \text{rank}(A - \lambda_1 I) = 1$ which is not the multiplicity of $\lambda_1$.
+		      Thus condition 2 fails and therefore $A$ is not diagonalizable.
+		      %Now we see if for each eigenvalue $\lambda$ of $T$, 
+		      %the multiplicity of $\lambda$ equals $n - \text{rank}(T - \lambda I)$.
+	      \end{proof}
+	      }
+	\item{
+	      $\left(\begin{array}{ll}1 & 3 \\ 3 & 1\end{array}\right)$
+	      \begin{proof}
+		      The characteristic polynomial of $A$ is
+		      \[
+			      \text{det}(A - \lambda I ) = \text{det}\left(\begin{array}{ll}1 - \lambda & 3 \\ 3 & 1 - \lambda \end{array}\right)
+			      = (1 - \lambda)(1 - \lambda) - 9 = (\lambda + 2)(\lambda - 4)
+		      \]
+		      which splits, so condition 1 of the test for diagonalization is satisfied.
+		      $A$ has eigenvalues of $\lambda_1 = -2 $ and $\lambda_2 = 4 $. By Theorem 5.7, condition 2
+		      is automatically satisfied for eigenvalues of multiplicity 1. Therefore, $A$ is diagonalizable.
+		      To find a invertible matrix $Q$ and a diagonal matrix $D$ such that $Q^{-1} A Q=D$, we first
+		      calculate the eigenvectors for $\lambda_1$ and $\lambda_2$ using Theorem 5.4.
+		      \[
+			      (A - \lambda_1I)x =  \begin{bmatrix}3 & 3 \\ 3 & 3 \end{bmatrix}x = 0
+		      \]
+		      \[
+			      \systeme{
+				      3x_1 + 3x_2 = 0,
+				      3x_1 + 3x_2 = 0
+			      }
+			      \Rightarrow x_1 = -x_2
+			      \Rightarrow \text{fix } x_1 = 1
+			      \Rightarrow v_{\lambda_1} =  \begin{bmatrix}1 \\-1 \end{bmatrix}
+		      \]
+		      \[
+			      (A - \lambda_2I)x = \begin{bmatrix}-3 & 3 \\ 3 & -3  \end{bmatrix}x = 0
+		      \]
+		      \[
+			      \systeme{
+				      -3x_1 + 3x_2 = 0,
+				      3x_1 - 3x_2 = 0
+			      }
+			      \Rightarrow x_1 = x_2
+			      \Rightarrow \text{fix } x_1 = 1
+			      \Rightarrow v_{\lambda_1} =  \begin{bmatrix}1 \\1  \end{bmatrix}
+		      \]
+		      $v_{\lambda_1}$ and $v_{\lambda_2}$ are eigenvectors of $\lambda_1$ and $\lambda_2$ respectively.
+		      We can use the corollary to Theorem 2.23 to find an invertible matrix $Q$.
+		      The matrix $Q$ has its columns the vectors in a basis of eigenvectors of $A$.
+		      \begin{align*}
+			      Q      & = \begin{bmatrix}
+				      1  & 1 \\
+				      -1 & 1
+			      \end{bmatrix}       \\
+			      Q^{-1} & = \frac{1}{(1\cdot1) - (1\cdot-1)}
+			      \begin{bmatrix}
+				      1 & -1 \\
+				      1 & 1
+			      \end{bmatrix}
+			      = 	\begin{bmatrix}
+				      \frac12 & -\frac12 \\
+				      \frac12 & \frac12
+			      \end{bmatrix}                \\
+			      D      & = Q^{-1} A Q                       \\
+			             & =
+			      \begin{bmatrix}
+				      \frac12 & -\frac12 \\
+				      \frac12 & \frac12
+			      \end{bmatrix}
+			      \begin{bmatrix}
+				      1 & 3 \\
+				      3 & 1
+			      \end{bmatrix}
+			      \begin{bmatrix}
+				      1  & 1 \\
+				      -1 & 1
+			      \end{bmatrix}                  \\
+			             & =
+			      \begin{bmatrix}
+				      -2 & 0 \\
+				      0  & 4
+			      \end{bmatrix}
+		      \end{align*}
+		      as desired.
+	      \end{proof}
+	      }
+	\item{
+	      $\left(\begin{array}{ll}1 & 4 \\ 3 & 2\end{array}\right)$
+	      \begin{proof}
+		      The characteristic polynomial of $A$ is
+		      \[
+			      \text{det}(A - \lambda I ) = \text{det}\left(\begin{array}{ll}1 - \lambda & 4 \\ 3 & 2 - \lambda \end{array}\right)
+			      = (1 - \lambda)(2 - \lambda) - 12 = (\lambda + 2) (\lambda - 5)
+		      \]
+		      which splits, so condition 1 of the test for diagonalization is satisfied.
+		      $A$ has eigenvalues of $\lambda_1 = -2 $ and $\lambda_2 = 5$.
+		      By Theorem 5.7, condition 2 is automatically satisfied for eigenvalues of multiplicity 1.
+		      Therefore, $A$ is diagonalizable.
+		      To find a invertible matrix $Q$ and a diagonal matrix $D$ such that $Q^{-1} A Q=D$, we first
+		      calculate the eigenvectors for $\lambda_1$ and $\lambda_2$ using Theorem 5.4.
+		      \[
+			      (A - \lambda_1I)x =  \begin{bmatrix}3 & 4 \\ 3 & 4 \end{bmatrix}x = 0
+		      \]
+		      \[
+			      \systeme{
+				      3x_1 + 4x_2 = 0,
+				      3x_1 + 4x_2 = 0
+			      }
+			      \Rightarrow x_1 = x_2
+			      \Rightarrow \text{fix } x_2 = 3
+			      \Rightarrow v_{\lambda_1} =  \begin{bmatrix}-4 \\3 \end{bmatrix}
+		      \]
+		      Similiarly, $$v_{\lambda_2} =  \begin{bmatrix} 1 \\1 \end{bmatrix}$$
+		      $v_{\lambda_1}$ and $v_{\lambda_2}$ are eigenvectors of $\lambda_1$ and $\lambda_2$ respectively.
+		      We can use the corollary to Theorem 2.23 to find an invertible matrix $Q$.
+		      The matrix $Q$ has as its  columns the vectors in a basis of eigenvectors of $A$.
+		      \begin{align*}
+			      Q      & =
+			      \begin{bmatrix}
+				      -4 & 1 \\
+				      3  & 1
+			      \end{bmatrix}           \\
+			      Q^{-1} & =
+			      \begin{bmatrix}
+				      -\frac{1}{7} & \frac{1}{7} \\
+				      \frac{3}{7}  & \frac{4}{7}
+			      \end{bmatrix}           \\
+			      D      & = Q^{-1} A Q                \\
+			             & =
+			      \begin{bmatrix}
+				      -\frac{1}{7} & \frac{1}{7} \\
+				      \frac{3}{7}  & \frac{4}{7}
+			      \end{bmatrix}
+			      \begin{bmatrix}
+				      1 & 4 \\
+				      3 & 2
+			      \end{bmatrix}
+			      \begin{bmatrix}
+				      -4 & 1 \\
+				      3  & 1
+			      \end{bmatrix}           \\
+			             & =\begin{bmatrix}
+				      -2 & 0 \\
+				      0  & 5
+			      \end{bmatrix}
+		      \end{align*}
+		      as desired.
+	      \end{proof}
+	      }
+	\item{
+	      $\left(\begin{array}{ccc}7 & -4 & 0 \\ 8 & -5 & 0 \\ 6 & -6 & 3\end{array}\right)$
+	      \begin{proof}
+		      The characteristic polynomial of $A$ is $-(\lambda+1)(\lambda-3)^2$
+		      which splits, so condition 1 of the test for diagonalization is satisfied.
+		      $A$ has eigenvalues of $\lambda_1 = -1 $ and $\lambda_2 = 3$.
+		      By Theorem 5.7, condition 2 is automatically satisfied for eigenvalues of multiplicity 1.
+		      So we only need to test condition 2 for $\lambda_2$.
+		      It is clear that
+		      \[
+			      A - \lambda_2 I =
+			      \begin{bmatrix}
+				      4 & -4 & 0 \\
+				      8 & -8 & 0 \\
+				      6 & -6 & 0
+			      \end{bmatrix}
+		      \]
+		      has rank 1, we see that $3 - \text{rank}(A - \lambda_1 I) = 2$ which is the multiplicity of $\lambda_2$.
+		      Thus, condition 2 holds and $A$ is diagonalizable. The eigenvector of $\lambda_1$ is
+		      \[
+			      \begin{bmatrix}
+				      2 \\
+				      4 \\
+				      3
+			      \end{bmatrix}
+		      \]
+		      and the eigenvectors of $\lambda_2$ is
+		      \[
+			      \begin{bmatrix}
+				      0 \\
+				      0 \\
+				      1
+			      \end{bmatrix},
+			      \begin{bmatrix}
+				      1 \\
+				      1 \\
+				      0
+			      \end{bmatrix}
+		      \]
+		      Thus,
+		      \[
+			      Q =
+			      \begin{bmatrix}
+				      2 & 0 & 1 \\
+				      4 & 0 & 1 \\
+				      3 & 1 & 0
+			      \end{bmatrix}
+		      \]
+		      and
+		      \begin{align*}
+			      D & = Q^{-1} A Q                \\
+			        & =\begin{bmatrix}-\frac{1}{2}&\frac{1}{2}&0\\ \frac{3}{2}&-\frac{3}{2}&1\\ 2&-1&0\end{bmatrix}
+			      \begin{bmatrix}
+				      7 & -4 & 0 \\ 8 & -5 & 0 \\ 6 & -6 & 3
+			      \end{bmatrix}
+			      \begin{bmatrix}
+				      2 & 0 & 1 \\
+				      4 & 0 & 1 \\
+				      3 & 1 & 0
+			      \end{bmatrix}      \\
+			        & =
+			      \begin{bmatrix}
+				      -1 & 0 & 0 \\ 0&3&0\\ 0&0&3
+			      \end{bmatrix}
+		      \end{align*}
+
+	      \end{proof}
+	      }
+	\item{
+	      %\begin{bmatrix} 0 & 0 & 1 \\ 1 & 0 & -1 \\ 0 & 1 & 1 \end{bmatrix}%
+	      $\left(\begin{array}{lll}0 & 0 & 1 \\ 1 & 0 & -1 \\ 0 & 1 & 1\end{array}\right)$
+	      \begin{proof}
+		      The characteristic polynomial of $A$ is $-(\lambda-1)(\lambda^2+1)$
+		      which does not split over $\mathbb{R}$, so condition 1 of the test for diagonalization is not satisfied.
+		      Therefore, $A$ is not diagonalizable.
+	      \end{proof}
+	      }
+	\item{
+	      $\left(\begin{array}{lll}1 & 1 & 0 \\ 0 & 1 & 2 \\ 0 & 0 & 3\end{array}\right)$
+	      \begin{proof}
+		      The characteristic polynomial of $A$ is $-(\lambda-1)^2(\lambda-3)$
+		      which splits, so condition 1 of the test for diagonalization is satisfied.
+		      $A$ has eigenvalues of $\lambda_1 = 1 $ and $\lambda_2 = 3$.
+		      We test condition 2 for $\lambda_1$.
+		      It is clear that
+		      \[
+			      A - \lambda_1 I =
+			      \begin{bmatrix}
+				      -1 & 0 & 1 \\ 1 & -1 & -1 \\ 0 & 1 & 0
+			      \end{bmatrix}
+		      \]
+		      has rank 2, we see that $3 - \text{rank}(A - \lambda_1 I) = 1$ which is not the multiplicity of $\lambda_2$.
+		      Thus, condition 2 fails and $A$ not diagonalizable.
+	      \end{proof}
+	      }
+	\item{
+	      $\left(\begin{array}{ccc}3 & 1 & 1 \\ 2 & 4 & 2 \\ -1 & -1 & 1\end{array}\right)$
+	      The characteristic polynomial of $A$ is $-(\lambda-2)^2(\lambda-4)$.
+	      which splits, so condition 1 of the test for diagonalization is satisfied.
+	      $A$ has eigenvalues of $\lambda_1 = 2 $ and $\lambda_2 = 4$.
+	      By Theorem 5.7, condition 2 is automatically satisfied for eigenvalues of multiplicity 1.
+	      So we only need to test condition 2 for $\lambda_1$.
+	      It is clear that
+	      \[
+		      A - \lambda_1 I =
+		      \begin{bmatrix}
+			      1 & 1 & 1 \\ 2 & 2 & 2 \\ -1 & -1 & -1
+		      \end{bmatrix}
+	      \]
+	      has rank 1, we see that $3 - \text{rank}(A - \lambda_1 I) = 2$ which is the multiplicity of $\lambda_2$.
+	      Thus, condition 2 holds and $A$ is diagonalizable. The eigenvectors of $\lambda_1$ is
+	      \[
+		      \begin{bmatrix}
+			      -1 \\ 1\\ 0
+		      \end{bmatrix},
+		      \begin{bmatrix}
+			      -1 \\ 0\\ 1
+		      \end{bmatrix}
+	      \]
+	      and the eigenvector of $\lambda_2$ is
+	      \[
+		      \begin{bmatrix}
+			      -1 \\ -2\\ 1
+		      \end{bmatrix}
+	      \]
+	      Thus,
+	      \[
+		      Q =
+		      \begin{bmatrix}
+			      -1 & -1 & -1 \\
+			      1  & 0  & -2 \\
+			      0  & 1  & 1
+		      \end{bmatrix}
+	      \]
+	      and
+	      \begin{align*}
+		      D & = Q^{-1} A Q                \\
+		        & =\begin{bmatrix}-1&0&-1\\ \frac{1}{2}&\frac{1}{2}&\frac{3}{2}\\ -\frac{1}{2}&-\frac{1}{2}&-\frac{1}{2}  \end{bmatrix}
+		      \begin{bmatrix}
+			      3 & 1 & 1 \\ 2 & 4 & 2 \\ -1 & -1 & 1
+		      \end{bmatrix}
+		      \begin{bmatrix}
+			      -1 & -1 & -1 \\
+			      1  & 0  & -2 \\
+			      0  & 1  & 1
+		      \end{bmatrix}      \\
+		        & =
+		      \begin{bmatrix}
+			      2 & 0 & 0 \\ 0&2&0\\ 0&0&4
+		      \end{bmatrix}
+	      \end{align*}
+
+	      }
+\end{enumerate}
 
 %5.2.7 
+\section{F}
+For
+$$A=\left(\begin{array}{ll}1 & 4 \\ 2 & 3\end{array}\right) \in \mathrm{M}_{2 \times 2}(R)$$
+find an expression for $A^{n},$ where $n$ is an arbitrary positive integer.
+\begin{proof}
+	We claim that $A$ is diagonalizable and we can find invertible matrices that will give us the expression $A^{n}$.
+	Consider the characteristic polynomial of $A$
+	\[
+		\text{det}(A - \lambda I ) = \text{det}\left(\begin{array}{ll}1 - \lambda & 4 \\ 2 & 3 - \lambda  \end{array}\right)
+		= (\lambda + 1)(\lambda-5)
+	\]
+	which splits, so condition 1 of the test for diagonalization is satisfied.
+	$A$ has eigenvalues of $\lambda_1 = -1 $ and $\lambda_2 = 5 $. By Theorem 5.7, condition 2
+	is automatically satisfied for eigenvalues of multiplicity 1. Therefore, $A$ is diagonalizable.
+	To find a invertible matrix $Q$ and a diagonal matrix $D$ such that $Q^{-1} A Q=D$, we first
+	calculate the eigenvectors for $\lambda_1$ and $\lambda_2$ using Theorem 5.4.
 
-%5.2.9 \section{F}
+	\[
+		(A - \lambda_1I)x =  \begin{bmatrix}2 & 4 \\ 2 & 4\end{bmatrix}x = 0
+	\]
+	\[
+		\systeme{
+			2x_1 + 4x_2 = 0,
+			2x_1 + 4x_2 = 0
+		}
+		\Rightarrow x_1 = -2x_2
+		\Rightarrow \text{fix } x_2 = 1
+		\Rightarrow v_{\lambda_1} =  \begin{bmatrix}-2 \\1 \end{bmatrix}
+	\]
+	\[
+		(A - \lambda_2I)x = \begin{bmatrix}-4 & 4 \\ 2 & -2  \end{bmatrix}x = 0
+	\]
+	\[
+		\systeme{
+			-4x_1 + 4x_2 = 0,
+			2x_1 - 2x_2 = 0
+		}
+		\Rightarrow x_1 = x_2
+		\Rightarrow \text{fix } x_1 = 1
+		\Rightarrow v_{\lambda_1} =  \begin{bmatrix}1 \\1  \end{bmatrix}
+	\]
+	$v_{\lambda_1}$ and $v_{\lambda_2}$ are eigenvectors of $\lambda_1$ and $\lambda_2$ respectively.
+	We can use the corollary to Theorem 2.23 to find an invertible matrix $Q$.
+	The matrix $Q$ has its columns the vectors in a basis of eigenvectors of $A$.
+	\begin{align*}
+		Q      & = 
+		\begin{bmatrix}
+			-2  & 1 \\
+			1 & 1
+		\end{bmatrix} \\
+		Q^{-1} & = \begin{bmatrix}-\frac{1}{3}&\frac{1}{3}\\ \frac{1}{3}&\frac{2}{3}\end{bmatrix} \\
+		D      & = Q^{-1} A Q                 \\
+		       & =
+		\begin{bmatrix}-\frac{1}{3}&\frac{1}{3}\\ \frac{1}{3}&\frac{2}{3}\end{bmatrix}
+		\begin{bmatrix}
+			1 & 4 \\ 2 & 3
+		\end{bmatrix}
+		\begin{bmatrix}
+			-2  & 1 \\
+			1 & 1
+		\end{bmatrix}            \\
+		       & =
+		\begin{bmatrix}
+		-1&0\\ 0&5
+		\end{bmatrix}
+	\end{align*}
+	Rewriting $ D = Q^{-1} A Q $ gets us $ A = QDQ^{-1}$. Since $A$ and $D$ are both diagonal matrices,
+	$ A^n = Q D^n Q^{-1}$.
+	So,
+	\begin{align*}
+			A^n & = Q D^n Q^{-1} \\
+			& = 
+			\begin{bmatrix}
+				-2  & 1 \\
+				1 & 1
+			\end{bmatrix}
+			\begin{bmatrix}
+				-1&0\\ 0&5
+				\end{bmatrix}^n
+		\begin{bmatrix}-\frac{1}{3}&\frac{1}{3}\\ \frac{1}{3}&\frac{2}{3}\end{bmatrix}
+	\end{align*}
+	as desired.
+\end{proof}
 
-%5.2.9 \section{G}
+%5.2.9 
+\section{G}
+Let $T$ be a linear operator on a finite-dimensional vector space $V$, and suppose there exists an ordered basis $\beta$ for
+$V$ such that $[T]_\beta$ is an upper triangular matrix.
+
+%5.2.9 
 
 %5.3.17 + 5.3.18	
 
