@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  22 APR 2020 15:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  22 APR 2020 19:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/daniel/homework/math/math341/hw8/hw8.tex
-(/home/daniel/homework/math/math341/hw8/hw8.tex
+**/home/daniel/homework/math/math240/hw9/hw9.tex
+(/home/daniel/homework/math/math240/hw9/hw9.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
@@ -87,7 +87,7 @@ LaTeX Info: Redefining \textsubscript on input line 4161.
 \c@table=\count87
 Class scrartcl Info: Redefining `\numberline' on input line 5319.
 \bibindent=\dimen102
-) (/home/daniel/homework/math/math341/hw8/../../evan.sty
+) (/home/daniel/homework/math/math240/hw9/../../evan.sty
 
 LaTeX Warning: You have requested package `../../evan',
                but the package provides `evan'.
@@ -157,7 +157,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (/usr/share/texmf/tex/latex/asymptote/asymptote.sty
 Package: asymptote 2016/11/26 v1.33 Asymptote style file for LaTeX
- (/home/daniel/homework/math/math341/hw8/hw8.pre)
+ (/home/daniel/homework/math/math240/hw9/hw9.pre)
 \ASYbox=\box30
 \ASYdimen=\dimen112
 \c@asy=\count100
@@ -207,7 +207,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 ))
-\openout4 = `hw8.pre'.
+\openout4 = `hw9.pre'.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
@@ -1579,8 +1579,13 @@ Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 \SYSeqnum=\count324
 )
 Package: systeme 2018/01/01 v0.31 Mise en forme de systemes d'equations (CT)
-) (/home/daniel/homework/math/math341/hw8/hw8.aux)
-\openout1 = `hw8.aux'.
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks53
+\verbatim@line=\toks54
+\verbatim@in@stream=\read2
+) (/home/daniel/homework/math/math240/hw9/hw9.aux)
+\openout1 = `hw9.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
 LaTeX Font Info:    ... okay on input line 21.
@@ -1609,12 +1614,12 @@ LaTeX Font Info:    ... okay on input line 21.
 \scratchbox=\box66
 \nofMPsegments=\count326
 \nofMParguments=\count327
-\everyMPshowfont=\toks53
+\everyMPshowfont=\toks55
 \MPscratchCnt=\count328
 \MPscratchDim=\dimen279
 \MPnumerator=\count329
 \makeMPintoPDFobject=\count330
-\everyMPtoPDFconversion=\toks54
+\everyMPtoPDFconversion=\toks56
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
  (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
@@ -1639,9 +1644,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 21.
 LaTeX Info: Redefining \pageref on input line 21.
 LaTeX Info: Redefining \nameref on input line 21.
- (/home/daniel/homework/math/math341/hw8/hw8.out) (/home/daniel/homework/math/math341/hw8/hw8.out)
+ (/home/daniel/homework/math/math240/hw9/hw9.out) (/home/daniel/homework/math/math240/hw9/hw9.out)
 \@outlinefile=\write7
-\openout7 = `hw8.out'.
+\openout7 = `hw9.out'.
 
  ABD: EveryShipout initializing macros
 
@@ -1745,51 +1750,37 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <10.95> not available
-(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 28.
+(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 35.
  [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-
-LaTeX Font Warning: Font shape `OT1/cmbr/bx/n' in size <8> not available
-(Font)              Font shape `OT1/cmbr/m/n' tried instead on input line 209.
-
-
-LaTeX Font Warning: Font shape `OT1/cmbr/bx/n' in size <6> not available
-(Font)              Font shape `OT1/cmbr/m/n' tried instead on input line 209.
-
-[4] [5] [6] [7]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 621.
-Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 621.
- [8] [9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 688.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 688.
- (/home/daniel/homework/math/math341/hw8/hw8.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 688.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 688.
-Package rerunfilecheck Info: File `hw8.out' has not changed.
-(rerunfilecheck)             Checksum: 8D5626C4FE6763D4A7A5DB22250A2E08;288.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 186.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 186.
+ (/home/daniel/homework/math/math240/hw9/hw9.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 186.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 186.
+Package rerunfilecheck Info: File `hw9.out' has not changed.
+(rerunfilecheck)             Checksum: 8F6991DAFA362F39E3D90CDB9C4D0B56;180.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 688.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 186.
  ) 
 Here is how much of TeX's memory you used:
- 38771 strings out of 492982
- 759577 string characters out of 6134896
- 963968 words of memory out of 5000000
- 41641 multiletter control sequences out of 15000+600000
- 553309 words of font info for 117 fonts, out of 8000000 for 9000
+ 38583 strings out of 492982
+ 755531 string characters out of 6134896
+ 956596 words of memory out of 5000000
+ 41515 multiletter control sequences out of 15000+600000
+ 550221 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,21n,114p,10453b,1250s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb>
-Output written on /home/daniel/homework/math/math341/hw8/hw8.pdf (9 pages, 132843 bytes).
+ 87i,20n,114p,10453b,637s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb>
+Output written on /home/daniel/homework/math/math240/hw9/hw9.pdf (2 pages, 79899 bytes).
 PDF statistics:
- 197 PDF objects out of 1000 (max. 8388607)
- 155 compressed objects within 2 object streams
- 44 named destinations out of 1000 (max. 500000)
- 16557 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 111 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
+ 14 named destinations out of 1000 (max. 500000)
+ 14997 words of extra memory for PDF output out of 17280 (max. 10000000)
 
