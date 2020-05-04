@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  22 APR 2020 22:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  30 APR 2020 23:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/daniel/homework/math/math240/hw9/hw9.tex
-(/home/daniel/homework/math/math240/hw9/hw9.tex
+**/home/daniel/homework/math/math341/hw9/hw9.tex
+(/home/daniel/homework/math/math341/hw9/hw9.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
@@ -87,7 +87,7 @@ LaTeX Info: Redefining \textsubscript on input line 4161.
 \c@table=\count87
 Class scrartcl Info: Redefining `\numberline' on input line 5319.
 \bibindent=\dimen102
-) (/home/daniel/homework/math/math240/hw9/../../evan.sty
+) (/home/daniel/homework/math/math341/hw9/../../evan.sty
 
 LaTeX Warning: You have requested package `../../evan',
                but the package provides `evan'.
@@ -157,7 +157,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (/usr/share/texmf/tex/latex/asymptote/asymptote.sty
 Package: asymptote 2016/11/26 v1.33 Asymptote style file for LaTeX
- (/home/daniel/homework/math/math240/hw9/hw9.pre)
+ (/home/daniel/homework/math/math341/hw9/hw9.pre)
 \ASYbox=\box30
 \ASYdimen=\dimen112
 \c@asy=\count100
@@ -1579,12 +1579,7 @@ Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 \SYSeqnum=\count324
 )
 Package: systeme 2018/01/01 v0.31 Mise en forme de systemes d'equations (CT)
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
-Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks53
-\verbatim@line=\toks54
-\verbatim@in@stream=\read2
-) (/home/daniel/homework/math/math240/hw9/hw9.aux)
+) (/home/daniel/homework/math/math341/hw9/hw9.aux)
 \openout1 = `hw9.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
@@ -1614,12 +1609,12 @@ LaTeX Font Info:    ... okay on input line 21.
 \scratchbox=\box66
 \nofMPsegments=\count326
 \nofMParguments=\count327
-\everyMPshowfont=\toks55
+\everyMPshowfont=\toks53
 \MPscratchCnt=\count328
 \MPscratchDim=\dimen279
 \MPnumerator=\count329
 \makeMPintoPDFobject=\count330
-\everyMPtoPDFconversion=\toks56
+\everyMPtoPDFconversion=\toks54
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
  (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
@@ -1644,7 +1639,7 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 21.
 LaTeX Info: Redefining \pageref on input line 21.
 LaTeX Info: Redefining \nameref on input line 21.
- (/home/daniel/homework/math/math240/hw9/hw9.out) (/home/daniel/homework/math/math240/hw9/hw9.out)
+ (/home/daniel/homework/math/math341/hw9/hw9.out) (/home/daniel/homework/math/math341/hw9/hw9.out)
 \@outlinefile=\write7
 \openout7 = `hw9.out'.
 
@@ -1750,37 +1745,46 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <10.95> not available
-(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 35.
+(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 31.
  [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 222.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 222.
- (/home/daniel/homework/math/math240/hw9/hw9.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 222.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 222.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+
+LaTeX Font Warning: Font shape `OT1/cmbr/bx/n' in size <8> not available
+(Font)              Font shape `OT1/cmbr/m/n' tried instead on input line 98.
+
+
+LaTeX Font Warning: Font shape `OT1/cmbr/bx/n' in size <6> not available
+(Font)              Font shape `OT1/cmbr/m/n' tried instead on input line 98.
+
+[2] [3] [4] [5] [6] [7] [8] [9] [10] [11]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 613.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 613.
+ (/home/daniel/homework/math/math341/hw9/hw9.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 613.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 613.
 Package rerunfilecheck Info: File `hw9.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+(rerunfilecheck)             Checksum: 8D5626C4FE6763D4A7A5DB22250A2E08;288.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 222.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 613.
  ) 
 Here is how much of TeX's memory you used:
- 38590 strings out of 492982
- 755591 string characters out of 6134896
- 959591 words of memory out of 5000000
- 41508 multiletter control sequences out of 15000+600000
- 550686 words of font info for 104 fonts, out of 8000000 for 9000
+ 38619 strings out of 492982
+ 755594 string characters out of 6134896
+ 960921 words of memory out of 5000000
+ 41501 multiletter control sequences out of 15000+600000
+ 552390 words of font info for 106 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,21n,114p,10453b,637s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb>
-Output written on /home/daniel/homework/math/math240/hw9/hw9.pdf (3 pages, 95659 bytes).
+ 87i,21n,114p,10453b,830s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb>
+Output written on /home/daniel/homework/math/math341/hw9/hw9.pdf (11 pages, 138412 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
- 75 compressed objects within 1 object stream
- 16 named destinations out of 1000 (max. 500000)
- 14957 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 210 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
+ 54 named destinations out of 1000 (max. 500000)
+ 16557 words of extra memory for PDF output out of 17280 (max. 10000000)
 

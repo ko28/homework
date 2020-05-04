@@ -21,52 +21,52 @@
 \begin{document}
 \maketitle
 
-\section{1}
+\section{}
 Let $A$ be any nonempty set. (You do not get to decide what $A$ is)
 \begin{enumerate}[label=\alph*.]
-\item{
-	Let $R$ be a relation on $A$. Explain what is wrong with the following
-	“proof” that if $R$ is symmetric and transitive, then it is reflexive.\par
-	
-	"Proof": Let $a \in A$. Take an element $b \in A$ such that $(a, b) \in R .$ Because $R$ is symmetric,
-	we also have $(b, a) \in R$. Now using the transitive property, we can conclude that $(a, a) \in R$ because 
-	$(a, b) \in R$ and $(b, a) \in R$
-	\begin{proof}
-		This proof is wrong because it assumes a priori that $(a, b) \in R$ when no such definition of the relation $R$ is 
-		defined. 
-	\end{proof}
-}
-\item{
-	Give an example of a relation $R$ on $A$ which is symmetric and
-	transitive, but not reflexive. Justify your answer.
-	\begin{proof}
-		The most trival example is a non empty set $A$ and the empty set $R$.   
-		It is vacuously true that $R$ is symmetric and transitive.
-		However, $R$ is not reflexive because there are no relations in it,
-		i.e. the following statement does not hold: $\forall a \in A : (a,a) \in R$.
-	\end{proof}
-}
+	\item{
+	      Let $R$ be a relation on $A$. Explain what is wrong with the following
+	      “proof” that if $R$ is symmetric and transitive, then it is reflexive.\par
+
+	      "Proof": Let $a \in A$. Take an element $b \in A$ such that $(a, b) \in R .$ Because $R$ is symmetric,
+	      we also have $(b, a) \in R$. Now using the transitive property, we can conclude that $(a, a) \in R$ because
+	      $(a, b) \in R$ and $(b, a) \in R$
+	      \begin{proof}
+		      This proof is wrong because it assumes a priori that $(a, b) \in R$ when no such definition of the relation $R$ is
+		      defined.
+	      \end{proof}
+	      }
+	\item{
+	      Give an example of a relation $R$ on $A$ which is symmetric and
+	      transitive, but not reflexive. Justify your answer.
+	      \begin{proof}
+		      The most trival example is a non empty set $A$ and the empty set $R$.
+		      It is vacuously true that $R$ is symmetric and transitive.
+		      However, $R$ is not reflexive because there are no relations in it,
+		      i.e. the following statement does not hold: $\forall a \in A : (a,a) \in R$.
+	      \end{proof}
+	      }
 \end{enumerate}
 
-\section{2}
+\section{}
 Give an example of a relation $R$ on $\mathbb{N}$ such that if $S$ is a relation on $\mathbb{N}$
 which contains $R$, then $S$ is not antisymmetric. Justify your answer.
 (This implies that the antisymmetric closure of R does not exist.)
 \begin{proof}
-Consider the relation $R = \{(1,2),(2,1)\}$. It is clear that $1 \neq 2$, hence $R$ is 
-not antisymmetric. Therefore, if $S$ contains $R$, then $S$ is not antisymmetric.
+	Consider the relation $R = \{(1,2),(2,1)\}$. It is clear that $1 \neq 2$, hence $R$ is
+	not antisymmetric. Therefore, if $S$ contains $R$, then $S$ is not antisymmetric.
 \end{proof}
 
-\section{3}
+\section{}
 Come up with a topological ordering of the following DAG, i.e., write
 down the vertices in some order such that if $(i, j)$ is an edge, then $i$ is
 to the left of $j$.
 \begin{proof}
-Using Kahn's algorithm, we get the topological ordering of 
-$2,3,4,6,1,5$.
+	Using Kahn's algorithm, we get the topological ordering of
+	$2,3,4,6,1,5$.
 \end{proof}
 
-\section{4}
+\section{}
 Let $R$ be the relation on $\mathbb{R}$ defined by $(x, y) \in R$ if and only if $x - y$
 is rational. Is $R$ symmetric? Antisymmetric? Reflexive? Transitive?
 Justify your answers. (You may use basic properties about rational
@@ -74,54 +74,90 @@ numbers without proving them)
 \begin{proof}\
 	\begin{enumerate}[label=\alph*.]
 		\item{
-			R is symmetric\par
-			This is because there is closure under addition/subtraction for rational numbers.
-			If $x - y$ is a rational number then $y - x$ is a rational number, hence 
-			$(y,x) \in R$. 
-		}
+		      R is symmetric\par
+		      This is because there is closure under addition/subtraction for rational numbers.
+		      If $x - y$ is a rational number then $y - x$ is a rational number, hence
+		      $(y,x) \in R$.
+		      }
 		\item{
-			R is not antisymmetric \par
-			Consider the following relation in $R$: $(1,2)$ and $(2,1)$.  
-			It is clear that $1 \neq 2$. Therefore, $R$ is not antisymmetric.
-		}
+		      R is not antisymmetric \par
+		      Consider the following relation in $R$: $(1,2)$ and $(2,1)$.
+		      It is clear that $1 \neq 2$. Therefore, $R$ is not antisymmetric.
+		      }
 		\item{
-			R is reflexive \par
-			Suppose $x \in \mathbb{R}$. Any number subtracted by itself will be zero.
-			Zero is a rational number. Thus, $(x,x) \in R$. Therefore, R is reflexive.
-		}
+		      R is reflexive \par
+		      Suppose $x \in \mathbb{R}$. Any number subtracted by itself will be zero.
+		      Zero is a rational number. Thus, $(x,x) \in R$. Therefore, R is reflexive.
+		      }
 		\item{
-			R is transitive \par
-			Suppose $(x,y)$ and $(y,z)$ are in R. This means that $x - y$ and $y - z$ are rational
-			numbers. Now consider,
-			\begin{align*}
-				x - z & = (x - y) + (y - z)
-			\end{align*}
-			Since there is closure under addition for rational numbers, $x - z$ must be a rational number.
-			Hence, $(x,z) \in R$. Therefore, R is transitive.
- 		}
+		      R is transitive \par
+		      Suppose $(x,y)$ and $(y,z)$ are in R. This means that $x - y$ and $y - z$ are rational
+		      numbers. Now consider,
+		      \begin{align*}
+			      x - z & = (x - y) + (y - z)
+		      \end{align*}
+		      Since there is closure under addition for rational numbers, $x - z$ must be a rational number.
+		      Hence, $(x,z) \in R$. Therefore, R is transitive.
+		      }
 	\end{enumerate}
 \end{proof}
 
-\section{5}
+%5
+\section{}
 Let $R$ be a relation on a set $A$. Prove that if $R$ is reflexive, then $R \subseteq R^n$
 for all $n \geq 1$.
 \begin{proof}
-	yeet
-	
+	We proceed by induction on  $n \geq 1$. Let $P(n)$ be the predicate
+	if $R$ is reflexive, then $R \subseteq R^n$.\\
+	\textbf{Base case:} We prove that $P(1)$ holds. Since $R^1 = R$, $P(1)$ holds.\\
+	\textbf{Inductive step:} Suppose that $n \geq 1$ such that $P(n)$ holds. We prove that $P(n + 1)$ holds.
+	%Suppose $(a,c) \in R^{n}$. Since $R^{n} = R^{n-1} \circ R$, there must be some some $b \in A$ such that
+	%$(a,b) \in R^{n-1}$ and $(b,c) \in R$. 
+	Suppose $(a,c) \in R$.
+	By our inductive hypothesis, $(a,c) \in R^{n}$.
+	Since $R^{n} = R^{n-1} \circ R$, there must be some some $b \in A$ such that
+	$(a,b) \in R$ and $(b,c) \in R^{n-1}$.
+	Since $R$ is reflexive, there exists $(c,c) \in R$. This directly implies that
+	$(a,c) \in R^{n+1}$.
+	%We know that $R \subseteq R^n$ by our inductive hypothesis. This means that 
+	Therefore, $P(n+1)$ holds and this concludes our inductive step.\\
+	We have proved by induction that if $R$ is reflexive, then $R \subseteq R^n$
+	for all $n \geq 1$.
+\end{proof}
+
+\section{}
+Let $R$ be a relation on a set $A$. Prove that for any $m, n \geq 1$, 
+$R^n \circ R^m = R^{n+m}$. (You may assume that composition of relations is associative,
+i.e., $(Q \circ R) \circ S = Q \circ (R \circ S)$
+\begin{proof}
+	Fix a positive nonzero $m$. We prove by induction on $n\in \mathbb{N}^+$
+	that $R^n \circ R^m = R^{n+m}$.	\\
+	\textbf{Base case:} We prove that $P(1)$ holds. Since $n=1$, $R^1 \circ R^m = R^{1+m}$, $P(1)$ holds.\\
+	\textbf{Inductive step:} Suppose that $n \in \mathbb{N}^+$ such that $P(n)$ holds. We prove that $P(n + 1)$ holds.
+	Since $P(n)$ holds, $R^n \circ R^m = R^{n+m}$. We apply $R$ to both sides,
+	\begin{align*}
+		R^n \circ R^m & = R^{n+m}\\
+		R \circ R^n \circ R^m & = R \circ R^{n+m}\\
+		R^{n+1} \circ R^m & = R^{n+m +1}\\
+		R^{n+1} \circ R^m & = R^{(n+ 1) +m}
+	\end{align*}
+	as desired. Therefore, $P(n+1)$ holds and this concludes our inductive step.\\
+	We have proved by induction that for any $m, n \geq 1$, 
+	$R^n \circ R^m = R^{n+m}$.
 \end{proof}
 
 \begin{comment}
 
 Prove that in any group of $n$ people $(n \geq 2),$ there must be two people with the same number of friends within the group. Assume friendship
-is mutual, and nobody is their own friend. 
+is mutual, and nobody is their own friend.
 \begin{proof}
 	Given that there is $n$ people, the amount of friends each person will be in this set: $\{0,1,\cdots, n-1\}$, excluding $n$
 	because you cannot be friends with yourself. Consider the case when someone has $n-1$ friends. This means everyone in this group
 	has at least one friend. Also consider the case when someone has $0$ friends. This means that the most amount of friends one can
-	have is $n-2$ because you cannot be friends with yourself and with the person with $0$ friends. Thus the range of friends that 
-	a group has is actually $\{1,2,\cdots, n-1\}$ or $\{0,1,\cdots, n-2\}$. In both cases, the number possible combination of friends 
-	one can have is $n-1$. Using the pigeonhole principle, it directly follows that there must exist at least 2 people with the same 
-	number of friends in this group. 
+	have is $n-2$ because you cannot be friends with yourself and with the person with $0$ friends. Thus the range of friends that
+	a group has is actually $\{1,2,\cdots, n-1\}$ or $\{0,1,\cdots, n-2\}$. In both cases, the number possible combination of friends
+	one can have is $n-1$. Using the pigeonhole principle, it directly follows that there must exist at least 2 people with the same
+	number of friends in this group.
 \end{proof}
 \begin{enumerate}[label=\alph*.]
 	\item{
@@ -163,23 +199,23 @@ is mutual, and nobody is their own friend.
 		      So in either case, adding a new vertex only adds one edge. It follows then by this fact and by our induction hypothesis that
 		      \begin{align*}
 			      \sum_{v \in V'} \operatorname{deg}(v) & = \sum_{v \in V} \operatorname{deg}(v) + \operatorname{deg}(u) \\
-														& = n - 1 + \operatorname{deg}(u)  \\
-														& = n - 1 + 1 \\
-														& = n
-			  \end{align*}
-			  Therefore, $P(n+1)$ holds and this concludes our inductive step. 
-			  We have proved by induction that for all $n \geq 1$ that if a tree $T$ has $n$ vertices, then
-			  it has exactly $n-1$ edges.
+			                                            & = n - 1 + \operatorname{deg}(u)                                \\
+			                                            & = n - 1 + 1                                                    \\
+			                                            & = n
+		      \end{align*}
+		      Therefore, $P(n+1)$ holds and this concludes our inductive step.
+		      We have proved by induction that for all $n \geq 1$ that if a tree $T$ has $n$ vertices, then
+		      it has exactly $n-1$ edges.
 	      \end{proof}
 	      }
 	\item{
 	      Prove that if $G$ is a connected graph with $n$ vertices, then it has at least $n-1$ edges. (Hint: Spanning tree.)
-		 \begin{proof}
-			We know that a graph is connected if and only if it has a spanning tree (theorem given in the lecture).
-			Thus, that $G$ is a spanning tree. It directly follows from this fact and from part (b) that $G$ has exactly $n-1$
-			edges.
-		 \end{proof} 
-		  }
+	      \begin{proof}
+		      We know that a graph is connected if and only if it has a spanning tree (theorem given in the lecture).
+		      Thus, that $G$ is a spanning tree. It directly follows from this fact and from part (b) that $G$ has exactly $n-1$
+		      edges.
+	      \end{proof}
+	      }
 \end{enumerate}
 \end{comment}
 

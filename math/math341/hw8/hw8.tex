@@ -635,54 +635,181 @@ $V$ such that $[T]_\beta$ is an upper triangular matrix.
 	\item{
 	      State and prove an analogous result for matrices.
 	      \begin{proof}
-			  The analogous result for matrices is as follows: if $A \in M_{nxn}(F)$ is similar to an upper triangular matrix $A'$ 
-			  (i.e. $A=Q^{-1}A'Q$),
-			  then the characteristic polynomial of $A$ splits. 
-			  Notice that the characteristic polynomial of $A$ is the same as the characteristic polynomial of $A'$.
+		      The analogous result for matrices is as follows: if $A \in M_{nxn}(F)$ is similar to an upper triangular matrix $A'$
+		      (i.e. $A=Q^{-1}A'Q$),
+		      then the characteristic polynomial of $A$ splits.
+		      Notice that the characteristic polynomial of $A$ is the same as the characteristic polynomial of $A'$.
 		      \begin{align*}
-			      \text{det}(A - \lambda I) & = \text{det}(Q^{-1}A'Q - \lambda I_n) \\
-											& = \text{det}(Q^{-1}A'Q - Q^{-1}\lambda I_nQ) \\
-											& = \text{det}(Q^{-1}(A' - \lambda I_n)Q) \\
-											& = \text{det}(Q^{-1}) \text{det}(A' - \lambda I_n)\text{det}(Q)\\
-											& = \text{det}(A' - \lambda I_n)
+			      \text{det}(A - \lambda I) & = \text{det}(Q^{-1}A'Q - \lambda I_n)                          \\
+			                                & = \text{det}(Q^{-1}A'Q - Q^{-1}\lambda I_nQ)                   \\
+			                                & = \text{det}(Q^{-1}(A' - \lambda I_n)Q)                        \\
+			                                & = \text{det}(Q^{-1}) \text{det}(A' - \lambda I_n)\text{det}(Q) \\
+			                                & = \text{det}(A' - \lambda I_n)
 		      \end{align*}
-			  We calculate the characteristic polynomial of $A$ by using the fact that $A'$ is an upper triangular matrix,
-			  \begin{align*}
-				\text{det}(A - \lambda I) & = \text{det}(A' - \lambda I_n) \\
-				& = \prod_{i=1}^{n}(A'_{i,i} - \lambda)
-			\end{align*}
-			and $A$ splits as desired. Therefore, analogous result of (a) for matrices holds.
+		      We calculate the characteristic polynomial of $A$ by using the fact that $A'$ is an upper triangular matrix,
+		      \begin{align*}
+			      \text{det}(A - \lambda I) & = \text{det}(A' - \lambda I_n)        \\
+			                                & = \prod_{i=1}^{n}(A'_{i,i} - \lambda)
+		      \end{align*}
+		      and $A$ splits as desired. Therefore, analogous result of (a) for matrices holds.
 	      \end{proof}
 	      }
 	      %5.4.32
 	\item{
 	      Prove that if $A \in M_{nxn}(F)$ and the characteristic polynomial
 	      of $A$ splits, then $A$ is similar to an upper triangular matrix.
-		  \begin{proof}
-			We proceed by induction on $n \in \mathbb{N}^+$.
-			Let $P(n)$ be the predicate that if $A \in M_{nxn}(F)$ and the characteristic polynomial
-			of $A$ splits, then $A$ is similar to an upper triangular matrix. \par
-			\textbf{Base case:} It is trival that $P(1)$ holds as all matrix $1x1$ are upper triangular. \par
-			\textbf{Inductive step:} We prove that if $P(n)$ holds, then $P(n + 1)$ holds.
+	      \begin{proof}
+		      We proceed by induction on $n \in \mathbb{N}^+$.
+		      Let $P(n)$ be the predicate that if $A \in M_{nxn}(F)$ and the characteristic polynomial
+		      of $A$ splits, then $A$ is similar to an upper triangular matrix. \par
+		      \textbf{Base case:} It is trival that $P(1)$ holds as all matrix $1x1$ are upper triangular. \par
+		      \textbf{Inductive step:} We prove that if $P(n)$ holds, then $P(n + 1)$ holds.
 	      \end{proof}
 	      }
 \end{enumerate}
 
-%5.2.9 
+%5.2.17 + 5.3.18
 \section{H}
 \begin{enumerate}[label=\alph*.]
 	\item{
-		Prove that if $T$ and $U$ are simultaneously diagonalizable linear operators on a finite-dimensional vector
-		space V, then the matrices $[T]_\beta$ and $[U]_\beta$ are simultaneously diagonalizable for any ordered basis $\beta$
-	}
+	      Prove that if $T$ and $U$ are simultaneously diagonalizable linear operators on a finite-dimensional vector
+	      space V, then the matrices $[T]_\beta$ and $[U]_\beta$ are simultaneously diagonalizable for any ordered basis $\beta$
+	      \begin{proof}
+		      %Since $T$ and $U$ are simultaneously diagonalizable, there exists an ordered basis $\beta$ such that both
+		      %$[T]_\beta$ and $[U]_\beta$ are diagonal matrices.
+		      Since $T$ and $U$ are simultaneously diagonalizable, there exists an ordered basis $\gamma$ such that $[T]_\gamma$ and $[U]_\gamma$ are diagonal matrices.
+		      Let $\beta$ be an arbitrary ordered basis.
+		      Consider the change of basis matrix $[I]_\gamma^\beta$.
+		      Notice that
+		      \[
+			      [T]_\beta = [I]_\gamma^\beta [T]_\gamma [I]_\beta^\gamma
+		      \]
+		      Similiarly,
+		      \[
+			      [U]_\beta = [I]_\gamma^\beta [U]_\gamma [I]_\beta^\gamma
+		      \]
+		      Therefore, the matrices $[T]_\beta$ and $[U]_\beta$ are simultaneously diagonalizable for any ordered basis $\beta$.
+	      \end{proof}
+	      }
+	\item{
+	      Prove that if A and B are simultaneously diagonalizable matrices, then $L_A$ and $L_B$ are simultaneously
+	      diagonalizable linear operator
+	      \begin{proof}
+		      Since A and B are simultaneously diagonalizable matrices, there exists
+		      an invertible matrix $Q$ such that that both $Q^{-1}AQ$ and $Q^{-1}BQ$
+		      are diagonal matrices. Let $\alpha$ be the basis from the columns vectors of
+		      $Q$ and $\beta$ be the standard basis for the domain of $L_A$ and $L_B$.
+		      Notice,
+		      \begin{align*}
+			      [L_A]_\alpha & = [I]_\beta^\alpha [L_A]_\beta [I]_\alpha^\beta = Q^{-1}AQ \\
+			      [L_B]_\alpha & = [I]_\beta^\alpha [L_B]_\beta [I]_\alpha^\beta = Q^{-1}BQ
+		      \end{align*}
+	      \end{proof}
+	      Therefore, $L_A$ and $L_B$ are simultaneously
+	      diagonalizable linear operators.
+	      }
+	\item{
+	      Prove that if $T$ and $U$ are simultaneously diagonalizable operators,
+	      then $T$ and $U$ commute (i.e., $TU = UT$).
+	      \begin{proof}
+		      Since $T$ and $U$ are simultaneously diagonalizable operators,
+		      there exists an ordered basis $\gamma$ such that $[T]_\gamma$ and $[U]_\gamma$ are diagonal matrices.
+		      Notice that
+		      \[[T]_\gamma [U]_\gamma = [U]_\gamma [T]_\gamma\]
+		      because diagonal matrices commute.
+		      This directly implies that $T$ and $U$ commute.
+	      \end{proof}
+	      }
+	\item{
+	      Show that if $A$ and $B$ are simultaneously diagonalizable matrices, then $A$ and $B$ commute.
+	      \begin{proof}
+		      Since A and B are simultaneously diagonalizable matrices, there exists
+		      an invertible matrix $Q$ such that that both $Q^{-1}AQ$ and $Q^{-1}BQ$
+		      are diagonal matrices.
+		      \begin{align*}
+			      AB & = (Q^{-1}AQ) (Q^{-1}BQ) \\
+			         & = (Q^{-1}BQ) (Q^{-1}AQ) \\
+			         & = Q^{-1} BA Q           \\
+			         & = BA
+		      \end{align*}
+		      as desired. Therfore, if $A$ and $B$ are simultaneously diagonalizable matrices, $A$ and $B$ commute
+	      \end{proof}
+	      }
 \end{enumerate}
 
-%5.3.17 + 5.3.18 \section{I}
+%5.4.19 
+\section{I}
+Let $A$ denote the $k \times k$ matrix
+$$
+	\left(\begin{array}{ccccc}
+			0      & 0      & \cdots & 0      & -a_{0}   \\
+			1      & 0      & \cdots & 0      & -a_{1}   \\
+			0      & 1      & \cdots & 0      & -a_{2}   \\
+			\vdots & \vdots &        & \vdots & \vdots   \\
+			0      & 0      & \cdots & 1      & -a_{k-1}
+		\end{array}\right)
+$$
+where $a_{0}, a_{1}, \ldots, a_{k-1}$ are arbitrary scalars. Prove that the characteristic polynomial of $A$ is
+$$
+	(-1)^{k}\left(a_{0}+a_{1} t+\cdots+a_{k-1} t^{k-1}+t^{k}\right)
+$$
+\begin{proof}
+	We proceed by induction on $k \in \mathbb{N}^+$.
+	Let $P(n)$ be the predicate that given $A \in M_{kxk}(F)$, the characteristic polynomial
+	is $(-1)^{k}\left(a_{0}+a_{1} t+\cdots+a_{k-1} t^{k-1}+t^{k}\right)$\\
+	\textbf{Base case:} We prove that $P(1)$ holds. The $1x1$ matrix is $[-a_0]$. The characteristic polynomial
+	is
+	\begin{align*}
+		\text{det}(A - tI) & =  -a_0 - t
+	\end{align*}
+	Using the formula,
+	\begin{align*}
+		(-1)^{k}(a_{0}+a_{1} t+\cdots+a_{k-1} t^{k-1}+t^{k}) & = (-1)^{1}(a_{0} + t^{1}) \\
+		                                                     & =  -a_{0} - t^{1}
+	\end{align*}
+	Thus, $P(1)$ holds.\\
+	\textbf{Inductive step:} Suppose $P(k)$ holds. We prove that $P(k + 1)$ holds.
+	We compute,
+	\begin{align*}
+		\text{det}(A - tI) & = \text{det}
+		\left(\begin{array}{ccccc}
+				-t     & 0      & \cdots & 0      & -a_{0}   \\
+				1      & -t     & \cdots & 0      & -a_{1}   \\
+				0      & 1      & \cdots & 0      & -a_{2}   \\
+				\vdots & \vdots &        & \vdots & \vdots   \\
+				0      & 0      & \cdots & 0      & -a_{k-1} \\
+				0      & 0      & \cdots & 1      & -a_{k}
+			\end{array}\right)                                                                \\
+		                   & = -t \text{ det}
+		\left(\begin{array}{ccccc}
+				-t     & 0      & \cdots & 0      & -a_{1}   \\
+				1      & -t     & \cdots & 0      & -a_{2}   \\
+				\vdots & \vdots &        & \vdots & \vdots   \\
+				0      & 0      & \cdots & 0      & -a_{k-1} \\
+				0      & 0      & \cdots & 1      & -a_{k}
+			\end{array}\right) + (-1)^{k + 2} (-a_0) \text{ det}
+		\left(\begin{array}{ccccc}
+				-t     & 0      & \cdots & 0      & -a_{1}   \\
+				1      & -t     & \cdots & 0      & -a_{2}   \\
+				\vdots & \vdots &        & \vdots & \vdots   \\
+				0      & 0      & \cdots & 0      & -a_{k-1} \\
+				0      & 0      & \cdots & 1      & -a_{k}
+			\end{array}\right)                                                                \\
+		                   & = (-t)(-1)^{k}(a_{1}+a_{2} t+\cdots+a_{k} t^{k-1}+t^{k}) + (-1)^{k + 2} (-a_0)(1) \\
+		                   & = (-1)^{k+1} (a_{1}t+a_{2}t^2+\cdots+a_{k} t^{k}+t^{k+1}) + (-1)^{k + 1} (a_0)    \\
+		                   & = (-1)^{k+1} (a_0 + a_{1}t+a_{2}t^2+\cdots+a_{k} t^{k}+t^{k+1})
+	\end{align*}
+	as desried. Thus we have proven the inductive step. Therefore,
+	$P(k)$ is true for all $k \in \mathbb{N}^+$.
+\end{proof}
 
-%5.4.19 \section{J}
+%5.4.23 + 24 + 25 
+%\section{J}
+%\begin{enumerate}[label=\alph*.]
+	%\item {
 
-%5.4.23 + 24 + 25 \section{K}
-
+	%      }
+%\end{enumerate}
 
 
 \end{document}

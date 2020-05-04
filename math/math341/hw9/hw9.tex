@@ -1,0 +1,613 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+
+
+\title{Math 341: Homework 9}
+\author{Daniel Ko}
+\date{Spring 2020}
+
+\begin{document}
+\maketitle
+
+\section{A}
+Let $W$ be a finite-dimensional subspace of an inner product space $V$
+
+\begin{enumerate}[label=\alph*.]
+	%6.2.13.d
+	\item{
+	      Prove that $V = W \oplus W^{\bot}$
+	      \begin{proof}\
+		      \begin{enumerate}[label=\roman*.]
+			      \item{
+			            $W \cap W^{\bot} = \{0\}$\par
+			            Let $v \in W \cap W^{\bot}$. This means that $\langle v,v \rangle = 0$.
+			            This implies that $v = 0$ by Theorem 6.1.
+			            }
+			      \item{
+			            $W + W^{\bot} = V$\par
+			            Theorem 6.6. states that for any $v \in V$, there exist unique vectors $u \in W$ and $z \in W^{\bot}$
+			            such that $v = u + z$.
+			            }
+		      \end{enumerate}
+		      Therefore, $V = W \oplus W^{\bot}$.
+	      \end{proof}
+	      }
+	      %6.2.10
+	      %http://my.fit.edu/~awelters/Teaching/2019/Spring/HW6AllRecommendExercisesSolnsSec.6.2,6.3,6.4Spring2019MTH5102.pdf
+	      %maybe make more rigourousss?
+	\item{
+	      Prove that there exists a projection $T$ on $W$ along $W^{\bot}$ that satisfies $N(T) = W^{\bot}$.
+	      \begin{proof}
+		      From (a), we know that $V = W \oplus W^{\bot}$, so this means that there is a
+		      projection $T$ on $W$ along $W^{\bot}$ such that
+		      whenever $x = x_1 + x_2$ where $x_1 \in W$ and $x_2 \in W^{\bot}$, $T(x) = x_1$.  \par
+		      Let $n \in N(T)$. We can express $n$ as $n = x_1 + x_2$ where $x_1 \in W$ and $x_2 \in W^{\bot}$ such that $T(n) = 0$.
+		      This implies that $x_1 = 0$ so $n = x_2 \in W^{\bot}$. Thus, $N(T) \subseteq W^{\bot}$.\par
+		      Let $n \in W^{\bot}$. We can express $n$ as $n = x_1 + x_2 = 0 + x_2$ where $x_1 \in W$ and $x_2 \in W^{\bot}$.
+		      It is clear that $T(n) = 0$, so $n \in N(T)$. Thus, $W^{\bot} \subseteq N(T)$.
+	      \end{proof}
+	      }
+	\item{
+	      Prove that $||T(x)|| \leq ||x||$ for all $x \in V$.
+	      \begin{proof}
+		      Let $x \in V$. We can express $x$ as $x = x_1 + x_2$ where $x_1 \in W$ and $x_2 \in W^{\bot}$.\par
+		      Notice that $||T(x)|| = ||x_1||$. Additionally, $||x|| = ||x_1 + x_2|| \leq ||x_1||+ ||x_2||$ by Theorem 6.2.
+		      Combining these two equations together, we get $||T(x)|| \leq ||x||$, as desired.
+	      \end{proof}
+	      }
+\end{enumerate}
+
+%6.3.15
+\section{B}
+Let $T: V \rightarrow W$ be a linear transformation, where $V$ and $W$ are finite dimensional inner product spaces with inner
+products $\langle \cdot,\cdot \rangle_1$ and $\langle \cdot,\cdot \rangle_2$ respectively. Prove the following results
+\begin{enumerate}[label=\alph*.]
+	\item {
+	      There is a unique adjoint $T^*$ of $T$, and $T^*$ is linear.
+	      \begin{proof}
+		      Suppose we have two unique adjoints, $T^*$ and $U^*$. Then,
+		      $\langle T(x), y \rangle_2 = \langle x, T^*(y) \rangle_1$
+		      and
+		      $\langle T(x), y \rangle_2 = \langle x, U^*(y) \rangle_1$
+		      Thus, $\langle x, T^*(y) \rangle_1 = \langle x, U^*(y) \rangle_1$ and it follows that $T^*=U^*$ by Theorem 6.1.
+		      Hence, the adjoint must be unique. \par
+		      We prove that $T^*$ is linear. Let $y_1, y_2 \in W$, $x \in V$, and $c \in F$. Then,
+		      \begin{align*}
+			      \langle x, T^*(cy_1 + y_2) \rangle_1 & = \langle T(x),  cy_1 + y_2 \rangle_2                             \\
+			                                           & = \langle T(x),  cy_1 \rangle_2  + \langle T(x),  y_2 \rangle_2   \\
+			                                           & = c \langle T(x),  y_1 \rangle_2  + \langle T(x),  y_2 \rangle_2  \\
+			                                           & = c \langle x, T^*(y_1) \rangle_1 + \langle x, T^*(y_2) \rangle_1
+		      \end{align*}
+		      as desired.
+	      \end{proof}
+	      }
+	\item{
+	      If $\beta$ and $\gamma$ are orthonormal bases for $\mathrm{V}$ and $\mathrm{W},$ respectively,
+	      then $\left[\mathbf{T}^{*}\right]_{\gamma}^{\beta}=\left([\mathbf{T}]_{\beta}^{\gamma}\right)^{*}$
+	      \begin{proof}
+		      Let $\beta = \{v_1, \cdots v_n\}$, $\gamma = \{w_1, \cdots, w_m\},
+			      A = [T^*]_{\gamma}^{\beta}, B = [T]_{\gamma}^{\beta}$.\par
+		      Since $T^*(w_j) \in V = span(\beta) \Rightarrow T^*(w_j) = \sum_{i = 1}^{n} \langle T^*(w_j), v_i \rangle_1 v_i$
+		      by Corollary 1 of Theorem 6.3. Then using the corollary of Theorem 6.5,
+		      this implies that $A_{ij} = ([T^*]_{\gamma}^{\beta})_{ij} = \langle T^*(w_j), v_i \rangle_1 $\par
+		      Similiarily, $T(v_j) \in W = span(\gamma) \Rightarrow T(v_j) = \sum_{i = 1}^{n} \langle T(v_j), w_i \rangle_2 w_i$
+		      and $B_{ij} = \langle T(v_j), w_i \rangle_2$. It follows that
+		      \begin{align*}
+			      (B_{ij})^* & = \overline{B_{ji}}                         \\
+			                 & =  \overline{\langle T(v_i), w_j \rangle_2} \\
+			                 & =  \langle w_j, T(v_i) \rangle_2            \\
+			                 & = \langle T^*(w_j), v_i \rangle_1           \\
+			                 & = A_{ij}
+		      \end{align*}
+		      Therfore, $\left[\mathbf{T}^{*}\right]_{\gamma}^{\beta}=\left([\mathbf{T}]_{\beta}^{\gamma}\right)^{*}$.
+	      \end{proof}
+	      %, $A = [T]_\beta^\gamma$, and $B = [T^*]_\beta$.
+	      }
+	\item{
+	      rank($T^*$) = rank($T$)
+	      \begin{proof}
+		      We know that $$dim(V) = dim(N(T)) + dim(R(T))$$ by the rank nullity theorem.
+		      By Theorem 6.7, we know that since $N(T)$ is a subspace of $V$, $$dim(V) = dim(N(T)) + dim(N(T)^{\perp})$$
+		      Hence,
+		      $$ dim(R(T)) = dim(N(T)^{\perp})$$
+		      We claim that $N(T) =  R(T^*)^{\perp}$. Suppose $x \in N(T)$. Let $y \in V$. Then,
+		      $$T(x) = 0 = \langle 0, y \rangle = \langle T(x), y \rangle = \langle x, T^*(y) \rangle$$
+		      By definition, $x \in N(T)^{\perp}$, so $N(T) \subseteq  R(T^*)^{\perp}$.\par
+		      Suppose $x \in R(T^*)^{\perp}$. Then for all $y \in V$,
+		      $$0 = \langle x, T^*(y) \rangle = \langle T(x), y \rangle$$
+		      This means that $T(x) = 0$, hence $x \in N(T)$. So $R(T^*)^{\perp} \subseteq N(T)$\par
+		      %may need to prove applying \perp to both sides but fuck idc
+		      Thus, $N(T) =  R(T^*)^{\perp}$. It directly follows that  $N(T)^{\perp} =  (R(T^*)^{\perp})^{\perp} =R (T^*) $.
+		      Therefore,
+		      \begin{align*}
+			      dim(R(T)) & = dim(N(T)^{\perp}) \\
+			                & = dim(R (T^*))      \\
+			      rank(T)   & = rank(T^*)
+		      \end{align*}
+	      \end{proof}
+	      }
+	\item{
+	      $\langle T^*(x), y \rangle_1 = \langle x, T(y) \rangle_2$ for all $x \in W$ and $y \in V$
+	      \begin{proof}
+		      \begin{align*}
+			      \langle T^*(x), y \rangle_1 & = \overline{\langle y, T^*(x) \rangle_1} \\
+			                                  & = \overline{\langle T(y), x \rangle_2}   \\
+			                                  & = \langle x, T(y) \rangle_2
+		      \end{align*}
+		      as desired.
+	      \end{proof}
+	      }
+	\item{
+	      For all $x \in V$, $T^*T(x) = 0$ if and only if $T(x)=0$
+	      \begin{proof}\
+		      \begin{enumerate}[label=\roman*.]
+			      \item {
+			            $T^*T(x) = 0 \Rightarrow T(x)=0$\par
+			            This means that $\forall x \in V$,
+			            \begin{align*}
+				            0 & = \langle x, T^*T(x) \rangle_1 \\
+				              & =\langle T(x), T(x) \rangle_2
+			            \end{align*}
+			            Therefore, $T(x)=0$
+			            }
+			      \item {
+			            $T(x)=0 \Rightarrow T^*T(x) = 0 $\par
+			            $$T^*T(x) = T^*(0) = 0$$
+			            as desired.
+			            }
+		      \end{enumerate}
+		      Therefore, $T^*T(x) = 0$ if and only if $T(x)=0$.
+	      \end{proof}
+	      }
+\end{enumerate}
+
+%6.3.23
+\section{C}
+\begin{enumerate}[label=\alph*.]
+	\item{
+	      Show that the equation $\left(A^{*} A\right) x_{0}=A^{*} y$ of Theorem 6.12 takes the form of the normal equations:
+	      $$\left(\sum_{i=1}^{m} t_{i}^{2}\right) c+\left(\sum_{i=1}^{m} t_{i}\right) d=\sum_{i=1}^{m} t_{i} y_{i}$$
+	      and
+	      $$\left(\sum_{i=1}^{m} t_{i}\right) c+m d=\sum_{i=1}^{m} y_{i}$$
+	      \begin{proof}
+		      Suppose $$ A = \begin{bmatrix}
+				      t_1    & 1      \\
+				      t_2    & 1      \\
+				      \vdots & \vdots \\
+				      t_n    & 1
+			      \end{bmatrix}$$
+		      Then,
+		      $$ A^* = \begin{bmatrix}
+				      t_1 & t_2 & \cdots & t_n \\
+				      1   & 1   & \cdots & 1
+			      \end{bmatrix}$$
+		      and
+		      $$ A^*A = \begin{bmatrix}
+				      \sum_{i = 1}^{m} (t_i)^2 & \sum_{i = 1}^{m} t_i \\
+				      \sum_{i = 1}^{m} t_i     & m
+			      \end{bmatrix}$$
+		      Hence,
+		      \begin{align*}
+			      A^*Ax_0 & = A^*y                            \\
+			      \begin{bmatrix}
+				      \sum_{i = 1}^{m} (t_i)^2 & \sum_{i = 1}^{m} t_i \\
+				      \sum_{i = 1}^{m} t_i     & m
+			      \end{bmatrix}
+			      \begin{bmatrix}
+				      c \\
+				      d
+			      \end{bmatrix}
+			              & =      \begin{bmatrix}
+				      t_1 & t_2 & \cdots & t_m \\
+				      1   & 1   & \cdots & 1
+			      \end{bmatrix}
+			      \begin{bmatrix}
+				      y_1    \\
+				      y_2    \\
+				      \vdots \\
+				      y_m
+			      \end{bmatrix}
+		      \end{align*}
+		      $$\left(\sum_{i=1}^{m} t_{i}^{2}\right) c+\left(\sum_{i=1}^{m} t_{i}\right) d=\sum_{i=1}^{m} t_{i} y_{i}$$
+		      and
+		      $$\left(\sum_{i=1}^{m} t_{i}\right) c+m d=\sum_{i=1}^{m} y_{i}$$
+		      as desired.
+	      \end{proof}
+	      }
+	\item{
+	      Use the second normal equation of (a) to show that the least squares line must pass through the center of mass,
+	      $(\bar{t}, \bar{y}),$ where
+	      $$\bar{t}=\frac{1}{m} \sum_{i=1}^{m} t_{i} \quad \text { and } \quad \bar{y}=\frac{1}{m} \sum_{i=1}^{m} y_{i}$$
+	      \begin{proof}
+		      Consider what happens when we divide the following equation by $m$.
+		      \begin{align*}
+			      \left(\sum_{i=1}^{m} t_{i}\right) c+m d          & =\sum_{i=1}^{m} y_{i}             \\
+			      \frac{1}{m}\left(\sum_{i=1}^{m} t_{i}\right) c+d & =\frac{1}{m} \sum_{i=1}^{m} y_{i} \\
+			      \bar{t}c+d                                       & = \bar{y}
+		      \end{align*}
+		      as desired.
+	      \end{proof}
+	      }
+\end{enumerate}
+
+
+%6.4.13
+\section{D}
+An $nxn$ real matrix $A$ is said to be a Gramian matrix if there exists a real (square) matrix $B$ such that $A = B^t B$.
+Prove that $A$ is a Gramian matrix if and only if $A$ is symmetric and all of its eigenvalues are nonnegative. Hint:
+Apply Theorem 6.17 to $T =L_A$ to obtain an orthonormal basis $\{v_1, v_2, \cdots, v_n\}$ of eigenvectors with the associated
+eigenvalues $\{\lambda_1, \lambda_2, \cdots, \lambda_n\}$. Define the linear operator $U$ by $U(v_i) = \sqrt{\lambda_i}v_i$.
+\begin{proof}\
+	\begin{enumerate}[label=\roman*.]
+		\item {
+		      $A$ is a Gramian matrix $\Rightarrow A$ is symmetric and all of its eigenvalues are nonnegative.\par
+		      Since $A$ is a Gramian matrix, there exists a real (square) matrix $B$ such that $A = B^t B$.
+		      This implies that $A$ is symmetric
+		      \begin{align*}
+			      A^t & = (B^t B)^t \\
+			          & = B^t B     \\
+			          & = A
+		      \end{align*}
+		      as desired.\par
+		      Suppose $\lambda$ is an eigenvalue of $A$ with a normal/unit eigenvector of $x$, i.e. $Ax = \lambda x$.
+		      It follows that
+		      \begin{align*}
+			      \lambda & = \lambda \langle x,x \rangle \\
+			              & = \langle Ax,x \rangle        \\
+			              & = \langle B^t B x,x \rangle   \\
+			              & = \langle Bx, Bx \rangle      \\
+			              & \geq 0
+		      \end{align*}
+		      because $Bx \neq 0$ and Theorem 6.1.\par
+		      Therefore, $A$ is symmetric and all of its eigenvalues are nonnegative.
+		      }
+		\item{
+		      $A$ is symmetric and all of its eigenvalues are nonnegative $\Rightarrow A$ is a Gramian matrix\par
+		      Since $A$ is symmetric it follows that $A$ and $T = L_A$ must be self-adjoint because $A$ is a real matrix, by definition.
+		      By Theorem 6.17, there exists an orthonormal basis $\{v_1, v_2, \cdots, v_n\}$ of eigenvectors with the associated
+		      eigenvalues $\{\lambda_1, \lambda_2, \cdots, \lambda_n\}$. By Theorem 6.16., $T$ is normal and there exists
+		      an digaonal matrix $[T]_\beta$ such that the $i$th digaonal entries are $\lambda_i$. Suppose we construct a digaonal
+		      matrix $C$ such that its $i$th digaonal entries are $\sqrt{\lambda_i}$, i.e. $C^2 = [T]_\beta$. This will still be a real matrix because the
+		      eigenvalues are nonnegative. Let $\alpha$ be the standard orded basis. Hence,
+		      $$A = [I]_\beta^\alpha [T]_\beta [I]_\alpha^\beta = [I]_\beta^\alpha C^2 [I]_\alpha^\beta  $$
+		      Since $\beta$ is orthonormal, $([I]_\beta^\alpha)^t [I]_\beta^\alpha  = [I]$.
+		      Thus, $([I]_\beta^\alpha)^t = ([I]_\beta^\alpha)^{-1} = ([I]_\alpha^\beta)$.
+		      We can fix $B$ to be $C[I]_\alpha^\beta$ such that
+		      \begin{align*}
+			      A & = [I]_\beta^\alpha C^2 [I]_\alpha^\beta \\
+			        & = [I]_\beta^\alpha CC [I]_\alpha^\beta  \\
+			        & = B^tB
+		      \end{align*}
+		      as desired. Therefore, $A$ is a Gramian matrix.
+		      }
+	\end{enumerate}
+\end{proof}
+
+%6.4.17
+%http://homepage.ntu.edu.tw/~jdyu/Teaching/Assignments/LinAlg2012/SHW10-12_sol.pdf
+\section{E}
+Let $T$ and $U$ be self-adjoint linear operators on an n-dimensional inner product space $V$,and let $A = [T]_\beta$ ,where
+$\beta$ is an orthonormal basis for $V$. Prove the following results.
+\begin{enumerate}[label=\alph*.]
+	\item {
+	      T is positive definite [semidefinite] if and only if all of its eigenvalues are positive [nonnegative].
+	      \begin{proof}\
+		      \begin{enumerate}[label=\roman*.]
+			      \item {
+			            T is positive definite $\Rightarrow$ all of its eigenvalues are positive\par
+			            By definition of positive definite, $\langle T(x),x \rangle > 0$ for all $x \neq 0$.
+			            Let $\lambda$ be a eigenvalue of $T$ with $v$ being its corresponding orthonormal eigenvector.
+			            Consider,
+			            \begin{align*}
+				            \lambda & = \lambda \langle v,v \rangle \\
+				                    & = \langle \lambda v,v \rangle \\
+				                    & = \langle T(v),v \rangle      \\
+				                    & > 0
+			            \end{align*}
+			            as desired.
+			            }
+			      \item {
+			            All of T's eigenvalues are positive $\Rightarrow$  T is positive definite \par
+			            By Theorem 6.17, we know that there exists an orthonormal basis
+			            $\beta = \{v_1, \cdots, v_n\}$ for $V$ consisting of eigenvectors of $T$.
+			            Let $x \in V$. We can express $x$ in terms of $\beta$,
+			            $$ x = \sum_{i = 1}^n c_iv_i$$
+			            Now consider the following inner product,
+			            \begin{align*}
+				            \langle T(x),x \rangle & = \langle T(\sum_{i = 1}^n c_iv_i),\sum_{i = 1}^n c_iv_i \rangle       \\
+				                                   & = \langle \sum_{i = 1}^n c_i\lambda_iv_i,\sum_{i = 1}^n c_iv_i \rangle \\
+				                                   & = \sum_{i = 1}^n |c_i|^2 \lambda_i  \langle v_i,v_i \rangle            \\
+				                                   & = \sum_{i = 1}^n |c_i|^2 \lambda_i                                     \\
+				                                   & > 0
+			            \end{align*}
+			            as desired.
+			            }
+		      \end{enumerate}
+		      Without loss of generality, the above statements hold for the semidefinite case. Therefore,
+		      T is positive definite [semidefinite] if and only if all of its eigenvalues are positive [nonnegative].
+	      \end{proof}
+	      }
+	\item{
+	      T is positive definite if and only if $\sum_{i,j} A_{ij} a_j \overline{a_i} >0$
+	      for all nonzero n-tuples $(a_1, \cdots, a_n)$
+	      \begin{proof}
+		      \
+		      \begin{enumerate}[label=\roman*.]
+			      \item{
+			            T is positive definite $\Rightarrow \sum_{i,j} A_{ij} a_j \overline{a_i} >0$
+			            for all nonzero n-tuples $(a_1, \cdots, a_n)$\par
+			            Let $\beta = \{v_1, \cdots, v_n\}$ be an orthonormal basis for $V$.
+			            Let $a = (a_1, \cdots, a_n)$ be a nonzero n-tuple. We can define $x = \sum_{i = 0}^{n} a_i v_i \in V$.
+			            %By definition of positive definite, $\langle T(x),x \rangle > 0$.
+			            It follows that by corollary of Theorem 6.5 and the definition of positive definite,
+			            \begin{align*}
+				            \langle T(x),x \rangle & =  \langle T(\sum_{j = 0}^{n} a_j v_j),\sum_{i = 0}^{n} a_i v_i \rangle \\
+				                                   & = \sum_{j = 0}^{n} a_j \langle T(v_j),\sum_{i = 0}^{n} a_i v_i \rangle  \\
+				                                   & = \sum_{i,j = 0}^{n} a_j \overline{a_i}\langle T(v_j),v_i \rangle       \\
+				                                   & = \sum_{i,j = 0}^{n} A_{ij} \overline{a_i} a_j                          \\
+				                                   & > 0
+			            \end{align*}
+			            as desired.
+			            }
+			      \item{
+			            $\sum_{i,j} A_{ij} a_j \overline{a_i} >0$ for all nonzero n-tuples
+			            $(a_1, \cdots, a_n) \Rightarrow$ T is positive definite \par
+			            Let $x = \sum_{i = 0}^{n} a_i v_i \in V$. It follows from corollary of Theorem 6.5,
+			            \begin{align*}
+				            \sum_{i,j}^{n} A_{ij} a_j \overline{a_i} & = \sum_{i,j}^{n}  a_j \overline{a_i} \langle T(v_j),v_i \rangle \\
+				                                                     & = \langle T(\sum_{j}^{n} a_j v_j),\sum_{i}^{n} a_i v_i \rangle  \\
+				                                                     & = \langle T(x),x \rangle                                        \\
+				                                                     & > 0
+			            \end{align*}
+			            as desired.
+			            }
+		      \end{enumerate}
+		      Therefore, T is positive definite if and only if $\sum_{i,j} A_{ij} a_j \overline{a_i} >0$
+		      for all nonzero n-tuples $(a_1, \cdots, a_n)$
+	      \end{proof}
+	      }
+	\item{
+	      $T$ is positive semidefinite if and only if $A = B^*B$ for some square matrix $B$.
+	      \begin{proof}\
+		      \begin{enumerate}[label=\roman*.]
+			      \item {
+			            $T$ is positive semidefinite $\Rightarrow A = B^*B$ for some square matrix $B$.\par
+			            %By definition of positive semidefinite, $\langle T(x),x \rangle \geq 0$
+			            Since $T$ is a self adjoint operator, there exists an orthonormal basis $\gamma = \{v_1, \cdots, v_n\}$ for $V$ consisting of
+			            eigenvectors of $T$ by Theorem 6.17. We also know from (a) that all of the corresponding eigenvalues are positive.
+			            Additionally, since $T$ is a self adjoint operator we know that $A = P^*DP$ where $D$ is diagonal.
+			            It follows that on the diagonals on $D$ are positive. Let's define a matrix $E_{ii} = \sqrt{D_{ii}}$,
+			            i.e. $E^2 = D$. Then we have $A = (P^*E)(EP)$ where we can fix $B = EP$ and we know that
+			            $B^* = (EP)^* = P*E^* = P^*E$ because $E$ is a self-adjoint matrix. Therefore, $A = B^*B$.
+			            }
+			      \item {
+			            $A = B^*B$ for some square matrix $B \Rightarrow T$ is positive semidefinite. \par
+			            Consider $v \in V$ and the following inner product,
+			            \begin{align*}
+				            \langle L_A(v),v \rangle & =  \langle Av,v \rangle    \\
+				                                     & = \langle B^*Bv,v \rangle  \\
+				                                     & = B^* \langle Bv,v \rangle \\
+				                                     & = \langle Bv,Bv \rangle    \\
+				                                     & \geq 0
+			            \end{align*}
+			            Since $A = [T]_\beta$, $T$ is positive semidefinite.
+			            }
+		      \end{enumerate}
+	      \end{proof}
+	      }
+	\item{
+	      If $T$ and $U$ are positive semidefinite operators such that $T^2 = U^2$ then $T = U$.
+	      \begin{proof}
+		      Since $T$ is a self adjoint operator, there exists an orthonormal basis $\gamma = \{v_1, \cdots, v_n\}$ for $V$ consisting of
+		      eigenvectors of $T$ by Theorem 6.17. We also know from (a) that all of the corresponding eigenvalues are nonnegative.
+		      Then, $T^2(v_i) = \lambda^2 v_i = U^2(v_i)$. It follows that
+		      \begin{align*}
+			      0 & = U^2v_i - \lambda^2 v_i             \\
+			        & = (U^2 - \lambda^2I) v_i             \\
+			        & = (U + \lambda I)(U - \lambda I) v_i
+		      \end{align*}
+		      This means that $(U - \lambda I)v_i = 0$ because eigenvalues are nonnegative for $T$.
+		      %If $\lambda = 0$ then $U(v_i) = 0v_i$.
+		      Thus
+		      \begin{align*}
+			      (U - \lambda I)v_i & = 0           \\
+			      U(v_i)             & = \lambda v_i \\
+			                         & = T(v_i)
+		      \end{align*}
+		      Therefore, $T = U$.
+	      \end{proof}
+	      }
+	\item{
+	      If $T$ and $U$ are positive definite operators such that $TU=UT$ then $TU$ is positive definite.
+	      \begin{proof}
+		      Since $T$ and $U$ are positive definite operators, $TU$ is self adjoint because $$(TU)^* = U^*T^* = UT = TU$$
+				 Let $Q^2 = T$ such that $Q$ is positive definite. We know that $Q^2U = QQU = QUQ$ because of part (d).
+				 \begin{align*}
+					\langle TU(x),x \rangle & = \langle Q^2U(x),x \rangle \\
+					& = \langle QUQ(x),x \rangle\\
+					& = \langle UQ(x),Q(x) \rangle\\
+					& > 0
+				 \end{align*} 
+				 Therefore, $TU$ is positive definite.
+			  %$TU$ is positive definite because 
+	      \end{proof}
+	      }
+	\item{
+	      $T$ is positive definite [semidefinite] if and only if $A$ is positive definite [semidefinite]. Because of (f), results
+	      analogous to items (a) through (d) hold for matrices as well as operators.
+	      \begin{proof}
+		      Let $\beta = \{v_1, \cdots, v_n\}$ be an orthonormal basis for $V$.
+		      Let $a = (a_1, \cdots, a_n)$ be a nonzero n-tuple. We can define $x = \sum_{i = 0}^{n} a_i v_i \in V$.
+		      %By definition of positive definite, $\langle T(x),x \rangle > 0$.
+		      It follows that by corollary of Theorem 6.5 and the definition of positive definite,
+		      \begin{align*}
+			      \langle T(x),x \rangle & =  \langle T(\sum_{j = 0}^{n} a_j v_j),\sum_{i = 0}^{n} a_i v_i \rangle \\
+			                             & = \sum_{j = 0}^{n} a_j \langle T(v_j),\sum_{i = 0}^{n} a_i v_i \rangle  \\
+			                             & = \sum_{i,j = 0}^{n} a_j \overline{a_i}\langle T(v_j),v_i \rangle       \\
+										 & = \sum_{i,j = 0}^{n} A_{ij} \overline{a_i} a_j                          \\
+										 & = \langle Ax , x\rangle \\
+		      \end{align*}
+		      as desired.
+	      \end{proof}
+	      }
+\end{enumerate}
+
+%6.4.19
+\section{F}
+Let $T$ and $U$ be positive definite operators on an inner product space $V$. Prove the following results.
+\begin{enumerate}[label=\alph*.]
+	\item {
+	      $T + U$ is positive definite
+	      \begin{proof}
+		      By definition,  $\langle T(x),x \rangle > 0$, $\langle U(x),x \rangle > 0$ for all $x \neq 0$
+		      \begin{align*}
+			      \langle (T + U)(x),x \rangle & = \langle T(x) + U(x),x \rangle                     \\
+			                                   & = \langle T(x) ,x \rangle  + \langle U(x),x \rangle \\
+			                                   & > 0
+		      \end{align*}
+		      Therefore, $T + U$ is positive definite.
+	      \end{proof}
+	      }
+	\item{
+	      If $c > 0$, then $cT$ is positive definite.
+	      \begin{proof}
+		      By definition, $\langle T(x),x \rangle > 0$. It follows that
+		      \begin{align*}
+			      \langle cT(x),x \rangle & =  c\langle T(x),x \rangle \\
+			                              & > 0
+		      \end{align*}
+		      Therefore, if $c > 0$, then $cT$ is positive definite.
+	      \end{proof}
+	      }
+	\item{
+	      $T^{-1}$ is positive definite.
+	      \begin{proof}
+		      Let $y =  T^{-1}(x)$.
+		      We know that $T^* = T$ because $T$ is self adjoint.
+		      \begin{align*}
+			      \langle T^{-1}(x),x \rangle & = \langle y,T(y) \rangle   \\
+			                                  & = \langle T^*(y),y \rangle \\
+			                                  & = \langle T(y),y \rangle   \\
+			                                  & > 0
+		      \end{align*}
+	      \end{proof}
+	      }
+\end{enumerate}
+
+
+%6.5.7
+\section{G}
+Prove that if $T$ is a unitary operator on a finite-dimensional inner product space $V$, then $T$ has a unitary square
+root; that is, there exists a unitary operator $U$ such that $T = U^2$.
+\begin{proof}
+	By Theorem 6.18, there exists an orthonormal basis $\beta = \{v_1, \cdots, v_n\}$ consisting of eigenvectors of $T$
+	with corresponding eigenvalues $\{\lambda_1, \cdots, \lambda_n\}$ of absolute value $1$.
+	It follows by Theorem 5.1 that
+	$$
+		[T]_\beta =
+		\begin{bmatrix}
+			\lambda_{1} &        & 0           \\
+			            & \ddots &             \\
+			0           &        & \lambda_{n}
+		\end{bmatrix}
+	$$
+	We can fix $[U]_\beta$ as $\sqrt{[T]_\beta}$
+	$$
+		[U]_\beta =
+		\begin{bmatrix}
+			\sqrt{\lambda_{1}} &        & 0                  \\
+			                   & \ddots &                    \\
+			0                  &        & \sqrt{\lambda_{n}}
+		\end{bmatrix}
+	$$
+	$U$ is a unitary operator by Theorem 6.18 because.
+	$$|\sqrt{\lambda_{i}}| = \sqrt{|\lambda_{i}|} = \sqrt{1} = 1$$
+	Therefore, there exists a unitary operator $U$ such that $T = U^2$.
+\end{proof}
+
+%6.5.21
+%http://w3.impa.br/~henrique/teach/hw7sol.pdf
+\section{H}
+Let $A$ and $B$ be $nxn$ matrices that are unitarily equivalent.
+\begin{enumerate}[label=\alph*.]
+	\item {
+	      Prove that $tr(A^*A)$ = $tr(B^*B)$
+	      \begin{proof}
+		      By definition, there exists a unitary matrix $P$ such that $A = P^*BP$. It follows that
+		      \begin{align*}
+			      tr(A^*A) & = tr((P^*BP)^*(P^*BP)) \\
+			               & = tr(P^*B^*PP^*BP)     \\
+			               & = tr((P^*B^*)(BP))     \\
+			               & = tr((BP)(P^*B^*))     \\
+			               & =  tr(BB^*)            \\
+			               & =  tr(B^*B)
+		      \end{align*}
+		      as desired.
+	      \end{proof}
+	      }
+	\item{
+	      Use (a) to prove that
+	      $$
+		      \sum_{i, j=1}^{n}\left|A_{i j}\right|^{2}=\sum_{i, j=1}^{n}\left|B_{i j}\right|^{2}
+	      $$
+	      \begin{proof}
+		      Notice that
+		      \begin{align*}
+			      \sum_{i, j=1}^{n}\left|A_{i j}\right|^{2} & = \sum_{i, j=1}^{n}|A_{i j}|^{2}                           \\
+			                                                & = \sum_{j=1}^{n} \sum_{i=1}^{n} \overline{A_{i j}} A_{i j} \\
+			                                                & = \sum_{j=1}^{n} \sum_{i=1}^{n} (A^{*})_{j i} A_{i j}      \\
+			                                                & = \sum_{i=1}^{n} (A^{*}A)_{i i}                            \\
+			                                                & = tr(A^*A)
+		      \end{align*}
+		      Without loss of generality,
+		      $$\sum_{i, j=1}^{n}\left|B_{i j}\right|^{2} = tr(B^*B)$$
+		      Therefore, by (a)
+		      $$
+			      \sum_{i, j=1}^{n}\left|A_{i j}\right|^{2}=\sum_{i, j=1}^{n}\left|B_{i j}\right|^{2}
+		      $$
+	      \end{proof}
+	      }
+	\item{
+	      Use (b) to show that the matrices
+	      $$
+		      A = \begin{bmatrix}
+			      1 & 2 \\
+			      2 & i
+		      \end{bmatrix}
+		      \quad \text { and } \quad
+		      B = \begin{bmatrix}
+			      i & 4 \\
+			      1 & 1
+		      \end{bmatrix}
+	      $$
+	      are not unitarily equivalent.
+	      \begin{proof}
+		      Consider,
+		      \begin{align*}
+			      \sum_{i, j=1}^{n}|A_{i j}|^{2} & = |1|^2 + |2|^2 + |2|^2 + |i|^2 \\
+			                                     & = 10
+		      \end{align*}
+		      and
+		      \begin{align*}
+			      \sum_{i, j=1}^{n}|B_{i j}|^{2} & = |i|^2 + |4|^2 + |1|^2 + |1|^2 \\
+			                                     & = 19
+		      \end{align*}
+		      Therefore, $A$ and $B$ are not unitarily equivalent.
+	      \end{proof}
+	      }
+\end{enumerate}
+
+
+\end{document}
