@@ -426,9 +426,9 @@ in which, $h, g, q$ and $\alpha$ are real numbers.
 		      By Theorem 3.8, $dim(K_H) = 3 - 2 = 1$. Thus any nonzero solution constitutes a basis for K. For example, since
 		      $$
 			      \begin{pmatrix}
-				      1 \\
-				      1 \\
-					  -1  \\
+				      1  \\
+				      1  \\
+				      -1 \\
 				      0
 			      \end{pmatrix}
 		      $$
@@ -439,8 +439,8 @@ in which, $h, g, q$ and $\alpha$ are real numbers.
 			      \left\{
 			      t\begin{pmatrix}
 				      1  \\
-				      1 \\
-				      -1  \\
+				      1  \\
+				      -1 \\
 				      0
 			      \end{pmatrix}: t \in \mathbb{R}
 			      \right\}
@@ -466,8 +466,8 @@ in which, $h, g, q$ and $\alpha$ are real numbers.
 			      \end{pmatrix}+
 			      t\begin{pmatrix}
 				      1  \\
-				      1 \\
-				      -1  \\
+				      1  \\
+				      -1 \\
 				      0
 			      \end{pmatrix}: t \in \mathbb{R}
 			      \right\}
@@ -477,6 +477,194 @@ in which, $h, g, q$ and $\alpha$ are real numbers.
 \end{enumerate}
 
 \section{}
+Let $T$ and $U$ be positive semidefinite operators on an inner product space $V$. Prove the following
+results
+\begin{enumerate}[label=\alph*.]
+	\item {
+	      $T + U$ is positive semidefinite.
+	      \begin{proof}
+		      By definition,  $\langle T(x),x \rangle \geq 0$, $\langle U(x),x \rangle > 0$ for all $x \neq 0$
+		      \begin{align*}
+			      \langle (T + U)(x),x \rangle & = \langle T(x) + U(x),x \rangle                     \\
+			                                   & = \langle T(x) ,x \rangle  + \langle U(x),x \rangle \\
+			                                   & \geq 0
+		      \end{align*}
+		      $T + U$ is self adjoint because
+		      \begin{align*}
+			      (T + U)^* & = T^* + U^* \\
+			                & = T + U
+		      \end{align*}
+		      Therefore, $T + U$ is positive semidefinite.
+	      \end{proof}
+	      }
+	\item{
+	      If $c > 0$, then $cI + T$ is positive definite, where $I$ is the identity transformation.
+	      \begin{proof}
+		      By definition, $\langle T(x),x \rangle \geq 0$, $\langle x,x \rangle > 0$ for all $x \neq 0$
+		      \begin{align*}
+			      \langle (cI + T)(x),x \rangle & = \langle cI(x) + T(x),x \rangle                      \\
+			                                    & = \langle cI(x) ,x \rangle  + \langle  T(x),x \rangle \\
+			                                    & = c \langle x ,x \rangle  + \langle  T(x),x \rangle   \\
+			                                    & > 0
+		      \end{align*}
+		      $cI + T$ is self adjoint because
+		      \begin{align*}
+			      (cI + T)^* & = (cI)^* + T^*          \\
+			                 & = \overline{c}I^* + T^* \\
+			                 & = cI + T
+		      \end{align*}
+		      Therefore, $cI + T$ is positive definite.
+	      \end{proof}
+	      }
+	\item{
+	      $(cI + T)^{-1}$ is positive definite. From (b) we know that $cI + T$ is self adjoint because. It follows that
+	      \begin{proof}
+		      Let $ y = (cI + T)^{-1}(x)$.
+		      \begin{align*}
+			      \langle (cI + T)^{-1}(x),x \rangle & = \langle y,(cI + T)(y) \rangle      \\
+			                                         & = \langle (cI + T)^* (y), y  \rangle \\
+			                                         & = \langle (cI + T)(y), y  \rangle    \\
+			                                         & > 0
+		      \end{align*}
+		      $(cI + T)^{-1}$ is self adjoint because
+		      \begin{align*}
+			      ((cI + T)^{-1})^* & = ((cI + T)^{*})^{-1} \\
+			                        & = (cI + T)^{-1}
+		      \end{align*}
+		      Therefore, $(cI + T)^{-1}$ is positive definite.
+	      \end{proof}
+	      }
+\end{enumerate}
 
+\section{}
+Let $V$ be a finite-dimensional inner product space. Suppose that U is a partial isometry of $W$
+on $V$, where $W$ is a subspace of $V$, and let $\{v_1, v_2, \cdots , v_k\}$ be an orthonormal basis for $W$.
+
+\begin{enumerate}[label=\alph*.]
+	\item {
+	      Show that $\{U(v_1), U(v_2), \cdots , U(v_k)\}$ is an orthonormal basis for $R(U)$
+	      \begin{proof}
+		      %We claim that $R(U) = U(W)$.\par
+		      By definition $||U(w)|| = ||w||$ for all $w \in W$. By Theorem 6.18 (b), we know that
+		      $\langle U(w_1), U(w_2) \rangle = \langle w_1, w_2 \rangle$ where $w_1, w_2 \in W$.\par
+		      Notice that $\langle U(v_i), U(v_j) \rangle =\langle v_i, v_j \rangle$ which means that
+		      $\{U(v_1), U(v_2), \cdots , U(v_k)\}$ is an orthonormal basis for $U(W)$ because
+		      $\{v_1, v_2, \cdots , v_k\}$ is an orthonormal basis and the fact that $U$ is a partial isometry. \par
+		      Additionally, suppose $w \in W$ and $w' \in W^\perp$. Then by definition of partial isometry we know
+		      that $U(w + w') = w$. This implies that $U(W) = R(U)$.\par
+		      Therefore, since $\{U(v_1), U(v_2), \cdots , U(v_k)\}$ is an orthonormal basis for $U(W)$,
+		      it is an orthonormal basis for $R(U)$,
+		      %$\{U(v_1), U(v_2), \cdots , U(v_k)\}$
+	      \end{proof}
+
+	      }
+	\item{
+	      Show that there exists an orthonormal basis $\gamma$ for $V$ such that the first k
+	      columns of $[U]_\gamma$ form an orthonormal set and the remaining columns are zero.
+	      \begin{proof}
+		      Suppose the dimension of $V$ is n.
+		      Using Corollary 2 of Theorem 1.10 (Replacement Theorem), we can extend
+		      the orthonormal basis for $W$ from (a) $\{v_1, v_2, \cdots , v_k\}$ to
+		      orthonormal basis for $V$, denoted as
+		      $\gamma = \{v_1, v_2, \cdots ,v_k, v_{k+1}, \cdots, v_{n-1}, v_n\}$.
+		      Notice that $U(v_i) \neq 0$ where $1 \leq i \leq k$ by (a). Since
+		      $\gamma$ is an orthonormal basis, $v_i \in W^\perp \Rightarrow U(v_i) = 0$ where $k+1 \leq i \leq n$.\par
+		      Therefore, there exists an orthonormal basis $\gamma$ for $V$ such that the first k
+		      columns of $[U]_\gamma$ form an orthonormal set and the remaining columns are zero.
+	      \end{proof}
+	      }
+	\item{
+	      Let $\left\{w_{1}, w_{2}, \cdots, w_{j}\right\}$ be an orthonormal basis for $\mathrm{R}(\mathrm{U})^{\perp}$ and
+	      $$
+		      \beta=\left\{\mathrm{U}\left(v_{1}\right), \mathrm{U}\left(v_{2}\right), \cdots, \mathrm{U}\left(v_{k}\right), w_{1}, \cdots, w_{j}\right\}
+	      $$
+	      Show that $\beta$ is an orthonormal basis for $\mathrm{V}$
+	      \begin{proof}\
+		      \begin{lemma}
+			      Let $V$ be an inner product space and $W$ be a finite-dimensional subspace of V.
+			      Then, $V = W \oplus W^\perp$
+			      \begin{proof}
+				      From Theorem 6.6, $V = W + W^\perp$. \par
+				      Let $x \in W \cap W^\perp$. Since $x \in W^\perp$, $\langle x, g \rangle = 0$ for any $g \in W$.
+				      Since $x \in W$, this means that $\langle x, x \rangle = 0$. Thus, $x = 0$ and $ W \cap W^\perp = \{0\}$.\par
+				      Therefore, $V = W \oplus W^\perp$.
+			      \end{proof}
+		      \end{lemma}
+		      Since $R(U) \subseteq V$, by by our lemma we know that $V = R(U) \oplus R(U)^\perp$.
+		      From (a), we know that
+		      $\{\mathrm{U}\left(v_{1}\right), \mathrm{U}\left(v_{2}\right)\}$ is a basis for $R(U)$.
+		      It directly follows that $\beta$ is an orthonormal basis for $\mathrm{V}$.
+	      \end{proof}
+	      }
+	\item{
+	      Show that $U^{*}$ is a partial isometry.
+	      \begin{proof}
+		      We want to show that there exists a subspace $X$ of $V$ such that
+		      $||U^*(x)|| = ||x||$ for all $x \in X$ and $U(x) = 0$ for all $x \in X^\perp$.\par
+		      We claim that $X = R(U)$. Let $x \in R(U)$. We can express $x$ as $\sum_{i = 1}^{k}c_i U(v_i)$. It follows that,
+		      \begin{align*}
+			      ||U^*(x)|| & = ||U^*(\sum_{i = 1}^{k}c_i U(v_i))|| \\
+			                 & = ||\sum_{i = 1}^{k}c_i U^*(U(v_i))|| \\
+			                 & = ||\sum_{i = 1}^{k}c_i v_i||         \\
+			                 & = ||\sum_{i = 1}^{k}c_i U(v_i)||      \\
+			                 & = || x ||
+		      \end{align*}
+		      by Theorem 6.18 and the fact that $U$ is a partial isometry, i.e. $||U(v_i)|| = ||v_i||$.\par
+		      Let $x \in R(U)^\perp$. We can express $x$ as $\sum_{i = 1}^{j} \langle x, w_i \rangle w_i$ from (c) and Theorem 6.5.
+		      \begin{align*}
+			      U^*(x) & = U^*(\sum_{i = 1}^{j}\langle x, w_i \rangle w_i) \\
+			             & = \sum_{i = 1}^{j}\langle U^*(x), w_i \rangle w_i \\
+			             & = \sum_{i = 1}^{j}\langle x, U(w_i) \rangle w_i   \\
+			             & = \sum_{i = 1}^{j}\langle x, 0 \rangle w_i        \\
+			             & = 0
+		      \end{align*}
+		      Therefore, $U^{*}$ is a partial isometry.
+	      \end{proof}
+	      }
+	\item{
+	      Show that $U^{*}U$ is an orthogonal projection on $W$.
+	      \begin{proof}
+		      We first show that $U^{*}U$ is a projection on $W$. From the lemma in (c), $x \in V$ can be expressed as
+		      $x = w + w'$ where $w \in W, w' \in W^\perp$. Then by definition of partial isometry of $U$,
+		      \begin{align*}
+			      U^{*}U(x) & = U^{*}U(w + w')         \\
+			                & = U^{*}U(w) + U^{*}U(w') \\
+			                & = U^{*}(w) + U^{*}U(0)   \\
+			                & = U^{*}(w)
+		      \end{align*}
+		      Thus, $U^{*}U$ is a projection on $W$.
+		      \begin{lemma}
+			      Let $V$ be a finite dimensional inner product space and $W$ be a subspace of $V$. Then, $(W^\perp)^\perp = W$.
+			      \begin{proof}
+					Let $w \in W$. For all $w' \in W^\perp$, $ \langle w, w' \rangle = 0$. This implies that $w \in (W^\perp)^\perp$.\par
+					Let $w' \in (W^\perp)^\perp$. That means for some $w \in W$, $ \langle w', w \rangle = 0$.This implies that $w \in W$. \par
+					Therefore, $(W^\perp)^\perp = W$.
+			      \end{proof}
+		      \end{lemma}
+		      By definition, $U^{*}U$ is an orthogonal projection if $R(U^{*}U)^\perp = N(U^{*}U)$ and $N(U^{*}U)^\perp = R(U^{*}U)$.
+		      We only need to prove one conditions because from our lemma,
+		      \begin{align*}
+			      R(U^{*}U)^\perp         & = N(U^{*}U)       \\
+			      (R(U^{*}U)^\perp)^\perp & = N(U^{*}U)^\perp \\
+			      R(U^{*}U)               & = N(U^{*}U)^\perp
+		      \end{align*}
+		      We claim that $R(U^{*}U)^\perp = N(U^{*}U)$. Let $x \in R(U^{*}U)^\perp$.
+		      \begin{align*}
+			      \langle U^{*}U(x), x \rangle & = \langle U(x), U(x) \rangle \\
+			                                   & = 0
+		      \end{align*}
+		      This implies that $U(x) = 0$, so $x \in N(U^{*}U)$.\par
+		      Let $x \in N(U^{*}U)$. By definition, $U^{*}U(x) = 0$. Let $y \in R(U^{*}U)$,
+		      \begin{align*}
+			      \langle x, U^{*}U(y) \rangle & = \langle U(x), U(y) \rangle   \\
+			                                   & = \langle U^{*}U(x), y \rangle \\
+			                                   & = \langle 0, y \rangle\\
+			                                   & = 0
+		      \end{align*}
+			  So $x \in R(U^{*}U)^\perp$.\par
+			  Therefore, $U^{*}U$ is an orthogonal projection on $W$.
+	      \end{proof}
+	      }
+\end{enumerate}
 
 \end{document}
