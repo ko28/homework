@@ -1,0 +1,58 @@
+reset
+as lc3os.asm
+ld lc3os.obj
+as q2.asm
+ld q2.obj
+
+set pc x3000
+
+set x5100 xffff
+set x5101 xffff
+set x5102 xffff
+set x5103 xffff
+set x5104 xffff
+set x5105 xffff
+set x5106 xffff
+set x5107 xffff
+set x5108 xffff
+set x5109 xffff
+set x510A xffff
+set x510B xffff
+set x510C xffff
+set x510D xffff
+set x510E xffff
+set x510F xffff
+
+set x5000 x54
+set x5001 x68
+set x5002 x65
+set x5003 x20
+set x5004 x6D
+set x5005 x61
+set x5006 x6E
+set x5007 x20
+set x5008 x73
+set x5009 x61
+set x500A x74
+set x500B x20
+set x500C x64
+set x500D x6F
+set x500E x77
+set x500F x6E
+set x5010 x0
+continue
+
+check x5100 x54
+check x5101 x68
+check x5102 x65
+check x5103 x6D
+check x5104 x61
+check x5105 x6E
+check x5106 x73
+check x5107 x61
+check x5108 x74
+check x5109 x64
+check x510A x6F
+check x510B x77
+check x510C x6E
+check x510D x0

@@ -1,0 +1,16 @@
+reset
+as lc3os.asm
+ld lc3os.obj
+as q1.asm
+ld q1.obj
+
+set pc x3000
+
+set x4000 xffff
+set x4001 xffff
+
+set x4000 x8000
+
+continue
+check x4001 x8000
+
