@@ -1,0 +1,140 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+
+\makeatletter
+\newenvironment{Dequation}
+{%
+	\def\tagform@##1{%
+	\maketag@@@{\makebox[0pt][r]{(\ignorespaces##1\unskip\@@italiccorr)}}}%
+	\ignorespaces
+}
+{%
+	\def\tagform@##1{\maketag@@@{(\ignorespaces##1\unskip\@@italiccorr)}}%
+	\ignorespacesafterend
+}
+\makeatother
+
+\title{Math 240: Final Written}
+\author{Daniel Ko}
+\date{Spring 2020}
+
+\begin{document}
+\maketitle
+
+\section{}
+Give an example of a tree $T$ and a vertex $v \in T$ such that the induced subgraph $T'$ of $T$ with vertex set
+$V-\{v\}$ is not connected. (In other words, removing $v$ from $T$ makes it disconnected.)
+To receive full credit, you must describe $T, v$ and $T^{\prime}$ explicitly (pictures are sufficient, but you must draw both $T$ and $T^{\prime}$ ), and explain why $T^{\prime}$ is not connected
+\begin{proof}
+	Consider a tree $T$ with $V = \{v_1,v_2,v_3\}$ and $E = \{(v_1,v_2),(v_2,v_3)\}$. It is clear that $T$ is connected,
+	i.e. there is a path between every two distinct vertices in the graph. Define the induced subgraph $T'$ of $T$
+	with vertex set $V-\{v_2\}$. Notice that there will be no edges in $T'$ because in $T$ all the edges had $v_2$ as
+	one of its endpoints. Hence $V' =\{v_1,v_3\}$ and $E' = \{\}$. $T'$ is not connected because there does not
+	exist a path between every two distinct vertices in the graph, namely there is no path between $v_1$ and $v_3$.
+\end{proof}
+
+\section{}
+For this question, you may leave your answers as formulas, rather than calculating the exact numerical answers.
+For full credit, show all your work and explain your steps.
+\begin{enumerate}[label=\alph*.]
+	\item {
+	      How many binary strings of length seven contain at least three 0’s?
+	      \begin{proof}
+		      We want to count the possible number of ways having three 0's in length seven string,
+		      four 0's in length seven string, $\cdots$, seven 0's in length seven string and adding it all up.
+		      $$
+			      \sum_{i=3}^{7} C(7,i)
+		      $$
+	      \end{proof}
+	      }
+	\item{
+	      How many binary strings of length seven contain at least four 1’s?
+	      \begin{proof}
+		      We want to count the possible number of ways having four 1's in length seven string,
+		      five 1's in length seven string, $\cdots$, seven 1's in length seven string and adding it all up.
+		      $$
+			      \sum_{i=4}^{7} C(7,i)
+		      $$
+	      \end{proof}
+	      }
+	\item{
+	      How many binary strings of length seven contain at least three 0’s \textbf{and} at least four 1’s?
+	      \begin{proof}
+		      Since the string is length seven, the above question is equivalent of counting the number of
+		      strings of length 7 that have three 0's and four 1's. We can just count either 0's or 1's
+		      because once we fix the 0's the rest must be 1's and vice versa.
+		      %Since the ones and zeros are not unique (i.e. 101 and 101 are the same) we can compute 
+
+		      $$
+			      C(7,3) = C(7,4)
+		      $$
+	      \end{proof}
+	      }
+	\item{
+	      How many binary strings of length seven contain at least three 0’s \textbf{or} at least four 1’s?
+	      \begin{proof}
+		      Using the inclusion exclusion principle, we add the number of strings with least three 0’s
+		      and the number of strings with least four 1’s, and the we subtract the number of strings with
+		      at least three 0's \textbf{and} least four 1’s.
+		      $$
+			      \left( \sum_{i=3}^{7} C(7,i) \right) + \left(  \sum_{i=4}^{7} C(7,i) \right) - C(7,3)
+		      $$
+	      \end{proof}
+	      }
+\end{enumerate}
+
+\section{}
+Let $f: A \rightarrow B$ be a function from a set $A$ to a set $B$. Prove that
+$R_{f} \circ R_{f}^{-1} \subseteq\{(b, b): b \in B\}$.
+
+\begin{proof}
+	Let $x = (\alpha,\theta) \in R_{f} \circ R_{f}^{-1}$. This means that there exists a $\phi$ such that
+	$(\alpha,\phi) \in R_{f}^{-1}$ and $(\phi,\theta) \in R_{f}$. We also know that $\alpha,\theta \in B$ and $\phi \in A$.
+	Observe that since $f$ is an isomorphism,
+	\begin{align*}
+		f^{-1} (\alpha)     & = \phi    \\
+		f (f^{-1} (\alpha)) & = f(\phi) \\
+		\alpha              & = f(\phi)
+	\end{align*}
+	This directly implies that $\alpha = \theta$ because $(\phi,\theta) \in R_{f}$. Hence, $x \in \{(b, b): b \in B\}$.\\
+	Therefore, $R_{f} \circ R_{f}^{-1} \subseteq\{(b, b): b \in B\}$.
+\end{proof}
+
+\section{}
+Suppose that a graph $G$ satisfies the following properties:
+\begin{itemize}
+	\item $G$ has $n$ vertices
+	\item $G$ has $m$ edges, where $m<n$
+	\item Every vertex in $G$ has degree at least 1
+\end{itemize}
+Prove that there are at least $2 (n-m)$ vertices which have degree 1.
+\begin{proof}
+	By the handshake lemma, $\sum_{v \in V} \text{deg}(v) = 2m$.
+	Let $\alpha$ be the number of vertices with degree 1. Then $n - \alpha$ will be the
+	number of vertices with degree greater than 1. Then we can construct the following inequality
+	where the rest of the vertices will have at least degree 2, 
+	\begin{align*}
+		2m      & \geq \alpha +  2(n - \alpha) \\
+		2m - 2n & \geq - \alpha             \\
+		2(n-m) & \leq \alpha             \\
+		% \sum_{v \in V : deg(v) = 1} \text{deg}(v) +  \sum_{v \in V : deg(v) > 1} \text{deg}(v) \\  
+		%2m -  \sum_{v \in V : deg(v) > 1} \text{deg}(v) & =  \sum_{v \in V : deg(v) = 1} \text{deg}(v)\\
+	\end{align*}
+	as desired.
+
+\end{proof}
+
+
+\end{document}
