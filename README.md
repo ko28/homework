@@ -15,7 +15,15 @@ The provided starter source files establish the inheritance hierarchy that we re
 Grade 27/30
 
 ## P3a: Hash Table
-Hash table implementation in Java. 
+For this project, you will be implementing a hash table and testing its basic functionality with JUnit tests.  Its performance will be tested in p3b (which will be released later)
+
+All files must be named correctly (case-sensitive). You may define and submit other package level (not public or private) classes as needed and you may add private members to your classes.
+
+The goal for your HashTable is to build a searchable data structure that achieves constant time O(1) for lookup, insert, and delete operations with comparable performance to Java's built-in TreeMap type.
+
+Students are required to submit a JUnit test class for this assignment. Use what you have learned
+about writing tests and the JUnit testing framework to ensure that your hash table
+implementation works correctly prior to analyzing its performance in p3b.
 
 Grade 30/30
 
