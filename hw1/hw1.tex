@@ -12,6 +12,18 @@
 \usepackage{amssymb}
 \usepackage{setspace}
 \usepackage{systeme}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{mathtools}
+\SetStartEndCondition{ }{}{}%
+\SetKwProg{Fn}{def}{\string:}{}
+\SetKwFunction{Range}{range}%%
+\SetKw{KwTo}{in}\SetKwFor{For}{for}{\string:}{}%
+\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else:}{}%
+\SetKwFor{While}{while}{:}{fintq}%
+\newcommand{\forcond}{$i=0$ \KwTo $n$}
+\SetKwFunction{FRecurs}{FnRecursive}%
+\AlgoDontDisplayBlockMarkers\SetAlgoNoEnd\SetAlgoNoLine%
+
 
 \title{CS 577: HW 1}
 \author{Daniel Ko}
@@ -21,9 +33,199 @@
 \maketitle
 
 %problem 1
-\section{}
+\section{
+  Among the collection of n cards, is there a set of more than n/2 of them that are all
+  equivalent to one another?
+ }
+\subsection{
+	Present your algorithm and explain the notations as necessary.
+}
+\begin{algorithm}
+
+	\KwData{cards, a collection of n cards; originalCards, the original/unmodified collection of n cards}
+	\KwResult{A card such that more than $n/2$ are equivalent if it exists, else null.}
+	\Fn{fraudMajority(cards)}{
+		%\tcc{this is a comment to tell you that we will now really start code}
+		\If{len(cards) $\leq$ 1 }{
+			\Return cards[0]\;
+		}\-\\
+		left = fraudMajority(cards[0:floor(len(cards)/2)])\\
+		right = fraudMajority(cards[floor(len(cards)/2):len(cards)])\\
+		numOfLeft = originalCards.count(left)\\
+		numOfRight = originalCards.count(right)\\
+		\If{\text{numOfLeft > len(originalCards)/2}}{
+			\Return left
+		}
+		\ElseIf{numOfRight > len(originalCards)/2}{
+			\Return right
+		}
+		\Else{
+			\Return null
+		}
+	}
+\end{algorithm}
 
 
+
+\subsection{
+	Prove the correctness of your algorithm in making the final judgement regarding
+	whether there exists a set of more than n/2 of cards that are all equivalent to one
+	another.
+}
+\begin{proof}
+	We show by strong induction that our algorithm is correct. Let $P(n)$ be the predicate,
+	"fraudMajority halts and returns a card in a collection of $n$ cards
+	such that more than $n/2$ are equivalent if it exists". We define $n \in \mathbb{N}$.
+	\par \textbf{Base Case:} When $n = 0$, fraudMajority halts and returns null which is the correct output
+	because the collection is empty. Hence, $P(0)$ holds.
+	\par \textbf{Inductive step:} Suppose $P(n)$ holds for all $n \leq k \in \mathbb{N}$. We show that $P(k+1)$ holds.
+	\par We observe that fraudMajority recursively calls collections of sizes $\floor{(k+1)/2}$ and
+	$(k+1) - \floor{(k+1)/2}$.
+	Since $\floor{(k+1)/2} \leq k$ and $(k+1) - \floor{(k+1)/2} \leq k $, we know by our strong inductive hypothesis that these
+	recursive calls must halt. Hence, fraudMajority halts with an input of $k+1$ cards.
+	\par fraudMajority finds the majority card of its left and right side, of size $\floor{(k+1)/2}$ and
+	$(k+1) - \floor{(k+1)/2}$ respectively. Since both of these collections are less than $k$, by our strong inductive hypothesis,
+	these recursive calls must return the correct output, the majority card of that partition if it exists.
+	Then our algorithm calculates the total number of the majority card on the right and left on our
+	$k+1$ collection and returns the majority. If no majority exists, it returns null. Thus,
+	fraudMajority returns the correct output for a collection of $k+1$ cards.
+
+	\par By strong induction, we have proven that $P(n)$ is true for all $n \in \mathbb{N}$.
+	Therefore, fraudMajority is correct.
+\end{proof}
+
+
+%\subsubsection{Partial correctness}
+%\begin{proof}
+%	Suppose fraudMajority halts. 
+%\end{proof}
+%\subsubsection{Termination}
+
+\subsection{
+	Show the recurrence of the computing complexity and explain how did you obtain it.
+	Note that you do not have to solve the recurrence since we can derive the solution
+	using the Master’s theorem.
+}
+We claim that $T(n) = 2T(n/2) + 2n$ which is $\Theta(n\log n)$.
+\begin{proof}
+	Each call to our algorithm will result in two recursive calls
+	with its input sized being halfed, which accounts for $2T(n/2)$. Additionally, calculating
+	the number of originalCards will require $n$ time and we do this computation for both the left
+	and right card, hence requiring an overall $2n$ time. The rest of the computations take constant time.
+	Using the master theorem, it is clear that we get values of $a = 2, b = 2, d = 1$ for this particular
+	recurrence which results in a complexity of $\Theta(n\log n)$.
+\end{proof}
+
+
+
+%problem 2
+\section{Please describe an algorithm that finds a number that is
+  bigger than any of its neighbors.}
+  For brevity, we define a peak to be a number that is
+  bigger than any of its neighbors.
+\subsection{
+	Present your algorithm and explain the notations as necessary.
+}
+
+\iffalse
+\begin{algorithm}
+
+	\KwData{arr, the $nxn$ matrix representing the grid of boxes}
+	\KwResult{A number that is larger than its neighbors if it exists.}
+	mid = floor(len(arr[0])/2) \\
+	%row = len(arr)\\
+	%col = len(arr[0])\\
+	findLarge(arr, mid)\\
+	\Fn{findLarge(arr, mid)}{
+		max\_Col, max\_Col\_Index = maxColumn(arr, mid)\\
+		\#Base Case: No local max number because we are checking the edges\\
+		\If{mid $\leq$ 0 or mid $\geq$ len(arr[0]) - 1 or\\
+		\ \ \ max\_Col\_Index $\leq$ 0 or max\_Col\_Index $\geq$ len(arr[0]) - 1 }{
+			\Return null\\
+		}\-\\
+		\#Case 1: max\_Col is a local max, left and right are smaller\\
+		\If{max\_Col > arr[max\_Col\_Index][mid - 1] and \\ \ \ \ max\_Col > arr[max\_Col\_Index][mid + 1]}{
+			\Return max\_Col\\
+		}\-\\
+		\#Case 2: The number right of max\_Col is bigger, recursively call the right side\\
+		\If{arr[max\_Col\_Index][mid + 1] > max\_Col}{
+			\Return findLarge(arr, mid + floor(mid / 2))\\
+		}\-\\
+		\#Case 3: The number left of max\_Col is bigger, recursively call the left side\\
+		\Return findLarge(arr, mid - floor(mid / 2))
+	}
+
+\end{algorithm}
+\fi
+
+
+\begin{algorithm}
+\KwData{arr, the $nxn$ matrix representing the grid of boxes.}
+\KwResult{A peak.}
+\Fn{findLarge(arr)}{
+	max $\leftarrow$ max element of boundary elements, middle row, and middle column\\
+	\# Comparison is vacuously true for the neighbors that do not exist \\
+	\If{max $>$ max's neighbors}{
+		\Return max
+	}
+	\If{size of arr $\leq 1x1$}{
+		\Return null
+	}
+	\#New submatrix does not contain the rows/columns used to find max\\
+	recursive\_arr $\leftarrow$ the submatrix of the quadrant containing the largest neighbor \\
+	\Return findLarge(recursive\_arr)
+}
+\end{algorithm}
+
+\subsection{
+	Prove the correctness of your algorithm in finding the right box that has a number
+	that is larger than all its neighbors.
+}
+\begin{proof}
+	We show by strong induction that our algorithm is correct. Let $P(n)$ be the predicate,
+	"findLarge halts and returns a peak in a $nxn$ matrix".
+	We define $n \in \mathbb{N^{+}}$.
+	\par \textbf{Base Case:} When $n = 1$, findLarge halts the only element in the matrix, which by definition
+	is larger than its neighbors, a peak. Hence, $P(1)$ holds.
+	\begin{theorem*}
+		A peak exists in any given matrix where its elements are unique integers. 
+		\begin{proof}
+			Let the set 
+			containing all the unique integers in the matrix be $S = \{a_1, \cdots, a_\alpha\}$. 	
+			Take set $S' = \{b_1, b_2, \cdots\}$ to be the upper bound of $S$, 
+			where the upper bound is defined as $ \forall a_i \in S \ \ \forall b_j \in S', a_i \leq b_j$.
+			Using the well ordering principle, there must exist as smallest element $b \in S'$.
+			By definition, this must be the greatest element $a \in S$. 
+			Hence, there exist a largest integer in a finite set of unique integers. 
+			By definition, this largest integer is a peak. 	
+		\end{proof}
+	\end{theorem*}
+	\begin{corollary*}
+		There exists a peak in the submatrix of the quadrant containing the largest neighbor.
+		\begin{proof}
+			By previous lemma, there must exist a peak in the submatrix of the quadrant containing the largest neighbor
+			because any subset of the original matrix will have unique elements.
+		\end{proof}
+	\end{corollary*}	
+	\par \textbf{Inductive step:} Suppose $P(n)$ holds for all $n \leq k \in \mathbb{N}$. We show that $P(k+1)$ holds.
+	
+	\par We observe that findLarge recursively calls with an matrix of size 
+	$\floor{(k-1) / 2} x \floor{(k-1) / 2}$.
+	Since $\floor{(k-1) / 2} \leq k$, we know by our strong inductive hypothesis that these
+	recursive calls must halt. Hence, findLarge halts with a matrix of size $(k+1)x(k+1)$.
+
+
+	\par By strong induction, we have proven that $P(n)$ is true for all $n \in \mathbb{N^{+}}$.
+	Therefore, fraudMajority is correct.
+\end{proof}
+
+\subsection{
+	Analyze the number of boxes that one need to open using your algorithm.
+}
+\begin{align*}
+	T(n)   & = T(n/2) + \Theta(6n^{1/2})\\
+	& \Rightarrow \Theta(n)
+\end{align*}
 
 \end{document}
 
