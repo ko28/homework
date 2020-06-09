@@ -168,10 +168,10 @@ We claim that $T(n) = 2T(n/2) + 2n$ which is $\Theta(n\log n)$.
 	\If{max $>$ max's neighbors}{
 		\Return max
 	}
-	\If{size of arr $\leq 1x1$}{
-		\Return null
-	}
-	\#New submatrix does not contain the rows/columns used to find max\\
+	%\If{size of arr $\leq 1x1$}{
+	%	\Return null
+	%}
+	\# New submatrix does not contain the rows/columns used to find max\\
 	recursive\_arr $\leftarrow$ the submatrix of the quadrant containing the largest neighbor \\
 	\Return findLarge(recursive\_arr)
 }
@@ -204,28 +204,39 @@ We claim that $T(n) = 2T(n/2) + 2n$ which is $\Theta(n\log n)$.
 		There exists a peak in the submatrix of the quadrant containing the largest neighbor.
 		\begin{proof}
 			By previous lemma, there must exist a peak in the submatrix of the quadrant containing the largest neighbor
-			because any subset of the original matrix will have unique elements.
+			because any subset of the original matrix containing unique elements, will have unique elements. Consider the 
+			special case where the peak is on the edge of the new submatrix. Let $\alpha$ be the largest neighbor in the original 
+			matrix and $\gamma$ be the max and peak on the edge. We know that $\gamma > \alpha$ because when we fix a max, 
+			by definition it is the
+			greatest integer in the boundary elements, middle row, and middle column. This directly implies that $\gamma$
+			is greater than all its neighbors within the original matrix because of the fact that $\alpha$ was the
+			greatest integer of the values that directly border the submatrix. 
 		\end{proof}
 	\end{corollary*}	
-	\par \textbf{Inductive step:} Suppose $P(n)$ holds for all $n \leq k \in \mathbb{N}$. We show that $P(k+1)$ holds.
+	\par \textbf{Inductive step:} Suppose $P(n)$ holds for all $n \leq k \in \mathbb{N}^{+}$. We show that $P(k+1)$ holds.
 	
 	\par We observe that findLarge recursively calls with an matrix of size 
 	$\floor{(k-1) / 2} x \floor{(k-1) / 2}$.
-	Since $\floor{(k-1) / 2} \leq k$, we know by our strong inductive hypothesis that these
-	recursive calls must halt. Hence, findLarge halts with a matrix of size $(k+1)x(k+1)$.
-
+	Since $\floor{(k-1) / 2} \leq k$, we know by our strong inductive hypothesis that this
+	recursive call must halt. Hence, findLarge halts with a matrix of size $(k+1)x(k+1)$.
+	
+	\par If a peak does not exist in the boundary elements, middle row, and middle column, findLarge 
+	recursively calls the submatrix with the biggest neighbor. By the corollary above, there 
+	exist a peak in this submatrix. Since the size of the submatrix is $\floor{(k-1) / 2} x \floor{(k-1) / 2}$,
+	and $\floor{(k-1) / 2} < k$, by our strong inductive hypothesis this recursive call returns a valid peak.
 
 	\par By strong induction, we have proven that $P(n)$ is true for all $n \in \mathbb{N^{+}}$.
-	Therefore, fraudMajority is correct.
+	Therefore, findLarge is correct.
 \end{proof}
 
 \subsection{
 	Analyze the number of boxes that one need to open using your algorithm.
 }
-\begin{align*}
-	T(n)   & = T(n/2) + \Theta(6n^{1/2})\\
-	& \Rightarrow \Theta(n)
-\end{align*}
+We claim that $T(n) = T(n/2) + 6n$ which is $\Theta(n)$.
+\begin{proof}
+	A call to our algorithm will result in single recursive call
+	with its input sized being halfed, which accounts for $T(n/2)$.
+\end{proof}
 
 \end{document}
 
