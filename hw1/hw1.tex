@@ -203,12 +203,13 @@ We claim that $T(n) = 2T(n/2) + 2n$ which is $\Theta(n\log n)$.
 	\begin{corollary*}
 		There exists a peak in the submatrix of the quadrant containing the largest neighbor.
 		\begin{proof}
-			By previous lemma, there must exist a peak in the submatrix of the quadrant containing the largest neighbor
+			By previous theorem, there must exist a peak in the submatrix of the quadrant containing the largest neighbor
 			because any subset of the original matrix containing unique elements, will have unique elements. Consider the 
 			special case where the peak is on the edge of the new submatrix. Let $\alpha$ be the largest neighbor in the original 
 			matrix and $\gamma$ be the max and peak on the edge. We know that $\gamma > \alpha$ because when we fix a max, 
 			by definition it is the
-			greatest integer in the boundary elements, middle row, and middle column. This directly implies that $\gamma$
+			greatest integer in the boundary elements, middle row, and middle column, which includes
+			$\alpha$. This directly implies that $\gamma$
 			is greater than all its neighbors within the original matrix because of the fact that $\alpha$ was the
 			greatest integer of the values that directly border the submatrix. 
 		\end{proof}
@@ -232,11 +233,31 @@ We claim that $T(n) = 2T(n/2) + 2n$ which is $\Theta(n\log n)$.
 \subsection{
 	Analyze the number of boxes that one need to open using your algorithm.
 }
-We claim that $T(n) = T(n/2) + 6n$ which is $\Theta(n)$.
+We claim that $T(n^2) = T((n/2)^2) + \Theta(6(n/2))$ which is $\Theta(n)$.
 \begin{proof}
-	A call to our algorithm will result in single recursive call
-	with its input sized being halfed, which accounts for $T(n/2)$.
+	Suppose we have a size $nxn$ matrix. Each recursive call will have a input size being one quarter
+	of original matrix, which accounts for $T((n/2)^2)$. Additionally, when searching for the max element, 
+	we must search the boundary elements, middle row, and middle column, which would require, 6 times half the new input size
+	i.e. $\Theta(6(n/2))$.
+	The rest of the computations take constant time. Let $m = n^2$
+	\begin{align*}
+		T(n^2) & = T((n/2)^2) + \Theta(6(n/2)) \\
+		T(m) & = T(m/4) + \Theta(3\sqrt{m})
+	\end{align*}
+	Using the master theorem, it is clear that we get values of $a = 1, b = 4, d = \frac12$ for this particular
+	recurrence which results in a complexity of $\Theta(\sqrt{m}) = \Theta(n)$.
 \end{proof}
+\iffalse
+Suppose we have a $nxn$ matrix.
+A call to our algorithm will result in single recursive call
+with its input sized being halfed. Additionally, for each
+recursive call, we must search the boundary elements, middle row, and middle column,
+which would require, 6 times half the input size time. 
+\begin{align*}
+	T(n^2) & = T(\frac{n}{2}x\frac{n}{2}) + \Theta(6(\frac{n}{2}))\\
+	T(n) & = T(\frac{n}{4}) + \Theta(3\sqrt{n})
+\end{align*}
+\fi
 
 \end{document}
 
