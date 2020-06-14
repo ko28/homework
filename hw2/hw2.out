@@ -1,0 +1,9 @@
+\BOOKMARK [1][-]{section.1}{Given the coordinates of each of the n events, find a viewable subset of maximum size, subject to the requirement that it should contain event n. Such a solution will be called optimal.}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Write the iterative version of the algorithm to find the maximal size.}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Show the algorithm for tracing the events selected.}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Give a brief argument of correctness.}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Analyze the running time.}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{Please describe an algorithm that finds a number that is bigger than any of its neighbors.}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{Present your algorithm and explain the notations as necessary.}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{Prove the correctness of your algorithm in finding the right box that has a number that is larger than all its neighbors.}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{Analyze the number of boxes that one need to open using your algorithm.}{section.2}% 9
