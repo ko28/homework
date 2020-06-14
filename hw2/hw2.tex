@@ -131,45 +131,26 @@ the recurrence relation descending, i.e. from $i = n-1$ to $i=0$.
 		the biggest MaxEvent from the $j$'s. By our strong backwards inductive hypothesis,
 		MaxEvent$(j)$ returns the correct amount of events because we defined 
 		$ j > i = \alpha - 1 \Leftrightarrow j \geq \alpha$. 
-
-		
-		\par By strong backwards induction, we have proven that $P(n)$ is true for all $n \in \mathbb{N}$.
+		This will give us the correct amount of events you can visit in the case where we can visit $i$ and $j$. 
+		\par In all other cases, we cannot visit $i$ or $j$ which means the max amount of events we can visit is 0.
+		\par By strong backwards induction, we have proven that $P(i)$ is true for all $i \in \mathbb{N}$.
 		Therefore, MaxEvent is correct.
 	\end{proof}
 \end{theorem*}
 
 \begin{theorem*}
-The algorithm returns the maximal amount of events we can view, given that we must view the last event.
+The algorithm, optimal, returns the maximal amount of events we can view, given that we must view the last event.
 
 \begin{proof}
-	Our algorithm evaluates the recurrence OPT(i) bottom-up by storing OPT(i) in DP[i].
-	Note that since we evaluate DP[i] as i increases from 1 to n, all values for subproblems 
-	referenced by the recurrence for OPT(i) will have already been computed. At the end, our 
-	algorithm returns the maximum value in the DP array, which corresponds to the length of the 
-	longest LIS that ends somewhere in the array, which in turn is an LIS of the overall array A.
+	Our algorithm evaluates the recurrence MaxEvent(i) bottom-up by storing MaxEvent(i) in dp[i].
+	All values for subproblems referenced by the recurrence for MaxEvent(i) will have already been computed
+	because we evaluate dp[i] as i decreases from n-1 to 0. 
+	After all the values in dp are computed, the algorithm returns the max element, 
+	which corresponds to the most amount of events you can visit somewhere in the list crd,
+	which in turn is the most amount of events you can visit in the entire list crd.
 \end{proof}
 
 \end{theorem*}
-
-\iffalse
-	
-	\par \textbf{Base Case:} When $k = 0$, fraudMajority halts and returns null which is the correct output
-	because the collection is empty. Hence, $P(0)$ holds.
-	\par \textbf{Inductive step:} Suppose $P(n)$ holds for all $n \leq k \in \mathbb{N}$. We show that $P(k+1)$ holds.
-	\par We observe that fraudMajority recursively calls collections of sizes $\floor{(k+1)/2}$ and
-	$(k+1) - \floor{(k+1)/2}$.
-	Since $\floor{(k+1)/2} \leq k$ and $(k+1) - \floor{(k+1)/2} \leq k $, we know by our strong inductive hypothesis that these
-	recursive calls must halt. Hence, fraudMajority halts with an input of $k+1$ cards.
-	\par fraudMajority finds the majority card of its left and right side, of size $\floor{(k+1)/2}$ and
-	$(k+1) - \floor{(k+1)/2}$ respectively. Since both of these collections are less than $k$, by our strong inductive hypothesis,
-	these recursive calls must return the correct output, the majority card of that partition if it exists.
-	Then our algorithm calculates the total number of the majority card on the right and left on our
-	$k+1$ collection and returns the majority. If no majority exists, it returns null. Thus,
-	fraudMajority returns the correct output for a collection of $k+1$ cards.
-
-	\par By strong induction, we have proven that $P(n)$ is true for all $n \in \mathbb{N}$.
-	Therefore, fraudMajority is correct.
-\fi
 
 
 \subsection{
@@ -188,14 +169,11 @@ We claim that the running time is $O(n^2)$.
 
 
 %problem 2
-\section{Please describe an algorithm that finds a number that is
-  bigger than any of its neighbors.}
-For brevity, we define a peak to be a number that is
-bigger than any of its neighbors.
+\section{Design an $O(n^3)$ algorithm using dynamic programming methodology to find an optimal
+(least total testing cost) assembly order.}
 \subsection{
-	Present your algorithm and explain the notations as necessary.
+	Use iterative implementation for the algorithm to find the optimal cost
 }
-
 \iffalse
 	\begin{algorithm}
 
@@ -247,8 +225,11 @@ bigger than any of its neighbors.
 \end{algorithm}
 
 \subsection{
-	Prove the correctness of your algorithm in finding the right box that has a number
-	that is larger than all its neighbors.
+	Show the algorithm for finding the optimal order.
+}
+
+\subsection{
+	Give a brief argument of correctness.
 }
 \begin{proof}
 	We show by strong induction that our algorithm is correct. Let $P(n)$ be the predicate,
@@ -300,7 +281,7 @@ bigger than any of its neighbors.
 \end{proof}
 
 \subsection{
-	Analyze the number of boxes that one need to open using your algorithm.
+	Analyze the running time.
 }
 We claim that $T(n^2) = T((n/2)^2) + \Theta(6(n/2))$ which is $\Theta(n)$.
 \begin{proof}
