@@ -101,10 +101,10 @@ We will assume that $|\text{coordinate of n}| \leq n$ and are using zero based n
 \[
 	\text{MaxEvent}(i)=
 	\begin{cases}
-		1 & \textbf{when } i = n - 1                                                                                   \\
+		1 & \textbf{when } i = n - 1                                                                           \\
 		1 + \text{max}(\text{MaxEvent}[j_1], \text{MaxEvent}[j_2], \cdots )
 		  & \textbf{if } \exists j > i \text{ s.t.} \mid \text{MaxEvent}[i]-\text{MaxEvent}[j] \mid \leq i - j \\
-		  & \text{and } i + 1 - \mid \text{MaxEvent}[i] \mid  \geq 0                                              \\
+		  & \text{and } i + 1 - \mid \text{MaxEvent}[i] \mid  \geq 0                                           \\
 		0 & \textbf{otherwise}
 	\end{cases}
 \]
@@ -112,51 +112,58 @@ We will assume that $|\text{coordinate of n}| \leq n$ and are using zero based n
 Note that MaxEvent$[n-1]$ corresponds to the $n$th event because of our zero based numbering for lists. We compute
 the recurrence relation descending, i.e. from $i = n-1$ to $i=0$.
 \begin{theorem*}
-	The recurrence relation, MaxEvent$(i)$ is most amount of events you can visit given that the first event you visit is at $i$ 
+	The recurrence relation, MaxEvent$(i)$ is most amount of events you can visit given that the first event you visit is at $i$
 	and you end on $n$th event.
 	\begin{proof}
-		We show by strong backwards induction that our algorithm is correct. Let $P(i)$ be the predicate,
-		"MaxEvent correctly computes the most amount of events you can visit given that the first event you visit is at $i$ 
+		We show by strong backwards induction that our recurrence relation is correct. Let $P(i)$ be the predicate,
+		"MaxEvent correctly computes the most amount of events you can visit given that the first event you visit is at $i$
 		and you end on $n$th event".
 		We define $i\in \mathbb{N}$. \\
-		\textbf{Base Case:} When $i = n - 1$, MaxEvent returns 1 which is the correct output because if you start 
+		\textbf{Base Case:} When $i = n - 1$, MaxEvent returns 1 which is the correct output because if you start
 		at the $n$th event, the last event, you can only visit one event. Hence, $P(n-1)$ holds.\\
 		\textbf{Inductive step:} Suppose $P(\alpha)$ holds for all $\alpha \leq n - 1$. We show that $P(\alpha-1)$ holds.
 		Our recurrence relation looks for all $j > i = \alpha-1$ such that if you start at event $i$, you can visit event $j$.
 		This part is given by, $$\exists j > i \text{ s.t. } \mid \text{MaxEvent}[i]-\text{MaxEvent}[j] \mid \leq i - j$$
 		\par The second condition of the recurrence checks if it is possible to view event $i$, given you start at coordinate 0
-		and can move 1 distance before the first event, i.e the second assumption given in the homework. This part is given by, 
+		and can move 1 distance before the first event, i.e the second assumption given in the homework. This part is given by,
 		$$ i + 1 - \mid \text{MaxEvent}[i] \mid  \geq 0$$
 		\par If both conditions hold, the most amount of events you can visit is the event at $i$, which is 1 event, plus
 		the biggest MaxEvent from the $j$'s. By our strong backwards inductive hypothesis,
-		MaxEvent$(j)$ returns the correct amount of events because we defined 
-		$ j > i = \alpha - 1 \Leftrightarrow j \geq \alpha$. 
-		This will give us the correct amount of events you can visit in the case where we can visit $i$ and $j$. 
+		MaxEvent$(j)$ returns the correct amount of events because we defined
+		$ j > i = \alpha - 1 \Leftrightarrow j \geq \alpha$.
+		This will give us the correct amount of events you can visit in the case where we can visit $i$ and $j$.
 		\par In all other cases, we cannot visit $i$ or $j$ which means the max amount of events we can visit is 0.
 		\par By strong backwards induction, we have proven that $P(i)$ is true for all $i \in \mathbb{N}$.
 		Therefore, MaxEvent is correct.
 	\end{proof}
 \end{theorem*}
 
-\begin{theorem*}
-The algorithm, optimal, returns the maximal amount of events we can view, given that we must view the last event.
+\begin{corollary*}
+	The algorithm, optimal, returns the maximal amount of events we can view, given that we must view the last event.
 
-\begin{proof}
-	Our algorithm evaluates the recurrence MaxEvent(i) bottom-up by storing MaxEvent(i) in dp[i].
-	All values for subproblems referenced by the recurrence for MaxEvent(i) will have already been computed
-	because we evaluate dp[i] as i decreases from n-1 to 0. 
-	After all the values in dp are computed, the algorithm returns the max element, 
-	which corresponds to the most amount of events you can visit somewhere in the list crd,
-	which in turn is the most amount of events you can visit in the entire list crd.
-\end{proof}
+	\begin{proof}
+		Our algorithm evaluates the recurrence MaxEvent(i) bottom-up by storing MaxEvent(i) in dp[i].
+		All values for subproblems referenced by the recurrence for MaxEvent(i) will have already been computed
+		because we evaluate dp[i] as i decreases from n-1 to 0.
+		After all the values in dp are computed, the algorithm returns the max element,
+		which corresponds to the most amount of events you can visit somewhere in the list crd,
+		which in turn is the most amount of events you can visit in the entire list crd.
+	\end{proof}
 
-\end{theorem*}
+\end{corollary*}
+
+\begin{corollary*}
+	The algorithm, events, correctly traces the events selected.
+	\begin{proof}
+		$$\textbf{DO THIS PART }$$
+	\end{proof}
+\end{corollary*}
 
 
 \subsection{
 	Analyze the running time.
 }
-We claim that the running time is $O(n^2)$.
+We claim that the running time of \textit{optimal} is $O(n^2)$.
 \begin{proof}
 	We have a nested for loop, which run at most $n$ times each.
 	In the outer for loop, we search for the max element of an array
@@ -167,60 +174,29 @@ We claim that the running time is $O(n^2)$.
 \end{proof}
 
 
-
 %problem 2
 \section{Design an $O(n^3)$ algorithm using dynamic programming methodology to find an optimal
-(least total testing cost) assembly order.}
+  (least total testing cost) assembly order.}
 \subsection{
 	Use iterative implementation for the algorithm to find the optimal cost
 }
-\iffalse
-	\begin{algorithm}
-
-		\KwData{arr, the $nxn$ matrix representing the grid of boxes}
-		\KwResult{A number that is larger than its neighbors if it exists.}
-		mid = floor(len(arr[0])/2) \\
-		%row = len(arr)\\
-		%col = len(arr[0])\\
-		findLarge(arr, mid)\\
-		\Fn{findLarge(arr, mid)}{
-			max\_Col, max\_Col\_Index = maxColumn(arr, mid)\\
-			\#Base Case: No local max number because we are checking the edges\\
-			\If{mid $\leq$ 0 or mid $\geq$ len(arr[0]) - 1 or\\
-				\ \ \ max\_Col\_Index $\leq$ 0 or max\_Col\_Index $\geq$ len(arr[0]) - 1 }{
-				\Return null\\
-			}\-\\
-			\#Case 1: max\_Col is a local max, left and right are smaller\\
-			\If{max\_Col > arr[max\_Col\_Index][mid - 1] and \\ \ \ \ max\_Col > arr[max\_Col\_Index][mid + 1]}{
-				\Return max\_Col\\
-			}\-\\
-			\#Case 2: The number right of max\_Col is bigger, recursively call the right side\\
-			\If{arr[max\_Col\_Index][mid + 1] > max\_Col}{
-				\Return findLarge(arr, mid + floor(mid / 2))\\
-			}\-\\
-			\#Case 3: The number left of max\_Col is bigger, recursively call the left side\\
-			\Return findLarge(arr, mid - floor(mid / 2))
-		}
-
-	\end{algorithm}
-\fi
-
 
 \begin{algorithm}
-	\KwData{arr, the $nxn$ matrix representing the grid of boxes.}
-	\KwResult{A peak.}
-	\Fn{findLarge(arr)}{
-		max $\leftarrow$ max element of boundary elements, middle row, and middle column\\
-		\# Comparison is vacuously true for the neighbors that do not exist \\
-		\If{max $>$ max's neighbors}{
-			\Return max
+	\KwData{pieces, a size $n$ list containing ordered pairs representing the interval of parts, i.e. $[a,b]$ where some part 
+	begins at $a$ and ends at $b$. 
+	%Total length of structure is $\omega$
+	}
+	\KwResult{Optimal cost to assemble the linear structure.}
+	\Fn{assemble(pieces)}{
+		dp $\leftarrow$ a $nxn$ matrix used for memoization, initialized with 0's \\
+		\For{$\alpha$ decreasing from n to 1}{
+			\For{$\omega$ increasing from $\alpha + 1$ to n }{
+				$$\text{dp}[\alpha, \omega] = f(\text{pieces}[\alpha][a], \text{pieces}[\omega][b]) +
+				\min\Big(\Big\{\text{dp}[\alpha, \phi] + \text{dp}[\phi + 1, \omega] \mid \alpha \leq \phi < \omega\Big\} \Big)$$
+			}
 		}
-		%\If{size of arr $\leq 1x1$}{
-		%	\Return null
-		%}
-		\# New submatrix does not contain the rows/columns used to find max\\
-		recursive\_arr $\leftarrow$ the submatrix of the quadrant containing the largest neighbor \\
-		\Return findLarge(recursive\_arr)
+		
+		\Return dp$[1, n]$
 	}
 \end{algorithm}
 
@@ -231,83 +207,71 @@ We claim that the running time is $O(n^2)$.
 \subsection{
 	Give a brief argument of correctness.
 }
-\begin{proof}
-	We show by strong induction that our algorithm is correct. Let $P(n)$ be the predicate,
-	"findLarge halts and returns a peak in a $nxn$ matrix".
-	We define $n \in \mathbb{N^{+}}$.
-	\par \textbf{Base Case:} When $n = 1$, findLarge halts the only element in the matrix, which by definition
-	is larger than its neighbors, a peak. Hence, $P(1)$ holds.
-	\begin{theorem*}
-		A peak exists in any given matrix where its elements are unique integers.
-		\begin{proof}
-			Let the set
-			containing all the unique integers in the matrix be $S = \{a_1, \cdots, a_\alpha\}$.
-			Take set $S' = \{b_1, b_2, \cdots\}$ to be the upper bound of $S$,
-			where the upper bound is defined as $ \forall a_i \in S \ \ \forall b_j \in S', a_i \leq b_j$.
-			Using the well ordering principle, there must exist as smallest element $b \in S'$.
-			By definition, this must be the greatest element $a \in S$.
-			Hence, there exist a largest integer in a finite set of unique integers.
-			By definition, this largest integer is a peak.
-		\end{proof}
-	\end{theorem*}
-	\begin{corollary*}
-		There exists a peak in the submatrix of the quadrant containing the largest neighbor.
-		\begin{proof}
-			By previous theorem, there must exist a peak in the submatrix of the quadrant containing the largest neighbor
-			because any subset of the original matrix containing unique elements, will have unique elements. Consider the
-			special case where the peak is on the edge of the new submatrix. Let $\alpha$ be the largest neighbor in the original
-			matrix and $\gamma$ be the max and peak on the edge. We know that $\gamma > \alpha$ because when we fix a max,
-			by definition it is the
-			greatest integer in the boundary elements, middle row, and middle column, which includes
-			$\alpha$. This directly implies that $\gamma$
-			is greater than all its neighbors within the original matrix because of the fact that $\alpha$ was the
-			greatest integer of the values that directly border the submatrix.
-		\end{proof}
-	\end{corollary*}
-	\par \textbf{Inductive step:} Suppose $P(n)$ holds for all $n \leq k \in \mathbb{N}^{+}$. We show that $P(k+1)$ holds.
 
-	\par We observe that findLarge recursively calls with an matrix of size
-	$\floor{(k-1) / 2} x \floor{(k-1) / 2}$.
-	Since $\floor{(k-1) / 2} \leq k$, we know by our strong inductive hypothesis that this
-	recursive call must halt. Hence, findLarge halts with a matrix of size $(k+1)x(k+1)$.
+We define $\alpha,\omega$ to be some piece between $[1,n]$. Each piece consists of an interval $[a,b]$.
+For example, $a_\alpha$ represents where the piece $\alpha$ begins. 
+Likewise, $b_\omega$ represents where the piece $\omega$ ends.
+\[
+	\text{MinCost}(\alpha,\omega)=
+	\begin{cases}
+		f(a_\alpha,b_\omega) + \min\Big(  
+		\Big\{\text{MinCost}(\alpha, \phi) + \text{MinCost}(\phi + 1, \omega) \mid \alpha \leq \phi < \omega\Big\} \Big)
+		& \textbf{if } \omega > \alpha \\
+		0 & \textbf{otherwise}
+	\end{cases}
+\]
 
-	\par If a peak does not exist in the boundary elements, middle row, and middle column, findLarge
-	recursively calls the submatrix with the biggest neighbor. By the corollary above, there
-	exist a peak in this submatrix. Since the size of the submatrix is $\floor{(k-1) / 2} x \floor{(k-1) / 2}$,
-	and $\floor{(k-1) / 2} < k$, by our strong inductive hypothesis this recursive call returns a valid peak.
+\begin{theorem*}
+	The recurrence relation, MinCost$(\alpha,\omega)$ is the minimum cost to assemble the linear structure from $\alpha$ to $\omega$.
+	\begin{proof}
+		Let $\psi = \omega - \alpha$.
+		We show by strong induction that our recurrence relation is correct. Let $P(\psi)$ be the predicate,
+		"MinCost correctly computes the minimum cost to assemble the linear structure that has $\psi$ pieces".
+		We define $\psi \in \mathbb{N}$. \\
+		\textbf{Base Case:} When $\psi = 0$, MinCost correctly returns 0 because there is 
+		nothing to join when you have no elements. Hence, $P(0)$ holds.\\
+		\textbf{Inductive step:} Suppose $P(\psi)$ holds for all $0 \leq \psi \leq k$. We show that $P(k + 1)$ holds. 
+		For all $\phi$ where $\alpha \leq \phi \leq \omega$, we know that $\phi - \alpha \leq k$ and $\omega - (\phi + 1) \leq k$.
+		It follows by our strong inductive hypothesis that all values contained in the set inside the min function will be correct.
+		The min function then returns the minimum cost to assemble two adjacent pieces linear structure of size $k + 1$.
+		This value is then added to the cost needed to merge remaining two pieces, $f(a_\alpha,b_\omega)$.
+		\par By strong induction, we have proven that $P(\psi)$ is true for all $\psi  \in \mathbb{N}$.
+		Therefore, MinCost is correct.
+	\end{proof}
+\end{theorem*}
 
-	\par By strong induction, we have proven that $P(n)$ is true for all $n \in \mathbb{N^{+}}$.
-	Therefore, findLarge is correct.
-\end{proof}
+\begin{theorem*}
+	The algorithm, assemble, returns the minimum cost to assemble the linear structure.
+
+	\begin{proof}
+		Our algorithm evaluates the recurrence MaxEvent(i) bottom-up by storing MaxEvent(i) in dp[i].
+		All values for subproblems referenced by the recurrence for MaxEvent(i) will have already been computed
+		because we evaluate dp[i] as i decreases from n-1 to 0.
+		After all the values in dp are computed, the algorithm returns the max element,
+		which corresponds to the most amount of events you can visit somewhere in the list crd,
+		which in turn is the most amount of events you can visit in the entire list crd.
+	\end{proof}
+
+\end{theorem*}
+
+\begin{corollary*}
+	The algorithm, order, correctly traces the events selected.
+	\begin{proof}
+		$$\textbf{DO THIS PART }$$
+	\end{proof}
+\end{corollary*}
 
 \subsection{
 	Analyze the running time.
 }
-We claim that $T(n^2) = T((n/2)^2) + \Theta(6(n/2))$ which is $\Theta(n)$.
+We claim that the running time of \textit{assemble} is $O(n^3)$. We assume computing $f(u,v)$ takes constant time. 
+
 \begin{proof}
-	Suppose we have a size $nxn$ matrix. Each recursive call will have a input size being one quarter
-	of original matrix, which accounts for $T((n/2)^2)$. Additionally, when searching for the max element,
-	we must search the boundary elements, middle row, and middle column, which would require, 6 times half the new input size
-	i.e. $\Theta(6(n/2))$.
-	The rest of the computations take constant time. Let $m = n^2$
-	\begin{align*}
-		T(n^2) & = T((n/2)^2) + \Theta(6(n/2)) \\
-		T(m)   & = T(m/4) + \Theta(3\sqrt{m})
-	\end{align*}
-	Using the master theorem, it is clear that we get values of $a = 1, b = 4, d = \frac12$ for this particular
-	recurrence which results in a complexity of $\Theta(\sqrt{m}) = \Theta(n)$.
+	We have a nested for loop, which run at most $n$ times each.
+	In the inner for loop, we calculate dp$[\alpha,\omega]$ which requires computing the minimum of at most $n-1$ values 
+	in dp. The rest of the computations take constant time.
+	Thus, our total time complexity of our algorithm is $O(n^3)$
 \end{proof}
-\iffalse
-	Suppose we have a $nxn$ matrix.
-	A call to our algorithm will result in single recursive call
-	with its input sized being halfed. Additionally, for each
-	recursive call, we must search the boundary elements, middle row, and middle column,
-	which would require, 6 times half the input size time.
-	\begin{align*}
-		T(n^2) & = T(\frac{n}{2}x\frac{n}{2}) + \Theta(6(\frac{n}{2})) \\
-		T(n)   & = T(\frac{n}{4}) + \Theta(3\sqrt{n})
-	\end{align*}
-\fi
 
 \end{document}
 
