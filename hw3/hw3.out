@@ -4,3 +4,6 @@
 \BOOKMARK [3][-]{subsubsection.1.1.2}{Write the pseudocode for the iterative version of the algorithm to find the minimum cost. You are not required to write pseudocode to find the shortest path.}{subsection.1.1}% 4
 \BOOKMARK [3][-]{subsubsection.1.1.3}{Analyze the computing complexity.}{subsection.1.1}% 5
 \BOOKMARK [2][-]{subsection.1.2}{Give a polynomial-time algorithm to find a sequence of paths P0, P1, \@let@token , Pb of minimum cost, where Pi is an s-t path in Gi for i = 0, 1, \@let@token , b.}{section.1}% 6
+\BOOKMARK [3][-]{subsubsection.1.2.1}{Set up the recursive formula and justify its correctness.}{subsection.1.2}% 7
+\BOOKMARK [1][-]{section.2}{Given a rooted tree T = \(V, E\) and an integer k, find the largest possible number of disjoint paths in T, where each path has length k.}{}% 8
+\BOOKMARK [2][-]{subsection.2.1}{Set up the recursive formula and justify its correctness.}{section.2}% 9
