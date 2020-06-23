@@ -29,7 +29,7 @@
 \newcommand{\maxp}{\text{MaxPath}}
 \newcommand{\ctn}{\text{MaxContains}}
 \newcommand{\dctn}{\text{MaxDoesNotContain}}
-
+\newcommand{\mpath}{\text{MinPath}}
 
 \title{CS 577: HW 3}
 \author{Daniel Ko}
@@ -49,12 +49,20 @@
 	each of the graphs $G_0, G_1, \cdots , G_b$. Give a polynomial-time algorithm
 	to find the shortest such path.
 }
-\subsubsection{
-	Set up the recursive formula and justify its correctness.
-}
+%More formally, we assume that there exists a path $p_\phi$ such that $p_\phi \subseteq G_i$ for all $i$.
 We define the set of edges that exist in all points in time as $$E^* = \bigcap_{i=0}^{b} E_i$$
-Since our graph is unweighted, we can perform breadth first search for the shortest path from 
-$s$ to $t$ on $G^* = (V, E^*)$. We define $\delta(v,t)$ to be the length of the shortest
+Since our graph is unweighted, we can perform breadth first search to find the shortest path from 
+$s$ to $t$ on $G^* = (V, E^*)$. 
+%We define $n$ to be size of the biggest $E_i$
+%or more formally, $n = \max(\{|E_i| : 0 \leq i \leq b\})$.
+%The complexity of computing $E^*$ is $\Theta(nb)$.
+%The computing complexity of breadth first search is $\Theta(|V| + |E^*|)$.
+%The total complexity would be $\Theta(nb + |V| + |E^*|) = O(n(b + |V|))$
+%which is polynomial-time.
+
+%We will assume that each of these graphs Gi is connected.
+\iffalse
+We define $\delta(v,t)$ to be the length of the shortest
 path from $v$ to $t$. 
 $$
 \delta(v,t) = 
@@ -64,9 +72,6 @@ $$
 	\min(\{ 1 + \delta(\phi,t) \mid (v,\phi) \in E^*\})  & \textbf{otherwise}\\ 
 \end{cases}
 $$
-
-%We will assume that each of these graphs Gi is connected.
-\iffalse
 Similiar to (6.23) from the book, we can modify the Bellman–Ford algorithm 
 to find the shortest path from $s$ to $t$ that exists in all $G_i$. We define $\opt(i,v)$ to be the length of the shortest
 path from $v$ to $t$ using at most $i$ edges. 
@@ -77,35 +82,8 @@ $$\opt(i,v) =
 	\infty & \textbf{otherwise}
 \end{cases}
 $$
-
-\begin{proof}
-	We show by strong induction that our recurrence relation is correct. Let $P(\alpha)$ be the predicate,
-		"\opt \ correctly computes the shortest path from $v$ to $t$ that exists in $E^*$ where the 
-		shortest path is length $\alpha$". Since we assume that a path exists, we define $\alpha \in \mathbb{N}^+$.\\
-		\textbf{Base Case:} When $\alpha = 1$, MaxEvent returns 1 which is the correct output because if you start
-		at the $n$th event, the last event, you can only visit one event. Hence, $P(n-1)$ holds.\\
-		\textbf{Inductive step:} Suppose $P(\alpha)$ holds for all $\alpha \leq n - 1$. We show that $P(\alpha-1)$ holds.
-		Our recurrence relation looks for all $j > i = \alpha-1$ such that if you start at event $i$, you can visit event $j$.
-		This part is given by, $$\exists j > i \text{ s.t. } \mid \text{MaxEvent}[i]-\text{MaxEvent}[j] \mid \leq i - j$$
-		\par The second condition of the recurrence checks if it is possible to view event $i$, given you start at coordinate 0
-		and can move 1 distance before the first event, i.e the second assumption given in the homework. This part is given by,
-		$$ i + 1 - \mid \text{MaxEvent}[i] \mid  \geq 0$$
-\end{proof}
-
 \fi
 
-\subsubsection{
-	Write the pseudocode for the iterative version of the algorithm to find the minimum
-	cost. You are not required to write pseudocode to find the shortest path.
-}
-
-
-
-
-\subsubsection{
-	Analyze the computing complexity.
-}
-We claim computing complexity of \textit{asdasd} is $O(V + E)$.
 
 %problem 1b
 \subsection{
@@ -113,17 +91,45 @@ We claim computing complexity of \textit{asdasd} is $O(V + E)$.
 	$P_0, P_1, \cdots , P_b$ of minimum cost, where $P_i$ is an $s-t$ path in $G_i$ for
 	$i = 0, 1, \cdots, b$.
 }
-
+For an $s-t$ path $P$ in one
+of the graphs $G_i$, we define the length of $P$ to be simply the number of
+edges in $P$, and we denote this to be $\ell(P)$.
+Formally, we
+define $\operatorname{changes}(P_{0}, P_{1}, \ldots, P_{b})$ to be the number of indices $i \ (0 \leq i \leq b - 1)$
+for which $P_i \neq P_{i+1}$.
+Fix a constant $K>0 .$ We define the cost of the sequence of paths
+$P_{0}, P_{1}, \ldots, P_{b}$ 
+\[
+\operatorname{cost}\left(P_{0}, P_{1}, \ldots, P_{b}\right)=
+\sum_{i=0}^{b} \ell\left(P_{i}\right)+K \cdot \operatorname{changes}\left(P_{0}, P_{1}, \ldots, P_{b}\right)
+\].
 \subsubsection{
 	Set up the recursive formula and justify its correctness.
 }
 
+We define $\mpath(i)$ to be the recurrence for the a sequence of paths of minimum cost 
+in $G_0, \cdots, G_i$. Let the set of edges that exist from graphs $G_a, \cdots, G_b$
+be defined as 
+$$E_{a,b} = \bigcap_{i=a}^{b} E_i$$
+Let $\ell_E(E_{a,b})$ be the length of the shortest $s-t$ path in $E_{a,b}$. If a path does not exist 
+we define $\ell_E(E_{a,b}) = \infty$.
 $$
-\opt(i) = \min()
+\mpath(i) = \min \Bigg(\ell_E\Big(E_{0,i}\Big) \cdot \Big(i+1\Big),
+\min\Big(\Big\{\mpath(\phi)	+ \ell_E\Big(E_{\phi+1,i}\Big) \cdot \Big(i - \phi \Big)+ K \mid 1 \leq \phi < i\Big\}\Big) \Bigg)
 $$
 
 
-
+\begin{proof}
+	We show by strong induction that our recurrence relation is correct. Let $P(i)$ be the predicate,
+	"MinPath correctly computes the sequence of paths of minimum cost in $G_0, \cdots, G_i$". 
+	We define $i \in \mathbb{N}$. \\
+	\textbf{Base Case:} When $i=0$, it is trivial to see that the correct minimum cost is
+	$\ell_E(E_{0,0})$ as there is only one graph to consider. We see that value in the left
+	parameter of the min function evaluates to $\ell_E\big(E_{0,0}\big) \cdot \big(0+1\big) = \ell_E(E_{0,0})$.
+	The right parameter never evaluates. Thus, the min of these two values is $\ell_E(E_{0,0})$,
+	which is the correct minimum cost. Therefore, $P(0)$ holds.\\
+	\textbf{Inductive step:} Suppose $P(i)$ holds for all $0 \leq i \leq k$. We show that $P(k + 1)$ holds.
+\end{proof}
 
 
 
@@ -140,12 +146,12 @@ of $T$ with root $v$. We consider two major cases, the maximum number of disjoin
 may not contain $v$. 
 
 $$
-\maxp(v) = \max \Big(\ctn(v, 0) , \dctn(v) \Big)
+\maxp(v) = \max \Big(\dctn(v), \ctn(v, 0) \Big)
 $$
 In the case where maximum number of disjoint paths does not contain $v$, we define 
 $\dctn(v)$ to be the sum of   
 the maximum number of disjoint paths of size $k$ for each sub tree generated by the children of $v$, 
-i.e. the sub trees having $c$ as the root where $(c,v) \in E$.
+i.e. the sub trees having $c$ as the root where $(v,c) \in E$.
 We will define the set of child nodes of a vertex $v$ as $$C_v = \Big\{c \mid (v,c) \in E\Big\}$$
 Adding up all the maximum paths for each sub tree
 gives us the total amount of maximum paths for the entire tree. 
@@ -193,35 +199,86 @@ $$
 	equals $0$. It is clear to see that there are no paths for a tree that consists of a single node.
 	Hence, $P(1,1)$ holds.\\
 	\textbf{Inductive step for number of nodes:} Suppose $P(\eta,\kappa)$ holds for all $n \leq \eta$ and $k \leq \kappa$. 
-	We show that $P(\eta + 1,\kappa)$ holds.
+	We show that $P(\eta + 1,\kappa)$ holds. MaxPath(v) calls $\ctn(v,0)$ and $\dctn(v)$. Since $v$
+	is not a leaf and $0 \neq k$, third condition holds in $\ctn$. 
+	Notice that the number of nodes the sub tree where the root is $c$ will have strictly less nodes than $n + 1$, 
+	which is amount of nodes in the sub tree where the root is $v$ because $c$ is a child of $v$.
+	%Given the previous statement and $\kappa-1 \leq k$, 
+	Hence, $\ctn(c, 1)$ holds by our inductive hypothesis.
+	Without loss of generality, $\maxp(c')$ and $\dctn(v)$ holds by our inductive hypothesis.
+	Therefore, $P(\eta + 1,\kappa)$ holds.\\
 	%\ctn is true by ih , tree of c is less
 	%\dctn is true by ih 
-
-
-	%\textbf{Inductive step for length of path:}
-	%Suppose $P(\eta,\kappa)$ holds for all $n \leq \eta$ and $k \leq \kappa$. 
-	%We show that $P(\eta,\kappa + 1)$ holds.
-
-	%By strong backwards induction, we have proven that $P(i)$ is true for all $i \in \mathbb{N}$.
-	%Therefore, MaxEvent is correct.
+	\textbf{Inductive step for length of path:} Suppose $P(\eta,\kappa)$ holds for all $n \leq \eta$ and 
+	$k \leq \kappa$. We show that $P(\eta,\kappa + 1)$ holds. MaxPath(v) calls $\ctn(v,0)$ and $\dctn(v)$.
+	We continue with the third condition in $\ctn(v,0)$. 
+	Notice that $\ctn(c, 1)$ is equivalent to $\ctn(c,0)$ if we fix $k = \kappa$.
+	Since $\kappa \leq \kappa + 1$, $\ctn(c,0)$ where $k = \kappa$ and subsequently 
+	$\ctn(c, 1)$ where $k = \kappa + 1$ holds by our inductive hypothesis. 
+	Without loss of generality, $\maxp(c')$ and $\dctn(v)$ holds by our inductive hypothesis
+	because they will eventually reach $\ctn(v', 1)$. Therefore, $P(\eta,\kappa+ 1)$ holds.\\
+	By strong induction, we have proven that $P(n,k)$ holds for all $n,k \in \mathbb{N}^+$.
+	Therefore, MaxPath is correct.
 \end{proof}
 
 
 
 
 \subsection{
-	Write the pseudocode for the iterative version of the algorithm to find the minimum
-	cost. You are not required to write pseudocode to find the shortest path.
+	Write the pseudocode for the iterative version of the algorithm to find the maximum
+	number of players that can play at the same time.	
 }
+The main idea of this algorithm is to compute bottom up the optimal cost to view event $n$
+when we start on some event $i$. We do this by creating a length $n$ list which the $i$th index represents the
+most amount of events you can view, given that you go straight from the starting coordinate, 0,
+to event $i$, and visit the most maximum amount of events from $i$ to $n$.
+We will assume that $|\text{coordinate of n}| \leq n$ and are using zero based numbering for lists.
 
+\begin{algorithm}
+	\KwData{$T = (V, E)$, a tree with root $r$; $k$, length of path}
+	\KwResult{Maximum number of disjoint paths of size $k$ in the tree $T$}
+	\Fn{max($T, k$)}{
+		contains $\leftarrow$ a map\\
+		notContains $\leftarrow$ a map\\
+		maxPaths $\leftarrow$ a map\\
+		\For{$v \in V$}{
+			\#base case \\
+			\If{$v$ is a leaf}{
+				maxPaths.insert(v, 0)\\
+				notContains.insert(v, 0)\\
+				\For{i from 0 to k - 1}{
+					contains.insert(<v,i>, 0)
+				}
+				contains.insert(<v,k>, 1)\\
+			}
+			\Else{
+				notContainVal = 0\\
+				\For{each child $c$ of $v$}{
+					notContainVal+=maxPaths.get(c)
+				}
+				notContains.insert(v,notContainVal)\\
+				\For{i from 0 to k-1}{
+					containsVal $\leftarrow$ a empty list\\
+					\For{each child $c$ of $v$}{
+						\#Where $c' \in C_v \setminus\{c\}$\\
+						val = contains.get(c,i+1) + $\sum$ maxPaths.get(c')\\
+						containsVal.insert(val)
+					}
+					contains.insert(<v,i>, max(containsVal))
+				}
+				contains.insert(<v,k>, 1+ notContains.get(v))\\
+				maxPaths.insert(v, max(contains.get(<v,0>),notContains.get(v)))
+			}
+		}
+		\Return{maxPaths.get(r)}
+	}
+\end{algorithm}
 
-\iffalse
 
 
 \subsubsection{
 	Analyze the computing complexity.
 }
-\fi
 
 
 \iffalse

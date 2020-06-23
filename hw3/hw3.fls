@@ -442,11 +442,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbras10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbrbs10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr8.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebsr8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr8.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebsr8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmo10.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebsr8.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebsr8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebmr9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/ebbx10.tfm
 INPUT /home/daniel/cs577/hw3/hw3.aux
