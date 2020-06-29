@@ -300,11 +300,11 @@ $$
 	Write the pseudocode for the iterative version of the algorithm to find the maximum
 	number of players that can play at the same time.
 }
-The main idea of this algorithm is to compute bottom up the optimal cost to view event $n$
-when we start on some event $i$. We do this by creating a length $n$ list which the $i$th index represents the
-most amount of events you can view, given that you go straight from the starting coordinate, 0,
-to event $i$, and visit the most maximum amount of events from $i$ to $n$.
-We will assume that $|\text{coordinate of n}| \leq n$ and are using zero based numbering for lists\\
+The main idea of this algorithm is to compute bottom up MaxPath. We iterate over all
+vertices in the tree using post order traversal. We compute all MaxContains values
+for that vertex and possible size of the paths that they are on. All the 
+recursive values needed in the recurrence relationship will be computed by the time 
+its needed.  
 
 \begin{algorithm}
 	\KwData{$T = (V, E)$, a tree with root $r$; $k$, length of path}
@@ -323,6 +323,7 @@ We will assume that $|\text{coordinate of n}| \leq n$ and are using zero based n
 				}
 				contains.insert(<v,k>, 1)\\
 			}
+			\# Computing MaxDoesNotContain(v) and MaxContains(v,$\delta$)  \\
 			\Else{
 				notContainVal = 0\\
 				\For{each child $c$ of $v$}{

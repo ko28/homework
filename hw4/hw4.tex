@@ -1,0 +1,69 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+\usepackage[vlined]{algorithm2e}
+\usepackage{mathtools}
+\SetStartEndCondition{ }{}{}%
+\SetKwProg{Fn}{def}{\string:}{}
+\SetKwFunction{Range}{range}%%
+\SetKw{KwTo}{in}\SetKwFor{For}{for}{\string:}{}%
+\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else:}{}%
+\SetKwFor{While}{while}{:}{fintq}%
+\newcommand{\forcond}{$i=0$ \KwTo $n$}
+\SetKwFunction{FRecurs}{FnRecursive}%
+\AlgoDontDisplayBlockMarkers\SetAlgoNoEnd\SetAlgoNoLine%
+
+
+\title{CS 577: HW 4}
+\author{Daniel Ko}
+\date{Summer 2020}
+
+\begin{document}
+\maketitle
+
+\section{
+Given the random process described above, what is the expected number of
+incoming links to node $v_j$ in the resulting network? Give an exact formula in terms of $n$ and $j$,
+and also try to express this quantity asymptotically (via an expression without large summations)
+using $\Theta$ notation
+}
+
+We know that $v_j$ can be only linked to nodes that come after it. 
+For every node $v_i$, where $i > j$, the probability of $v_i$
+connecting with $v_j$ is $\frac{1}{i-1}$, as there are $i-1$ nodes to choose from and $v_i$
+connects to only one node. Hence, the expected number of
+incoming links to node $v_j$ in the resulting network is the following:
+$$
+\sum_{i = j+1}^n \frac{1}{i-1}
+$$
+By Theorem 13.10 in the textbook we know that $H(\alpha) = \Theta(\log (\alpha))$,
+\begin{align*}
+	\sum_{i = j+1}^n \frac{1}{i-1} & = \sum_{i = j}^{n-1} \frac{1}{i} \\
+	& = \sum_{i = 1}^{n-1} \frac{1}{i} - \sum_{i = 1}^{j-1} \frac{1}{i}\\
+	& = H(n-1) - H(k-1)\\
+	& = \Theta(\log(n-1)) - \Theta(\log(k-1))\\
+	& =  \Theta(\log(n)) - \Theta(\log(k))\\
+	& = \Theta(\log\Big(\frac{n}{k}\Big))
+\end{align*}
+
+\section{
+Part (1) makes precise sense in which the nodes that arrive early carry an “unfair”
+share of the connections in the network. Another way to quantify the imbalance is to observe
+that, in a run of this random process, we expect many nodes to end up with no incoming links.
+Give a formula for the expected number of nodes with no incoming links in a network grown
+randomly according to this model.
+}
+
+\end{document}
+
