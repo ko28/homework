@@ -1,0 +1,82 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+\usepackage[vlined]{algorithm2e}
+\usepackage{mathtools}
+\SetStartEndCondition{ }{}{}%
+\SetKwProg{Fn}{def}{\string:}{}
+\SetKwFunction{Range}{range}%%
+\SetKw{KwTo}{in}\SetKwFor{For}{for}{\string:}{}%
+\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else:}{}%
+\SetKwFor{While}{while}{:}{fintq}%
+\newcommand{\forcond}{$i=0$ \KwTo $n$}
+\SetKwFunction{FRecurs}{FnRecursive}%
+\AlgoDontDisplayBlockMarkers\SetAlgoNoEnd\SetAlgoNoLine%
+
+
+\title{CS 577: HW 5}
+\author{Daniel Ko}
+\date{Summer 2020}
+
+\begin{document}
+\maketitle
+
+\section{
+	Joe is a project manager in a software company called SuperDuo. Joe found out that
+	programmers usually produces the highest quality codes when they are working in pair.
+	However, the productivity of each pair of programmers is the speed of the slower
+	programmer. So Joe needs to figure out the best strategy for pairing the programmers to
+	generate the maximum sum of productivity for his project. Suppose that the number of
+	programmers in Joe’s project is even.
+}
+
+\subsection{
+	Give a greedy strategy that maximizes the sum of the productivity of all
+	pairs. You should describe the greedy strategy first and then write it in the form of an
+	algorithm. Also you should analyze the computing complexity of the greedy
+	algorithm.
+}
+The greedy strategy is to first sort the programmers in ascending order of productivity.
+Then, we pair the first two programmers, then the next two, etc. We sum up all the 
+slower programmer in each pair, which will be our maximum sum of productivity.  
+\begin{algorithm}
+	\KwData{A list $gamer$ of even size $n$, containing the productivity level of each programmer}
+	\KwResult{The maximum sum of productivity for pair programming}
+	\Fn{maxProd($gamer$)}{
+		sortedGamer $\leftarrow$ Sort $gamer$ in ascending order of productivity\\
+		totalProd $\leftarrow$ 0\\
+		\For{int i = 0; i < n; i+=2}{
+			totalProd += sortedGamer[i]
+		}
+		\Return{\text{\normalfont totalProd}}
+	}
+\end{algorithm}\\
+The time complexity of maxProd is $O(n\log n)$
+\begin{proof}
+	We first sort the list gamer of size $n$. Using an efficient sorting algorithm such as 
+	merge sort, this will take $O(n\log n)$ time. Then, we sum up every other element 
+	in the list, which takes $O(n)$ time. The rest of the computations take constant time.
+	Hence, the total time complexity is $O(n\log n + n) = O(n\log n)$
+\end{proof}
+\subsection{
+	Prove that this greedy strategy indeed generates the maximum sum of
+	productivity.
+}
+It does bro
+
+
+
+
+\end{document}
+

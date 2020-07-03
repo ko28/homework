@@ -51,10 +51,10 @@ By Theorem 13.10 in the textbook we know that $H(\alpha) = \Theta(\log (\alpha))
 \begin{align*}
 	\sum_{i = j+1}^n \frac{1}{i-1} & = \sum_{i = j}^{n-1} \frac{1}{i} \\
 	& = \sum_{i = 1}^{n-1} \frac{1}{i} - \sum_{i = 1}^{j-1} \frac{1}{i}\\
-	& = H(n-1) - H(k-1)\\
-	& = \Theta(\log(n-1)) - \Theta(\log(k-1))\\
-	& =  \Theta(\log(n)) - \Theta(\log(k))\\
-	& = \Theta(\log\Big(\frac{n}{k}\Big))
+	& = H(n-1) - H(j-1)\\
+	& = \Theta(\log(n-1)) - \Theta(\log(j-1))\\
+	& =  \Theta(\log(n)) - \Theta(\log(j))\\
+	& = \Theta(\log\Big(\frac{n}{j}\Big))
 \end{align*}
 
 \section{
@@ -65,5 +65,35 @@ Give a formula for the expected number of nodes with no incoming links in a netw
 randomly according to this model.
 }
 
+Let $X_j$ be a random variable such that
+$$
+X_j = 
+\begin{cases}
+	1 & \textbf{if }  v_j \text{ has no incoming links} \\
+	0 & \textbf{otherwise}
+\end{cases}
+$$
+From part 1, we know that the probability for some $v_i$ to connect 
+with $v_j$, where $i>j$, is $\frac{1}{i-1}$. It follows then that the probability that 
+$v_i$ does not connect with $v_j$ is $1 - \frac{1}{i-1}$. To find the probability 
+that no nodes connect to $v_j$, we multiply the probability of all $v_i$ not connecting 
+to $v_j$. Hence the expected value of $X_j$ is
+\begin{align*}
+	E[X_j] & = \prod_{i = j+1}^n 1 - \frac{1}{i-1} \\
+	& =  \Big( 1 - \frac{1}{j} \Big) \Big( 1 - \frac{1}{j+1} \Big) \cdots \Big( 1 - \frac{1}{n-1} \Big) \\
+	& =  \Big( \frac{j-1}{j} \Big) \Big( \frac{j}{j+1} \Big) \cdots   \Big( \frac{n-2}{n-1} \Big)\\
+	& = \frac{j-1}{n-1}
+\end{align*}
+assuming $n>1$.\\
+To find the expected number of all nodes with no incoming links is to sum up 
+the expected value of no incoming links for all nodes. Using the formula for triangle numbers,
+
+\begin{align*}
+	\sum_{j=1}^n E[X_j] & = \sum_{j=1}^n \frac{j-1}{n-1} \\
+	& = \frac{1}{n-1} \Big( \sum_{j=1}^n j - \sum_{j=1}^n 1 \Big) \\
+	& = \frac{1}{n-1}  \Big( \frac{n(n+1)}{2} - n \Big)\\
+	& = \frac{1}{n-1}  \Big( \frac{n(n-1)}{2}  \Big)\\
+	& = \frac{n}{2}
+\end{align*}
 \end{document}
 
