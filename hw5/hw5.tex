@@ -73,10 +73,49 @@ The time complexity of maxProd is $O(n\log n)$
 	Prove that this greedy strategy indeed generates the maximum sum of
 	productivity.
 }
-It does bro
+We will use a “Greedy Stays Ahead” argument to prove this greedy strategy. 
+\subsubsection{
+	Define Your Solution
+}
+Let $A=\{a_1, a_2, \cdots, a_{n/2}\}$ denote the pairs containing the productivity values of two programmers 
+that our algorithm will generate, i.e. $a_i = (p_1, p_2)$ where $p_1$ and $p_2$ are the productivity values of the 
+first and second programmer of the $i$th pair respectively.   
+Let $O = \{o_1, o_2, \cdots, o_{n/2}\}$ denote the pairs containing the productivity values of two programmers 
+that an optimal algorithm will generate. Let $O$ be ordered in ascending productivity, i.e. if $i>j$,
+the productivity of pair $o_i$ will be equal to or higher than pair $o_j$.
+\subsubsection{
+	Define Your Measure
+}
+For our algorithm, let $\delta(a_1), \cdots, \delta(a_{n/2})$ denote the total productivity of pairs 
+from $a_1$ to $a_i$. For example, $\delta(a_3)$ will be the sum of the productivity (the 
+lower productivity between the two programmers) of pairs $a_1$, $a_2$, and $a_3$.
+Similiary for the optimal algorithm, the $\delta(o_1), \cdots, \delta(o_{n/2})$ denote 
+the total productivity of pairs from $o_1$ to $o_i$.
+\subsubsection{
+	Prove Greedy Stays Ahead
+}
+We show by induction that our greedy stays ahead.
+\begin{proof}
+	Let $P(i)$ be the predicate, "$\delta(a_i) \geq \delta(o_i)$"
+	We define $i \in \mathbb{N}^+$. \\
+	\textbf{Base Case:} When $i = 1$, we know that $a_1$ contains the lowest productivity programmer
+	because we paired up the two lowest productivity programmers in our algorithm. We also know that 
+	$o_1$ contains the lowest productivity programmer because we ordered $O$ in ascending productivity.
+	The least productive pair must contain the lowest productivity programmer because the 
+	productivity any pair containing the lowest productivity programmer will the productivity value of the 
+	lowest productivity programmer.
+	Hence, the productivity of pair $a_1$ will be the value of lowest productivity programmer, and 
+	similarly, the productivity of pair $o_1$ will be the value of lowest productivity programmer.
+	Thus, $\delta(a_1) \geq \delta(o_1)$ and $P(1)$ holds.\\
+	\textbf{Inductive step:} Suppose $P(k-1)$ holds. We show that $P(k)$ holds.
+
+\end{proof} 
 
 
-
+slowest has to be first no matter what lol 
+\subsubsection{
+	Prove Optimality
+}
 
 \end{document}
 
