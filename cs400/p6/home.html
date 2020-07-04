@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang ="en-US">
+    <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+                cs400 p6 Web Page        
+        </title>
+    </head>
+<body>
+<h1>Daniel Ko, CS Login: ko</h1>
+
+
+<!-- button code: https://stackoverflow.com/questions/45508275/how-would-i-create-a-javascript-button-that-shows-text-on-click-->
+<button class="button button1" onclick="displaySong1()">Click Me</button>
+        <div id="paragraph">
+                난 파도가 머물던
+                <br>모래 위에 적힌 글씨처럼
+                <br>그대가 멀리 사라져 버릴 것 같아
+                <br>늘 그리워 그리워
+                <br>여기 내 맘속에
+                <br>모든 말을 다 꺼내어 줄 순 없지만
+                <br>사랑한다는 말이에요
+        </div>
+<style>
+.button {
+   	background-color: rgb(149, 128, 243);
+   	color: white;
+   	padding: 16px 32px;
+   	display:inline-block;
+   	margin:4px 2px;
+   	-webkit-transition-duration: 0.4s; /* Safari */
+     transition-duration: 0.4s;	
+}
+    	
+.button1{
+  	background-color:rgb(118, 156, 218);
+   	color:#FFF;    	
+}
+
+#paragraph
+{
+  display:none;
+}
+
+</style>
+<script>
+    function displaySong1() {
+  var p = document.getElementById("paragraph");
+  p.style.display = "block";  	 
+}
+</script>
+        <h1><a href="hyperSpace.html">
+                Go to hyperspace</a></h1>
+
+<h1>My favorite things</h1>
+<ol>
+    <li>Colors</li>
+    <li>Music</li>
+    <li>Dancing</li>
+    <li>Cats</li>
+</ol>
+<ul>
+    <li>This</li>
+    <li>is</li>
+    <li>not</li>
+    <li>ordered</li>
+</ul>
+<h2>
+    CS400 terms
+</h2>
+<dl>
+        <dt>Hash Table</dt>
+        <dd>A data structure that implements an associative array abstract data type, a structure that can map keys to values. 
+            <br>A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.</dd>
+        <dt>Dijkstra's algorithm</dt>
+        <dd>An algorithm for finding the shortest paths between nodes in a graph.
+            <br>Let the node at which we are starting be called the initial node. 
+            <br>Let the distance of node Y be the distance from the initial node to Y. 
+            <br>Dijkstra's algorithm will assign some initial distance values and will try to improve them step by step.
+            <ol>
+                    <li>Mark all nodes unvisited. Create a set of all the unvisited nodes called the unvisited set.</li>
+                    <li>Assign to every node a tentative distance value: set it to zero for our initial node and to infinity for all other nodes. Set the initial node as current.
+                        </li>
+                    <li>For the current node, consider all of its unvisited neighbours and calculate their tentative distances through the current node. Compare the newly calculated tentative distance to the current assigned value and assign the smaller one. For example, if the current node A is marked with a distance of 6, and the edge connecting it with a neighbour B has length 2, then the distance to B through A will be 6 + 2 = 8. If B was previously marked with a distance greater than 8 then change it to 8. Otherwise, keep the current value.</li>
+                    <li>When we are done considering all of the unvisited neighbours of the current node, mark the current node as visited and remove it from the unvisited set. A visited node will never be checked again.
+                        </li>
+                        <li>
+                                If the destination node has been marked visited (when planning a route between two specific nodes) or if the smallest tentative distance among the nodes in the unvisited set is infinity (when planning a complete traversal; occurs when there is no connection between the initial node and remaining unvisited nodes), then stop. The algorithm has finished.
+
+                        </li>
+                        <li>
+                                Otherwise, select the unvisited node that is marked with the smallest tentative distance, set it as the new "current node", and go back to step 3.
+
+                        </li>
+                        <br>When planning a route, it is actually not necessary to wait until the destination node is "visited" as above: the algorithm can stop once the destination node has the smallest tentative distance among all "unvisited" nodes (and thus could be selected as the next "current").
+
+
+                </ol>
+        </dd>
+        <dt>Adjacency list</dt>
+        <dd>In graph theory and computer science, an adjacency list is a collection of unordered lists used to represent a finite graph. 
+            <br>Each list describes the set of neighbors of a vertex in the graph. This is one of several commonly used representations 
+            <br>of graphs for use in computer programs.</dd>
+      </dl>
+<h2>
+    My favorite image
+</h2>
+<img src = "circle.jpg" alt = "this is a picture of a circle of fifths" height="400">
+<h2>
+       Table for study schedule 
+    </h2>
+<table>
+        <tr>
+          <th>5/3</th>
+          <th>5/4</th>
+          <th>5/5</th>
+          <th>5/6</th>
+          <th>5/7</th>
+          <th>5/8</th>
+          <th>5/9</th>
+          <th>5/10</th>
+          <th>5/11</th>
+        </tr>
+        <tr>
+          <td>Sleep</td>
+          <td>Sleep</td>
+          <td>Sleep</td>
+          <td>Pretend to study</td>
+          <td>Pretend to study</td>
+          <td>Study</td>
+          <td>Sleep</td>
+          <td>Sleep</td>
+          <td>Sleep</td>
+        </tr>
+      </table>
+
+      <footer>
+            <p>Made by: Daniel Ko</p>
+            <p>Contact information: <a href="mailto:ko28@wisc.edu">
+            ko28@wisc.edu</a>.</p>
+          </footer>
+</body>
+</html>
