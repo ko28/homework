@@ -1,0 +1,91 @@
+;i=0
+    AND R0, R0, #0 ; AND with 0 yields zero
+    ST  R0, i      ; store 0 in i
+	
+;i < limit;
+TEST LD R0, i       ; get i
+    LD R1, limit   ; get limit
+    NOT R1, R1     ; two's complement
+    ADD R1, R1, #1
+    ADD R0, R0, R1 ; compute i - limit
+    BRzp END       ; done when (i - limit) >= 0
+
+
+
+; lc3 code for body
+;if char == '\0' == 0 ascii
+LEA R0, i
+LEA R1, BEGIN
+ADD R2, R0, R1 ;mem address
+STI R2, tempMemAddress
+LDI R3, tempMemAddress;load current char aka. MEM[i+BEGIN]
+LDI R0, tempMemAddress;load current char aka. MEM[i+BEGIN]
+OUT
+BRz END ;break if current char== '\0' = x0000
+
+ADD R4, R3, #-16
+ADD R4, R4, #-16; total subtraction is 32 but need to split it up cuz of memory limit
+BRz END_IF ; do nothing if current char is a space
+STI R3, modified_string
+;LD R6, modified_string  ;increment modified_string
+;ADD R6, R6, #1
+
+
+;i++
+INCR LD  R0, i      ; get i
+    ADD R0, R0, #1 ; increment it
+    ST  R0, i      ; save the new value
+    BR TEST        ; go back and test again
+END                 ; code after loop complete
+
+HALT
+tempMemAddress: .FILL x0000
+i: .FILL x0000
+limit: .FILL x0064
+STRING: .FILL x5000
+MODIFIED_STRING_ADDRESS: .FILL x5100 
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ORIG x3000   ; begin program at x3000   
+
+;----------------------------------------
+; Example: Simple Loop
+;----------------------------------------
+AND R1, R1, #0 ; R0 <- 0 
+STI  R1, INDEX  ; INDEX <- 0 
+
+LEA R0, LOOP_MSG; load ADDRESS of LOOP_MSG into R0
+
+LOOP_START
+;----------------------------------------
+PUTS; print the looping message
+;----------------------------------------
+
+LDI R1, INDEX ; R1 <- INDEX
+LDI R2, STRING ;R2 <- INDEX
+ADD R3, R2, R1 ; mem location of next char, i.e. index + string 
+ST R3, tempMemAddress
+LDI R3, tempMemAddress
+BRz END; if R1 is the null string then exit loop
+BR LOOP_START
+
+END
+HALT
+INDEX: .FILL x0000
+STRING: .FILL x5000
+NEW_STRING: .FILL x5100 
+tempMemAddress: .FILL x0000
+LOOP_MSG .STRINGZ "LoopingHi"
+.END
+        
