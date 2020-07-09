@@ -33,13 +33,13 @@
 \maketitle
 
 \section{
-	Joe is a project manager in a software company called SuperDuo. Joe found out that
-	programmers usually produces the highest quality codes when they are working in pair.
-	However, the productivity of each pair of programmers is the speed of the slower
-	programmer. So Joe needs to figure out the best strategy for pairing the programmers to
-	generate the maximum sum of productivity for his project. Suppose that the number of
-	programmers in Joe’s project is even.
-}
+  Joe is a project manager in a software company called SuperDuo. Joe found out that
+  programmers usually produces the highest quality codes when they are working in pair.
+  However, the productivity of each pair of programmers is the speed of the slower
+  programmer. So Joe needs to figure out the best strategy for pairing the programmers to
+  generate the maximum sum of productivity for his project. Suppose that the number of
+  programmers in Joe’s project is even.
+ }
 
 \subsection{
 	Give a greedy strategy that maximizes the sum of the productivity of all
@@ -48,8 +48,8 @@
 	algorithm.
 }
 The greedy strategy is to first sort the programmers in ascending order of productivity.
-Then, we pair the first two programmers, then the next two, etc. We sum up all the 
-slower programmer in each pair, which will be our maximum sum of productivity.  
+Then, we pair the first two programmers, then the next two, etc. We sum up all the
+slower programmer in each pair, which will be our maximum sum of productivity.
 \begin{algorithm}
 	\KwData{A list $gamer$ of even size $n$, containing the productivity level of each programmer}
 	\KwResult{The maximum sum of productivity for pair programming}
@@ -64,8 +64,8 @@ slower programmer in each pair, which will be our maximum sum of productivity.
 \end{algorithm}\\
 The time complexity of maxProd is $O(n\log n)$
 \begin{proof}
-	We first sort the list gamer of size $n$. Using an efficient sorting algorithm such as 
-	merge sort, this will take $O(n\log n)$ time. Then, we sum up every other element 
+	We first sort the list gamer of size $n$. Using an efficient sorting algorithm such as
+	merge sort, this will take $O(n\log n)$ time. Then, we sum up every other element
 	in the list, which takes $O(n)$ time. The rest of the computations take constant time.
 	Hence, the total time complexity is $O(n\log n + n) = O(n\log n)$
 \end{proof}
@@ -73,23 +73,25 @@ The time complexity of maxProd is $O(n\log n)$
 	Prove that this greedy strategy indeed generates the maximum sum of
 	productivity.
 }
-We will use a “Greedy Stays Ahead” argument to prove this greedy strategy. 
+We will use a “Greedy Stays Ahead” argument to prove this greedy strategy.
 \subsubsection{
 	Define Your Solution
 }
-Let $A=\{a_1, a_2, \cdots, a_{n/2}\}$ denote the pairs containing the productivity values of two programmers 
-that our algorithm will generate, i.e. $a_i = (p_1, p_2)$ where $p_1$ and $p_2$ are the productivity values of the 
-first and second programmer of the $i$th pair respectively.   
-Let $O = \{o_1, o_2, \cdots, o_{n/2}\}$ denote the pairs containing the productivity values of two programmers 
+Let $A=\{a_1, a_2, \cdots, a_{n/2}\}$ denote the pairs containing the productivity values of two programmers
+that our algorithm will generate, i.e. $a_i = (p_\alpha, p_\beta)$ where $p_\alpha$ and $p_\beta$ are the
+productivity values of $\alpha$ and $\beta$th lowest productive programmer in this $i$th pair respectively.
+Let $O = \{o_1, o_2, \cdots, o_{n/2}\}$ denote the pairs containing the productivity values of two programmers
 that an optimal algorithm will generate. Let $O$ be ordered in ascending productivity, i.e. if $i>j$,
 the productivity of pair $o_i$ will be equal to or higher than pair $o_j$.
 \subsubsection{
 	Define Your Measure
 }
-For our algorithm, let $\delta(a_1), \cdots, \delta(a_{n/2})$ denote the total productivity of pairs 
-from $a_1$ to $a_i$. For example, $\delta(a_3)$ will be the sum of the productivity (the 
+For our algorithm, let $\delta(a_1), \cdots, \delta(a_{n/2})$ denote the total productivity of pairs
+from $a_1$ to $a_i$. For example, $\delta(a_3)$ will be the sum of the productivity (the
 lower productivity between the two programmers) of pairs $a_1$, $a_2$, and $a_3$.
-Similiary for the optimal algorithm, the $\delta(o_1), \cdots, \delta(o_{n/2})$ denote 
+Formally, we can express this function as
+$$\delta(a_i) = \sum_{j=1}^i \min(a_j)$$
+Similiary for the optimal algorithm, the $\delta(o_1), \cdots, \delta(o_{n/2})$ denote
 the total productivity of pairs from $o_1$ to $o_i$.
 \subsubsection{
 	Prove Greedy Stays Ahead
@@ -99,23 +101,225 @@ We show by induction that our greedy stays ahead.
 	Let $P(i)$ be the predicate, "$\delta(a_i) \geq \delta(o_i)$"
 	We define $i \in \mathbb{N}^+$. \\
 	\textbf{Base Case:} When $i = 1$, we know that $a_1$ contains the lowest productivity programmer
-	because we paired up the two lowest productivity programmers in our algorithm. We also know that 
+	because we paired up the two lowest productivity programmers in our algorithm. We also know that
 	$o_1$ contains the lowest productivity programmer because we ordered $O$ in ascending productivity.
-	The least productive pair must contain the lowest productivity programmer because the 
-	productivity any pair containing the lowest productivity programmer will the productivity value of the 
+	The least productive pair must contain the lowest productivity programmer because the
+	productivity any pair containing the lowest productivity programmer will the productivity value of the
 	lowest productivity programmer.
-	Hence, the productivity of pair $a_1$ will be the value of lowest productivity programmer, and 
+	Hence, the productivity of pair $a_1$ will be the value of lowest productivity programmer, and
 	similarly, the productivity of pair $o_1$ will be the value of lowest productivity programmer.
 	Thus, $\delta(a_1) \geq \delta(o_1)$ and $P(1)$ holds.\\
 	\textbf{Inductive step:} Suppose $P(k-1)$ holds. We show that $P(k)$ holds.
+	By our algorithm, we know that pair $a_k$ contains the $(2k-1)$th lowest productive
+	programmer and $a_k$'s productivity value will be the productivity value of the
+	$(2k-1)$th lowest productive programmer, i.e. $\min(a_k) = p_{2k-1}$.
+	We claim that we can bound the productivity value of pair $o_k$ by
+	%$p_k \leq 
+	$\min(o_k) \leq p_{2k-1}$. We know that since $O$ is ordered
+	in ascending productivity, the productivity value of pair $o_k$ must be equal or greater
+	to the pairs that came before it. There are $2k-2$ programmers that come before pair
+	$o_k$. This means that at most, there are $2k-2$ programmers with lower or equal productivity value
+	than productivity value of pair $o_k$ from the pairs behind $o_k$.
+	If we include the programmer that determines the productivity value of pair $o_k$,
+	we have $2k-1$ programmers with lower or equal productivity value
+	than productivity value of pair $o_k$. It follows from the pigeonhole principle
+	that $\min(o_k) \leq p_{2k-1}$ because if $\min(o_k) \geq p_{2k}$ then
+	there would exist some programmer with productivity value equal or
+	less than $p_{2k-1}$ that will not belong in the pairs behind $o_k$ but
+	rather ahead of $o_k$, which would be a contradiction because $O$ is
+	ordered, i.e. $p_{2k}$ will appear before $p_{2k-1}$.
+	Using this bound we know that $\min(a_k)\geq \min(o_k)$ and by our induction
+	hypothesis we know that $\delta(a_{k-1}) \geq \delta(o_{k-1})$. It follows that,
+	\begin{align*}
+		\delta(a_k) & = \delta(a_{k-1}) + \min(a_k)    \\
+		            & \geq \delta(o_{k-1}) + \min(o_k) \\
+		            & \geq \delta(o_k)
+	\end{align*}
+	$P(k)$ holds as desired. Therefore by induction, $\delta(a_i) \geq \delta(o_i)$ for all $i \in \mathbb{N}^+$.
+\end{proof}
 
-\end{proof} 
 
-
-slowest has to be first no matter what lol 
 \subsubsection{
 	Prove Optimality
 }
+Since both $O$ and $A$ have the same number of pairs, $n/2$, it follows from our proof
+from 1.2.3 that $\delta(a_{n/2}) \geq \delta(o_{n/2})$. Therefore, our algorithm is
+optimal because
+the total productivity of $A$ is equal or greater than the total productivity of
+$O$.
 
+\section{
+  Give an algorithm that increases the lengths of certain edges so that
+  the resulting tree has zero skew and the total edge length is as small as
+  possible.
+ }
+
+\subsection{
+	Describe a greedy strategy and write it in the algorithm format. Also
+	analyze the computing complexity of the algorithm.
+}
+Suppose we have a complete balanced binary tree, $T$, with root $v$ 
+and child nodes $l$ and $r$. Let $\delta_l$ be maximum distance between
+the paths that start at the root of $T$ and ends on leaf that is a child of $l$. 
+Similiarly, let $\delta_r$ be the maximum distance between
+the paths that start at the root of $T$ and ends on leaf that is a child of $r$. 
+If $\delta_l > \delta_r$, add $\delta_l - \delta_r$ to the edge between
+$v$ and $r$. 
+If $\delta_r > \delta_l$, add $\delta_r - \delta_l$ to the edge between
+$v$ and $l$.
+If $\delta_r = \delta_l$, do nothing. Recursively call this algorithm
+on the child nodes, $l$ and $r$, until there are no more child nodes to call. 
+\iffalse
+\begin{algorithm}
+	\KwData{$T = (V,E,\ell)$, a complete balanced binary tree with an associated edge length}
+	\KwResult{A tree has zero skew and the total edge length is as small as	possible}
+	\Fn{timingCircuit($T$)}{
+		\For{$v \in V$ in level order traversal}{
+			\#$l$, $r$ is left, right child of $v$ respectively\\
+			\If{$l$ and $r$ exists}{
+				$\delta_l \leftarrow$  
+				max(paths that start at the root of $T$ and ends on leaf that is a child of $l$) \\
+				$\delta_r \leftarrow$  
+				max(paths that start at the root of $T$ and ends on leaf that is a child of $r$) \\
+				\# Where $\ell_{(a,b)}$ is the associated length of edge $(a,b) \in E$\\  
+				\If{$\delta_l > \delta_r$}{
+					Increment $\ell_{(v,r)}$ by $\delta_l - \delta_r$  
+				}
+				\ElseIf{$\delta_r > \delta_l$}{
+					Increment $\ell_{(v,l)}$ by $\delta_r - \delta_l$
+				}
+			}
+		}
+		\Return{$T$}
+	}
+\end{algorithm}
+\fi
+
+\begin{algorithm}
+	\KwData{$T = (V,E,\ell)$, a complete balanced binary tree with an associated edge length\\
+	\qquad \hspace{0.5em} $v \in V$,  }
+	\KwResult{Length from root to leaf (zero skew value); a tree has zero skew and the total edge length is as small as	possible}
+	\Fn{timingCircuit($v$)}{
+		\If{$v$ is a leaf}{
+			\Return{0}
+		}
+		$\delta_l = $ timingCircuit($l$)\\
+		$\delta_r = $ timingCircuit($r$)\\
+		%$\ell_{L} =$ edge length of $v$ to $L$ \\
+		%$\ell_{R} =$ edge length of $v$ to $R$ \\
+		\# Where $\ell_{(a,b)}$ is the associated length of edge $(a,b) \in E$\\  
+		\If{$\delta_l + \ell_{(v,l)} > \delta_r + \ell_{(v,r)}$}{\-\\
+			Increment $\ell_{(v,r)}$ by $(\delta_l + \ell_{(v,l)}) - (\delta_r + \ell_{(v,r)})$  
+		}
+		\ElseIf{$\delta_r + \ell_{(v,r)} > \delta_l + \ell_{(v,l)}$}{\-\\
+			Increment $\ell_{(v,l)}$ by $(\delta_r + \ell_{(v,r)}) - (\delta_l + \ell_{(v,l)})$
+		}
+		\Return{$\delta_r + \ell_{(v,r)}$}
+	}
+\end{algorithm}
+The time complexity of timingCircuit is $\Theta(n)$.
+\begin{proof}
+	Each recursive call in our algorithm halves the input size and we have two 
+	recursive calls. The rest of the computations take constant time.  
+	We get a recurrence relationship of $T(n) = 2T(n/2) + n^0$ 
+	which is $\Theta(n)$ by the master theorem.
+\end{proof}
+\subsection{
+	Prove that this greedy strategy indeed generates the optimal solution
+}
+\begin{lemma}
+	The algorithm timingCircuit will always generate a zero skew tree. 	
+\end{lemma}
+\begin{proof}
+	We show by strong induction that timingCircuit will always generate a zero skew tree. 	
+	Let $P(n)$ be the predicate "timingCircuit will generate a zero skew tree that has $n$ leaves".
+	We define $n \in \mathbb{N}^+$. \\
+	\textbf{Base Case:} When $n = 1$, timingCircuit returns $0$. It is trivially true 
+	that a tree with a single node will always have zero skew. Hence $P(1)$ holds.\\
+	\textbf{Inductive step:} Suppose for all $1 \leq n \leq k$, $P(n)$ holds. We show that $P(k+1)$ holds.
+	We know that the subtrees generated by the children of $v$, $l$ and $r$, will have strictly less  
+	leaves than $k+1$. It follows by our strong inductive hypothesis, that timingCircuit($l$) and timingCircuit($r$)
+	will correctly generate a zero skew subtrees for the subtrees that have $l$ and $r$ has its root,
+	and return the distance from $l$ to its leaves, $\delta_r$, and $r$ to its leaves, $\delta_l$.  
+	Since the two subtrees generated by the children $v$ are zero skew, all we need to do so that 
+	the entire tree is zero skew is to 
+	modify the edge length between $(v,l)$ and $(v,r)$ such that  
+	$\delta_r + \ell_{(v,r)} = \delta_l + \ell_{(v,l)}$, i.e. both subtrees have same zero skew 
+	if we start from $v$. This is exactly what we do in the if and else if statement in our algorithm.
+	Hence, timingCircuit generates a zero skew tree that has $k+1$ leaves and $P(k+1)$ holds. 
+	Therefore by strong induction, timingCircuit will always generate a zero skew tree.
+\end{proof} 
+
+We define terms for the following theorem.
+Let $T$ be the original tree and let $\ell$ be its associated edge length. 
+Let $v$ be the root of $T$ and let $l$ and $r$ be the left and right child of $v$ respectively. 
+Let $T_\alpha$ be the tree generated by timingCircuit. Let $T_\phi$ be an 
+optimal tree, i.e. a zero skew tree such that the total edge length is as small as possible.
+Let the left and right subtree of $T_\alpha$ be $L_\alpha$, $R_\alpha$.
+Similiarly, define $L_\phi$, $R_\phi$. 
+Let $\ell^\alpha$ and $\ell^\phi$ and the associated edge length of $T_\alpha$ and $T_\phi$ respectively.
+
+\iffalse
+\begin{lemma}
+	If $L_\alpha = L_\phi$ and $R_\alpha = R_\phi$,	then $\ell^\alpha_{(v,l)} \leq \ell^\phi_{(v,l)}$ and 
+	$\ell^\alpha_{(v,r)} \leq \ell^\phi_{(v,r)}$.
+\end{lemma}
+\begin{proof}
+	Consider the case when $\delta_l + \ell_{(v,l)} > \delta_r + \ell_{(v,r)}$.
+	We show $\ell^\alpha_{(v,l)} \leq \ell^\phi_{(v,l)}$ and 
+	$\ell^\alpha_{(v,r)} \leq \ell^\phi_{(v,r)}$.
+	Suppose for the sake of contradiction, $\ell^\alpha_{(v,l)} > \ell^\phi_{(v,l)}$.
+
+\end{proof}
+\fi
+\begin{theorem}
+	The algorithm timingCircuit will always generate a unique zero skew tree such that the 
+	total edge length is as small as possible.
+\end{theorem}
+\begin{proof}
+	From lemma 2.1, we know that timingCircuit will always generate a zero skew tree. 
+	It is sufficient to show that timingCircuit will minimize total edge length when
+	generating this tree. %We show by an exchange argument that timingCircuit is optimal.
+	%Suppose $T_\alpha \neq T_\phi$, where T_\phi. There must exist an edge $(a,b) \in E$ 
+	Suppose $T_\alpha$ is not an optimal solution, i.e. total edge length of $T_\phi$ 
+	is strictly less than total edge length of $T_\alpha$.
+	This means there exists an edge $(a,b)$ such that $\ell^\alpha_{(a,b)} < \ell^\phi_{(a,b)}$.
+	Fix $(a,b)$ such that it is the closet edge from the leaves. 
+	
+	%This means that the edge length on the 
+	%original tree, $\ell_{(a,b)}$, must of increased by at least $\ell^\phi_{(a,b)} - \ell^\alpha_{(a,b)}$ .
+\end{proof}
+
+
+
+
+
+
+
+\iffalse
+We will use an exchange argument argument to prove this greedy strategy
+\subsubsection{
+	Define Your Solution
+}
+Let $T_g = (V, E, \ell^g)$ be the tree generated by our greedy algorithm, where $\ell^g$
+is the associated edge length of $T_g$.   
+Let $T_o = (V, E, \ell^o)$ be a tree that is 
+generated by an optimal algorithm where $T_o$ has zero skew and the total edge length is as small as possible.
+
+
+
+
+\subsubsection{
+	Compare Solutions
+}
+If $\ell^g \neq \ell^o$, there exists an edge $(a,b) \in E$ such that $\ell^g_{a,b} \neq \ell^o_{a,b}$.
+
+\subsubsection{
+	Exchange Pieces
+}
+\subsubsection{
+	Iterate
+}
+\fi
 \end{document}
 

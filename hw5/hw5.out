@@ -5,3 +5,6 @@
 \BOOKMARK [3][-]{subsubsection.1.2.2}{Define Your Measure}{subsection.1.2}% 5
 \BOOKMARK [3][-]{subsubsection.1.2.3}{Prove Greedy Stays Ahead}{subsection.1.2}% 6
 \BOOKMARK [3][-]{subsubsection.1.2.4}{Prove Optimality}{subsection.1.2}% 7
+\BOOKMARK [1][-]{section.2}{Give an algorithm that increases the lengths of certain edges so that the resulting tree has zero skew and the total edge length is as small as possible.}{}% 8
+\BOOKMARK [2][-]{subsection.2.1}{Describe a greedy strategy and write it in the algorithm format. Also analyze the computing complexity of the algorithm.}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.2}{Prove that this greedy strategy indeed generates the optimal solution}{section.2}% 10
