@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  8 JUL 2020 23:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  12 JUL 2020 15:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/daniel/cs577/hw5/hw5.tex
-(/home/daniel/cs577/hw5/hw5.tex
+**/home/daniel/cs577/hw6/hw6.tex
+(/home/daniel/cs577/hw6/hw6.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
@@ -87,7 +87,7 @@ LaTeX Info: Redefining \textsubscript on input line 4161.
 \c@table=\count87
 Class scrartcl Info: Redefining `\numberline' on input line 5319.
 \bibindent=\dimen102
-) (/home/daniel/cs577/hw5/../evan.sty
+) (/home/daniel/cs577/hw6/../evan.sty
 
 LaTeX Warning: You have requested package `../evan',
                but the package provides `evan'.
@@ -157,7 +157,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (/usr/share/texmf/tex/latex/asymptote/asymptote.sty
 Package: asymptote 2016/11/26 v1.33 Asymptote style file for LaTeX
- (/home/daniel/cs577/hw5/hw5.pre)
+ (/home/daniel/cs577/hw6/hw6.pre)
 \ASYbox=\box30
 \ASYdimen=\dimen112
 \c@asy=\count100
@@ -207,7 +207,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 ))
-\openout4 = `hw5.pre'.
+\openout4 = `hw6.pre'.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
@@ -1626,29 +1626,29 @@ Package: relsize 2013/03/29 ver 4.1
 \c@algocf=\count329
 \algocf@algoframe=\box72
 \algocf@algobox=\box73
-) (/home/daniel/cs577/hw5/hw5.aux)
-\openout1 = `hw5.aux'.
+) (/home/daniel/cs577/hw6/hw6.aux)
+\openout1 = `hw6.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 32.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 49.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    ... okay on input line 49.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count330
@@ -1675,7 +1675,7 @@ Package grfext Info: Graphics extension search list:
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 \AtBeginShipoutBox=\box75
-Package hyperref Info: Link coloring ON on input line 32.
+Package hyperref Info: Link coloring ON on input line 49.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -1683,12 +1683,12 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count336
 )
-LaTeX Info: Redefining \ref on input line 32.
-LaTeX Info: Redefining \pageref on input line 32.
-LaTeX Info: Redefining \nameref on input line 32.
- (/home/daniel/cs577/hw5/hw5.out) (/home/daniel/cs577/hw5/hw5.out)
+LaTeX Info: Redefining \ref on input line 49.
+LaTeX Info: Redefining \pageref on input line 49.
+LaTeX Info: Redefining \nameref on input line 49.
+ (/home/daniel/cs577/hw6/hw6.out) (/home/daniel/cs577/hw6/hw6.out)
 \@outlinefile=\write7
-\openout7 = `hw5.out'.
+\openout7 = `hw6.out'.
 
  ABD: EveryShipout initializing macros
 
@@ -1702,34 +1702,34 @@ Package tocstyle Warning: Usage of `tocstyle' with new `tocbasic' detected.
 (tocstyle)                You may also get additional warnings because of
 (tocstyle)                redefined `\numberline'. Ignore them.
 
-Package tocstyle Info: prepare \l@part for redefinition on input line 32.
-Package tocstyle Info: prepare \l@section for redefinition on input line 32.
-Package tocstyle Info: prepare \l@subsection for redefinition on input line 32.
-LaTeX Font Info:    Try loading font information for OML+cmbrm on input line 32.
+Package tocstyle Info: prepare \l@part for redefinition on input line 49.
+Package tocstyle Info: prepare \l@section for redefinition on input line 49.
+Package tocstyle Info: prepare \l@subsection for redefinition on input line 49.
+LaTeX Font Info:    Try loading font information for OML+cmbrm on input line 49.
 (/usr/share/texlive/texmf-dist/tex/latex/cmbright/omlcmbrm.fd
 File: omlcmbrm.fd 2005/04/13 v8.1 (WaS)
 )
-LaTeX Font Info:    Try loading font information for OMS+cmbrs on input line 32.
+LaTeX Font Info:    Try loading font information for OMS+cmbrs on input line 49.
  (/usr/share/texlive/texmf-dist/tex/latex/cmbright/omscmbrs.fd
 File: omscmbrs.fd 2005/04/13 v8.1 (WaS)
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 32.
+LaTeX Font Info:    Try loading font information for U+msa on input line 49.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 32.
+LaTeX Font Info:    Try loading font information for U+msb on input line 49.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 32.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 49.
  (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-Package tocstyle Info: prepare \l@subsubsection for redefinition on input line 32.
-Package tocstyle Info: prepare \l@table for redefinition on input line 32.
-Package tocstyle Info: prepare \l@figure for redefinition on input line 32.
+Package tocstyle Info: prepare \l@subsubsection for redefinition on input line 49.
+Package tocstyle Info: prepare \l@table for redefinition on input line 49.
+Package tocstyle Info: prepare \l@figure for redefinition on input line 49.
 \c@lstlisting=\count337
-LaTeX Info: Redefining \microtypecontext on input line 32.
+LaTeX Info: Redefining \microtypecontext on input line 49.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -1780,7 +1780,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 LaTeX Font Warning: Font shape `T1/cmbr/m/sc' undefined
-(Font)              using `T1/cmbr/m/n' instead on input line 34.
+(Font)              using `T1/cmbr/m/n' instead on input line 51.
 
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmbr' (encoding: OT1).
@@ -1791,47 +1791,71 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
+LaTeX Font Info:    Try loading font information for TS1+cmbr on input line 72.
+ (/usr/share/texlive/texmf-dist/tex/latex/cmbright/ts1cmbr.fd
+File: ts1cmbr.fd 2005/04/13 v8.1 (WaS)
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmbr' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Try loading font information for T1+cmtl on input line 110.
+ (/usr/share/texlive/texmf-dist/tex/latex/cmbright/t1cmtl.fd
+File: t1cmtl.fd 2005/04/13 v8.1 (WaS)
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmtl' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+
+LaTeX Font Warning: Font shape `T1/cmbr/bx/n' in size <8> not available
+(Font)              Font shape `T1/cmbr/sb/n' tried instead on input line 140.
+
+
+LaTeX Font Warning: Font shape `T1/cmtl/bx/n' undefined
+(Font)              using `T1/cmtl/m/n' instead on input line 140.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 165.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 165.
+
 LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <10.95> not available
-(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 64.
- [1
+(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 167.
+[1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 204.
-Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 204.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 249.
-Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 249.
- [4] [5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 319.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 319.
- (/home/daniel/cs577/hw5/hw5.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 319.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 319.
-Package rerunfilecheck Info: File `hw5.out' has not changed.
-(rerunfilecheck)             Checksum: 08B947BFC2FCE7E71E6BF482EE0B01DA;1714.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 524.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 524.
+ (/home/daniel/cs577/hw6/hw6.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 524.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 524.
+Package rerunfilecheck Info: File `hw6.out' has not changed.
+(rerunfilecheck)             Checksum: 354A0A173FAC4B787159DA1EBD5E7E3E;1094.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 319.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 524.
  ) 
 Here is how much of TeX's memory you used:
- 39676 strings out of 492982
- 774309 string characters out of 6134896
- 985285 words of memory out of 5000000
- 42551 multiletter control sequences out of 15000+600000
- 551741 words of font info for 117 fonts, out of 8000000 for 9000
+ 39641 strings out of 492982
+ 772656 string characters out of 6134896
+ 989596 words of memory out of 5000000
+ 42529 multiletter control sequences out of 15000+600000
+ 555493 words of font info for 112 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,21n,114p,10437b,1033s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb>
-Output written on /home/daniel/cs577/hw5/hw5.pdf (5 pages, 129350 bytes).
+ 87i,20n,114p,10437b,639s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbsr8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbtl10.pfb>
+Output written on /home/daniel/cs577/hw6/hw6.pdf (3 pages, 131664 bytes).
 PDF statistics:
- 157 PDF objects out of 1000 (max. 8388607)
- 120 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 500000)
- 15549 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 161 PDF objects out of 1000 (max. 8388607)
+ 126 compressed objects within 2 object streams
+ 36 named destinations out of 1000 (max. 500000)
+ 19621 words of extra memory for PDF output out of 20736 (max. 10000000)
 
