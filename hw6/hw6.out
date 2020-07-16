@@ -1,7 +1,0 @@
-\BOOKMARK [1][-]{section.1}{Give an efficient algorithm to decide if this is possible, and if so, to actually choose an ad to show each user.}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Construct a network flow model for this problem. Clearly state the meaning of each component \(node, edge, capacity\) of the flow network that you construct, present your algorithm in pseudocode, and give the computing complexity analysis of your algorithm.}{section.1}% 2
-\BOOKMARK [3][-]{subsubsection.1.1.1}{Components for graph}{subsection.1.1}% 3
-\BOOKMARK [3][-]{subsubsection.1.1.2}{Algorithm and complexity}{subsection.1.1}% 4
-\BOOKMARK [2][-]{subsection.1.2}{Present the analysis on the correctness of your algorithm.}{section.1}% 5
-\BOOKMARK [3][-]{subsubsection.1.2.1}{Show that a solution to the original problem will result in flows \(i.e. satisfies the conservation and capacity conditions\) in the network flow graph G.}{subsection.1.2}% 6
-\BOOKMARK [3][-]{subsubsection.1.2.2}{Show that the solution to the network flow problem will give the solution for the original problem.}{subsection.1.2}% 7
