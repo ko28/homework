@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  16 JUL 2020 21:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.1.13)  18 JUL 2020 15:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/daniel/cs577/hw6/hw6.tex
-(/home/daniel/cs577/hw6/hw6.tex
+**/home/daniel/cs577/hw7/hw7.tex
+(/home/daniel/cs577/hw7/hw7.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
@@ -87,7 +87,7 @@ LaTeX Info: Redefining \textsubscript on input line 4161.
 \c@table=\count87
 Class scrartcl Info: Redefining `\numberline' on input line 5319.
 \bibindent=\dimen102
-) (/home/daniel/cs577/hw6/../evan.sty
+) (/home/daniel/cs577/hw7/../evan.sty
 
 LaTeX Warning: You have requested package `../evan',
                but the package provides `evan'.
@@ -157,7 +157,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (/usr/share/texmf/tex/latex/asymptote/asymptote.sty
 Package: asymptote 2016/11/26 v1.33 Asymptote style file for LaTeX
- (/home/daniel/cs577/hw6/hw6.pre)
+ (/home/daniel/cs577/hw7/hw7.pre)
 \ASYbox=\box30
 \ASYdimen=\dimen112
 \c@asy=\count100
@@ -207,7 +207,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 ))
-\openout4 = `hw6.pre'.
+\openout4 = `hw7.pre'.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
@@ -1626,8 +1626,8 @@ Package: relsize 2013/03/29 ver 4.1
 \c@algocf=\count329
 \algocf@algoframe=\box72
 \algocf@algobox=\box73
-) (/home/daniel/cs577/hw6/hw6.aux)
-\openout1 = `hw6.aux'.
+) (/home/daniel/cs577/hw7/hw7.aux)
+\openout1 = `hw7.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
 LaTeX Font Info:    ... okay on input line 51.
@@ -1686,9 +1686,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 51.
 LaTeX Info: Redefining \pageref on input line 51.
 LaTeX Info: Redefining \nameref on input line 51.
- (/home/daniel/cs577/hw6/hw6.out) (/home/daniel/cs577/hw6/hw6.out)
+ (/home/daniel/cs577/hw7/hw7.out) (/home/daniel/cs577/hw7/hw7.out)
 \@outlinefile=\write7
-\openout7 = `hw6.out'.
+\openout7 = `hw7.out'.
 
  ABD: EveryShipout initializing macros
 
@@ -1791,99 +1791,38 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Try loading font information for TS1+cmbr on input line 73.
- (/usr/share/texlive/texmf-dist/tex/latex/cmbright/ts1cmbr.fd
-File: ts1cmbr.fd 2005/04/13 v8.1 (WaS)
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmbr' (encoding: TS1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-<./images/p1hw6.png, id=91, 963.6pt x 722.7pt>
-File: ./images/p1hw6.png Graphic file (type png)
-<use ./images/p1hw6.png>
-Package pdftex.def Info: ./images/p1hw6.png  used on input line 105.
-(pdftex.def)             Requested size: 481.79883pt x 361.3491pt.
-
-Overfull \hbox (28.83087pt too wide) in paragraph at lines 105--106
-[] 
- []
-
-[1
+LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <10.95> not available
+(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 64.
+ [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for T1+cmtl on input line 111.
- (/usr/share/texlive/texmf-dist/tex/latex/cmbright/t1cmtl.fd
-File: t1cmtl.fd 2005/04/13 v8.1 (WaS)
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmtl' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-
-
-LaTeX Font Warning: Font shape `T1/cmbr/bx/n' in size <8> not available
-(Font)              Font shape `T1/cmbr/sb/n' tried instead on input line 146.
-
-
-LaTeX Font Warning: Font shape `T1/cmtl/bx/n' undefined
-(Font)              using `T1/cmtl/m/n' instead on input line 146.
-
-[2 <./images/p1hw6.png>] [3]
-LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <10.95> not available
-(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 167.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 197.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 197.
-
-[4] [5]
-<./images/p2hw6.png, id=158, 963.6pt x 722.7pt>
-File: ./images/p2hw6.png Graphic file (type png)
-<use ./images/p2hw6.png>
-Package pdftex.def Info: ./images/p2hw6.png  used on input line 299.
-(pdftex.def)             Requested size: 385.43317pt x 289.07487pt.
- [6 <./images/p2hw6.png>] [7] [8]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 429.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 429.
-
-[9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 467.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 467.
- (/home/daniel/cs577/hw6/hw6.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 467.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 467.
-Package rerunfilecheck Info: File `hw6.out' has not changed.
-(rerunfilecheck)             Checksum: F479C68DCE1CED7729E6728ED5F7D36E;2309.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 512.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 512.
+ (/home/daniel/cs577/hw7/hw7.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 512.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 512.
+Package rerunfilecheck Info: File `hw7.out' has not changed.
+(rerunfilecheck)             Checksum: 8FCF942D1F33DFE65507B5C7128FF6BD;269.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 467.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 512.
  ) 
 Here is how much of TeX's memory you used:
- 39755 strings out of 492982
- 774032 string characters out of 6134896
- 989620 words of memory out of 5000000
- 42545 multiletter control sequences out of 15000+600000
- 557051 words of font info for 131 fonts, out of 8000000 for 9000
+ 39464 strings out of 492982
+ 769922 string characters out of 6134896
+ 978604 words of memory out of 5000000
+ 42427 multiletter control sequences out of 15000+600000
+ 547411 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,21n,114p,10437b,704s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr9.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbsr8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbtl10.pfb>
-Output written on /home/daniel/cs577/hw6/hw6.pdf (9 pages, 202157 bytes).
+ 87i,20n,114p,10437b,506s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf/fonts/type1/public/cm-super/sfbbx10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmo10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbmr10.pfb>
+Output written on /home/daniel/cs577/hw7/hw7.pdf (1 page, 28369 bytes).
 PDF statistics:
- 280 PDF objects out of 1000 (max. 8388607)
- 234 compressed objects within 3 object streams
- 92 named destinations out of 1000 (max. 500000)
- 19695 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 66 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
+ 5 named destinations out of 1000 (max. 500000)
+ 12933 words of extra memory for PDF output out of 14400 (max. 10000000)
 
