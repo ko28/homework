@@ -1,3 +1,6 @@
 \BOOKMARK [1][-]{section.1}{Prove that Strategic Advertising is NP-complete.}{}% 1
 \BOOKMARK [2][-]{subsection.1.1}{Strategic Advertising is NP.}{section.1}% 2
 \BOOKMARK [2][-]{subsection.1.2}{Reduce Strategic Advertising to a known NP-complete problem.}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Prove that Scheduling is NP-complete.}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Scheduling is NP.}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Reduce Scheduling to a known NP-complete problem.}{section.2}% 6
