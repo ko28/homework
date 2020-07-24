@@ -80,6 +80,7 @@ includes at least one node containing an advertisement.
 	We show that Vertex Cover $\leq_p$ Strategic Advertising.
 
 	Suppose we have a graph $G=(V,E)$, and we want to find a vertex cover of size of at most $k$.
+	We can convert this problem into a Strategic Advertising problem in polynomial time by doing the following.
 	Since Strategic Advertising algorithm requires a directed graph, let $G^*=(V,E^*)$
 	where $E^*$ is where we arbitrary set a direction to the edges in $E$. Generate paths,
 	$P_i$, where each edge in $E^*$ is a path.
@@ -148,7 +149,7 @@ includes at least one node containing an advertisement.
 	We show that Independent Set $\leq_p$ Scheduling.
 
 	Suppose we have a graph $G=(V,E)$, and we want to find an independent set of at least $k$.
-	We can convert this problem into a Scheduling problem by doing the following. 
+	We can convert this problem into a Scheduling problem in polynomial time by doing the following.
 	Let where $e$ is the number of edges in our graph. 
 	Let the available period of time that our jobs be from $(00:00)$ to $(\delta:00)$.
 	Divide this period of time into $e$ intervals where each period represent an edge in $E$.
