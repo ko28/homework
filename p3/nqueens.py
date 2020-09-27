@@ -54,28 +54,6 @@ def f(state):
 
     return f 
 
-
-"""
-# given the current state, use succ() to generate the successors and return the selected next state
-def choose_next(curr, static_x, static_y):
-    # including the current state in succ pursuant to https://piazza.com/class/kef2n72f455sp?cid=500
-    succs = succ(curr, static_x, static_y)
-    # If one of the possible states (including the current state) has a uniquely low score, select that state
-    succs.append(curr)
-    print(succs)
-    f_vals = [f(x) for x in succs]
-    print(f_vals)
-    for x in succs: print(f(x))
-    if f_vals.count(min(f_vals)) == 1 and len(succs) > 1:
-        return succs[f_vals.index(min(f_vals))]
-    print("2nd")
-
-    #Otherwise, sort the states in ascending order (as though they were integers) and select the "lowest" state
-    succs.remove(curr)
-    succs_f = sorted(succs, key=lambda x: (f(x), x))
-    return succs_f[0] if len(succs_f) > 0  else None
-"""
-
 # given the current state, use succ() to generate the successors and return the selected next state
 def choose_next(curr, static_x, static_y):
     if curr[static_x] != static_y:
@@ -89,51 +67,73 @@ def choose_next(curr, static_x, static_y):
 # run the hill-climbing algorithm from a given initial state, return the convergence state
 def n_queens(initial_state, static_x, static_y):
     past_state = initial_state
-    print(str(past_state) + " - " + str(f(past_state)))
+    print(str(past_state) + " - f=" + str(f(past_state)))
     min_state = choose_next(past_state, static_x, static_y)
     while f(past_state) != f(min_state):
-        print(str(min_state) + " - " + str(f(min_state)))
+        print(str(min_state) + " - f=" + str(f(min_state)))
         past_state = min_state
         min_state = choose_next(past_state, static_x, static_y)
         if f(min_state) == 0:
             break
-    print(str(min_state) + " - " + str(f(min_state)))
-        
-    
+    print(str(min_state) + " - f=" + str(f(min_state)))
+    return min_state 
+
+def n_queens_no_print(initial_state, static_x, static_y):
+    past_state = initial_state
+    min_state = choose_next(past_state, static_x, static_y)
+    while f(past_state) != f(min_state):
+        past_state = min_state
+        min_state = choose_next(past_state, static_x, static_y)
+        if f(min_state) == 0:
+            break     
     return min_state 
 
 # generates a valid n queens state 
-def generate_random_start(n):
-    random.seed(1)
+def generate_random_start(n, static_x, static_y):
+    #random.seed(1)
     state = []
-    state.append(random.randint(0,n-1))
-    print(state)
-    for i in range(1,n-1):
-        next_queen = random.randint(0,n-1)
-        while abs(random.randint(0,n-1) - state[i-1]) == 1:
-            next_queen = random.randint(0,n-1)
-        print(next_queen)
-        state.append(next_queen)
-   
+    for x in range(n):
+        if x == static_x:
+            state.append(static_y)
+        else:
+            state.append(random.randint(0,n-1))
+    #state = [random.randint(0,n-1) for x in range(n)]
+    #state[static_x] = static_y
     return state
 
 
 # run the hill-climbing algorithm on an n*n board with random restarts
 def n_queens_restart(n, k, static_x, static_y):
     random.seed(1)
+    best_states = []
+    best_f = float('inf')
+    for i in range(k):
+        state = generate_random_start(n, static_x, static_y)
+        #state = [random.randint(0,n-1) for x in range(n)]
+        #state[static_x] = static_y
+        hill_climb = n_queens_no_print(state, static_x, static_y)
+        curr_f = f(hill_climb)
 
-    random_int_1 = random.randint(0, 8)
-    random_int_2 = random.randint(0, 8)
-    print(random_int_1)
-    print(random_int_2)
+        # If you find an optimal solution before you reach k restarts, print the solution and terminate.
+        if(curr_f == 0):
+            print(str(hill_climb) + " - f=0")
+            return
+
+        # Better f found, remove old values and create new list 
+        if curr_f < best_f:
+            best_f = curr_f
+            best_states = []
+            best_states.append(hill_climb)
+        # Same f found, add to best states 
+        elif curr_f == best_f:
+            best_states.append(hill_climb)
+   
+    #If you reach k before finding an optimal solution with a score of 0, print the best solution(s) in sorted order.
+    for state in sorted(best_states):
+        print(str(state) + " - f=" + str(f(state)))
 
 
-if __name__ == "__main__":
-    #g = n_queens([0, 7, 3, 4, 7, 1, 2, 2], 0, 0)
-    #print(g)
-    #n_queens_restart(1,1,1,1)
-    #print(succ([0, 1, 0], 0, 1))
-    print(generate_random_start(10))
 
 
-#n_queens(initial_state, static_x, static_y) -- run the hill-climbing algorithm from a given initial state, return the convergence state
+
+
