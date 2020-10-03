@@ -1,3 +1,9 @@
+# Name: Daniel Ko
+# Project 2, CS 540
+# Email: ko28@wisc.edu
+# Some comments were taken from the homework directly
+import os 
+
 def create_bow(vocab, filepath):
     """ Create a single dictionary for the data
         Note: label may be None
@@ -19,11 +25,22 @@ def create_vocabulary(directory, cutoff):
     """ Create a vocabulary from the training directory
         return a sorted vocabulary list
     """
-
-    vocab = []
-    # TODO: add your code here
-
-    return vocab
+    vocab = {}
+    for root, dirs, files in os.walk(directory):
+        for f in files:
+            textfile = open(os.path.join(root, f), "r").read().split('\n')
+            for text in textfile:
+                if text not in vocab:
+                    vocab[text] = 1
+                else:
+                    vocab[text] = vocab[text] + 1
+    
+    list_vocab = []
+    for key in vocab.keys():
+        if vocab[key] >= cutoff:
+            list_vocab.append(key)
+    
+    return sorted(list_vocab)
 
 def prior(training_data, label_list):
     """ return the prior probability of the label in the training set
@@ -79,3 +96,6 @@ def classify(model, filepath):
     return retval
 
 
+if __name__ == "__main__":
+    vocab = create_vocabulary('./EasyFiles/', 1)
+    print(create_bow(vocab, './EasyFiles/2016/1.txt'))
