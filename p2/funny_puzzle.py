@@ -135,24 +135,7 @@ def solve(state):
                 h = manhattan(state)
                 parent_index = len(parents) - 1
                 heapq.heappush(pq, (g + h, state, (g, h , parent_index)))
-   
 
-
-    #print(len(pq))
-
-    """
-    parents = []
-    while pq:
-        parent = heapq.heappop(pq)
-        succ = generate_succ(parent)
-        for succ_state in succ:
-            heapq.heappush(pq, (0 + manhattan(succ_state), succ_state, parent))
-    #for succ_states in succ:
-    #    heapq.heappush(pq, (moves + manhattan(succ_states), ))
-    #while pq
-    # """
-    # no solution was found 
-    return None 
 
 def print_path(state, parents):
     path = []
@@ -174,7 +157,7 @@ def main():
     #print_succ([4,3,8,5,1,6,7,2,0])
     #solve([4,3,8,5,1,6,7,2,0])
     start = time.process_time()
-    solve([4,3,8,5,1,6,7,2,0])
+    solve([8,6,7,2,5,4,3,0,1])
     
     print(time.process_time() - start)
 
