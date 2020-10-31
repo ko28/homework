@@ -27,11 +27,10 @@ class Teeko2Player:
             drop_phase = True 
         return drop_phase
 
-    def succ(self, state):
+    def succ(self, state, turn_piece):
         succ_list = []
         one_dim_state = sum(state, [])
-        turn_piece = self.my_piece if one_dim_state.count(self.my_piece) > one_dim_state.count(self.opp) else self.opp
-
+        
         # succ will just be putting a piece in empty spot for drop in 
         if self.is_drop_phase(state):
             for i in range(len(state)):
@@ -46,49 +45,134 @@ class Teeko2Player:
                 for j_old in range(len(state[0])):
                     # our piece we can move to a different location
                     if state[i_old][j_old] == turn_piece:
-                        for i_new in range(len(state)):
-                            for j_new in range(len(state[0])):
-                                # found an empty location
-                                if state[i_new][j_new] == ' ':
-                                    next_state = copy.deepcopy(state)
-                                    next_state[i_new][j_new] = next_state[i_old][j_old]
-                                    next_state[i_old][j_old] = ' '
-                                    succ_list.append(next_state)
+                        for cord in self.get_neighbors(state, i_old, j_old):
+                            if state[cord[0]][cord[1]] == ' ':
+                                next_state = copy.deepcopy(state)
+                                next_state[cord[0]][cord[1]] = next_state[i_old][j_old]
+                                next_state[i_old][j_old] = ' '
+                                succ_list.append(next_state)
+                                   
+
+            '''
+                    for i in succ_list:
+            for j in i:
+                print(j)
+            print()
+            '''
         return succ_list
 
+    def get_neighbors(self, state, i, j):
+        neighbors = []
+        # check all surrounding squares 
+        if i - 1 >= 0:
+            neighbors.append((i-1, j))
+        if i + 1 < len(state):
+            neighbors.append((i+1, j))
+        if j - 1 >= 0:
+            neighbors.append((i, j-1))
+        if j + 1 < len(state):
+            neighbors.append((i, j+1))
+        if i - 1 >= 0 and j - 1 >= 0:
+            neighbors.append((i-1, j-1))
+        if i - 1 >= 0 and j + 1 < len(state):
+            neighbors.append((i-1, j+1))
+        if i + 1 < len(state) and j - 1 >= 0:
+            neighbors.append((i+1, j-1))
+        if i + 1 < len(state) and j + 1 < len(state):
+            neighbors.append((i+1, j+1))
+        return neighbors
 
     def heuristic_game_value(self, state):
-        return 0
+        count = dict()
+        count[self.my_piece] = 0
+        count[self.opp] = 0
+
+        for i in range(len(state)):
+            for j in range(len(state[0])):
+                player = state[i][j]
+                # check if current square is non empty
+                if player != ' ':
+                    # check all surrounding squares 
+                    if i - 1 >= 0 and state[i-1][j] == player:
+                        count[player]+=1
+                    if i + 1 < len(state) and state[i+1][j] == player:
+                        count[player]+=1
+                    if j - 1 >= 0 and state[i][j-1] == player:
+                        count[player]+=1
+                    if j + 1 < len(state) and state[i][j+1] == player:
+                        count[player]+=1
+                    if i - 1 >= 0 and j - 1 >= 0 and state[i-1][j-1] == player:
+                        count[player]+=1
+                    if i - 1 >= 0 and j + 1 < len(state) and state[i-1][j+1] == player:
+                        count[player]+=1
+                    if i + 1 < len(state) and j - 1 >= 0 and state[i+1][j-1] == player:
+                        count[player]+=1
+                    if i + 1 < len(state) and j + 1 < len(state) and state[i+1][j+1] == player:
+                        count[player]+=1
+        
+        return (count[self.my_piece] - count[self.opp]) / max(1,count[self.my_piece] + count[self.opp])
+
 
 
     
     def Max_Value(self, state, depth):
         # Check if this is a terminal state
-        val = game_value(state)
+        val = self.game_value(state)
         if val != 0:
             return val
         
+        if depth > 2:
+            return self.heuristic_game_value(state)
+
         a = -math.inf
-        #succ_list = succ(state)
-        for s in succ(state):
-            a = max(a, Min_Value(s))
         
+        # find next best state
+        best_state = state
+        for s in self.succ(state, self.my_piece):
+            old_a = a
+            a = max(a, self.Min_Value(s, depth + 1))
+            if old_a != a:
+                #print(s)
+                best_state = s
+        
+        # need to return a move if base case
+        if depth == 0:
+            return best_state
+
         return a
 
     def Min_Value(self, state, depth):
         # Check if this is a terminal state
-        val = game_value(state)
+        val = self.game_value(state)
         if val != 0:
             return val
         
+        if depth > 2:
+            return self.heuristic_game_value(state)
+
         b = math.inf
-        for s in succ(state):
-            b = min(b, Max_Value(s))
+        for s in self.succ(state, self.opp):
+            b = min(b, self.Max_Value(s, depth + 1))
         
         return b
 
-
     def make_move(self, state):
+
+        new_state = self.Max_Value(state, 0)
+        for i in new_state:
+            print(i)
+        move = []     
+        for i in range(len(state)):
+            for j in range(len(state[0])):
+                if state[i][j] != new_state[i][j]:
+                    move.append((i,j))     
+
+        if len(move) == 2 and state[move[0][0]][move[0][1]] != ' ' :
+            move.reverse()     
+       
+        return move        
+
+    def make_move_rand(self, state):
         """ Selects a (row, col) space for the next move. You may assume that whenever
         this function is called, it is this player's turn to move.
 
@@ -126,7 +210,7 @@ class Teeko2Player:
                 j_old = random.randrange(len(state[0]))
                 i_new = random.randrange(len(state))
                 j_new = random.randrange(len(state[0]))
-                if state[i_old][j_old] == self.my_piece and (i_old,j_old) != (i_new,j_new) and state[i_new][j_new] == ' ':
+                if state[i_old][j_old] == self.opp and (i_old,j_old) != (i_new,j_new) and state[i_new][j_new] == ' ':
                     return [(i_new,j_new),(i_old,j_old)]
 
         # select an unoccupied space randomly
@@ -187,6 +271,7 @@ class Teeko2Player:
         if len(move) > 1:
             self.board[move[1][0]][move[1][1]] = ' '
         self.board[move[0][0]][move[0][1]] = piece
+
 
     def print_board(self):
         """ Formatted printing for the board """
@@ -278,6 +363,77 @@ class Teeko2Player:
 # THE FOLLOWING CODE IS FOR SAMPLE GAMEPLAY ONLY
 #
 ############################################################################
+def maintwo():
+    print('Hello, this is Samaritan')
+    ai = Teeko2Player()
+    piece_count = 0
+    turn = 0
+
+    # drop phase
+    while piece_count < 8 and ai.game_value(ai.board) == 0:
+
+        # get the player or AI's move
+        if ai.my_piece == ai.pieces[turn]:
+            ai.print_board()
+            move = ai.make_move(ai.board)
+            ai.place_piece(move, ai.my_piece)
+            print(ai.my_piece+" moved at "+chr(move[0][1]+ord("A"))+str(move[0][0]))
+        else:
+            move_made = False
+            ai.print_board()
+            print(ai.opp+"'s turn")
+            while not move_made:
+                player_move = ai.make_move_rand(ai.board)[0]
+                print(player_move)
+                d = {0:'A',1:'B',2:'C',3:'D',4:'E'}
+                move_char =  d[player_move[0]] + str(player_move[1])
+                ai.opponent_move([(player_move[1]), d[player_move[0]]])
+                move_made = True
+
+
+        # update the game variables
+        piece_count += 1
+        turn += 1
+        turn %= 2
+
+    # move phase - can't have a winner until all 8 pieces are on the board
+    while ai.game_value(ai.board) == 0:
+
+        # get the player or AI's move
+        if ai.my_piece == ai.pieces[turn]:
+            ai.print_board()
+            move = ai.make_move(ai.board)
+            ai.place_piece(move, ai.my_piece)
+            print(ai.my_piece+" moved from "+chr(move[1][1]+ord("A"))+str(move[1][0]))
+            print("  to "+chr(move[0][1]+ord("A"))+str(move[0][0]))
+        else:
+            move_made = False
+            ai.print_board()
+            print(ai.opp+"'s turn")
+            while not move_made:
+                move_from = input("Move from (e.g. B3): ")
+                while move_from[0] not in "ABCDE" or move_from[1] not in "01234":
+                    move_from = input("Move from (e.g. B3): ")
+                move_to = input("Move to (e.g. B3): ")
+                while move_to[0] not in "ABCDE" or move_to[1] not in "01234":
+                    move_to = input("Move to (e.g. B3): ")
+                try:
+                    ai.opponent_move([(int(move_to[1]), ord(move_to[0])-ord("A")),
+                                    (int(move_from[1]), ord(move_from[0])-ord("A"))])
+                    move_made = True
+                except Exception as e:
+                    print(e)
+
+        # update the game variables
+        turn += 1
+        turn %= 2
+
+    ai.print_board()
+    if ai.game_value(ai.board) == 1:
+        print("AI wins! Game over.")
+    else:
+        print("You win! Game over.")
+
 def main():
     print('Hello, this is Samaritan')
     ai = Teeko2Player()
@@ -350,6 +506,5 @@ def main():
     else:
         print("You win! Game over.")
 
-
 if __name__ == "__main__":
-    main()
+    maintwo()
