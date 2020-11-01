@@ -159,8 +159,6 @@ class Teeko2Player:
     def make_move(self, state):
 
         new_state = self.Max_Value(state, 0)
-        for i in new_state:
-            print(i)
         move = []     
         for i in range(len(state)):
             for j in range(len(state[0])):
@@ -206,12 +204,16 @@ class Teeko2Player:
             # Until this part is implemented and the move list is updated
             # accordingly, the AI will not follow the rules after the drop phase!
             while True:
+                
+
                 i_old = random.randrange(len(state))
                 j_old = random.randrange(len(state[0]))
-                i_new = random.randrange(len(state))
-                j_new = random.randrange(len(state[0]))
-                if state[i_old][j_old] == self.opp and (i_old,j_old) != (i_new,j_new) and state[i_new][j_new] == ' ':
-                    return [(i_new,j_new),(i_old,j_old)]
+                #i_new = random.randrange(len(state))
+                #j_new = random.randrange(len(state[0]))
+                if state[i_old][j_old] == self.opp:
+                    for cord in (self.get_neighbors(state, i_old, j_old)):
+                        if state[cord[0]][cord[1]] == ' ':
+                            return [(cord[0],cord[1]),(i_old,j_old)]
 
         # select an unoccupied space randomly
         # TODO: implement a minimax algorithm to play better
@@ -386,8 +388,8 @@ def maintwo():
                 player_move = ai.make_move_rand(ai.board)[0]
                 print(player_move)
                 d = {0:'A',1:'B',2:'C',3:'D',4:'E'}
-                move_char =  d[player_move[0]] + str(player_move[1])
-                ai.opponent_move([(player_move[1]), d[player_move[0]]])
+                #move_char =  d[player_move[0]] + str(player_move[1])
+                ai.opponent_move([(player_move[0], player_move[1])])
                 move_made = True
 
 
@@ -411,15 +413,10 @@ def maintwo():
             ai.print_board()
             print(ai.opp+"'s turn")
             while not move_made:
-                move_from = input("Move from (e.g. B3): ")
-                while move_from[0] not in "ABCDE" or move_from[1] not in "01234":
-                    move_from = input("Move from (e.g. B3): ")
-                move_to = input("Move to (e.g. B3): ")
-                while move_to[0] not in "ABCDE" or move_to[1] not in "01234":
-                    move_to = input("Move to (e.g. B3): ")
+                player_move = ai.make_move_rand(ai.board)
                 try:
-                    ai.opponent_move([(int(move_to[1]), ord(move_to[0])-ord("A")),
-                                    (int(move_from[1]), ord(move_from[0])-ord("A"))])
+                    ai.opponent_move([(player_move[0][0], player_move[0][1]),
+                                      (player_move[1][0], player_move[1][1])])
                     move_made = True
                 except Exception as e:
                     print(e)
