@@ -4,7 +4,10 @@
 # Some comments were taken from the homework directly
 
 import csv 
+from scipy.cluster.hierarchy import linkage, dendrogram
 import numpy as np
+import copy 
+from matplotlib import pyplot as plt
 
 def load_data(filepath):
     data = []
@@ -34,6 +37,15 @@ def compute_vector(data):
     for entry in data:
         vector.append(list(calculate_x_y(entry)))
     return vector
+
+def hac_scipy(dataset):
+    print(dataset)
+    a = linkage(dataset, method='single')
+    fig = plt.figure(figsize=(25, 10))
+    dn = dendrogram(a)
+    plt.savefig('help')
+    return a
+
 
 class Cluster:
     def __init__(self, points, index):
@@ -66,6 +78,7 @@ def hac(dataset):
                         min_cluster = [[cluster_a, cluster_b]]
                     elif dist == min_dist:
                         min_cluster.append([cluster_a, cluster_b])   
+        #print(min_cluster)
         if len(clusters) == 1:
             min_cluster = min_cluster[0]
         else:
@@ -75,7 +88,9 @@ def hac(dataset):
                 if calculate_min_dist(c[0], c[1]) < calculate_min_dist(temp_min[0], temp_min[1]):
                     temp_min = c
             min_cluster = temp_min
-
+            #min_cluster =  min(sorted(clusters, key=lambda c: c.index), key=lambda c: c.size())
+        #print("after", min_cluster)
+        #print(min_cluster[0].index,min_cluster[1].index )
         combined_cluster = Cluster(min_cluster[0].points + min_cluster[1].points, next_index)
 
         z[i, 0] = min_cluster[0].index
@@ -89,6 +104,7 @@ def hac(dataset):
         clusters.remove(min_cluster[0])
         clusters.remove(min_cluster[1])
         clusters.append(combined_cluster)
+
         
     return z
 
@@ -102,3 +118,76 @@ def calculate_min_dist(cluster_a, cluster_b):
 
     return min
 
+def hac_old(dataset):
+    z = np.zeros((len(dataset) - 1, 4))
+    
+    clusters = []
+    for i, data in enumerate(dataset):
+        clusters.append([data, i, 1])
+
+    next_index = len(clusters)
+    i=0
+    while len(clusters) > 1:
+        min_dist = np.inf 
+        min_cluster = None
+        for val_a in clusters:
+            for val_b in clusters:
+                if val_a != val_b:
+                    dist = np.linalg.norm(np.array(val_a[0]) - np.array(val_b[0]))
+                    if dist < min_dist:
+                        print(np.array(val_a[0]), np.array(val_b[0]))
+                        min_dist = dist
+                        min_cluster = [[val_a, val_b]]
+                    elif dist == min_dist:
+                        min_cluster.append([val_a, val_b])
+        
+        #print(min_cluster)
+        if len(min_cluster) == 1:
+            min_cluster = min_cluster[0]
+        else:
+            print("woah", len(min_cluster))
+            min = min_cluster[0]
+            for cluster in min_cluster:
+                if cluster[0][2] + cluster[1][2] < min[0][2] + min[1][2]:
+                    min = cluster
+            min_cluster = min
+        print("we have our min boi", min_cluster)
+        z[i, 0] = min_cluster[0][1]
+        z[i, 1] = min_cluster[1][1]
+        z[i, 2] = min_dist
+        z[i, 3] = min_cluster[0][2] + min_cluster[1][2]
+        
+        new_x = (min_cluster[0][0][0] + min_cluster[1][0][0])/2
+        new_y = (min_cluster[0][0][1] + min_cluster[1][0][1])/2
+        #print(min_cluster[0][0], min_cluster[1][0])
+        #print(new_x, new_y)
+        new_cluster = [[new_x, new_y], next_index, min_cluster[0][2] + min_cluster[1][2]]
+        
+        i+=1
+        next_index+=1
+        
+        clusters.remove(min_cluster[0])
+        clusters.remove(min_cluster[1])
+        clusters.append(new_cluster)
+        print("we added this boi", new_cluster)
+        print(clusters)
+        print(z)
+        print()
+    return z
+
+
+
+if __name__=="__main__":
+    #data = load_data('Pokemon.csv')
+    #xy = compute_vector(data)
+    #print(xy)
+    #print(hac(xy))
+    #me = hac_1(xy)
+    #print(me)
+    #fig = plt.figure(figsize=(25, 10))
+    #dn = dendrogram(me)
+    #plt.savefig('help2')
+    #print(hac_scipy(xy))
+    #print(xy[1])
+    #print(me)
+    pass

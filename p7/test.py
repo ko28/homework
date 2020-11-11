@@ -1,7 +1,7 @@
 __author__ = 'cs540-testers'
 __credits__ = ['Harrison Clark', 'Stephen Jasina', 'Saurabh Kulkarni',
 		'Alex Moon']
-version = 'v0.1'
+version = 'v0.3'
 
 import unittest
 import numpy as np
@@ -66,14 +66,15 @@ class TestCalculateXY(unittest.TestCase):
 				(296, 115), (334, 380), (336, 436), (270, 425), (207, 480),
 				(347, 401), (186, 305), (267, 304), (396, 184), (469, 518),
 				(414, 223)] # I'm sorry this is ugly
+
 		for x_y_pair, expected_x_y_pair in zip(x_y_pairs, expected_x_y_pairs):
+			self.assertIsInstance(x_y_pair, tuple)
 			self.assertEqual(x_y_pair, expected_x_y_pair)
 
 
 class TestHAC(unittest.TestCase):
 	def test_randomized(self):
 		x_y_pairs = get_x_y_pairs(random_csv_file)
-
 		computed = hac(x_y_pairs)
 
 		# hac should return an numpy array of the right shape
@@ -93,7 +94,8 @@ class TestHAC(unittest.TestCase):
 		computed = hac(x_y_pairs)
 		expected_cluster_sizes \
 				= [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 8, 8, 12, 20]
-		for i, row in enumerate(computed):
+		for i in range(np.shape(computed)[0]):
+			row = np.array(computed[i,:]).flatten()
 			self.assertEqual(row[0], 2 * i)
 			self.assertEqual(row[1], 2 * i + 1)
 			self.assertEqual(row[2], 0)
