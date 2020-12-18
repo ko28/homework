@@ -1,0 +1,99 @@
+==1791== Memcheck, a memory error detector
+==1791== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1791== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==1791== Command: ./test_coalesce1
+==1791== Parent PID: 241
+==1791== 
+--1791-- 
+--1791-- Valgrind options:
+--1791--    --leak-check=full
+--1791--    --show-leak-kinds=all
+--1791--    --track-origins=yes
+--1791--    --verbose
+--1791--    --log-file=valgrind-out.txt
+--1791-- Contents of /proc/version:
+--1791--   Linux version 4.19.128-microsoft-standard (oe-user@oe-host) (gcc version 8.2.0 (GCC)) #1 SMP Tue Jun 23 12:58:10 UTC 2020
+--1791-- 
+--1791-- Arch and hwcaps: X86, LittleEndian, x86-mmxext-sse1-sse2-sse3-lzcnt
+--1791-- Page sizes: currently 4096, max supported 4096
+--1791-- Valgrind library directory: /usr/lib/valgrind
+--1791-- Reading syms from /home/daniel/cs354/p3/tests/test_coalesce1
+--1791-- Reading syms from /lib/i386-linux-gnu/ld-2.27.so
+--1791--   Considering /lib/i386-linux-gnu/ld-2.27.so ..
+--1791--   .. CRC mismatch (computed 965ff690 wanted 79ae83c3)
+--1791--   Considering /usr/lib/debug/lib/i386-linux-gnu/ld-2.27.so ..
+--1791--   .. CRC is valid
+--1791-- Reading syms from /usr/lib/valgrind/memcheck-x86-linux
+--1791--   Considering /usr/lib/valgrind/memcheck-x86-linux ..
+--1791--   .. CRC mismatch (computed a7281062 wanted 16af0e50)
+--1791--    object doesn't have a symbol table
+--1791--    object doesn't have a dynamic symbol table
+--1791-- Scheduler: using generic scheduler lock implementation.
+--1791-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==1791== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-1791-by-daniel-on-???
+==1791== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-1791-by-daniel-on-???
+==1791== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-1791-by-daniel-on-???
+==1791== 
+==1791== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==1791== don't want to do, unless you know exactly what you're doing,
+==1791== or are doing some strange experiment):
+==1791==   /usr/lib/valgrind/../../bin/vgdb --pid=1791 ...command...
+==1791== 
+==1791== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==1791==   /path/to/gdb ./test_coalesce1
+==1791== and then give GDB the following command
+==1791==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=1791
+==1791== --pid is optional if only one valgrind process is running
+==1791== 
+--1791-- REDIR: 0x401b4d0 (ld-linux.so.2:strlen) redirected to 0x58055ad3 (???)
+--1791-- REDIR: 0x401b230 (ld-linux.so.2:index) redirected to 0x58055aae (???)
+--1791-- Reading syms from /usr/lib/valgrind/vgpreload_core-x86-linux.so
+--1791--   Considering /usr/lib/valgrind/vgpreload_core-x86-linux.so ..
+--1791--   .. CRC mismatch (computed 86c0c51e wanted baca1012)
+--1791--    object doesn't have a symbol table
+--1791-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so
+--1791--   Considering /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so ..
+--1791--   .. CRC mismatch (computed 14c838a6 wanted 6f3b1ae1)
+--1791--    object doesn't have a symbol table
+==1791== WARNING: new redirection conflicts with existing -- ignoring it
+--1791--     old: 0x0401b4d0 (strlen              ) R-> (0000.0) 0x58055ad3 ???
+--1791--     new: 0x0401b4d0 (strlen              ) R-> (2007.0) 0x04833430 strlen
+--1791-- Reading syms from /home/daniel/cs354/p3/libheap.so
+--1791-- Reading syms from /lib/i386-linux-gnu/libc-2.27.so
+--1791--   Considering /lib/i386-linux-gnu/libc-2.27.so ..
+--1791--   .. CRC mismatch (computed 06b0a9e5 wanted 165f08e4)
+--1791--   Considering /usr/lib/debug/lib/i386-linux-gnu/libc-2.27.so ..
+--1791--   .. CRC is valid
+--1791-- REDIR: 0x48d7a70 (libc.so.6:strncasecmp) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
+--1791-- REDIR: 0x48de040 (libc.so.6:memrchr) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
+--1791-- REDIR: 0x48f1bf0 (libc.so.6:wcslen) redirected to 0x482a560 (_vgnU_ifunc_wrapper)
+--1791-- REDIR: 0x48f0dd0 (libc.so.6:__GI_strrchr) redirected to 0x4832de0 (__GI_strrchr)
+--1791-- REDIR: 0x1086ad (NONE:malloc) redirected to 0x48301b0 (malloc)
+--1791-- REDIR: 0x48d3320 (libc.so.6:free) redirected to 0x4831370 (free)
+==1791== 
+==1791== HEAP SUMMARY:
+==1791==     in use at exit: 2,048 bytes in 2 blocks
+==1791==   total heap usage: 2 allocs, 0 frees, 2,048 bytes allocated
+==1791== 
+==1791== Searching for pointers to 2 not-freed blocks
+==1791== Checked 54,120 bytes
+==1791== 
+==1791== 1,024 bytes in 1 blocks are definitely lost in loss record 1 of 2
+==1791==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==1791==    by 0x483E8C9: myFree (myHeap.c:198)
+==1791==    by 0x108811: main (test_coalesce1.c:25)
+==1791== 
+==1791== 1,024 bytes in 1 blocks are definitely lost in loss record 2 of 2
+==1791==    at 0x483021B: malloc (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==1791==    by 0x483E8C9: myFree (myHeap.c:198)
+==1791==    by 0x108840: main (test_coalesce1.c:26)
+==1791== 
+==1791== LEAK SUMMARY:
+==1791==    definitely lost: 2,048 bytes in 2 blocks
+==1791==    indirectly lost: 0 bytes in 0 blocks
+==1791==      possibly lost: 0 bytes in 0 blocks
+==1791==    still reachable: 0 bytes in 0 blocks
+==1791==         suppressed: 0 bytes in 0 blocks
+==1791== 
+==1791== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==1791== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)

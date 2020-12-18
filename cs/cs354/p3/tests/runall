@@ -1,0 +1,5 @@
+#!/bin/bash
+find . -name "*test_*"  -a -not -name "*.c*" -printf '%p\n' -exec "{}" \;
+
+
+#-exec "printf hello\n && {}" \;  

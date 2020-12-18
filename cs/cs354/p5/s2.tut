@@ -1,0 +1,7 @@
+cmp	%eax,(%edx)
+
+
+input is %eax however every loop ur input decreases by 1 
+so u need to input: ur_num + i, where i is the loop ur on (1st time thru is i = 1 )
+
+we check if *$edx == $eax

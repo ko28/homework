@@ -1,0 +1,8 @@
+gcc -Wall -m32 -std=gnu99 -ggdb3 -o n_in_a_row n_in_a_row.c      
+
+valgrind --leak-check=full \
+		 --show-leak-kinds=all \
+		 --track-origins=yes \
+		 --verbose \
+		 --log-file=valgrind-out.txt \
+		 ./program_name param1 param2  

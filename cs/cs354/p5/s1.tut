@@ -1,0 +1,2 @@
+%eax is the input
+we check if *(0x50(%ebx,%esi,4)) == *(0x50+$ebx+$esi*4) == %eax 

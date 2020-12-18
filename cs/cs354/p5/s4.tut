@@ -1,0 +1,6 @@
+$eax is input + 2 ?
+
+515665
+
+
+x/4d $sp
