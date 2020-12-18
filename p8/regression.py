@@ -261,11 +261,12 @@ def approx_grad(dataset, cols, betas, r):
 
 if __name__ == '__main__':
     dataset = get_dataset('bodyfat.csv')
+    print_stats(dataset, 1)
     #print(len(dataset))
     #r = random_index_generator(1,4)
-    sgd(dataset, cols=[2,3], betas=[0,0,0], T=5, eta=1e-6)
-    print()
-    sgd(dataset, cols=[2,8], betas=[-40,0,0.5], T=10, eta=1e-5)
+    #sgd(dataset, cols=[2,3], betas=[0,0,0], T=5, eta=1e-6)
+    #print()
+    #sgd(dataset, cols=[2,8], betas=[-40,0,0.5], T=10, eta=1e-5)
     #print(ds)
     #print(ds.shape)
     #print_stats(ds,1)
