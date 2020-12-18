@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{A sawmill only has one large sawing machine and get n job orders at the beginning of each day. They want the jobs to be scheduled in an order that keeps the customers most satisfied}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Someone proposes to schedule the jobs based on the descending order of the value of the corresponding customers. That is, the one with the highest value get the job scheduled first. In the above example, the customer with value 20 is scheduled before the customer with the value of 2. Show a counter example that this greedy algorithm will not result in the lowest average valued finishing time.}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Design an optimal greedy algorithm to solve the problem and analyze the computing complexity. Here you just need to state the algorithm idea but do not have to write out the pseudocode.}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Prove the optimality of your algorithm using either \215Exchange argument\216 or \215Stay ahead\216 method.}{section.1}% 4
+\BOOKMARK [3][-]{subsubsection.1.3.1}{Define the solution}{subsection.1.3}% 5
+\BOOKMARK [3][-]{subsubsection.1.3.2}{Identify the difference}{subsection.1.3}% 6
+\BOOKMARK [3][-]{subsubsection.1.3.3}{Exchange and iterate}{subsection.1.3}% 7
+\BOOKMARK [1][-]{section.2}{Which of the remaining applications should be migrated? Give a polynomial-time algorithm to find a set S \1731, 2, \@let@token , n-1\175 for which the sum of the benefits minus the interaction expenses happened after migration of the applications in S is maximized.}{}% 8
+\BOOKMARK [2][-]{subsection.2.1}{Construct a network flow model for this problem. Clearly state the meaning of each component \(node, edge, capacity\) of the flow network that you construct, set up a flow network graph, describe your algorithm idea \(you don\220t have to write the pseudocode\), and give the computing complexity analysis of your algorithm}{section.2}% 9
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Components for graph}{subsection.2.1}% 10
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Algorithm and complexity}{subsection.2.1}% 11
+\BOOKMARK [1][-]{section.3}{Resource Allocation Problem}{}% 12
+\BOOKMARK [2][-]{subsection.3.1}{Prove that the Resource Allocation problem is an NP problem}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.2}{Identify a well-known NP-Complete problem and show the construction of a Resource Allocation problem out of the well-known NP-Complete problem.}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.3}{Show the correctness of the reduction.}{section.3}% 15
+\BOOKMARK [1][-]{section.4}{Short answer questions}{}% 16
+\BOOKMARK [2][-]{subsection.4.1}{Maximum flow and minimum cut problem}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.2}{True/False}{section.4}% 18

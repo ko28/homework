@@ -1,0 +1,8 @@
+\BOOKMARK [1][-]{section.1}{Among the collection of n cards, is there a set of more than n/2 of them that are all equivalent to one another?}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Present your algorithm and explain the notations as necessary.}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Prove the correctness of your algorithm in making the final judgement regarding whether there exists a set of more than n/2 of cards that are all equivalent to one another.}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Show the recurrence of the computing complexity and explain how did you obtain it. Note that you do not have to solve the recurrence since we can derive the solution using the Master\220s theorem.}{section.1}% 4
+\BOOKMARK [1][-]{section.2}{Please describe an algorithm that finds a number that is bigger than any of its neighbors.}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{Present your algorithm and explain the notations as necessary.}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.2}{Prove the correctness of your algorithm in finding the right box that has a number that is larger than all its neighbors.}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.3}{Analyze the number of boxes that one need to open using your algorithm.}{section.2}% 8

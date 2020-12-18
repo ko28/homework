@@ -1,0 +1,177 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[sexy]{../evan}
+\usepackage{cmbright}
+\usepackage{cancel}
+\usepackage[T1]{fontenc}
+%\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage[pdfborder={0 0 0},colorlinks=true,citecolor=red{}]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{systeme}
+%\usepackage[vlined]{algorithm2e}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\SetStartEndCondition{ }{}{}%
+\SetKwProg{Fn}{def}{\string:}{}
+\SetKwFunction{Range}{range}%%
+\SetKw{KwTo}{in}\SetKwFor{For}{for}{\string:}{}%
+\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else:}{}%
+\SetKwFor{While}{while}{:}{fintq}%
+\newcommand{\forcond}{$i=0$ \KwTo $n$}
+\SetKwFunction{FRecurs}{FnRecursive}%
+\AlgoDontDisplayBlockMarkers\SetAlgoNoEnd\SetAlgoNoLine%
+
+
+\usepackage{xcolor}
+\DontPrintSemicolon
+
+% Define pseudocode formatting
+\renewcommand{\KwSty}[1]{\textnormal{\textcolor{blue!90!black}{\ttfamily\bfseries #1}}\unskip}
+\renewcommand{\ArgSty}[1]{\textnormal{\ttfamily #1}\unskip}
+\SetKwComment{Comment}{\color{green!50!black}// }{}
+\renewcommand{\CommentSty}[1]{\textnormal{\ttfamily\color{green!50!black}#1}\unskip}
+\newcommand{\assign}{\leftarrow}
+\newcommand{\var}{\texttt}
+\newcommand{\FuncCall}[2]{\texttt{\bfseries #1(#2)}}
+\SetKwProg{Function}{function}{}{}
+\renewcommand{\ProgSty}[1]{\texttt{\bfseries #1}}
+
+
+
+\title{CS 577: HW 7}
+\author{Daniel Ko}
+\date{Summer 2020}
+
+\begin{document}
+\maketitle
+
+\section{
+  Prove that Strategic Advertising is NP-complete.
+ }
+Define a set $S$ to fulfill Strategic Advertising Problem (SAP) on $G$ with paths $\{P_i\}$,
+if it is possible to place advertisements on at most $k$ of the nodes in $G$, so that each path $P_i$
+includes at least one node containing an advertisement.
+
+\subsection{
+	Strategic Advertising is NP.
+}
+%,and either if the set $S$ .  
+\begin{proof}
+	Suppose we have a set $S$ that claims to fulfill SAP.
+	We can iterate through all nodes in each $t$ paths, checking to see if a path contains a node
+	that is also in the set $S$. Since, a path is at most $n$, where $n$ is the amount of nodes in the
+	graph $G$, the computing complexity to check if a set $S$ fulfills SAP
+	is $O(nkt)$ which is clearly polynomial.
+
+\end{proof}
+
+\subsection{
+	Reduce Strategic Advertising to a known NP-complete problem.
+}
+
+\begin{proof}
+	We claim that we can reduce Strategic Advertising to the Vertex Cover problem.
+	We show that Vertex Cover $\leq_p$ Strategic Advertising.
+
+	Suppose we have a graph $G=(V,E)$, and we want to find a vertex cover of size of at most $k$.
+	We can convert this problem into a Strategic Advertising problem in polynomial time by doing the following.
+	Since Strategic Advertising algorithm requires a directed graph, let $G^*=(V,E^*)$
+	where $E^*$ is where we arbitrary set a direction to the edges in $E$. Generate paths,
+	$P_i$, where each edge in $E^*$ is a path.
+	We show that $G$ has a vertex cover of size of at most $k$ $\Leftrightarrow$
+	there exists a set $S$ such that it fulfills SAP on $G^*$ with paths $\{P_i\}$.
+
+	\begin{enumerate}[label=\roman*.]
+		\item {
+		      $G$ has a vertex cover of size of at most $k$ $\Rightarrow$
+			  There exists a set $S$ such that it fulfills SAP on $G^*$ with paths $\{P_i\}$\\\-\\
+			  Let $S$ be a set of nodes for a vertex cover for $G$.
+			  $S$ will fulfill SAP because all edges will at least one endpoint in $S$ by the 
+			  fact that $S$ is a vertex cover and since $\{P_i\}$ consists of all edges in $E$.
+		      }
+		\item {
+		      There exists a set $S$ such that it fulfills SAP on $G^*$ with paths $\{P_i\}$
+			  $\Rightarrow$ $G$ has a vertex cover of size of at most $k$\\\-\\
+			  This means that we have most $k$ nodes in $S$ such that each path $P_i$ includes
+			  such nodes. Notice that we since we defined $\{P_i\}$ to be the set of all edges in $E$,
+			  $S$ will be a vertex cover for $G$.
+
+		      }
+	\end{enumerate}
+	Thus, Vertex Cover $\leq_p$ Strategic Advertising as desired.
+	Using Theorem 8.14, we conclude that Strategic Advertising is NP-complete.
+\end{proof}
+
+
+
+
+
+
+\pagebreak
+
+
+
+\section{
+  Prove that Scheduling is NP-complete.
+ }
+ We define the Scheduling problem to be the following:
+ If you’re given a set of $n$ jobs with each specified by a set of time
+ intervals. Is it possible to accept at least $k$ of them so that none of the accepted jobs
+ overlap in time? 
+
+\subsection{
+	Scheduling is NP.
+}
+%,and either if the set $S$ .  
+\begin{proof}
+	Suppose we have a set $S$ that claims to fulfill the Scheduling problem. 
+	We can clearly check if none of the jobs overlap by first sorting the intervals by 
+	start time and iterate through $S$, checking if the end time of the $i$th job is equal or earlier than 
+	the start time of the $i+1$th job. We also make sure that $|S| \geq k$. 
+	Using an efficient sorting algorithm like merge sort, will take $O(n\log n)$, where $n$ is the number of 
+	intervals given in the set, 
+	and checking if any job overlap will take, $O(n)$. Hence, checking if $S$ fulfills Scheduling problem
+	will take $O(n\log n)$, which clearly takes polynomial time. 
+\end{proof}
+
+
+\subsection{
+	Reduce Scheduling to a known NP-complete problem.
+}
+\begin{proof}
+	We claim that we can reduce Scheduling problem to the Independent Set problem.
+	We show that Independent Set $\leq_p$ Scheduling.
+
+	Suppose we have a graph $G=(V,E)$, and we want to find an independent set of at least $k$.
+	We can convert this problem into a Scheduling problem in polynomial time by doing the following.
+	Let where $e$ is the number of edges in our graph. 
+	Let the available period of time that our jobs be from $(00:00)$ to $(\delta:00)$.
+	Divide this period of time into $e$ intervals where each period represent an edge in $E$.
+	%Let $e_i$ represent the interval that corresponds with the $i$th edge in $E$.
+	Let $n$ be the number of vertices in $G$ and create a set with $n$ jobs with each job 
+	corresponding to a vertex in $G$. For each job, set its intervals to the ones that represent its edges. 
+	
+	We show that $G$ has an independent set of at least $k$ if and only if there is at least $k$ jobs that do not overlap. 
+	If there is independent set of size $k$, these nodes do not share any edges, thus the corresponding 
+	time intervals for such jobs do not overlap. Conversely, if there is at least $k$ jobs that do not overlap, 
+	the corresponding graph contains at least $k$ jobs that do not share edges with each other, which is an independent set.  
+\end{proof}
+
+
+Thus, Vertex Cover $\leq_p$ Strategic Advertising as desired.
+Using Theorem 8.14, we conclude that Scheduling is NP-complete.
+
+
+
+
+
+
+
+\end{document}
+
