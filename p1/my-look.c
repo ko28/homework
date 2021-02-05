@@ -37,9 +37,8 @@ int main(int argc, char *argv[]) {
     }
 
     // -h: prints help information about this utility
-    // TODO:
     if (strcmp(argv[1], "-h") == 0) {
-      printf("Usage: my-look \n");
+      printf("Usage: my-look (-f [file] or pipe in text) [search words] \n");
       return 0;
     }
 

@@ -24,29 +24,21 @@ void rev(char* filename) {
   while (fgets(buffer, 100, fp) != NULL) {
     // reverse string in buffer
     int len = strlen(buffer);
-    // int newline = 0;
     if (buffer[len - 1] == '\n') {
       len--;
     }
-    // printf("len: %d\n", len);
-    // printf("buffer: %s", buffer);
     for (int i = 0; i < len; i++) {
-      // printf("i: %d  len-i: %d\n", i, len-i);
-      // printf("buffer[len - i]: %c \n", buffer[len-i]);
       revbuf[i] = buffer[len - i - 1];
-      // printf("revbuf[%d]: %c\n", i, revbuf[i]);
     }
-    // printf("revbuf[0]: %c\n", revbuf[0]);
+
     if (buffer[len] == '\n') {
       revbuf[len] = '\n';
       revbuf[len + 1] = '\0';
     } else {
       revbuf[len] = '\0';
     }
-    // printf("revbuf[0]: %c\n", revbuf[0]);
 
     printf("%s", revbuf);
-    // exit(1);
 
     memset(revbuf, '\0', 100);  // clear string
   }
@@ -69,9 +61,8 @@ int main(int argc, char* argv[]) {
     }
 
     // -h: prints help information about this utility
-    // TODO:
     if (strcmp(argv[1], "-h") == 0) {
-      printf("Usage: my-rev \n");
+      printf("Usage: my-rev -f [file path] or pipe in text\n");
       return 0;
     }
 
