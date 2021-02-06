@@ -77,6 +77,9 @@ allocproc(void)
   char *sp;
 
   acquire(&ptable.lock);
+  
+  p->numsyscalls = 0;
+  p->numsyscallsgood = 0;
 
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
     if(p->state == UNUSED)
@@ -531,4 +534,28 @@ procdump(void)
     }
     cprintf("\n");
   }
+}
+
+int
+getnumsyscalls(int pid) {
+  struct proc *p;
+
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+		return p->numsyscalls;
+    }
+  }
+  return -1;
+}
+
+int
+getnumsyscallsgood(int pid) {
+  struct proc *p;
+
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+		return p->numsyscallsgood;
+    }
+  }
+  return -1;
 }
