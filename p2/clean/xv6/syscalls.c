@@ -5,13 +5,14 @@
 int
 main(int argc, char **argv)
 {
-  if(argc < 2){
-    printf(2, "usage: syscalls pid...\n");
+  if(argc != 3){
+    printf(2, "usage: syscalls N g\n");
     exit();
   }
-  // printf(2, "ur num: %s\n", argv[1]);
-  // printf("pid number is %d\n", getpid());
-  printf(2, "daniel's number is %d\n", daniel(atoi(argv[1])));
-
+  if(!(atoi(argv[1]) >= 1 && atoi(argv[2]) >= 1)) {
+	  exit();
+  }
+  int pid = getpid();
+  printf(2, "%d %d\n", getnumsyscalls(pid), getnumsyscallsgood(pid));
   exit();
 }

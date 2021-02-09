@@ -21,3 +21,5 @@
 #define SYS_mkdir  20
 #define SYS_close  21
 #define SYS_daniel 69
+#define SYS_getnumsyscalls 420
+#define SYS_getnumsyscallsgood 1337

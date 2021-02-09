@@ -86,6 +86,9 @@ allocproc(void)
   return 0;
 
 found:
+  p->numsyscalls = 0;
+  p->numsyscallsgood = 0;
+
   p->state = EMBRYO;
   p->pid = nextpid++;
 
@@ -533,7 +536,26 @@ procdump(void)
   }
 }
 
-int 
-getnumsyscalls(int pid){
-	return pid-1;
+int
+getnumsyscalls(int pid) {
+  struct proc *p;
+
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+		return p->numsyscalls;
+    }
+  }
+  return -1;
+}
+
+int
+getnumsyscallsgood(int pid) {
+  struct proc *p;
+
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+		return p->numsyscallsgood;
+    }
+  }
+  return -1;
 }
