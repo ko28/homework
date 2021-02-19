@@ -51,7 +51,9 @@ static void handle_line(const char *userline) {
 
 
 int main(void) {
-    char userline[512];
+    // handle batch
+	
+	char userline[512];
 
     while (1) {
         // Use write() to avoid output buffering.
