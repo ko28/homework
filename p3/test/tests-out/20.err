@@ -1,0 +1,1 @@
+./tester/run-tests.sh: line 26: 2739929 Aborted                 timeout 5 ./mysh tests/20.in > /dev/null 2>&1

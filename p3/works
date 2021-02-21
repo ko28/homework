@@ -1,0 +1,222 @@
+  1.desc - Too many arguments to mysh.
+  2.desc - Invalid batch file name
+  3.desc - Batchfile with multiple commands as input.
+  4.desc - Simple batchfile that just exits.
+  5.desc - Interactive mode (ended with EOF)
+  6.desc - Simple batchfile that echos and exits to test interactive shell.
+  7.desc - Batch File ends without exit
+  8.desc - Redirection with no output file specified.
+  9.desc - Redirection with multiple output files.
+  10.desc - Redirection with multiple '>'
+  11.desc - Normal redirection
+  12.desc - Redirection with varied spacing
+  13.desc - Redirection with varied spacing
+  14.desc - Multiple sequential redirections
+  15.desc - Tests command with variable whitespace.
+  16.desc - Command not found
+  17.desc - Basic alias test
+  18.desc - Create and list 10 aliases
+  19.desc - Create then replace alias
+  20.desc - Line longer than 512 Characters (only checks return code).
+  21.desc - Empty commands
+  22.desc - Input to check bad redirection. Contains no command before '>'.
+  23.desc - Alias <alias-name> to echo replacement for alias-name.
+  24.desc - Command in shell segfaults.
+  25.desc - Very large batch file
+  26.desc - Overwriting files during redirection
+  27.desc - Handling multiple flags and redirection
+  28.desc - Create and remove one alias
+  29.desc - Create and remove 5 aliases in a stack order
+  30.desc - Create and remove 5 aliases in a queue order
+  31.desc - Create 2 aliases, remove one, then run the remaining alias
+  32.desc - Create 2 aliases, delete 1, then run deleted
+  33.desc - Unalias with no arguments
+  34.desc - Unalias with too many arguments
+  35.desc - Unalias a nonexistent alias
+  36.desc - Creates multiple aliases and runs them, then removes those aliases and tries to run them
+  37.desc - Creates multiple aliases and runs them, then removes those aliases and tries to run them
+
+  
+*** Testing output for mysh
+test 1: passed
+test 2: passed
+test 3: passed
+test 4: passed
+test 5: passed
+test 6: passed
+test 7: passed
+test 8: passed
+test 9: passed
+test 10: passed
+test 11: passed
+test 12: passed
+test 13: passed
+test 14: passed
+test 15: passed
+test 16: passed
+test 17: out incorrect
+  what results should be found in file: tests/17.out
+  what results produced by your program: tests-out/17.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/17.out tests-out/17.out
+test 17: err incorrect
+  what results should be found in file: tests/17.err
+  what results produced by your program: tests-out/17.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/17.err tests-out/17.err
+test 18: out incorrect
+  what results should be found in file: tests/18.out
+  what results produced by your program: tests-out/18.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/18.out tests-out/18.out
+test 18: err incorrect
+  what results should be found in file: tests/18.err
+  what results produced by your program: tests-out/18.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/18.err tests-out/18.err
+test 19: out incorrect
+  what results should be found in file: tests/19.out
+  what results produced by your program: tests-out/19.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/19.out tests-out/19.out
+test 19: err incorrect
+  what results should be found in file: tests/19.err
+  what results produced by your program: tests-out/19.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/19.err tests-out/19.err
+test 20: rc incorrect
+  what results should be found in file: tests/20.rc
+  what results produced by your program: tests-out/20.rc
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/20.rc tests-out/20.rc
+test 20: err incorrect
+  what results should be found in file: tests/20.err
+  what results produced by your program: tests-out/20.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/20.err tests-out/20.err
+test 21: passed
+test 22: passed
+test 23: out incorrect
+  what results should be found in file: tests/23.out
+  what results produced by your program: tests-out/23.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/23.out tests-out/23.out
+test 23: err incorrect
+  what results should be found in file: tests/23.err
+  what results produced by your program: tests-out/23.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/23.err tests-out/23.err
+test 24: passed
+test 25: out incorrect
+  what results should be found in file: tests/25.out
+  what results produced by your program: tests-out/25.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/25.out tests-out/25.out
+test 25: err incorrect
+  what results should be found in file: tests/25.err
+  what results produced by your program: tests-out/25.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/25.err tests-out/25.err
+test 26: passed
+test 27: passed
+test 28: out incorrect
+  what results should be found in file: tests/28.out
+  what results produced by your program: tests-out/28.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/28.out tests-out/28.out
+test 28: err incorrect
+  what results should be found in file: tests/28.err
+  what results produced by your program: tests-out/28.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/28.err tests-out/28.err
+test 29: out incorrect
+  what results should be found in file: tests/29.out
+  what results produced by your program: tests-out/29.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/29.out tests-out/29.out
+test 29: err incorrect
+  what results should be found in file: tests/29.err
+  what results produced by your program: tests-out/29.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/29.err tests-out/29.err
+test 30: out incorrect
+  what results should be found in file: tests/30.out
+  what results produced by your program: tests-out/30.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/30.out tests-out/30.out
+test 30: err incorrect
+  what results should be found in file: tests/30.err
+  what results produced by your program: tests-out/30.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/30.err tests-out/30.err
+test 31: out incorrect
+  what results should be found in file: tests/31.out
+  what results produced by your program: tests-out/31.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/31.out tests-out/31.out
+test 31: err incorrect
+  what results should be found in file: tests/31.err
+  what results produced by your program: tests-out/31.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/31.err tests-out/31.err
+test 32: out incorrect
+  what results should be found in file: tests/32.out
+  what results produced by your program: tests-out/32.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/32.out tests-out/32.out
+test 32: err incorrect
+  what results should be found in file: tests/32.err
+  what results produced by your program: tests-out/32.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/32.err tests-out/32.err
+test 33: out incorrect
+  what results should be found in file: tests/33.out
+  what results produced by your program: tests-out/33.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/33.out tests-out/33.out
+test 33: err incorrect
+  what results should be found in file: tests/33.err
+  what results produced by your program: tests-out/33.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/33.err tests-out/33.err
+test 34: out incorrect
+  what results should be found in file: tests/34.out
+  what results produced by your program: tests-out/34.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/34.out tests-out/34.out
+test 34: err incorrect
+  what results should be found in file: tests/34.err
+  what results produced by your program: tests-out/34.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/34.err tests-out/34.err
+test 35: out incorrect
+  what results should be found in file: tests/35.out
+  what results produced by your program: tests-out/35.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/35.out tests-out/35.out
+test 35: err incorrect
+  what results should be found in file: tests/35.err
+  what results produced by your program: tests-out/35.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/35.err tests-out/35.err
+test 36: out incorrect
+  what results should be found in file: tests/36.out
+  what results produced by your program: tests-out/36.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/36.out tests-out/36.out
+test 36: err incorrect
+  what results should be found in file: tests/36.err
+  what results produced by your program: tests-out/36.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/36.err tests-out/36.err
+test 37: out incorrect
+  what results should be found in file: tests/37.out
+  what results produced by your program: tests-out/37.out
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/37.out tests-out/37.out
+test 37: err incorrect
+  what results should be found in file: tests/37.err
+  what results produced by your program: tests-out/37.err
+  compare the two using diff, cmp, or related tools to debug, e.g.:
+  prompt> diff tests/37.err tests-out/37.err
+*** SUMMARY: 21 / 37
