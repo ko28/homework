@@ -1,4 +1,7 @@
 {
 	"C_Cpp.clang_format_fallbackStyle": "",
-	"C_Cpp.clang_format_style": "Visual Studio"
+	"C_Cpp.clang_format_style": "Visual Studio",
+	"files.associations": {
+		"string": "c"
+	}
 }

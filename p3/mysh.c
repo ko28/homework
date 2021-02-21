@@ -4,12 +4,46 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <stdarg.h>
+
+/* void print(const char *string){
+	// Use write() to avoid output buffering.
+	ssize_t bytes = write(STDOUT_FILENO, string, strlen(string));
+	assert(bytes > 0);
+} */
+
+void print(const char *format, ...){
+	// convert variadic param to va_list
+	va_list vl;
+	va_start(vl, format);
+
+	char buffer[100];
+	vsnprintf(buffer, 100, format, vl);
+	
+	// Use write() to avoid output buffering.
+	ssize_t bytes = write(STDOUT_FILENO, buffer, strlen(buffer));
+	va_end(vl);
+	assert(bytes > 0);
+}
+
+void printerr(const char *format, ...){
+	// convert variadic param to va_list
+	va_list vl;
+	va_start(vl, format);
+
+	char buffer[100];
+	vsnprintf(buffer, 100, format, vl);
+	
+	// Use write() to avoid output buffering.
+	ssize_t bytes = write(STDERR_FILENO, buffer, strlen(buffer));
+	va_end(vl);
+	assert(bytes > 0);
+}
 
 void handle_line(const char *userline)
 {
     if (strlen(userline) <= 0)
         return;
-
     
 	// Make a copy in case we need to modify in place.
     char *line = strdup(userline);
@@ -29,8 +63,14 @@ void handle_line(const char *userline)
 	}
 	args[i] = NULL;
 
-	for(int j = 0; j < i; j++)
-		printf("%d: %s\n",j, args[j]);
+	// check for exit 
+	if(args[0] && strcmp("exit", args[0]) == 0){
+		free(line);
+		exit(0);
+	}
+
+									// for(int j = 0; j < i; j++)
+									//	printf("%d: %s\n",j, args[j]);
 
 	// make sure args has a command 
 	if(i > 0){
@@ -40,11 +80,11 @@ void handle_line(const char *userline)
 			// is child
 			if (pid == 0)
 			{
-				printf("args[0]: %s\n", args[0]);
+				// printf("args[0]: %s\n", args[0]);
 				execv(args[0], args);
 
 				// if child reached here, exec failed
-				printf("simplesh: exec failed\n");
+				printerr("%s: Command not found.\n", args[0]);
 				_exit(1);
 			}
 			// wait for child to finish exec
@@ -60,28 +100,39 @@ void handle_line(const char *userline)
 		}
 	}
 
-    printf("inputted command was %s", userline);
+    // printf("inputted command was %s", userline);
 	free(line);
 }
 
-int main(int argc, char *argv[])
-{
-    // handle_batch
-	if (argc > 2){
-		printf("Usage: mysh [batch-file]\n");
-		exit(1);
+void handle_batch(const char *filename){
+	//print(sprintf("fileeee is %s.\n",filename));
+	//print("fileeee is %s.\n", filename, filename);
+	char buffer[100];
+
+	FILE *fp = fopen(filename, "r");
+	
+	if (fp == NULL) {
+		printerr("Error: Cannot open file %s.\n", filename);
+    	exit(1);
+  	}
+
+  	while (fgets(buffer, 100, fp) != NULL) {
+   		print(buffer);
+		handle_line(buffer);
 	}
 
+	fclose(fp);
+}
 
-	// User mode 
-    char userline[512];
+void handle_interactive(){
+	char userline[512];
 
     while (1)
     {
         // Use write() to avoid output buffering.
-        ssize_t bytes = write(STDOUT_FILENO, "mysh> ", 6);
-        assert(bytes > 0);
-
+        //ssize_t bytes = write(STDOUT_FILENO, "mysh> ", 6);
+        //assert(bytes > 0);
+		print("mysh> ");
         // Wait for user input line.
         char *ret = fgets(userline, 512, stdin);
         if (ret == NULL) // EOF
@@ -89,6 +140,25 @@ int main(int argc, char *argv[])
 
         handle_line(userline);
     }
+}
+
+int main(int argc, char *argv[])
+{
+    // Incorrect args/input
+	if (argc > 2){
+		printerr("Usage: mysh [batch-file]\n");
+		exit(1);
+	}
+
+	// Batch mode
+	else if (argc == 2){
+		handle_batch(argv[1]);
+	}
+
+	// Interactive mode 
+    else{
+		handle_interactive();
+	}
 
     return 0;
 }
