@@ -11,14 +11,17 @@ SANFLAG=-fsanitize=address -static-libasan
 # Main build command
 #mysh: mysh.c sample_module.c sample_module.h
 #	$(CC) $(CFLAGS) -o mysh mysh.c sample_module.c
-mysh: mysh.c
-	$(CC) $(CFLAGS) -o mysh mysh.c
+mysh: mysh.c keyval.o
+	$(CC) $(CFLAGS) -o mysh mysh.c keyval.o
+
+keyval.o: keyval.c keyval.h
+	$(CC) $(CFLAGS) -c keyval.c 
 
 # .PHONY means this command does not actually produce an output file
 .PHONY: clean mem memtext
 
 clean:
-	rm -rf mysh
+	rm -rf mysh *.o
 
 mem:
 	valgrind --leak-check=full \
@@ -36,6 +39,9 @@ memtext:
 		 --log-file=valgrind-out.txt \
 		 ./mysh 19.in
 
-san:
-	$(CC) $(CFLAGS) $(SANFLAG) -o mysh mysh.c
-	rm -rf mysh
+t:
+	rm -rf mysh *.o
+	$(CC) $(CFLAGS) -c keyval.c 
+	$(CC) $(CFLAGS) $(SANFLAG) -o mysh mysh.c keyval.o
+	rm -rf mysh 
+	cppcheck mysh.c

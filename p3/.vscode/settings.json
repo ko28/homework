@@ -2,6 +2,19 @@
 	"C_Cpp.clang_format_fallbackStyle": "",
 	"C_Cpp.clang_format_style": "Visual Studio",
 	"files.associations": {
-		"string": "c"
+		"string": "c",
+		"array": "c",
+		"*.tcc": "c",
+		"memory": "c",
+		"tuple": "c",
+		"fstream": "c",
+		"istream": "c",
+		"limits": "c",
+		"ostream": "c",
+		"sstream": "c",
+		"streambuf": "c",
+		"utility": "c",
+		"stdlib.h": "c",
+		"stdarg.h": "c"
 	}
 }

@@ -5,12 +5,18 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdarg.h>
-
+#include "keyval.h"
 /* void print(const char *string){
 	// Use write() to avoid output buffering.
 	ssize_t bytes = write(STDOUT_FILENO, string, strlen(string));
 	assert(bytes > 0);
 } */
+
+// Perform clean up before calling exit 
+void my_exit(int __status){
+	free_list();	// For alias list
+	exit(__status);
+}
 
 void print(const char *format, ...){
 	// convert variadic param to va_list
@@ -58,6 +64,54 @@ void space_gt(char *str){
 	strcpy(str, buffer);
 }
 
+void handle_alias(char **args, int len){
+/* 	for(int i = 0; i < len; i++){
+		print("args[%d]: %s\n", i, args[i]);
+	} */
+	// Case 1: "alias"
+	// Display all the aliases that have been set up with one per line
+	if(len == 1){
+		//print("Case 1\n");
+		print_list();
+	}
+
+	// Case 2: "alias <word>"
+	// If the word matches a current alias-name, print the alias-name and corresponding replacement value
+	// If the word does not match a current alias-name, just continue
+	else if(len == 2){
+		//print("Case 2\n");
+		const char *val = get(args[1]);
+		if(val != NULL){
+			print("%s %s\n", args[1], val);
+		}
+	}
+
+	// Case 3: "alias <word> <replacement string>"
+	// Set up an alias between the alias-name and the value (e.g. alias ll /bin/ls -l -a).
+	// If the alias-name was already being used, just replace the old value with the new value.
+	else{
+		//print("Case 3\n");
+		// Dangerous alias names
+		if((strcmp("alias", args[1]) == 0) || (strcmp("unalias", args[1]) == 0) || (strcmp("exit", args[1]) == 0)){
+			print_err("alias: Too dangerous to alias that.\n");
+		}
+		else{
+			delete(args[1]);
+			char buffer[512];
+			strcpy(buffer,"");
+			for(int i = 2; i < len; i++){
+				strcat(buffer, args[i]);
+				strcat(buffer, " ");
+			}
+			insert(args[1], buffer);
+		}
+	}
+}
+
+void handle_unalias(){
+
+}
+
 void handle_line(const char *userline)
 {
     if (strlen(userline) <= 0)
@@ -87,7 +141,21 @@ void handle_line(const char *userline)
 	// check for exit 
 	if(args[0] && strcmp("exit", args[0]) == 0){
 		free(line);
-		exit(0);
+		my_exit(0);
+	}
+
+	// check for adding alias
+	if(args[0] && strcmp("alias", args[0]) == 0){
+		handle_alias(args, i);
+		free(line);
+		return;
+	}
+
+	// check if command is alias 
+	if(args[0] && contains(args[0])){
+		handle_line(get(args[0]));
+		free(line);
+		return;
 	}
 
 	// check for redirection 
@@ -156,7 +224,7 @@ void handle_batch(const char *filename){
 	
 	if (fp == NULL) {
 		print_err("Error: Cannot open file %s.\n", filename);
-    	exit(1);
+    	my_exit(1);
   	}
 
   	while (fgets(buffer, 512, fp) != NULL) {
