@@ -11,20 +11,16 @@
 	ssize_t bytes = write(STDOUT_FILENO, string, strlen(string));
 	assert(bytes > 0);
 } */
-
-// Perform clean up before calling exit 
-void my_exit(int __status){
-	free_list();	// For alias list
-	exit(__status);
-}
+static const int BUFFER_SIZE = 512;
+static FILE *fp_batch = NULL;
 
 void print(const char *format, ...){
 	// convert variadic param to va_list
 	va_list vl;
 	va_start(vl, format);
 
-	char buffer[100];
-	vsnprintf(buffer, 100, format, vl);
+	char buffer[BUFFER_SIZE];
+	vsnprintf(buffer, BUFFER_SIZE, format, vl);
 	
 	// Use write() to avoid output buffering.
 	ssize_t bytes = write(STDOUT_FILENO, buffer, strlen(buffer));
@@ -37,8 +33,8 @@ void print_err(const char *format, ...){
 	va_list vl;
 	va_start(vl, format);
 
-	char buffer[100];
-	vsnprintf(buffer, 100, format, vl);
+	char buffer[BUFFER_SIZE];
+	vsnprintf(buffer, BUFFER_SIZE, format, vl);
 	
 	// Use write() to avoid output buffering.
 	ssize_t bytes = write(STDERR_FILENO, buffer, strlen(buffer));
@@ -46,9 +42,20 @@ void print_err(const char *format, ...){
 	assert(bytes > 0);
 }
 
+// Perform clean up before calling exit 
+void my_exit(int __status){
+	free_list();	// For alias list
+	if(fp_batch != NULL){
+		fflush(fp_batch);
+		fclose(fp_batch);
+		fp_batch = NULL;
+	}
+	exit(__status);
+}
+
 // add whitespace around greater than sign: >
 void space_gt(char *str){
-    char buffer[512]; 
+    char buffer[BUFFER_SIZE]; 
     int b = 0;
     for (int i = 0; i < strlen(str); i++){
         if(str[i] == '>'){
@@ -62,6 +69,14 @@ void space_gt(char *str){
     }
     buffer[b] = '\0';
 	strcpy(str, buffer);
+}
+
+void print_list(){
+	Node *curr = HEAD;
+	while(curr != NULL) {
+		print("%s %s\n", curr->key, curr->val);
+		curr = curr->next;
+	}
 }
 
 void handle_alias(char **args, int len){
@@ -97,19 +112,21 @@ void handle_alias(char **args, int len){
 		}
 		else{
 			delete(args[1]);
-			char buffer[512];
-			strcpy(buffer,"");
+			char buffer[BUFFER_SIZE];
+			strcpy(buffer, "");
 			for(int i = 2; i < len; i++){
 				strcat(buffer, args[i]);
-				strcat(buffer, " ");
+				if(i < len - 1){
+					strcat(buffer, " ");
+				}
 			}
 			insert(args[1], buffer);
 		}
 	}
 }
 
-void handle_unalias(){
-
+void handle_unalias(char *alias){
+	delete(alias);
 }
 
 void handle_line(const char *userline)
@@ -118,7 +135,7 @@ void handle_line(const char *userline)
         return;
     
 	// Make a copy in case we need to modify in place.
-    char *line = strndup(userline, 512);
+    char *line = strndup(userline, BUFFER_SIZE);
     // Remove trailing newline.
     for (int i = strlen(line) - 1; i >= 0; --i) {
         if (line[i] == '\n')
@@ -132,7 +149,7 @@ void handle_line(const char *userline)
 	char *args[100]; 
 	char *word = strtok(line, " \t\n\v\f\r");
 	int i;
-	for (i = 0; word != NULL; i++){
+	for (i = 0; (word != NULL && i < 99); i++){
 		args[i] = word;
 		word = strtok(NULL, " \t\n\v\f\r");
 	}
@@ -151,6 +168,18 @@ void handle_line(const char *userline)
 		return;
 	}
 
+	// check for unalias
+	if(args[0] && strcmp("unalias", args[0]) == 0){
+		if(i != 2){
+			print_err("unalias: Incorrect number of arguments.\n");
+		}
+		else{
+			handle_unalias(args[1]);
+		}
+		free(line);
+		return;
+	}
+
 	// check if command is alias 
 	if(args[0] && contains(args[0])){
 		handle_line(get(args[0]));
@@ -160,13 +189,14 @@ void handle_line(const char *userline)
 
 	// check for redirection 
 	FILE *fp = NULL;
-	int std_out = dup(STDOUT_FILENO);
+	int std_out;
 	for(int j = 0; j < i; j++) {
 		//print("%d: %s\n",j, args[j]);
 		// (> exists) 
 		if(strcmp(">", args[j]) == 0) {
 			// (exists command to redirect) and (exactly 1 param after >) and (next param is not >) 
 			if((j > 0) && (j+1 == i-1) && (strcmp(">", args[j+1]) != 0)) {
+				std_out = dup(STDOUT_FILENO);
 				fp = fopen(args[j+1], "w"); // discard old contents if exists and create file
 				dup2(fileno(fp), STDOUT_FILENO); // redirect stdout to file 
 				args[j] = NULL; // discard everything after > before running command
@@ -193,6 +223,8 @@ void handle_line(const char *userline)
 
 				// if child reached here, exec failed
 				print_err("%s: Command not found.\n", args[0]);
+				free(line);
+				line = NULL;
 				_exit(1);
 			}
 			// wait for child to finish exec
@@ -202,12 +234,13 @@ void handle_line(const char *userline)
 			}
 		}
 		else {
-			print_err("Fork failed. Cannot run  command\n");
+			print_err("Fork failed. Cannot run command\n");
 		}
 	}
 
 	// Clean up
-	free(line);
+	if(line != NULL)
+		free(line);
 	// restore stdout and close file
 	if (fp != NULL) {
 		fclose(fp);
@@ -218,32 +251,33 @@ void handle_line(const char *userline)
 void handle_batch(const char *filename){
 	//print(sprintf("fileeee is %s.\n",filename));
 	//print("fileeee is %s.\n", filename, filename);
-	char buffer[512];
+	char buffer[BUFFER_SIZE];
 
-	FILE *fp = fopen(filename, "r");
+	fp_batch = fopen(filename, "r");
 	
-	if (fp == NULL) {
+	if (fp_batch == NULL) {
 		print_err("Error: Cannot open file %s.\n", filename);
     	my_exit(1);
   	}
 
-  	while (fgets(buffer, 512, fp) != NULL) {
+  	while (fgets(buffer, BUFFER_SIZE, fp_batch) != NULL) {
+		buffer[BUFFER_SIZE - 1] = '\0';
    		print(buffer);
 		handle_line(buffer);
 	}
-
-	fclose(fp);
+	fflush(fp_batch);
+	fclose(fp_batch);
 }
 
 void handle_interactive(){
-	char userline[512];
+	char userline[BUFFER_SIZE];
 
     while (1)
     {
 		print("mysh> ");
 
         // Wait for user input line.
-        char *ret = fgets(userline, 512, stdin);
+        char *ret = fgets(userline, BUFFER_SIZE, stdin);
         if (ret == NULL) // EOF
             break;
 
@@ -268,6 +302,7 @@ int main(int argc, char *argv[])
     else{
 		handle_interactive();
 	}
-
-    return 0;
+	
+	my_exit(0);
+	return 0;
 }

@@ -4,12 +4,12 @@
 #include "keyval.h"
 // bad key val/dictionary store via singly linked list 
 
-
+static int BUFFER_SIZE = 512;
 Node *HEAD = NULL;
 
 void set (Node *n, char *key, char *val, Node *next){
-	strcpy(n->key, key);
-	strcpy(n->val, val);
+	strncpy(n->key, key, BUFFER_SIZE);
+	strncpy(n->val, val, BUFFER_SIZE);
 	n->next = next;
 }
 
@@ -67,13 +67,13 @@ void delete (char *key) {
 	}
 }
 
-void print_list(){
+/* void print_list(){
 	Node *curr = HEAD;
 	while(curr != NULL) {
 		printf("%s %s\n", curr->key, curr->val);
 		curr = curr->next;
 	}
-}
+} */
 
 void free_list(){
 	Node *curr = HEAD;

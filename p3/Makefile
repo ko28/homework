@@ -18,7 +18,7 @@ keyval.o: keyval.c keyval.h
 	$(CC) $(CFLAGS) -c keyval.c 
 
 # .PHONY means this command does not actually produce an output file
-.PHONY: clean mem memtext
+.PHONY: clean mem memtext t
 
 clean:
 	rm -rf mysh *.o
@@ -37,7 +37,7 @@ memtext:
 		 --track-origins=yes \
 		 --verbose \
 		 --log-file=valgrind-out.txt \
-		 ./mysh 19.in
+		 ./mysh test/tests/1.in
 
 t:
 	rm -rf mysh *.o
@@ -45,3 +45,5 @@ t:
 	$(CC) $(CFLAGS) $(SANFLAG) -o mysh mysh.c keyval.o
 	rm -rf mysh 
 	cppcheck mysh.c
+
+#make clean && make && make memtext
