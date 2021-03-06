@@ -57,7 +57,7 @@ void my_exit(int __status){
 void space_gt(char *str){
     char buffer[BUFFER_SIZE]; 
     int b = 0;
-    for (int i = 0; i < strlen(str); i++){
+    for (int i = 0; (i < strlen(str) && b < BUFFER_SIZE - 2); i++){
         if(str[i] == '>'){
             buffer[b++] = ' ';
             buffer[b++] = '>';
@@ -68,7 +68,10 @@ void space_gt(char *str){
         }
     }
     buffer[b] = '\0';
-	strcpy(str, buffer);
+	//print("og %s\n", str);
+	//print("buffer %s\n", buffer);
+	memcpy(str, buffer, sizeof(char) * (b));
+	// strcpy(str, buffer);
 }
 
 void print_list(){
@@ -135,8 +138,9 @@ void handle_line(const char *userline)
         return;
     
 	// Make a copy in case we need to modify in place.
-    char *line = strndup(userline, BUFFER_SIZE);
-    // Remove trailing newline.
+    //char *line = strndup(userline, BUFFER_SIZE);
+	char *line = strdup(userline);
+	// Remove trailing newline.
     for (int i = strlen(line) - 1; i >= 0; --i) {
         if (line[i] == '\n')
             line[i] = '\0';
@@ -159,6 +163,7 @@ void handle_line(const char *userline)
 	if(args[0] && strcmp("exit", args[0]) == 0){
 		free(line);
 		my_exit(0);
+		return;
 	}
 
 	// check for adding alias
@@ -224,7 +229,6 @@ void handle_line(const char *userline)
 				// if child reached here, exec failed
 				print_err("%s: Command not found.\n", args[0]);
 				free(line);
-				line = NULL;
 				_exit(1);
 			}
 			// wait for child to finish exec
@@ -254,19 +258,19 @@ void handle_batch(const char *filename){
 	char buffer[BUFFER_SIZE];
 
 	fp_batch = fopen(filename, "r");
-	
 	if (fp_batch == NULL) {
 		print_err("Error: Cannot open file %s.\n", filename);
     	my_exit(1);
   	}
-
-  	while (fgets(buffer, BUFFER_SIZE, fp_batch) != NULL) {
-		buffer[BUFFER_SIZE - 1] = '\0';
-   		print(buffer);
-		handle_line(buffer);
+	else{
+		while (fgets(buffer, BUFFER_SIZE, fp_batch) != NULL) {
+			buffer[BUFFER_SIZE - 1] = '\0';
+			print(buffer);
+			handle_line(buffer);
+		}
+		my_exit(0);
 	}
-	fflush(fp_batch);
-	fclose(fp_batch);
+  
 }
 
 void handle_interactive(){

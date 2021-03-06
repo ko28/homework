@@ -1,144 +1,218 @@
-==22048== Memcheck, a memory error detector
-==22048== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==22048== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==22048== Command: ./mysh test/tests/1.in
-==22048== Parent PID: 22047
-==22048== 
---22048-- 
---22048-- Valgrind options:
---22048--    --leak-check=full
---22048--    --show-leak-kinds=all
---22048--    --track-origins=yes
---22048--    --verbose
---22048--    --log-file=valgrind-out.txt
---22048-- Contents of /proc/version:
---22048--   Linux version 4.19.128-microsoft-standard (oe-user@oe-host) (gcc version 8.2.0 (GCC)) #1 SMP Tue Jun 23 12:58:10 UTC 2020
---22048-- 
---22048-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
---22048-- Page sizes: currently 4096, max supported 4096
---22048-- Valgrind library directory: /usr/lib/valgrind
---22048-- Reading syms from /home/daniel/cs537/p3/mysh
---22048-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
---22048--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
---22048--   .. CRC mismatch (computed ac9397f6 wanted d0d82632)
---22048--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
---22048--   .. CRC is valid
---22048-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
---22048--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
---22048--   .. CRC mismatch (computed 41ddb025 wanted 9972f546)
---22048--    object doesn't have a symbol table
---22048--    object doesn't have a dynamic symbol table
---22048-- Scheduler: using generic scheduler lock implementation.
---22048-- Reading suppressions file: /usr/lib/valgrind/default.supp
-==22048== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-22048-by-daniel-on-???
-==22048== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-22048-by-daniel-on-???
-==22048== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-22048-by-daniel-on-???
-==22048== 
-==22048== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==22048== don't want to do, unless you know exactly what you're doing,
-==22048== or are doing some strange experiment):
-==22048==   /usr/lib/valgrind/../../bin/vgdb --pid=22048 ...command...
-==22048== 
-==22048== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==22048==   /path/to/gdb ./mysh
-==22048== and then give GDB the following command
-==22048==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=22048
-==22048== --pid is optional if only one valgrind process is running
-==22048== 
---22048-- REDIR: 0x401f320 (ld-linux-x86-64.so.2:strlen) redirected to 0x580608c1 (???)
---22048-- REDIR: 0x401f100 (ld-linux-x86-64.so.2:index) redirected to 0x580608db (???)
---22048-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
---22048--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
---22048--   .. CRC mismatch (computed 50df1b30 wanted 4800a4cf)
---22048--    object doesn't have a symbol table
---22048-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
---22048--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
---22048--   .. CRC mismatch (computed f893b962 wanted 95ee359e)
---22048--    object doesn't have a symbol table
-==22048== WARNING: new redirection conflicts with existing -- ignoring it
---22048--     old: 0x0401f320 (strlen              ) R-> (0000.0) 0x580608c1 ???
---22048--     new: 0x0401f320 (strlen              ) R-> (2007.0) 0x04c32db0 strlen
---22048-- REDIR: 0x401d390 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c33ee0 (strcmp)
---22048-- REDIR: 0x401f860 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c374f0 (mempcpy)
---22048-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
---22048--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
---22048--   .. CRC mismatch (computed c2c067b2 wanted d73adc7f)
---22048--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
---22048--   .. CRC is valid
---22048-- REDIR: 0x4edace0 (libc.so.6:memmove) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed9db0 (libc.so.6:strncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edafc0 (libc.so.6:strcasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed9800 (libc.so.6:strcat) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed9de0 (libc.so.6:rindex) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edc830 (libc.so.6:rawmemchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edae50 (libc.so.6:mempcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edac80 (libc.so.6:bcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed9d70 (libc.so.6:strncmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed9870 (libc.so.6:strcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edadb0 (libc.so.6:memset) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ef8160 (libc.so.6:wcschr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed9d10 (libc.so.6:strnlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed98e0 (libc.so.6:strcspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edb010 (libc.so.6:strncasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed98b0 (libc.so.6:strcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edb150 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed9e10 (libc.so.6:strpbrk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed9830 (libc.so.6:index) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ed9ce0 (libc.so.6:strlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ee4730 (libc.so.6:memrchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edb060 (libc.so.6:strcasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edac50 (libc.so.6:memchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4ef8f20 (libc.so.6:wcslen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4eda0c0 (libc.so.6:strspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edaf90 (libc.so.6:stpncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edaf60 (libc.so.6:stpcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edc860 (libc.so.6:strchrnul) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4edb0b0 (libc.so.6:strncasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
---22048-- REDIR: 0x4fca630 (libc.so.6:__strrchr_avx2) redirected to 0x4c32730 (rindex)
---22048-- REDIR: 0x4ed30e0 (libc.so.6:malloc) redirected to 0x4c2faa0 (malloc)
---22048-- REDIR: 0x4eda600 (libc.so.6:__GI_strstr) redirected to 0x4c37760 (__strstr_sse2)
---22048-- REDIR: 0x4fc6690 (libc.so.6:__memchr_avx2) redirected to 0x4c33f80 (memchr)
---22048-- REDIR: 0x4fcad40 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4c366e0 (memmove)
---22048-- REDIR: 0x4fca440 (libc.so.6:__strchrnul_avx2) redirected to 0x4c37020 (strchrnul)
---22048-- REDIR: 0x4fcad20 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4c37130 (mempcpy)
---22048-- REDIR: 0x4fca800 (libc.so.6:__strlen_avx2) redirected to 0x4c32cf0 (strlen)
---22048-- REDIR: 0x4fca990 (libc.so.6:__strnlen_avx2) redirected to 0x4c32c90 (strnlen)
---22048-- REDIR: 0x4fb7bc0 (libc.so.6:__strcpy_ssse3) redirected to 0x4c32dd0 (strcpy)
---22048-- REDIR: 0x4fc6570 (libc.so.6:__strspn_sse42) redirected to 0x4c37990 (strspn)
---22048-- REDIR: 0x4fc62e0 (libc.so.6:__strcspn_sse42) redirected to 0x4c378d0 (strcspn)
---22048-- REDIR: 0x4fa5fd0 (libc.so.6:__strcmp_ssse3) redirected to 0x4c33da0 (strcmp)
---22049-- REDIR: 0x4ed39c0 (libc.so.6:free) redirected to 0x4c30cd0 (free)
-==22049== 
-==22049== HEAP SUMMARY:
-==22049==     in use at exit: 552 bytes in 1 blocks
-==22049==   total heap usage: 3 allocs, 2 frees, 4,679 bytes allocated
-==22049== 
-==22049== Searching for pointers to 1 not-freed blocks
-==22049== Checked 70,912 bytes
-==22049== 
-==22049== 552 bytes in 1 blocks are still reachable in loss record 1 of 1
-==22049==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22049==    by 0x4EBAEB9: __fopen_internal (iofopen.c:65)
-==22049==    by 0x4EBAEB9: fopen@@GLIBC_2.2.5 (iofopen.c:89)
-==22049==    by 0x109A9B: handle_batch (mysh.c:257)
-==22049==    by 0x109C90: main (mysh.c:300)
-==22049== 
-==22049== LEAK SUMMARY:
-==22049==    definitely lost: 0 bytes in 0 blocks
-==22049==    indirectly lost: 0 bytes in 0 blocks
-==22049==      possibly lost: 0 bytes in 0 blocks
-==22049==    still reachable: 552 bytes in 1 blocks
-==22049==         suppressed: 0 bytes in 0 blocks
-==22049== 
-==22049== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==22049== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---22048-- REDIR: 0x4ed39c0 (libc.so.6:free) redirected to 0x4c30cd0 (free)
-==22048== 
-==22048== HEAP SUMMARY:
-==22048==     in use at exit: 0 bytes in 0 blocks
-==22048==   total heap usage: 4 allocs, 4 frees, 4,685 bytes allocated
-==22048== 
-==22048== All heap blocks were freed -- no leaks are possible
-==22048== 
-==22048== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==22048== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==1304== Memcheck, a memory error detector
+==1304== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1304== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==1304== Command: ./mysh
+==1304== Parent PID: 1303
+==1304== 
+--1304-- 
+--1304-- Valgrind options:
+--1304--    --leak-check=full
+--1304--    --show-leak-kinds=all
+--1304--    --track-origins=yes
+--1304--    --verbose
+--1304--    --log-file=valgrind-out.txt
+--1304-- Contents of /proc/version:
+--1304--   Linux version 4.19.128-microsoft-standard (oe-user@oe-host) (gcc version 8.2.0 (GCC)) #1 SMP Tue Jun 23 12:58:10 UTC 2020
+--1304-- 
+--1304-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--1304-- Page sizes: currently 4096, max supported 4096
+--1304-- Valgrind library directory: /usr/lib/valgrind
+--1304-- Reading syms from /home/daniel/cs537/p3/mysh
+--1304-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--1304--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--1304--   .. CRC mismatch (computed ac9397f6 wanted d0d82632)
+--1304--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--1304--   .. CRC is valid
+--1304-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--1304--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--1304--   .. CRC mismatch (computed 41ddb025 wanted 9972f546)
+--1304--    object doesn't have a symbol table
+--1304--    object doesn't have a dynamic symbol table
+--1304-- Scheduler: using generic scheduler lock implementation.
+--1304-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==1304== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-1304-by-daniel-on-???
+==1304== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-1304-by-daniel-on-???
+==1304== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-1304-by-daniel-on-???
+==1304== 
+==1304== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==1304== don't want to do, unless you know exactly what you're doing,
+==1304== or are doing some strange experiment):
+==1304==   /usr/lib/valgrind/../../bin/vgdb --pid=1304 ...command...
+==1304== 
+==1304== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==1304==   /path/to/gdb ./mysh
+==1304== and then give GDB the following command
+==1304==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=1304
+==1304== --pid is optional if only one valgrind process is running
+==1304== 
+--1304-- REDIR: 0x401f320 (ld-linux-x86-64.so.2:strlen) redirected to 0x580608c1 (???)
+--1304-- REDIR: 0x401f100 (ld-linux-x86-64.so.2:index) redirected to 0x580608db (???)
+--1304-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--1304--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--1304--   .. CRC mismatch (computed 50df1b30 wanted 4800a4cf)
+--1304--    object doesn't have a symbol table
+--1304-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--1304--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--1304--   .. CRC mismatch (computed f893b962 wanted 95ee359e)
+--1304--    object doesn't have a symbol table
+==1304== WARNING: new redirection conflicts with existing -- ignoring it
+--1304--     old: 0x0401f320 (strlen              ) R-> (0000.0) 0x580608c1 ???
+--1304--     new: 0x0401f320 (strlen              ) R-> (2007.0) 0x04c32db0 strlen
+--1304-- REDIR: 0x401d390 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c33ee0 (strcmp)
+--1304-- REDIR: 0x401f860 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c374f0 (mempcpy)
+--1304-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--1304--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--1304--   .. CRC mismatch (computed c2c067b2 wanted d73adc7f)
+--1304--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--1304--   .. CRC is valid
+--1304-- REDIR: 0x4edace0 (libc.so.6:memmove) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed9db0 (libc.so.6:strncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edafc0 (libc.so.6:strcasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed9800 (libc.so.6:strcat) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed9de0 (libc.so.6:rindex) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edc830 (libc.so.6:rawmemchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edae50 (libc.so.6:mempcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edac80 (libc.so.6:bcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed9d70 (libc.so.6:strncmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed9870 (libc.so.6:strcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edadb0 (libc.so.6:memset) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ef8160 (libc.so.6:wcschr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed9d10 (libc.so.6:strnlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed98e0 (libc.so.6:strcspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edb010 (libc.so.6:strncasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed98b0 (libc.so.6:strcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edb150 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed9e10 (libc.so.6:strpbrk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed9830 (libc.so.6:index) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ed9ce0 (libc.so.6:strlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ee4730 (libc.so.6:memrchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edb060 (libc.so.6:strcasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edac50 (libc.so.6:memchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4ef8f20 (libc.so.6:wcslen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4eda0c0 (libc.so.6:strspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edaf90 (libc.so.6:stpncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edaf60 (libc.so.6:stpcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edc860 (libc.so.6:strchrnul) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4edb0b0 (libc.so.6:strncasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--1304-- REDIR: 0x4fca630 (libc.so.6:__strrchr_avx2) redirected to 0x4c32730 (rindex)
+--1304-- REDIR: 0x4fca440 (libc.so.6:__strchrnul_avx2) redirected to 0x4c37020 (strchrnul)
+--1304-- REDIR: 0x4fca800 (libc.so.6:__strlen_avx2) redirected to 0x4c32cf0 (strlen)
+--1304-- REDIR: 0x4ed30e0 (libc.so.6:malloc) redirected to 0x4c2faa0 (malloc)
+--1304-- REDIR: 0x4fc6690 (libc.so.6:__memchr_avx2) redirected to 0x4c33f80 (memchr)
+--1304-- REDIR: 0x4fcad40 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4c366e0 (memmove)
+--1304-- REDIR: 0x4fca990 (libc.so.6:__strnlen_avx2) redirected to 0x4c32c90 (strnlen)
+--1304-- REDIR: 0x4fc6570 (libc.so.6:__strspn_sse42) redirected to 0x4c37990 (strspn)
+--1304-- REDIR: 0x4fc62e0 (libc.so.6:__strcspn_sse42) redirected to 0x4c378d0 (strcspn)
+==1304== Invalid read of size 1
+==1304==    at 0x4C37922: strcspn (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1304==    by 0x4EDAC04: strtok_r (strtok_r.c:64)
+==1304==    by 0x1095E0: handle_line (mysh.c:158)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304==  Address 0x522d4a0 is 0 bytes after a block of size 32 alloc'd
+==1304==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1304==    by 0x4ED9A79: strndup (strndup.c:43)
+==1304==    by 0x10951F: handle_line (mysh.c:141)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304== 
+==1304== Invalid read of size 1
+==1304==    at 0x4EDAC08: strtok_r (strtok_r.c:65)
+==1304==    by 0x1095E0: handle_line (mysh.c:158)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304==  Address 0x522d4a0 is 0 bytes after a block of size 32 alloc'd
+==1304==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1304==    by 0x4ED9A79: strndup (strndup.c:43)
+==1304==    by 0x10951F: handle_line (mysh.c:141)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304== 
+==1304== Invalid read of size 1
+==1304==    at 0x4EDABE2: strtok_r (strtok_r.c:49)
+==1304==    by 0x1095E0: handle_line (mysh.c:158)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304==  Address 0x522d4a0 is 0 bytes after a block of size 32 alloc'd
+==1304==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1304==    by 0x4ED9A79: strndup (strndup.c:43)
+==1304==    by 0x10951F: handle_line (mysh.c:141)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304== 
+--1304-- REDIR: 0x4fa5fd0 (libc.so.6:__strcmp_ssse3) redirected to 0x4c33da0 (strcmp)
+==1306== Syscall param execve(argv[i]) points to unaddressable byte(s)
+==1306==    at 0x4F20E97: execve (syscall-template.S:78)
+==1306==    by 0x1097B1: handle_line (mysh.c:227)
+==1306==    by 0x109A72: handle_interactive (mysh.c:288)
+==1306==    by 0x109AE8: main (mysh.c:307)
+==1306==  Address 0x522d4a0 is 0 bytes after a block of size 32 alloc'd
+==1306==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1306==    by 0x4ED9A79: strndup (strndup.c:43)
+==1306==    by 0x10951F: handle_line (mysh.c:141)
+==1306==    by 0x109A72: handle_interactive (mysh.c:288)
+==1306==    by 0x109AE8: main (mysh.c:307)
+==1306== 
+--1304-- REDIR: 0x4ed39c0 (libc.so.6:free) redirected to 0x4c30cd0 (free)
+==1304== 
+==1304== Process terminating with default action of signal 2 (SIGINT)
+==1304==    at 0x4F4C191: read (read.c:27)
+==1304==    by 0x4EC91B7: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:531)
+==1304==    by 0x4ECA461: _IO_default_uflow (genops.c:380)
+==1304==    by 0x4EBBED1: _IO_getline_info (iogetline.c:60)
+==1304==    by 0x4EBBED1: _IO_getline (iogetline.c:34)
+==1304==    by 0x4EBAC3C: fgets (iofgets.c:53)
+==1304==    by 0x109A5B: handle_interactive (mysh.c:284)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304== 
+==1304== HEAP SUMMARY:
+==1304==     in use at exit: 0 bytes in 0 blocks
+==1304==   total heap usage: 2 allocs, 2 frees, 1,056 bytes allocated
+==1304== 
+==1304== All heap blocks were freed -- no leaks are possible
+==1304== 
+==1304== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+==1304== 
+==1304== 1 errors in context 1 of 3:
+==1304== Invalid read of size 1
+==1304==    at 0x4EDABE2: strtok_r (strtok_r.c:49)
+==1304==    by 0x1095E0: handle_line (mysh.c:158)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304==  Address 0x522d4a0 is 0 bytes after a block of size 32 alloc'd
+==1304==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1304==    by 0x4ED9A79: strndup (strndup.c:43)
+==1304==    by 0x10951F: handle_line (mysh.c:141)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304== 
+==1304== 
+==1304== 1 errors in context 2 of 3:
+==1304== Invalid read of size 1
+==1304==    at 0x4EDAC08: strtok_r (strtok_r.c:65)
+==1304==    by 0x1095E0: handle_line (mysh.c:158)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304==  Address 0x522d4a0 is 0 bytes after a block of size 32 alloc'd
+==1304==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1304==    by 0x4ED9A79: strndup (strndup.c:43)
+==1304==    by 0x10951F: handle_line (mysh.c:141)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304== 
+==1304== 
+==1304== 1 errors in context 3 of 3:
+==1304== Invalid read of size 1
+==1304==    at 0x4C37922: strcspn (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1304==    by 0x4EDAC04: strtok_r (strtok_r.c:64)
+==1304==    by 0x1095E0: handle_line (mysh.c:158)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304==  Address 0x522d4a0 is 0 bytes after a block of size 32 alloc'd
+==1304==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1304==    by 0x4ED9A79: strndup (strndup.c:43)
+==1304==    by 0x10951F: handle_line (mysh.c:141)
+==1304==    by 0x109A72: handle_interactive (mysh.c:288)
+==1304==    by 0x109AE8: main (mysh.c:307)
+==1304== 
+==1304== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)

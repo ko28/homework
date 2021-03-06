@@ -36,8 +36,8 @@ memtext:
 		 --show-leak-kinds=all \
 		 --track-origins=yes \
 		 --verbose \
-		 --log-file=valgrind-out.txt \
-		 ./mysh test/tests/1.in
+		 --log-file=valgrind-out1.txt \
+		 ./mysh test/tests/13.in
 
 t:
 	rm -rf mysh *.o
