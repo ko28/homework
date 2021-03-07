@@ -89,3 +89,31 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+// User defined
+int
+sys_setslice(void)
+{
+  //int pid;
+  //int slice;
+
+  return -1;
+}
+
+int
+sys_getslice(void)
+{
+  return -1;
+}
+
+int
+sys_fork2(void)
+{
+  return -1;
+}
+
+int
+sys_getpinfo(void)
+{
+  return -1;
+}

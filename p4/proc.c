@@ -7,6 +7,70 @@
 #include "proc.h"
 #include "spinlock.h"
 
+/*
+struct queue{
+  int procs[NPROC]; // Contains PIDs of processes 
+  int tail; // Points to end of queue
+};
+*/
+typedef struct node{
+  int pid;
+  struct node *next;
+} node;
+
+#define NULL ((node *)0)
+
+static node nodes[NPROC];
+
+typedef struct queue{
+  node *head;
+  node *tail;
+} queue;
+
+static queue crr_queue; // Queue for Compensated Round-Robin (CRR) Scheduler
+
+void init_queue(){
+  // Empty queue
+  crr_queue.head = NULL;
+  crr_queue.tail = NULL;
+  // PID of -1 means this node is empty
+  for(int i = 0; i < NPROC; i++)
+    nodes[i].pid = -1;
+}
+
+void enqueue(int pid){
+  // Search for open node 
+  int open = 0;
+  for(int i = 0; i < NPROC; i++){
+    if(nodes[i].pid == -1){
+      open = i;
+      break;
+    }
+  }
+  
+  // Init node 
+  nodes[open].pid = pid;
+  nodes[open].next = NULL;
+
+  // Edge case where queue is empty
+  if(crr_queue.head == NULL){
+    crr_queue.head = &nodes[open];
+    crr_queue.tail = &nodes[open];
+  }
+  else{
+    crr_queue.tail->next = &nodes[open];
+  }
+}
+
+void dequeue(){
+  crr_queue.head->pid = -1; // Free head node;
+  crr_queue.head = crr_queue.head->next;
+}
+
+int peek(){
+  return crr_queue.head->pid;
+}
+
 struct {
   struct spinlock lock;
   struct proc proc[NPROC];
@@ -142,6 +206,8 @@ userinit(void)
   safestrcpy(p->name, "initcode", sizeof(p->name));
   p->cwd = namei("/");
 
+  p->slice = 1; // Give first process 1 tick 
+
   // this assignment to p->state lets other cores
   // run this process. the acquire forces the above
   // writes to be visible, and the lock is also needed
@@ -151,6 +217,10 @@ userinit(void)
   p->state = RUNNABLE;
 
   release(&ptable.lock);
+
+  init_queue();
+  enqueue(p->pid);
+  peek();
 }
 
 // Grow current process's memory by n bytes.

@@ -20,3 +20,8 @@
 #define SYS_link   19
 #define SYS_mkdir  20
 #define SYS_close  21
+// User defined sys calls
+#define SYS_setslice    22
+#define SYS_getslice    23
+#define SYS_fork2       24
+#define SYS_getpinfo    25
