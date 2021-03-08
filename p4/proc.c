@@ -6,6 +6,7 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
+#include "pstat.h"
 
 /*
 struct queue{
@@ -74,6 +75,7 @@ int peek(){
 struct {
   struct spinlock lock;
   struct proc proc[NPROC];
+  // struct pstat stat;
 } ptable;
 
 static struct proc *initproc;
@@ -220,7 +222,7 @@ userinit(void)
 
   init_queue();
   enqueue(p->pid);
-  peek();
+  
 }
 
 // Grow current process's memory by n bytes.
@@ -244,11 +246,18 @@ growproc(int n)
   return 0;
 }
 
+/*
+int
+fork(void){
+  return fork2(getslice(getpid()));
+}
+
+*/
+
 // Create a new process copying p as the parent.
 // Sets up stack to return as if from system call.
 // Caller must set state of returned proc to RUNNABLE.
-int
-fork(void)
+int fork(void)
 {
   int i, pid;
   struct proc *np;
@@ -601,4 +610,66 @@ procdump(void)
     }
     cprintf("\n");
   }
+}
+
+int getslice(int pid){
+  struct proc *p;
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      release(&ptable.lock);
+      return p->slice;
+    }
+  }
+  release(&ptable.lock);
+  return -1;
+}
+
+int setslice(int pid, int slice){
+  struct proc *p;
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      p->slice = slice;
+      
+      
+      // int toSchedule = p->slice >= slice; 
+      if(ticks >= slice) // Schedule is new slice is 
+        sched();
+      
+      release(&ptable.lock);
+      return 0;
+    }
+  }
+  release(&ptable.lock);
+  return -1;
+}
+
+int getpinfo(struct pstat *stat){
+  if(stat == NULL)
+    return -1;
+
+  struct proc *p;
+  
+  acquire(&ptable.lock);
+  int i = 0;
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->state == UNUSED){
+      stat->inuse[i] = 0;
+    }
+    else{
+      stat->inuse[i] = 1;
+      stat->pid[i] = p->pid;
+      stat->timeslice[i] = p->slice;
+      stat->compticks[i]= p->compticks;
+      stat->schedticks[i] = p->schedticks;
+      stat->sleepticks[i] = p->sleepticks;
+      stat->switches[i] = p->switches;
+    }
+    i++;
+    
+  }
+  
+  release(&ptable.lock);
+  return 0;
 }

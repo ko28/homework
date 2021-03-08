@@ -50,7 +50,11 @@ struct proc {
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
   // User defined
-  int slice;
+  int slice;      // number of base ticks this process can run in a timeslice
+  int compticks;  // number of compensation ticks this process has used
+  int schedticks; // total number of timer ticks this process has been scheduled
+  int sleepticks; // number of ticks during which this process was blocked
+  int switches;   // total num times this process has been scheduled
 };
 
 // Process memory is laid out contiguously, low addresses first:
@@ -58,3 +62,7 @@ struct proc {
 //   original data and bss
 //   fixed-size stack
 //   expandable heap
+
+// User defined
+int getslice(int pid);
+int setslice(int pid, int slice);
