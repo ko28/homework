@@ -63,9 +63,11 @@ void enqueue(int pid){
   }
 }
 
-void dequeue(){
+int dequeue(){
+  int head_pid = crr_queue.head->pid;
   crr_queue.head->pid = -1; // Free head node;
   crr_queue.head = crr_queue.head->next;
+  return head_pid;
 }
 
 int peek(){
@@ -421,6 +423,7 @@ scheduler(void)
       c->proc = p;
       switchuvm(p);
       p->state = RUNNING;
+      p->switches++;
 
       swtch(&(c->scheduler), p->context);
       switchkvm();
@@ -434,6 +437,51 @@ scheduler(void)
   }
 }
 
+void
+scheduler2(void)
+{
+  struct proc *p;
+  struct cpu *c = mycpu();
+  c->proc = 0;
+  
+  for(;;){
+    // Enable interrupts on this processor.
+    sti();
+    
+    int pid = crr_queue.head->pid;
+    int starttick = ticks;
+    // Loop over process table looking for process to run.
+    acquire(&ptable.lock);
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      if(pid == p->pid)
+        continue;
+
+      // Switch to chosen process.  It is the process's job
+      // to release ptable.lock and then reacquire it
+      // before jumping back to us.
+      c->proc = p;
+      switchuvm(p);
+      p->state = RUNNING;
+      p->switches++;
+
+      while(starttick + p->sleepticks >= ticks){
+        cprintf("ticks: %d\t pid: %d\n",ticks,pid);
+        swtch(&(c->scheduler), p->context);
+        switchkvm();
+      }
+
+      
+
+      // Process is done running for now.
+      // It should have changed its p->state before coming back.
+      c->proc = 0;
+    }
+    release(&ptable.lock);
+
+  }
+}
+
+
 // Enter scheduler.  Must hold only ptable.lock
 // and have changed proc->state. Saves and restores
 // intena because intena is a property of this
@@ -446,7 +494,6 @@ sched(void)
 {
   int intena;
   struct proc *p = myproc();
-
   if(!holding(&ptable.lock))
     panic("sched ptable.lock");
   if(mycpu()->ncli != 1)
@@ -634,7 +681,7 @@ int setslice(int pid, int slice){
       
       
       // int toSchedule = p->slice >= slice; 
-      if(ticks >= slice) // Schedule is new slice is 
+      if(p->schedticks >= slice) // Schedule is new slice is 
         sched();
       
       release(&ptable.lock);
@@ -646,7 +693,7 @@ int setslice(int pid, int slice){
 }
 
 int getpinfo(struct pstat *stat){
-  if(stat == NULL)
+  if(stat == (struct pstat *) NULL)
     return -1;
 
   struct proc *p;
