@@ -66,3 +66,5 @@ struct proc {
 // User defined
 int getslice(int pid);
 int setslice(int pid, int slice);
+void print_runnable_proc();
+void printqueue();

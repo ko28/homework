@@ -74,6 +74,16 @@ int peek(){
   return crr_queue.head->pid;
 }
 
+void printqueue(){
+  node * n = crr_queue.head; 
+  cprintf("queue: ");
+  while(n != NULL){
+    cprintf("%d -> ", n->pid);
+    n = n->next;
+  }
+  cprintf("\n");
+}
+
 struct {
   struct spinlock lock;
   struct proc proc[NPROC];
@@ -156,7 +166,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
-
+  
   release(&ptable.lock);
 
   // Allocate kernel stack.
@@ -191,6 +201,8 @@ userinit(void)
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
 
+  init_queue();
+
   p = allocproc();
   
   initproc = p;
@@ -219,11 +231,9 @@ userinit(void)
   acquire(&ptable.lock);
 
   p->state = RUNNABLE;
-
-  release(&ptable.lock);
-
-  init_queue();
   enqueue(p->pid);
+  
+  release(&ptable.lock);
   
 }
 
@@ -296,6 +306,7 @@ int fork(void)
   acquire(&ptable.lock);
 
   np->state = RUNNABLE;
+  enqueue(np->pid);
 
   release(&ptable.lock);
 
@@ -392,6 +403,19 @@ wait(void)
   }
 }
 
+void print_runnable_proc(){
+  struct proc *p;
+  acquire(&ptable.lock);
+    cprintf("queue: ");
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      if(p->state == RUNNABLE){
+        cprintf("%s,%d -> ", p->name, p->pid);
+      }      
+    }
+  cprintf("\n");
+  release(&ptable.lock);    
+}
+
 //PAGEBREAK: 42
 // Per-CPU process scheduler.
 // Each CPU calls scheduler() after setting itself up.
@@ -416,7 +440,6 @@ scheduler(void)
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
-
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
@@ -430,6 +453,7 @@ scheduler(void)
 
       // Process is done running for now.
       // It should have changed its p->state before coming back.
+      //cprintf("c->proc->name: %s\n", c->proc->name);
       c->proc = 0;
     }
     release(&ptable.lock);
@@ -447,7 +471,7 @@ scheduler2(void)
   for(;;){
     // Enable interrupts on this processor.
     sti();
-    
+
     int pid = crr_queue.head->pid;
     int starttick = ticks;
     // Loop over process table looking for process to run.
@@ -459,17 +483,21 @@ scheduler2(void)
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
-      c->proc = p;
-      switchuvm(p);
-      p->state = RUNNING;
-      p->switches++;
 
-      while(starttick + p->sleepticks >= ticks){
-        cprintf("ticks: %d\t pid: %d\n",ticks,pid);
+      p->switches++;
+      //cprintf("c->proc->name: %s\n", c->proc->name);
+      while(starttick + p->sleepticks >= ticks && p->state == RUNNABLE){
+        p->schedticks++;
+        //cprintf("c->proc->name: %s\n", c->proc->name);
+        //cprintf("ticks: %d\t pid: %d\n",ticks,pid);
+        c->proc = p;
+        p->state = RUNNING;
+        switchuvm(p);
         swtch(&(c->scheduler), p->context);
         switchkvm();
       }
-
+      if(p->state == RUNNABLE || p->state == SLEEPING)
+        enqueue(dequeue());
       
 
       // Process is done running for now.
