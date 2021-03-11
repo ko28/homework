@@ -6,6 +6,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "pstat.h"
 
 int
 sys_fork(void)
@@ -115,12 +116,21 @@ sys_getslice(void)
 int
 sys_fork2(void)
 {
-  return -1;
-  //return fork2();
+  int slice;
+  
+  if(argint(0, &slice) < 0)
+    return -1;
+
+  return fork2(slice);
 }
 
 int
 sys_getpinfo(void)
 {
-  return -1;
+  int stat;
+
+  if(argint(0, &stat) < 0)
+    return -1;
+
+  return getpinfo((struct pstat *) stat);
 }
