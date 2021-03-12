@@ -18,12 +18,12 @@ main(int argc, char **argv)
   }
 
   sleep(sleepT);
-  /*
+  
   int i = 0, j = 0;
   while (i < 800000000) {
     j += i * j + 1;
     i++;
-  }*/
+  }
   
 //printf(1, "%d\n", sleepT);
   exit();

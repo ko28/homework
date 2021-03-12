@@ -574,7 +574,7 @@ scheduler(void)
       // before jumping back to us.
 
       p->switches++;
-      while(starttick + p->slept + p->compsleep >= ticks && p->state == RUNNABLE){
+      while(starttick + p->slice + p->compsleep >= ticks && p->state == RUNNABLE){
         p->schedticks++;
         //
         //cprintf("ticks: %d\t pid: %d\n",p->schedticks,pid);
@@ -584,9 +584,11 @@ scheduler(void)
         swtch(&(c->scheduler), p->context);
         switchkvm();
       }
-      
-      p->compticks += p->compsleep;
-      p->compsleep = 0;
+
+      if(p->state != SLEEPING){
+        p->compticks += p->compsleep;
+        p->compsleep = 0;
+      }
       
       //cprintf("state: %s\n", p->state);
       if(p->state == RUNNABLE || p->state == SLEEPING){
@@ -725,7 +727,7 @@ wakeup1(void *chan)
         }
         // fake wakeup
         else{
-          cprintf("im sleeping!!\n");
+          //cprintf("im sleeping!!\n");
           continue;
         }
       }
@@ -815,7 +817,7 @@ void handlecomp(){
       p->slept++;
       p->sleepticks++;
       // process slept for its requested duration, mark as runnable
-      if(p->sleep >= p->compsleep){
+      if(p->sleep <= p->slept){
         p->state = RUNNABLE;
         p->sleep = 0;
       }
