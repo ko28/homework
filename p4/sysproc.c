@@ -61,12 +61,17 @@ int
 sys_sleep(void)
 {
   int n;
-  uint ticks0;
+  //uint ticks0;
 
   if(argint(0, &n) < 0)
     return -1;
   acquire(&tickslock);
-  ticks0 = ticks;
+  //ticks0 = ticks;
+  myproc()->sleep = n;
+  myproc()->compsleep = 0; // no accumulation of compensation ticks
+  sleep(&ticks, &tickslock);
+
+  /*
   while(ticks - ticks0 < n){
     if(myproc()->killed){
       release(&tickslock);
@@ -74,6 +79,8 @@ sys_sleep(void)
     }
     sleep(&ticks, &tickslock);
   }
+  */
+  
   release(&tickslock);
   return 0;
 }
@@ -127,10 +134,10 @@ sys_fork2(void)
 int
 sys_getpinfo(void)
 {
-  int stat;
+  struct pstat *stat;
 
-  if(argint(0, &stat) < 0)
+  if(argptr(0, (void *)&stat, sizeof(*stat)) < 0)
     return -1;
 
-  return getpinfo((struct pstat *) stat);
+  return getpinfo(stat);
 }

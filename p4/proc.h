@@ -53,6 +53,8 @@ struct proc {
   int slice;      // number of base ticks this process can run in a timeslice
   int compsleep; // number of ticks that the process get as compensation for sleeping
   int sleep; // number of ticks that this process requested to sleep for 
+  int slept;  // number of ticks that this process slept 
+
   // accumulative 
   int compticks;  // number of compensation ticks this process has used
   int schedticks; // total number of timer ticks this process has been scheduled

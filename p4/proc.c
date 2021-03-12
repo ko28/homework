@@ -8,6 +8,8 @@
 #include "spinlock.h"
 #include "pstat.h"
 
+void handlecomp();
+
 /*
 struct queue{
   int procs[NPROC]; // Contains PIDs of processes 
@@ -572,16 +574,20 @@ scheduler(void)
       // before jumping back to us.
 
       p->switches++;
-      while(starttick + p->sleepticks + p->compsleep >= ticks && p->state == RUNNABLE){
+      while(starttick + p->slept + p->compsleep >= ticks && p->state == RUNNABLE){
         p->schedticks++;
         //
-        cprintf("ticks: %d\t pid: %d\n",p->schedticks,pid);
+        //cprintf("ticks: %d\t pid: %d\n",p->schedticks,pid);
         c->proc = p;
         p->state = RUNNING;
         switchuvm(p);
         swtch(&(c->scheduler), p->context);
         switchkvm();
       }
+      
+      p->compticks += p->compsleep;
+      p->compsleep = 0;
+      
       //cprintf("state: %s\n", p->state);
       if(p->state == RUNNABLE || p->state == SLEEPING){
         enqueue(dequeue());
@@ -707,10 +713,27 @@ static void
 wakeup1(void *chan)
 {
   struct proc *p;
-
-  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
-    if(p->state == SLEEPING && p->chan == chan)
+// && p->sleep && p->sleep >= p->sleepticks
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->state == SLEEPING && p->chan == chan) {
+      // Case 1: Special wakeup via trap every 1 tick
+      if(p->chan == &ticks){
+        // done syscall sleeping         
+        if(p->sleep <= p->slept){
+          p->sleep = 0;
+          p->slept = 0;
+        }
+        // fake wakeup
+        else{
+          cprintf("im sleeping!!\n");
+          continue;
+        }
+      }
+      // Case 2: Normal wakeups
       p->state = RUNNABLE;
+    }
+  }
+      
 }
 
 // Wake up all processes sleeping on chan.
@@ -789,12 +812,13 @@ void handlecomp(){
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     if(p->state == SLEEPING){
       p->compsleep++;
+      p->slept++;
       p->sleepticks++;
-    }
-    // process slept for its requested duration, mark as runnable
-    if(p->sleep >= p->compsleep){
-      p->state = RUNNABLE;
-      p->sleep = 0;
+      // process slept for its requested duration, mark as runnable
+      if(p->sleep >= p->compsleep){
+        p->state = RUNNABLE;
+        p->sleep = 0;
+      }
     }
   }
   //release(&ptable.lock);
