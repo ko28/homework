@@ -1,1 +1,0 @@
-new syscall test - fork2() a child process with timeslice 7, then getslice() on it, expecting 7 

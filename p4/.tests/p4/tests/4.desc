@@ -1,1 +1,0 @@
-new syscall test - setslice() on a process itself to 3, then getpinfo() and check the timeslice has been set

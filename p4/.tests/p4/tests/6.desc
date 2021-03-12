@@ -1,1 +1,0 @@
-new syscall test - getpinfo() given a ridiculously large pointer, should fail and return -1

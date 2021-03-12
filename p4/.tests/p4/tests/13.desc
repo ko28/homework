@@ -1,1 +1,0 @@
-compensation related test - three processes, parent sleeps full cycle when children run, checks sleepticks & compticks
