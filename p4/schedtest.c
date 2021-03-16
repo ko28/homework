@@ -13,7 +13,7 @@ int
 main(int argc, char **argv)
 {
   if(argc != 6){
-    printf(2, "usage: syscalls sliceA sleepA sliceB sleepB sleepParent\n");
+    printf(2, "usage: schedtest sliceA sleepA sliceB sleepB sleepParent\n");
     exit();
   }
   
@@ -62,18 +62,18 @@ main(int argc, char **argv)
           //wait();
       }
   }
-  
+    printf(1, "pid_a: %d\tpid_b:%d\n", pid_a, pid_b);
+
   // The parent schedtest process then sleeps for sleepParent ticks by calling sleep(sleepParent)
   sleep(sleepParent);
 
   // After sleeping, the parent calls getpinfo(), and prints one line of two numbers separated by a space
   struct pstat p;
   //printf(1, "%p\n", (void *) &p);
-  getpinfo(&p);
+  //getpinfo(&p);
   int compticksA = -1; 
   int compticksB = -1; 
   
-  //printf(1, "pid_a: %d\tpid_b:%d\n", pid_a, pid_b);
 
   
   for(int i = 0; i < NPROC; i++){
@@ -85,7 +85,7 @@ main(int argc, char **argv)
   }
 
 
-//debug(p);
+debug(p);
 //p.inuse[i] == 1 && 
 //schedtest 2 3 5 5 100
 

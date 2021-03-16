@@ -6,52 +6,58 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
+#include "pstat.h"
 
-// Code for Queue 
+void handlecomp();
 
+/*
+struct queue{
+  int procs[NPROC]; // Contains PIDs of processes 
+  int tail; // Points to end of queue
+};
+*/
 typedef struct node{
-  struct proc *process;
+  int pid;
   struct node *next;
 } node;
 
-static node nodes[NPROC]; // Hold nodes for queue on stack 
+
+static node nodes[NPROC];
 
 typedef struct queue{
   node *head;
   node *tail;
 } queue;
 
-static queue crr_queue; // Queue for Compensated Round-Robin (CRR) Scheduler, only holds ronnable processes
+static queue crr_queue; // Queue for Compensated Round-Robin (CRR) Scheduler
 
 void init_queue(){
   // Empty queue
   crr_queue.head = NULL;
   crr_queue.tail = NULL;
-
-  // Flush out nodes
-  for(int i = 0; i < NPROC; i++){
-      nodes[i].process = NULL;
-      nodes[i].next = NULL;
-  }
+  // PID of -1 means this node is empty
+  for(int i = 0; i < NPROC; i++)
+    nodes[i].pid = -1;
 }
 
-void enqueue(struct proc *process){
-  // ignore invalid process 
-  if(process == NULL){
+void enqueue(int pid){
+  // ignore invalid pids 
+  if(pid < 0){
+    cprintf("%d is an invalid pid dummy\n", pid);
     return;
   }
 
   // Search for open node 
-  int open = -1;
+  int open = 0;
   for(int i = 0; i < NPROC; i++){
-    if(nodes[i].process == NULL){
+    if(nodes[i].pid == -1){
       open = i;
       break;
     }
   }
   
   // Init node 
-  nodes[open].process = process;
+  nodes[open].pid = pid;
   nodes[open].next = NULL;
 
   // Edge case where queue is empty
@@ -65,37 +71,35 @@ void enqueue(struct proc *process){
   }
 }
 
-struct proc* dequeue(){
+int dequeue(){
   if(crr_queue.head == NULL)
-    return NULL;
-  struct proc* head_proc = crr_queue.head->process;
-  crr_queue.head->process = NULL; // Free head node;
+    return -1;
+  int head_pid = crr_queue.head->pid;
+  crr_queue.head->pid = -1; // Free head node;
   crr_queue.head = crr_queue.head->next;
-  return head_proc;
+  return head_pid;
 }
 
-struct proc* peek(){
+int peek(){
   if(crr_queue.head == NULL)
-    return NULL;
-  return crr_queue.head->process;
+    return -1;
+  return crr_queue.head->pid;
 }
 
 void printqueue(){
   node * n = crr_queue.head; 
   cprintf("queue: ");
   while(n != NULL){
-    cprintf("%d -> ", n->process->pid);
+    cprintf("%d -> ", n->pid);
     n = n->next;
   }
   cprintf("\n");
 }
 
-
-// End of code for Queue  
-
 struct {
   struct spinlock lock;
   struct proc proc[NPROC];
+  // struct pstat stat;
 } ptable;
 
 static struct proc *initproc;
@@ -174,7 +178,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
-
+  
   release(&ptable.lock);
 
   // Allocate kernel stack.
@@ -209,6 +213,8 @@ userinit(void)
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
 
+  init_queue();
+
   p = allocproc();
   
   initproc = p;
@@ -228,6 +234,8 @@ userinit(void)
   safestrcpy(p->name, "initcode", sizeof(p->name));
   p->cwd = namei("/");
 
+  p->slice = 1; // Give first process 1 tick 
+
   // this assignment to p->state lets other cores
   // run this process. the acquire forces the above
   // writes to be visible, and the lock is also needed
@@ -235,13 +243,9 @@ userinit(void)
   acquire(&ptable.lock);
 
   p->state = RUNNABLE;
-  
-  // Add to Compensated Round-Robin scheduler 
-  p->slice = 1; // Give first process 1 tick 
-  init_queue();
-  enqueue(p);
-
+  enqueue(p->pid);
   release(&ptable.lock);
+  
 }
 
 // Grow current process's memory by n bytes.
@@ -265,11 +269,72 @@ growproc(int n)
   return 0;
 }
 
+int getslice(int pid){
+  struct proc *p;
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      release(&ptable.lock);
+      return p->slice;
+    }
+  }
+  release(&ptable.lock);
+  return -1;
+}
+
+int setslice(int pid, int slice){
+  struct proc *p;
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      p->slice = slice;
+      
+      
+      // int toSchedule = p->slice >= slice; 
+      if(p->schedticks >= slice) // Schedule is new slice is 
+        sched();
+      
+      release(&ptable.lock);
+      return 0;
+    }
+  }
+  release(&ptable.lock);
+  return -1;
+}
+
+int getpinfo(struct pstat *stat){
+  if(stat == (struct pstat *) NULL)
+    return -1;
+
+  struct proc *p;
+  
+  acquire(&ptable.lock);
+  int i = 0;
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->state == UNUSED){
+      stat->inuse[i] = 0;
+    }
+    else{
+      stat->inuse[i] = 1;
+      stat->pid[i] = p->pid;
+      stat->timeslice[i] = p->slice;
+      stat->compticks[i]= p->compticks;
+      stat->schedticks[i] = p->schedticks;
+      stat->sleepticks[i] = p->sleepticks;
+      stat->switches[i] = p->switches;
+    }
+    i++;
+    
+  }
+  
+  release(&ptable.lock);
+  return 0;
+}
+
 // Create a new process copying p as the parent.
 // Sets up stack to return as if from system call.
 // Caller must set state of returned proc to RUNNABLE.
-int
-fork2(int slice)
+int fork2(int slice)
 {
   if(!(slice > 0)) {
     return -1;
@@ -310,14 +375,10 @@ fork2(int slice)
   acquire(&ptable.lock);
 
   np->state = RUNNABLE;
-  
-  // Add to CRR Queue
-  np->compticks = 0;
   np->slice = slice;
-  enqueue(np);
-
+  enqueue(pid);
+//printqueue();
   release(&ptable.lock);
-
   return pid;
 }
 
@@ -325,6 +386,7 @@ int
 fork(void){
   return fork2(getslice(myproc()->pid));
 }
+
 
 // Exit the current process.  Does not return.
 // An exited process remains in the zombie state
@@ -416,6 +478,30 @@ wait(void)
   }
 }
 
+void print_runnable_proc_fuck_locks(){
+  struct proc *p;
+  cprintf("ptable: ");
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->state == RUNNABLE){
+      cprintf("%s,%d -> ", p->name, p->pid);
+    }     
+  }
+  cprintf("\n");
+}
+
+void print_runnable_proc(){
+  struct proc *p;
+  acquire(&ptable.lock);
+    cprintf("ptable: ");
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      if(p->state == RUNNABLE){
+        cprintf("%s,%d -> ", p->name, p->pid);
+      }      
+    }
+  cprintf("\n");
+  release(&ptable.lock);    
+}
+
 //PAGEBREAK: 42
 // Per-CPU process scheduler.
 // Each CPU calls scheduler() after setting itself up.
@@ -430,7 +516,7 @@ scheduler2(void)
   struct proc *p;
   struct cpu *c = mycpu();
   c->proc = 0;
-  
+
   for(;;){
     // Enable interrupts on this processor.
     sti();
@@ -438,15 +524,18 @@ scheduler2(void)
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if(p->state != RUNNABLE)
-        continue;
 
+      if(p->state != RUNNABLE){
+        release(&ptable.lock);
+        continue;
+      }
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
       c->proc = p;
       switchuvm(p);
       p->state = RUNNING;
+      p->switches++;
 
       swtch(&(c->scheduler), p->context);
       switchkvm();
@@ -454,6 +543,7 @@ scheduler2(void)
       // Process is done running for now.
       // It should have changed its p->state before coming back.
       c->proc = 0;
+      // print_runnable_proc_fuck_locks();
     }
     release(&ptable.lock);
 
@@ -468,57 +558,72 @@ scheduler(void)
   c->proc = 0;
   
   for(;;){
+    //if(ticks % 1000 == 0)
+    //  cprintf("boop\n");
+    
     // Enable interrupts on this processor.
     sti();
 
+    int pid = crr_queue.head->pid;
+    int starttick = ticks;
+    // Loop over process table looking for process to run.
     acquire(&ptable.lock);
-    
-    p = peek();
-    
-    // Checking that queue isn't empty
-    if(p == NULL){
-        release(&ptable.lock);
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      if(pid != p->pid)
         continue;
-    }
-
-    acquire(&tickslock);
-    uint start_time = ticks;
-    uint curr_time = ticks;
-    release(&tickslock);
-
-    // cprintf("proc %s\n", p->name);
-    // Schedule process if it didn't use up all of its time
-    while(start_time + p->slice + p->compsleep >= curr_time && p->state == RUNNABLE){
+      // Switch to chosen process.  It is the process's job
+      // to release ptable.lock and then reacquire it
+      // before jumping back to us.
+      p->switches++;
+      while(starttick + p->slice + p->compsleep >= ticks && p->state == RUNNABLE){
+        p->schedticks++;
+        // cprintf("ticks: %d\t pid: %d\n", ticks,pid);
         c->proc = p;
-        switchuvm(p);
         p->state = RUNNING;
+        switchuvm(p);
         swtch(&(c->scheduler), p->context);
         switchkvm();
-        // Process is done running for now.
-        // It should have changed its p->state before coming back.
-        c->proc = 0;
-        acquire(&tickslock);
-        curr_time = ticks;
-        release(&tickslock);
-    }
-    // Remove process from runnable queue if apporopiate
-    if(p->state != RUNNABLE){
-        dequeue();
-    }
-    // Process is runnable, move to end of queue
-    else{
-        p->compticks += p->compsleep;
+        handlecomp(); // Give out compensation ticks each tick
+        //cprintf("p->state %d\n", p->state);
+        //p->state = RUNNABLE;
+      }
+      
+      if(p->state != SLEEPING){
+        p->compticks += p->compsleep; // ticks - starttick - p->slice
         p->compsleep = 0;
+      }
+      
+      //cprintf("state: %s\n", p->state);
+      if(p->state == RUNNABLE || p->state == SLEEPING){
         enqueue(dequeue());
-    }
+      }
+      else{
+        dequeue();
+      }
+
+      /*
+      if(ticks > 100){
+        cprintf("p->state: %d\n", p->state);
+        printqueue();
+      }*/
+      
+      // Give out compensation ticks 
+      if(ticks - starttick) {
+        // cprintf("comp time %d\n",ticks - starttick);
+        //handlecomp(ticks - starttick);
         
-
-    
+      }
+      // Process is done running for now.
+      // It should have changed its p->state before coming back.
+      c->proc = 0;
+      break;
+      
+    }
     release(&ptable.lock);
-
 
   }
 }
+
 
 // Enter scheduler.  Must hold only ptable.lock
 // and have changed proc->state. Saves and restores
@@ -532,7 +637,6 @@ sched(void)
 {
   int intena;
   struct proc *p = myproc();
-
   if(!holding(&ptable.lock))
     panic("sched ptable.lock");
   if(mycpu()->ncli != 1)
@@ -552,7 +656,6 @@ yield(void)
 {
   acquire(&ptable.lock);  //DOC: yieldlock
   myproc()->state = RUNNABLE;
-// enqueue(myproc()); // ??
   sched();
   release(&ptable.lock);
 }
@@ -624,33 +727,27 @@ static void
 wakeup1(void *chan)
 {
   struct proc *p;
+// && p->sleep && p->sleep >= p->sleepticks
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    if(p->state == SLEEPING && p->chan == chan){
-      // Case 1: Special wakeup to syscall sleeping procs via trap every 1 tick
-      //if(!holding(&tickslock))
-      //acquire(&tickslock);
+    if(p->state == SLEEPING && p->chan == chan) {
+      // Case 1: Special wakeup via trap every 1 tick
       if(p->chan == &ticks){
-          p->slept++;
-          p->compticks++;
-          if(p->sleep <= p->slept){
-            p->sleep = 0;
-            p->slept = 0;
-          }
-          else{
-              //release(&tickslock);
-              continue;
-          }
-          
+        // done syscall sleeping         
+        if(p->sleep <= p->slept){
+          p->sleep = 0;
+          p->slept = 0;
+        }
+        // fake wakeup
+        else{
+          //cprintf("im sleeping!!\n");
+          continue;
+        }
       }
       // Case 2: Normal wakeups
       p->state = RUNNABLE;
-      enqueue(p);
-     }
-     //release(&tickslock);
+      //cprintf("wakeup boi\n");
+    }
   }
-  
-
-      
 }
 
 // Wake up all processes sleeping on chan.
@@ -675,10 +772,8 @@ kill(int pid)
     if(p->pid == pid){
       p->killed = 1;
       // Wake process from sleep if necessary.
-      if(p->state == SLEEPING){
+      if(p->state == SLEEPING)
         p->state = RUNNABLE;
-        enqueue(p);
-      }
       release(&ptable.lock);
       return 0;
     }
@@ -724,64 +819,32 @@ procdump(void)
   }
 }
 
-int getslice(int pid){
-  struct proc *p;
-  acquire(&ptable.lock);
-  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    if(p->pid == pid){
-      release(&ptable.lock);
-      return p->slice;
-    }
-  }
-  release(&ptable.lock);
-  return -1;
+int min(int a, int b){
+  return (a > b) ? b : a;
 }
 
-int setslice(int pid, int slice){
+void handlecomp(){
   struct proc *p;
-  acquire(&ptable.lock);
-  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    if(p->pid == pid){
-      p->slice = slice;
-      
-      
-      // int toSchedule = p->slice >= slice; 
-      if(p->schedticks >= slice) // Schedule is new slice is 
-        sched();
-      
-      release(&ptable.lock);
-      return 0;
-    }
-  }
-  release(&ptable.lock);
-  return -1;
-}
 
-int getpinfo(struct pstat *stat){
-  if(stat == (struct pstat *) NULL)
-    return -1;
-
-  struct proc *p;
-  
-  acquire(&ptable.lock);
-  int i = 0;
+  //acquire(&ptable.lock);
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    if(p->state == UNUSED){
-      stat->inuse[i] = 0;
+    if(p->state == SLEEPING && p->sleep){
+      // min(time, p->sleep - p->slept)
+      p->compsleep++;
+      p->slept++;
+      p->sleepticks++;
+      
+      cprintf("compsleep %d\tslept %d\t sleepticks %d\n", p->compsleep, p->slept, p->sleepticks);
+      printqueue();
+      // process slept for its requested duration, mark as runnable
+      /*if(p->sleep <= p->slept){
+          p->state = RUNNABLE;
+          p->sleep = 0;
+          p->slept = 0;
+      }*/
     }
-    else{
-      stat->inuse[i] = 1;
-      stat->pid[i] = p->pid;
-      stat->timeslice[i] = p->slice;
-      stat->compticks[i]= p->compticks;
-      stat->schedticks[i] = p->schedticks;
-      stat->sleepticks[i] = p->sleepticks;
-      stat->switches[i] = p->switches;
-    }
-    i++;
-    
+
+
   }
-  
-  release(&ptable.lock);
-  return 0;
+  //release(&ptable.lock);
 }

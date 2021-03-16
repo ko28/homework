@@ -57,21 +57,17 @@ sys_sbrk(void)
   return addr;
 }
 
+/*
 int
 sys_sleep(void)
 {
   int n;
-  //uint ticks0;
+  uint ticks0;
 
   if(argint(0, &n) < 0)
     return -1;
   acquire(&tickslock);
-  //ticks0 = ticks;
-  myproc()->sleep = n;
-  myproc()->compsleep = 0; // no accumulation of compensation ticks
-  sleep(&ticks, &tickslock);
-
-  /*
+  ticks0 = ticks;
   while(ticks - ticks0 < n){
     if(myproc()->killed){
       release(&tickslock);
@@ -79,11 +75,27 @@ sys_sleep(void)
     }
     sleep(&ticks, &tickslock);
   }
-  */
-  
   release(&tickslock);
   return 0;
 }
+*/
+
+
+int
+sys_sleep(void)
+{
+  int n;
+  if(argint(0, &n) < 0)
+    return -1;
+
+  myproc()->sleep = n;
+  myproc()->compsleep = 0; // no accumulation of compensation ticks
+  acquire(&tickslock);
+  sleep(&ticks, &tickslock);
+  release(&tickslock);
+  return 0;
+}
+
 
 // return how many clock tick interrupts have occurred
 // since start.
