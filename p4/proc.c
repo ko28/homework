@@ -488,6 +488,9 @@ scheduler(void)
 
     // cprintf("proc %s\n", p->name);
     // Schedule process if it didn't use up all of its time
+    if(start_time + p->slice + p->compsleep >= curr_time && p->state == RUNNABLE)
+      p->switches++; // really dumb code 
+
     while(start_time + p->slice + p->compsleep >= curr_time && p->state == RUNNABLE){
         c->proc = p;
         switchuvm(p);
@@ -501,6 +504,9 @@ scheduler(void)
         curr_time = ticks;
         release(&tickslock);
     }
+    
+    p->schedticks += curr_time - start_time + p->slice + p->compsleep;
+
     // Remove process from runnable queue if apporopiate
     if(p->state != RUNNABLE){
         dequeue();
@@ -632,6 +638,7 @@ wakeup1(void *chan)
       if(p->chan == &ticks){
           p->slept++;
           p->compticks++;
+          p->sleepticks++;
           if(p->sleep <= p->slept){
             p->sleep = 0;
             p->slept = 0;
@@ -738,6 +745,8 @@ int getslice(int pid){
 }
 
 int setslice(int pid, int slice){
+  if(pid <= 0 || slice <=0)
+    return -1;
   struct proc *p;
   acquire(&ptable.lock);
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
