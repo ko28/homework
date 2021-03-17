@@ -68,9 +68,9 @@ main(int argc, char **argv)
   sleep(sleepParent);
 
   // After sleeping, the parent calls getpinfo(), and prints one line of two numbers separated by a space
-  struct pstat p = {};
+  struct pstat p;
   //printf(1, "%p\n", (void *) &p);
-  //getpinfo(&p);
+  getpinfo(&p);
   int compticksA = -1; 
   int compticksB = -1; 
   

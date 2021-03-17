@@ -310,10 +310,17 @@ fork2(int slice)
   acquire(&ptable.lock);
 
   np->state = RUNNABLE;
+  np->slice = slice;
+  // Flush out parent's data
+  np->compsleep = 0;
+  np->sleep = 0; 
+  np->slept = 0;
+  np->compticks = 0; 
+  np->schedticks = 0;
+  np->sleepticks = 0;
+  np->switches = 0;
   
   // Add to CRR Queue
-  np->compticks = 0;
-  np->slice = slice;
   enqueue(np);
 
   release(&ptable.lock);
@@ -504,8 +511,9 @@ scheduler(void)
         curr_time = ticks;
         release(&tickslock);
     }
+    // allow comp sleep?
     
-    p->schedticks += curr_time - start_time + p->slice + p->compsleep;
+    p->schedticks += p->slice + p->compsleep;
 
     // Remove process from runnable queue if apporopiate
     if(p->state != RUNNABLE){
@@ -637,7 +645,7 @@ wakeup1(void *chan)
       //acquire(&tickslock);
       if(p->chan == &ticks){
           p->slept++;
-          p->compticks++;
+          p->compsleep++;
           p->sleepticks++;
           if(p->sleep <= p->slept){
             p->sleep = 0;
@@ -745,19 +753,14 @@ int getslice(int pid){
 }
 
 int setslice(int pid, int slice){
-  if(pid <= 0 || slice <=0)
+  if(pid <= 0 || slice <=0){
     return -1;
+  }
   struct proc *p;
   acquire(&ptable.lock);
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     if(p->pid == pid){
       p->slice = slice;
-      
-      
-      // int toSchedule = p->slice >= slice; 
-      if(p->schedticks >= slice) // Schedule is new slice is 
-        sched();
-      
       release(&ptable.lock);
       return 0;
     }
