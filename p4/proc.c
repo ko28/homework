@@ -510,6 +510,10 @@ scheduler(void)
         acquire(&tickslock);
         curr_time = ticks;
         release(&tickslock);
+        if(start_time + p->slice + 1 < curr_time && p->compsleep){
+          p->compticks++;
+          //cprintf("%d\n", p->compticks);
+        }
     }
     // allow comp sleep?
     
@@ -521,7 +525,7 @@ scheduler(void)
     }
     // Process is runnable, move to end of queue
     else{
-        p->compticks += p->compsleep;
+        //p->compticks += p->compsleep;
         p->compsleep = 0;
         enqueue(dequeue());
     }
