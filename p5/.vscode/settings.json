@@ -1,0 +1,12 @@
+{
+	"files.associations": {
+		"atomic": "cpp",
+		"*.tcc": "cpp",
+		"fstream": "cpp",
+		"sstream": "cpp",
+		"*.def": "cpp",
+		"ratio": "c",
+		"defs.h": "c",
+		"param.h": "c"
+	}
+}
