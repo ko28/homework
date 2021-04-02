@@ -7,6 +7,9 @@
 		"*.def": "cpp",
 		"ratio": "c",
 		"defs.h": "c",
-		"param.h": "c"
+		"param.h": "c",
+		"syscall.h": "c",
+		"mmu.h": "c",
+		"proc.h": "c"
 	}
 }

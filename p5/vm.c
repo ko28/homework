@@ -311,6 +311,30 @@ clearpteu(pde_t *pgdir, char *uva)
   *pte &= ~PTE_U;
 }
 
+/*
+void
+clearptep(pde_t *pgdir, char *uva)
+{
+  pte_t *pte;
+
+  pte = walkpgdir(pgdir, uva, 0);
+  if(pte == 0)
+    panic("clearptep");
+  *pte &= ~PTE_P;
+}
+
+void
+setptee(pde_t *pgdir, char *uva)
+{
+  pte_t *pte;
+
+  pte = walkpgdir(pgdir, uva, 0);
+  if(pte == 0)
+    panic("setptee");
+  *pte |= PTE_E;
+}
+*/
+
 // Given a parent process's page table, create a copy
 // of it for a child.
 pde_t*
@@ -353,6 +377,8 @@ uva2ka(pde_t *pgdir, char *uva)
   pte_t *pte;
 
   pte = walkpgdir(pgdir, uva, 0);
+  if((*pte & PTE_E))
+    return (char*)P2V(PTE_ADDR(*pte));
   if((*pte & PTE_P) == 0)
     return 0;
   if((*pte & PTE_U) == 0)
@@ -395,16 +421,59 @@ copyout(pde_t *pgdir, uint va, void *p, uint len)
 
 
 int mencrypt(char* virtual_addr, int len){
-	// CASE 0: parameter len equals 0, do nothing 
+
+	/* error checking */
+	// CASE 0a: parameter len equals 0, do nothing 
 	if(len == 0)
 		return 0;
-	
-	char* lower, *upper;
-	lower = (char*) PGROUNDDOWN((uint)virtual_addr);
-	upper = PGROUNDDOWN((uint)virtual_addr) + len * PGSIZE;
-	
 
-	return -1;
+	struct proc *p = myproc();	
+	char *base_virtual_addr = (char*) PGROUNDDOWN((uint) virtual_addr);
+	
+	// CASE 0b: check if process has access to memory 
+	for(int i = 0; i < len; i++){
+		char *physical_addr = uva2ka(p->pgdir, base_virtual_addr + i * PGSIZE);
+		if(physical_addr == 0){
+			return -1;
+		}
+	}
+
+	// CASE 0c: check if len is a valid number 
+	if(len < 0 || len * PGSIZE > p->sz)
+		return -1;
+
+	
+	
+	// go over each page 
+	for(int i = 0; i < len; i++){
+		char* lower_virt = base_virtual_addr + (i * PGSIZE);
+		pte_t *pte = walkpgdir(p->pgdir, lower_virt , 0);
+
+		// page is not encrypted, time to do "encryption"
+		if((*pte & PTE_E) == 0){
+			// not sure if this is correct
+			/*
+			for(int p = 0; p < PGSIZE; p++){
+				*(pte + p) = ~ *(pte + p);
+			}
+			*/
+
+			char * lower_physical = uva2ka(p->pgdir, lower_virt);
+			for(int p = 0; p < PGSIZE; p++){
+				*(lower_physical + p) = ~ *(lower_physical + p);
+			}
+			
+			// set PTE_E bit 
+			*pte |= PTE_E;
+			// clear PTE_P so we trigger page fault later when we want to decrypt 
+			*pte &= ~PTE_P;
+		}
+	}
+
+	// Flush tlb
+	switchuvm(p);
+	
+	return 0;
 }
 
 int getpgtable(struct pt_entry* entries, int num){

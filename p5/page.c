@@ -9,5 +9,27 @@ int main(int argc, char **argv) {
 	 // Encrypt the pages
 	//struct pt_entry pt_entry; 
 	//getpgtable(&pt_entry, 1); // Get the page table information for newly allocated page
-	printf(1, "%d", mencrypt(ptr, 1));
+	//sleep(1);
+	
+	//
+	*ptr = 1;
+	printf(1, "%d\n", ptr);
+	mencrypt(ptr, 1);
+	printf(1, "page done runnin %d\n", ptr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	exit();
 }
