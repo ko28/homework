@@ -69,9 +69,14 @@ mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)
   for(;;){
     if((pte = walkpgdir(pgdir, a, 1)) == 0)
       return -1;
-    if(*pte & PTE_P)
+    if(*pte & (PTE_P | PTE_E))
       panic("remap");
-    *pte = pa | perm | PTE_P;
+	if(perm & PTE_E){
+		*pte = pa | perm | PTE_E;
+	} 
+	else {
+    	*pte = pa | perm | PTE_P;
+	}
     if(a == last)
       break;
     a += PGSIZE;
@@ -267,7 +272,7 @@ deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)
     pte = walkpgdir(pgdir, (char*)a, 0);
     if(!pte)
       a = PGADDR(PDX(a) + 1, 0, 0) - PGSIZE;
-    else if((*pte & PTE_P) != 0){
+    else if((*pte & (PTE_P | PTE_E)) != 0){
       pa = PTE_ADDR(*pte);
       if(pa == 0)
         panic("kfree");
@@ -290,7 +295,7 @@ freevm(pde_t *pgdir)
     panic("freevm: no pgdir");
   deallocuvm(pgdir, KERNBASE, 0);
   for(i = 0; i < NPDENTRIES; i++){
-    if(pgdir[i] & PTE_P){
+    if(pgdir[i] & (PTE_P | PTE_E)){
       char * v = P2V(PTE_ADDR(pgdir[i]));
       kfree(v);
     }
@@ -350,7 +355,7 @@ copyuvm(pde_t *pgdir, uint sz)
   for(i = 0; i < sz; i += PGSIZE){
     if((pte = walkpgdir(pgdir, (void *) i, 0)) == 0)
       panic("copyuvm: pte should exist");
-    if(!(*pte & PTE_P))
+    if(!(*pte & (PTE_P | PTE_E)))
       panic("copyuvm: page not present");
     pa = PTE_ADDR(*pte);
     flags = PTE_FLAGS(*pte);
@@ -446,7 +451,7 @@ int mencrypt(char* virtual_addr, int len){
 	
 	// go over each page 
 	for(int i = 0; i < len; i++){
-		char* lower_virt = base_virtual_addr + (i * PGSIZE);
+		char *lower_virt = base_virtual_addr + (i * PGSIZE);
 		pte_t *pte = walkpgdir(p->pgdir, lower_virt , 0);
 
 		// page is not encrypted, time to do "encryption"
@@ -458,11 +463,11 @@ int mencrypt(char* virtual_addr, int len){
 			}
 			*/
 
-			char * lower_physical = uva2ka(p->pgdir, lower_virt);
+			char *lower_physical = uva2ka(p->pgdir, lower_virt);
 			for(int p = 0; p < PGSIZE; p++){
 				*(lower_physical + p) = ~ *(lower_physical + p);
 			}
-			
+
 			// set PTE_E bit 
 			*pte |= PTE_E;
 			// clear PTE_P so we trigger page fault later when we want to decrypt 
@@ -476,10 +481,47 @@ int mencrypt(char* virtual_addr, int len){
 	return 0;
 }
 
+int mdecrypt(char* virtual_addr){
+	struct proc *p = myproc();	
+	char *base_virtual_addr = (char*) PGROUNDDOWN((uint) virtual_addr);
+	pte_t *pte = walkpgdir(p->pgdir, base_virtual_addr, 0);
+	// is encrypted page 
+	if(*pte & PTE_E){
+		char *lower_physical = uva2ka(p->pgdir, base_virtual_addr);
+		// decrypt 
+		for(int p = 0; p < PGSIZE; p++){
+			*(lower_physical + p) = ~ *(lower_physical + p);
+		}
+		*pte |= PTE_P;	// page is present 
+		*pte &= ~PTE_E; // not encrypted 
+		switchuvm(p);	// Flush tlb
+		return 1; // decrypt succeeded  
+	}
+	return 0; // decrypt failed 
+}
+
+
 int getpgtable(struct pt_entry* entries, int num){
-	return 69;
+	if(entries == (struct pt_entry*) 0)
+		return -1;
+	struct proc *p = myproc();	
+	int i;
+	for(i = 0; i < num; i++){
+		char *va = (char*) PGROUNDDOWN((uint) p->sz - i*PGSIZE - 1);
+		pte_t *pte = walkpgdir(p->pgdir, va, 0);
+		entries->pdx = PDX(va);
+		entries->ptx = PTX(va);
+		entries->ppage = PTE_ADDR(*pte) >> 12;
+		entries->present = (*pte & PTE_P) ? 1 : 0;
+		entries->writable = (*pte & PTE_W) ? 1 : 0;
+		entries->encrypted = (*pte & PTE_E) ? 1 : 0;
+		entries++;
+	}
+
+	return i;
 }
 
 int dump_rawphymem(uint physical_addr, char* buffer){
-	return 10;
+	struct proc *p = myproc();
+	return copyout(p->pgdir, (uint) buffer, P2V(physical_addr), PGSIZE);
 }

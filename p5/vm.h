@@ -4,3 +4,4 @@
 int mencrypt(char* virtual_addr, int len);
 int getpgtable(struct pt_entry* entries, int num);
 int dump_rawphymem(uint physical_addr, char* buffer);
+int mdecrypt(char* virtual_addr);

@@ -7,6 +7,7 @@
 #include "x86.h"
 #include "traps.h"
 #include "spinlock.h"
+#include "vm.h"
 
 // Interrupt descriptor table (shared by all CPUs).
 struct gatedesc idt[256];
@@ -77,6 +78,13 @@ trap(struct trapframe *tf)
             cpuid(), tf->cs, tf->eip);
     lapiceoi();
     break;
+  // handle encryption 
+  case T_PGFLT:
+  {
+    char *virtual_address = (char *) rcr2();
+    if(mdecrypt(virtual_address))
+    	break;	
+  }	
 
   //PAGEBREAK: 13
   default:
