@@ -385,6 +385,60 @@ copyout(pde_t *pgdir, uint va, void *p, uint len)
   return 0;
 }
 
+int 
+getpgtable(struct pt_entry* entries, int num, int wsetOnly)
+{
+	return -1;
+}
+
+int 
+dump_rawphymem(uint physical_addr, char * buffer)
+{
+	return -1;
+}
+
+int mencrypt(char *virtual_addr, int len) {
+  //the given pointer is a virtual address in this pid's userspace
+  struct proc * p = myproc();
+  pde_t* mypd = p->pgdir;
+
+  virtual_addr = (char *)PGROUNDDOWN((uint)virtual_addr);
+
+  //error checking first. all or nothing.
+  char * slider = virtual_addr;
+  for (int i = 0; i < len; i++) { 
+    //check page table for each translation first
+    char * kvp = uva2ka(mypd, slider);
+    if (!kvp) {
+      cprintf("mencrypt: Could not access address\n");
+      return -1;
+    }
+    slider = slider + PGSIZE;
+  }
+
+  //encrypt stage. Have to do this before setting flag 
+  //or else we'll page fault
+  slider = virtual_addr;
+  for (int i = 0; i < len; i++) { 
+    //we get the page table entry that corresponds to this VA
+    pte_t * mypte = walkpgdir(mypd, slider, 0);
+    if (*mypte & PTE_E) {//already encrypted
+      slider += PGSIZE;
+      continue;
+    }
+    for (int offset = 0; offset < PGSIZE; offset++) {
+      *slider = ~*slider;
+      slider++;
+    }
+    *mypte = *mypte & ~PTE_P;
+    *mypte = *mypte | PTE_E;
+  }
+
+  switchuvm(myproc());
+  return 0;
+}
+
+
 //PAGEBREAK!
 // Blank page.
 //PAGEBREAK!

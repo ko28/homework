@@ -1,3 +1,5 @@
+#include "ptentry.h"
+
 struct buf;
 struct context;
 struct file;
@@ -185,6 +187,8 @@ void            switchuvm(struct proc*);
 void            switchkvm(void);
 int             copyout(pde_t*, uint, void*, uint);
 void            clearpteu(pde_t *pgdir, char *uva);
+int             getpgtable(struct pt_entry* entries, int num, int wsetOnly);
+int             dump_rawphymem(uint physical_addr, char * buffer);
 
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))

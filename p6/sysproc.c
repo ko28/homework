@@ -89,3 +89,34 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+int
+sys_getpgtable(void)
+{
+  struct pt_entry * entries; 
+  int num;
+  int wsetOnly;
+
+  if(argptr(0, (void *)&entries, sizeof(*entries)) < 0)
+    return -1;
+
+  if(argint(1, &num) < 0 || argint(2, &wsetOnly) < 0)
+	return -1;
+
+  return getpgtable(entries, num, wsetOnly);
+}
+
+int
+sys_dump_rawphymem(void)
+{ 
+  uint physical_addr; 
+  char * buffer;
+
+  if(argptr(1, &buffer, PGSIZE) < 0)
+    return -1;
+
+  if(argint(0, (int*)&physical_addr) < 0)
+    return -1;
+
+  return dump_rawphymem(physical_addr, buffer);
+}
