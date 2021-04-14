@@ -25,13 +25,6 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 
-// syscall for p6
-int getpgtable(struct pt_entry*, int, int);
-int dump_rawphymem(uint, char*);
-
- 
-
-
 // ulib.c
 int stat(const char*, struct stat*);
 char* strcpy(char*, const char*);
@@ -45,3 +38,8 @@ void* memset(void*, int, uint);
 void* malloc(uint);
 void free(void*);
 int atoi(const char*);
+
+// syscall for p6
+int getpgtable(struct pt_entry*, int, int);
+int dump_rawphymem(uint, char*);
+

@@ -1,6 +1,5 @@
 {
 	"files.associations": {
-		"mmu.h": "c",
-		"param.h": "c"
+		"user.h": "c"
 	}
 }
