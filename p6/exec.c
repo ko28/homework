@@ -101,6 +101,10 @@ exec(char *path, char **argv)
   curproc->tf->esp = sp;
   switchuvm(curproc);
   freevm(oldpgdir);
+
+  // P6: clear the clock queue, encrypt all the pages.
+  init_clock(&curproc->c);
+  mencrypt_all(0, sz/PGSIZE);
   return 0;
 
  bad:

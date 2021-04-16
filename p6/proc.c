@@ -163,9 +163,14 @@ growproc(int n)
 
   sz = curproc->sz;
   if(n > 0){
+	  // TODO: if growing (due to, say, sbrk()), encrypt all the newly allocated pages
+	uint old_sz = sz;
     if((sz = allocuvm(curproc->pgdir, sz, sz + n)) == 0)
       return -1;
-  } else if(n < 0){
+	mencrypt((char *)old_sz, (sz - old_sz)/PGSIZE);
+  } 
+  else if(n < 0){
+	// TODO: if shrinking (deallocating pages), need to remove all those pages from the clock queue
     if((sz = deallocuvm(curproc->pgdir, sz, sz + n)) == 0)
       return -1;
   }
@@ -217,6 +222,9 @@ fork(void)
   np->state = RUNNABLE;
 
   release(&ptable.lock);
+  
+  // child get same clock as parent ??
+  np->c = curproc->c;
 
   return pid;
 }

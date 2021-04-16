@@ -69,9 +69,19 @@ mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)
   for(;;){
     if((pte = walkpgdir(pgdir, a, 1)) == 0)
       return -1;
-    if(*pte & PTE_P)
+    if(*pte & (PTE_P | PTE_E))
       panic("remap");
-    *pte = pa | perm | PTE_P;
+    
+    //"perm" is just the lower 12 bits of the PTE
+    //if encrypted, then ensure that PTE_P is not set
+    //This is somewhat redundant. If our code is correct,
+    //we should just be able to say pa | perm
+    if (perm & PTE_E)
+      *pte = (pa | perm | PTE_E) & ~PTE_P;
+    else
+      *pte = pa | perm | PTE_P;
+
+
     if(a == last)
       break;
     a += PGSIZE;
@@ -79,6 +89,7 @@ mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)
   }
   return 0;
 }
+
 
 // There is one page table per process, plus one that's used when
 // a CPU is not running any process (kpgdir). The kernel uses the
@@ -273,6 +284,7 @@ deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)
         panic("kfree");
       char *v = P2V(pa);
       kfree(v);
+	  remove_clock(&myproc()->c, pte);
       *pte = 0;
     }
   }
@@ -326,7 +338,7 @@ copyuvm(pde_t *pgdir, uint sz)
   for(i = 0; i < sz; i += PGSIZE){
     if((pte = walkpgdir(pgdir, (void *) i, 0)) == 0)
       panic("copyuvm: pte should exist");
-    if(!(*pte & PTE_P))
+    if(!(*pte & (PTE_P | PTE_E)))
       panic("copyuvm: page not present");
     pa = PTE_ADDR(*pte);
     flags = PTE_FLAGS(*pte);
@@ -353,7 +365,8 @@ uva2ka(pde_t *pgdir, char *uva)
   pte_t *pte;
 
   pte = walkpgdir(pgdir, uva, 0);
-  if((*pte & PTE_P) == 0)
+  //TODO: uva2ka says not present if PTE_P is 0
+  if(((*pte & PTE_P) | (*pte & PTE_E)) == 0)
     return 0;
   if((*pte & PTE_U) == 0)
     return 0;
@@ -386,10 +399,184 @@ copyout(pde_t *pgdir, uint va, void *p, uint len)
   return 0;
 }
 
-int getpgtable(struct pt_entry* entries, int num, int wsetOnly){
-	return 69;
+
+int getpgtable_all(struct pt_entry* entries, int num){
+	if(entries == (struct pt_entry*) 0)
+		return -1;
+	struct proc *p = myproc();	
+	int i;
+	for(i = 0; i < num; i++){
+		char *va = (char*) PGROUNDDOWN((uint) p->sz - i*PGSIZE - 1);
+		pte_t *pte = walkpgdir(p->pgdir, va, 0);
+		entries->pdx = PDX(va);
+		entries->ptx = PTX(va);
+		entries->ppage = PTE_ADDR(*pte) >> 12;
+		entries->present = (*pte & PTE_P) ? 1 : 0;
+		entries->writable = (*pte & PTE_W) ? 1 : 0;
+		entries->encrypted = (*pte & PTE_E) ? 1 : 0;
+		entries->user = (*pte & PTE_U) ? 1 : 0;
+		entries->ref = (*pte & PTE_A) ? 1 : 0;
+		entries++;
+	}
+
+	return i;
 }
 
-int dump_rawphymem(uint physical_addr, char * buffer){
-	return 420;
+int getpgtable(struct pt_entry* entries, int num, int wsetOnly){
+	if(wsetOnly == 0)
+		return getpgtable_all(entries, num);
+	
+	// TODO: add wsetOnly == 1 implementation 
+	struct proc *p = myproc();	
+	int n = 0;
+	for(int i = 0; (i < num) && (i < CLOCKSIZE); i++){
+		pte_t *pte = p->c.clock_queue[i].pte;
+		if(pte != (pte_t *)-1){
+			char* va = (char *)P2V(PTE_ADDR(*pte));
+			entries->pdx = PDX(va);
+			entries->ptx = PTX(va);
+			entries->ppage = PTE_ADDR(*pte) >> 12;
+			entries->present = (*pte & PTE_P) ? 1 : 0;
+			entries->writable = (*pte & PTE_W) ? 1 : 0;
+			entries->encrypted = (*pte & PTE_E) ? 1 : 0;
+			entries->user = (*pte & PTE_U) ? 1 : 0;
+			entries->ref = (*pte & PTE_A) ? 1 : 0;
+			entries++;
+			n++;
+		}
+	}
+	return n;
+}
+
+// TODO: The buffer might be encrypted, in which case you should decrypt that page
+int dump_rawphymem(uint physical_addr, char* buffer){
+	struct proc *p = myproc();
+	return copyout(p->pgdir, (uint) buffer, P2V(physical_addr), PGSIZE);
+}
+
+int mencrypt(char *virtual_addr, int len) {
+  //the given pointer is a virtual address in this pid's userspace
+  struct proc * p = myproc();
+  pde_t* mypd = p->pgdir;
+
+  virtual_addr = (char *)PGROUNDDOWN((uint)virtual_addr);
+
+  //error checking first. all or nothing.
+  char * slider = virtual_addr;
+  for (int i = 0; i < len; i++) { 
+    //check page table for each translation first
+    char * kvp = uva2ka(mypd, slider);
+    if (!kvp) {
+      cprintf("mencrypt: Could not access address\n");
+      return -1;
+    }
+    slider = slider + PGSIZE;
+  }
+
+  //encrypt stage. Have to do this before setting flag 
+  //or else we'll page fault
+  slider = virtual_addr;
+  for (int i = 0; i < len; i++) { 
+    //we get the page table entry that corresponds to this VA
+    pte_t * mypte = walkpgdir(mypd, slider, 0);
+    if (*mypte & PTE_E) {//already encrypted
+      slider += PGSIZE;
+      continue;
+    }
+    for (int offset = 0; offset < PGSIZE; offset++) {
+      *slider = ~*slider;
+      slider++;
+    }
+    *mypte = *mypte & ~PTE_P;
+    *mypte = *mypte | PTE_E;
+  }
+
+  switchuvm(myproc());
+  return 0;
+}
+
+int mencrypt_all(char *virtual_addr, int len) {
+  //the given pointer is a virtual address in this pid's userspace
+  struct proc * p = myproc();
+  pde_t* mypd = p->pgdir;
+
+  virtual_addr = (char *)PGROUNDDOWN((uint)virtual_addr);
+
+  //error checking first. all or nothing.
+  char * slider = virtual_addr;
+
+  //encrypt stage. Have to do this before setting flag 
+  //or else we'll page fault
+  slider = virtual_addr;
+  for (int i = 0; i < len; i++) { 
+    //we get the page table entry that corresponds to this VA
+    pte_t * mypte = walkpgdir(mypd, slider, 0);
+    if (*mypte & PTE_E) {//already encrypted
+      slider += PGSIZE;
+      continue;
+    }
+    for (int offset = 0; offset < PGSIZE; offset++) {
+      *slider = ~*slider;
+      slider++;
+    }
+    *mypte = *mypte & ~PTE_P;
+    *mypte = *mypte | PTE_E;
+  }
+
+  switchuvm(myproc());
+  return 0;
+}
+
+// decrypt 1 page 
+int mdecrypt(char* virtual_addr){
+	struct proc *p = myproc();	
+	char *base_virtual_addr = (char*) PGROUNDDOWN((uint) virtual_addr);
+	pte_t *pte = walkpgdir(p->pgdir, base_virtual_addr, 0);
+	// is encrypted page 
+	if(*pte & PTE_E){
+		char *lower_physical = uva2ka(p->pgdir, base_virtual_addr);
+		// decrypt 
+		for(int p = 0; p < PGSIZE; p++){
+			*(lower_physical + p) = ~ *(lower_physical + p);
+		}
+		*pte |= PTE_P;	// page is present 
+		*pte &= ~PTE_E; // not encrypted 
+		switchuvm(p);	// Flush tlb
+		return 1; // decrypt succeeded  
+	}
+	
+	return 0; // decrypt failed 
+}
+
+void access_page(char* virtual_addr){
+	struct proc *p = myproc();	
+	char *base_virtual_addr = (char*) PGROUNDDOWN((uint) virtual_addr);
+	pte_t *pte = walkpgdir(p->pgdir, base_virtual_addr, 0);
+	// if the page has PTE_P set, then nothing happens, no faults; the page must be in queue and in clear text
+	//cprintf("(*pte & PTE_P) = %d\n", (*pte & PTE_P));
+	if(*pte & PTE_P){
+		return; 
+	}
+	// this is an encrypted page and needs to be inserted into the clock queue, possibly evicting another page
+	else{
+		insert_clock(&p->c, pte);
+		//cprintf("data: %p\n", pte);
+		//print_clock(&p->c);
+		mdecrypt(virtual_addr);
+
+	}
+}
+
+void mencrypt_pte(pte_t* mypte) {
+  char* slider = (char *)P2V(PTE_ADDR(*mypte));
+
+  for (int offset = 0; offset < PGSIZE; offset++) {
+      *slider = ~*slider;
+      slider++;
+  }
+
+  *mypte = *mypte & ~PTE_P;
+  *mypte = *mypte | PTE_E;
+  switchuvm(myproc());
+
 }

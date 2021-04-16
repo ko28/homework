@@ -10,7 +10,7 @@ struct spinlock;
 struct sleeplock;
 struct stat;
 struct superblock;
-
+struct clock;
 // bio.c
 void            binit(void);
 struct buf*     bread(uint, uint);
@@ -188,6 +188,16 @@ int             copyout(pde_t*, uint, void*, uint);
 void            clearpteu(pde_t *pgdir, char *uva);
 int 			getpgtable(struct pt_entry* entries, int num, int wsetOnly);
 int 			dump_rawphymem(uint physical_addr, char* buffer);
+int 			mencrypt(char *virtual_addr, int len);
+int 			mencrypt_all(char *virtual_addr, int len);
+void 			access_page(char* virtual_addr);
+void 			mencrypt_pte(pte_t *mypte);
 
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))
+
+//clock.c
+void init_clock(struct clock *c);
+void insert_clock(struct clock *c, pte_t *pte);
+void remove_clock(struct clock *c, pte_t *pte);
+void print_clock(struct clock *c);
