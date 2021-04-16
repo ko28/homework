@@ -192,7 +192,8 @@ int 			mencrypt(char *virtual_addr, int len);
 int 			mencrypt_all(char *virtual_addr, int len);
 void 			access_page(char* virtual_addr);
 void 			mencrypt_pte(pte_t *mypte);
-
+pte_t* 			walkpgdir(pde_t *pgdir, const void *va, int alloc);
+void remove_from_clock(char* virtual_addr, int n);
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))
 

@@ -33,7 +33,7 @@ seginit(void)
 // Return the address of the PTE in page table pgdir
 // that corresponds to virtual address va.  If alloc!=0,
 // create any required page table pages.
-static pte_t *
+pte_t *
 walkpgdir(pde_t *pgdir, const void *va, int alloc)
 {
   pde_t *pde;
@@ -399,7 +399,7 @@ copyout(pde_t *pgdir, uint va, void *p, uint len)
   return 0;
 }
 
-
+/*
 int getpgtable_all(struct pt_entry* entries, int num){
 	if(entries == (struct pt_entry*) 0)
 		return -1;
@@ -420,6 +420,40 @@ int getpgtable_all(struct pt_entry* entries, int num){
 	}
 
 	return i;
+}
+*/
+int getpgtable_all(struct pt_entry* entries, int num) {
+  struct proc * me = myproc();
+
+  int index = 0;
+  pte_t * curr_pte;
+  //reverse order
+
+  for (void * i = (void*) PGROUNDDOWN(((int)me->sz)); i >= 0 && index < num; i-=PGSIZE) {
+    //walk through the page table and read the entries
+    //Those entries contain the physical page number + flags
+    curr_pte = walkpgdir(me->pgdir, i, 0);
+
+
+    //currPage is 0 if page is not allocated
+    //see deallocuvm
+    if (curr_pte && *curr_pte) {//this page is allocated
+      //this is the same for all pt_entries... right?
+      entries[index].pdx = PDX(i); 
+      entries[index].ptx = PTX(i);
+      //convert to physical addr then shift to get PPN 
+      entries[index].ppage = PTE_ADDR(*curr_pte) >> 12;
+      //have to set it like this because these are 1 bit wide fields
+      entries[index].present = (*curr_pte & PTE_P) ? 1 : 0;
+      entries[index].writable = (*curr_pte & PTE_W) ? 1 : 0;
+      entries[index].encrypted = (*curr_pte & PTE_E) ? 1 : 0;
+	  entries[index].user = (*curr_pte & PTE_U) ? 1 : 0;
+	  entries[index].ref = (*curr_pte & PTE_A) ? 1 : 0;
+      index++;
+    }
+  }
+  //index is the number of ptes copied
+  return index;
 }
 
 int getpgtable(struct pt_entry* entries, int num, int wsetOnly){
@@ -450,8 +484,42 @@ int getpgtable(struct pt_entry* entries, int num, int wsetOnly){
 
 // TODO: The buffer might be encrypted, in which case you should decrypt that page
 int dump_rawphymem(uint physical_addr, char* buffer){
+	/*
 	struct proc *p = myproc();
-	return copyout(p->pgdir, (uint) buffer, P2V(physical_addr), PGSIZE);
+	pte_t *pte = walkpgdir(p->pgdir, P2V(physical_addr), 0);
+	cprintf("p: %s\n", p->name);
+	int o = copyout(p->pgdir, (uint) buffer, (char *)PGROUNDDOWN((uint)P2V(physical_addr)), PGSIZE);
+	// is encrypted, so fliparoo
+	cprintf("pte_p %d\tpte_w %d\tpte_e %d\tpte_u %d\tpte_a %d\n",  
+			(*pte & PTE_P), 
+			(*pte & PTE_W), 
+			(*pte & PTE_E), 
+			(*pte & PTE_U), 
+			(*pte & PTE_A));
+			
+	if (*pte & PTE_E){
+		for (int offset = 0; offset < PGSIZE; offset++) {
+			*buffer = ~*buffer;
+			buffer++;
+		}
+	}
+	return o;
+	*/
+	struct proc *p = myproc();
+	pte_t *pte = walkpgdir(p->pgdir, P2V(physical_addr), 0);
+	// is encrypted, so fliparoo
+	cprintf("pte_p %d\tpte_w %d\tpte_e %d\tpte_u %d\tpte_a %d\n",  
+			(*pte & PTE_P), 
+			(*pte & PTE_W), 
+			(*pte & PTE_E), 
+			(*pte & PTE_U), 
+			(*pte & PTE_A));
+
+	int retval = copyout(myproc()->pgdir, (uint) buffer, (void *) P2V(physical_addr), PGSIZE);
+
+	if (retval)
+		return -1;
+	return 0;
 }
 
 int mencrypt(char *virtual_addr, int len) {
@@ -511,7 +579,7 @@ int mencrypt_all(char *virtual_addr, int len) {
   for (int i = 0; i < len; i++) { 
     //we get the page table entry that corresponds to this VA
     pte_t * mypte = walkpgdir(mypd, slider, 0);
-    if (*mypte & PTE_E) {//already encrypted
+    if (*mypte & PTE_E ||!(*mypte & PTE_U)) {//already encrypted
       slider += PGSIZE;
       continue;
     }
@@ -519,6 +587,7 @@ int mencrypt_all(char *virtual_addr, int len) {
       *slider = ~*slider;
       slider++;
     }
+	cprintf("mencrypt_all %d\n", i);
     *mypte = *mypte & ~PTE_P;
     *mypte = *mypte | PTE_E;
   }
@@ -579,4 +648,15 @@ void mencrypt_pte(pte_t* mypte) {
   *mypte = *mypte | PTE_E;
   switchuvm(myproc());
 
+}
+
+void remove_from_clock(char* virtual_addr, int n){
+	struct proc *p = myproc();	
+	char *base_virtual_addr = (char*) PGROUNDDOWN((uint) virtual_addr + n);
+	
+	while(base_virtual_addr < virtual_addr){
+		pte_t *pte = walkpgdir(p->pgdir, base_virtual_addr, 0);
+		remove_clock(&p->c, pte);
+		base_virtual_addr = (char*) PGROUNDDOWN((uint) base_virtual_addr + PGSIZE);
+	}
 }

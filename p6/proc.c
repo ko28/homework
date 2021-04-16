@@ -170,9 +170,11 @@ growproc(int n)
 	mencrypt((char *)old_sz, (sz - old_sz)/PGSIZE);
   } 
   else if(n < 0){
+	//uint old_sz = sz;
 	// TODO: if shrinking (deallocating pages), need to remove all those pages from the clock queue
     if((sz = deallocuvm(curproc->pgdir, sz, sz + n)) == 0)
       return -1;
+	// remove_from_clock((char *)old_sz, n); ???????????
   }
   curproc->sz = sz;
   switchuvm(curproc);
@@ -224,7 +226,12 @@ fork(void)
   release(&ptable.lock);
   
   // child get same clock as parent ??
-  np->c = curproc->c;
+  init_clock(&np->c);
+  
+  for(int i = 0; i < CLOCKSIZE; i++){
+	np->c.clock_queue[i].pte = curproc->c.clock_queue[i].pte;
+  }
+
 
   return pid;
 }

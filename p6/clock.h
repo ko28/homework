@@ -1,5 +1,5 @@
 typedef struct node {
-    int vpn;
+    //int vpn;
     pte_t *pte;
 } node;
 
