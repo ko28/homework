@@ -190,9 +190,11 @@ int 			getpgtable(struct pt_entry* entries, int num, int wsetOnly);
 int 			dump_rawphymem(uint physical_addr, char* buffer);
 int 			mencrypt(char *virtual_addr, int len);
 int 			mencrypt_all(char *virtual_addr, int len);
-void 			access_page(char* virtual_addr);
+int 			access_page(char* virtual_addr);
 void 			mencrypt_pte(pte_t *mypte);
 pte_t* 			walkpgdir(pde_t *pgdir, const void *va, int alloc);
+void 			clock_fork_copy(struct proc* parent, struct proc* child);
+
 void remove_from_clock(char* virtual_addr, int n);
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))

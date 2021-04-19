@@ -80,8 +80,8 @@ trap(struct trapframe *tf)
   case T_PGFLT:
   {
 		char *virtual_address = (char *) rcr2();
-		access_page(virtual_address);
-		break;
+		if(access_page(virtual_address))
+			break;
   }
   //PAGEBREAK: 13
   default:
