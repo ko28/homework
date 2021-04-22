@@ -284,7 +284,7 @@ deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)
         panic("kfree");
       char *v = P2V(pa);
       kfree(v);
-	  remove_clock(&myproc()->c, pte);
+	  //remove_clock(&myproc()->c, pte);
       *pte = 0;
     }
   }
@@ -458,51 +458,35 @@ int getpgtable_all(struct pt_entry* entries, int num) {
   return index;
 }
 
-int getpgtable(struct pt_entry* entries, int num, int wsetOnly){
-	if(wsetOnly == 0)
-		return getpgtable_all(entries, num);
-	
-	// TODO: add wsetOnly == 1 implementation 
-	struct proc *p = myproc();	
-	int n = 0;
-	for(int i = 0; (i < num) && (i < CLOCKSIZE); i++){
-		pte_t *pte = p->c.clock_queue[i].pte;
-		if(pte != (pte_t *)-1){
-			char* va = (char *)P2V(PTE_ADDR(*pte));
-			entries->pdx = PDX(va);
-			entries->ptx = PTX(va);
-			entries->ppage = PTE_ADDR(*pte) >> 12;
-			entries->present = (*pte & PTE_P) ? 1 : 0;
-			entries->writable = (*pte & PTE_W) ? 1 : 0;
-			entries->encrypted = (*pte & PTE_E) ? 1 : 0;
-			entries->user = (*pte & PTE_U) ? 1 : 0;
-			entries->ref = (*pte & PTE_A) ? 1 : 0;
-			entries++;
-			n++;
-		}
-	}
-	return n;
-}
-
-
-/*
 int inClockQueue(pte_t * pte){
   struct proc *p = myproc();
+  char* addr1 = (char *)PGROUNDDOWN((uint)P2V(PTE_ADDR(*(pte))));
+  //cprintf("addr1: %p\n", addr1);
   for(int i = 0; i < CLOCKSIZE; i++){
+	  char* addr2 = (char *)PGROUNDDOWN((uint)P2V(PTE_ADDR(*(p->c.clock_queue[i].pte))));
+	   // cprintf("addr2: %p\n", addr2);
+	  /*
     if(*(p->c.clock_queue[i].pte) == *pte){
+	  cprintf("match: %p\t%p\n", pte, p->c.clock_queue[i].pte );
       return 1;
     }
+	*/
+	//|| *addr1 == *addr2
+	if(addr1 != 0 && addr1 == addr2){
+		return 1;
+	}
   }
   return 0;
 }
 
-int getpgtable(struct pt_entry* entries, int num, int wsetOnly) {
-  struct proc * me = myproc();
 
+int getpgtable_wset(struct pt_entry* entries, int num){
+  struct proc * me = myproc();
+  
   int index = 0;
   pte_t * curr_pte;
   //reverse order
-
+  //cprintf("start %p\n",(void*) PGROUNDDOWN(((int)me->sz)));
   for (void * i = (void*) PGROUNDDOWN(((int)me->sz)); i >= 0 && index < num; i-=PGSIZE) {
     //walk through the page table and read the entries
     //Those entries contain the physical page number + flags
@@ -511,13 +495,8 @@ int getpgtable(struct pt_entry* entries, int num, int wsetOnly) {
 
     //currPage is 0 if page is not allocated
     //see deallocuvm
-
-    if (curr_pte && *curr_pte) {//this page is allocated
-	  if(wsetOnly == 1 && !inClockQueue(curr_pte)) 
-	    continue;
-        
-      	
-
+    if (curr_pte && *curr_pte && inClockQueue(curr_pte)) {//this page is allocated
+	  
       //this is the same for all pt_entries... right?
       entries[index].pdx = PDX(i); 
       entries[index].ptx = PTX(i);
@@ -531,50 +510,33 @@ int getpgtable(struct pt_entry* entries, int num, int wsetOnly) {
 	  entries[index].ref = (*curr_pte & PTE_A) ? 1 : 0;
       index++;
     }
+	if(i-PGSIZE > i || i == 0){ //why
+		break;
+	}
   }
   //index is the number of ptes copied
   return index;
 }
-*/
+
+
+
+int getpgtable(struct pt_entry* entries, int num, int wsetOnly){
+	//print_clock(&myproc()->c);
+	if(wsetOnly == 0)
+		return getpgtable_all(entries, num);
+	else if(wsetOnly == 1)
+		return getpgtable_wset(entries, num);
+	else
+		return -1;
+}
+
+
 
 
 // TODO: The buffer might be encrypted, in which case you should decrypt that page
 int dump_rawphymem(uint physical_addr, char* buffer){
-	/*
-	struct proc *p = myproc();
-	pte_t *pte = walkpgdir(p->pgdir, P2V(physical_addr), 0);
-	cprintf("p: %s\n", p->name);
-	int o = copyout(p->pgdir, (uint) buffer, (char *)PGROUNDDOWN((uint)P2V(physical_addr)), PGSIZE);
-	// is encrypted, so fliparoo
-	cprintf("pte_p %d\tpte_w %d\tpte_e %d\tpte_u %d\tpte_a %d\n",  
-			(*pte & PTE_P), 
-			(*pte & PTE_W), 
-			(*pte & PTE_E), 
-			(*pte & PTE_U), 
-			(*pte & PTE_A));
-			
-	if (*pte & PTE_E){
-		for (int offset = 0; offset < PGSIZE; offset++) {
-			*buffer = ~*buffer;
-			buffer++;
-		}
-	}
-	return o;
-	*/
-	//struct proc *p = myproc();
-	//pte_t *pte = walkpgdir(p->pgdir, P2V(physical_addr), 0);
 	*buffer = *buffer;
-	/*
-	// is encrypted, so fliparoo
-	cprintf("pte_p %d\tpte_w %d\tpte_e %d\tpte_u %d\tpte_a %d\n",  
-			(*pte & PTE_P), 
-			(*pte & PTE_W), 
-			(*pte & PTE_E), 
-			(*pte & PTE_U), 
-			(*pte & PTE_A));
-	*/
 	int retval = copyout(myproc()->pgdir, (uint) buffer, (void *) P2V(physical_addr), PGSIZE);
-
 	if (retval)
 		return -1;
 	return 0;
@@ -646,7 +608,7 @@ int mencrypt_all(char *virtual_addr, int len) {
       *slider = ~*slider;
       slider++;
     }
-	cprintf("mencrypt_all %d\n", i);
+	//cprintf("mencrypt_all %d\n", i);
     *mypte = *mypte & ~PTE_P;
     *mypte = *mypte | PTE_E;
   }
@@ -725,9 +687,9 @@ void clock_fork_copy(struct proc* parent, struct proc* child){
   for(int i = 0; i < CLOCKSIZE; i++){
 	if(parent->c.clock_queue[i].pte ==  (pte_t *) -1)
 	  continue;
-	char* addr = (char *)P2V(PTE_ADDR(*(parent->c.clock_queue[i].pte)));
+	char* addr = (char *)PGROUNDDOWN((uint)P2V(PTE_ADDR(*(parent->c.clock_queue[i].pte))));
 	pte_t *pte = walkpgdir(child->pgdir, addr, 0);
-	cprintf("parent %p, child %p\n", parent, child);
+	//cprintf("parent %p, child %p\n", parent, child);
 	child->c.clock_queue[i].pte = pte;
   }
   child->c.clock_hand = parent->c.clock_hand;

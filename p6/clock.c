@@ -79,6 +79,14 @@ remove_clock(struct clock *c, pte_t *pte)
 void print_clock(struct clock *c){
 	cprintf("clock print!\n");
 	for(int i = 0; i < CLOCKSIZE; i++){
-		cprintf("i: %d\tpte: %p\n", i, c->clock_queue[i].pte);
+		pte_t * pte = c->clock_queue[i].pte;
+		cprintf("i: %d\tpte %d\tpte_p %d\tpte_w %d\tpte_e %d\tpte_u %d\tpte_a %d\n",
+			i,
+			*pte,
+			(*pte & PTE_P), 
+			(*pte & PTE_W), 
+			(*pte & PTE_E), 
+			(*pte & PTE_U), 
+			(*pte & PTE_A));
 	}
 }

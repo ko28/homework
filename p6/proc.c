@@ -227,13 +227,14 @@ fork(void)
   
   // child get same clock as parent ??
   init_clock(&np->c);
+
   
+  clock_fork_copy(curproc, np);
+  /*
   for(int i = 0; i < CLOCKSIZE; i++){
 	np->c.clock_queue[i].pte = curproc->c.clock_queue[i].pte;
   }
-  
-  //clock_fork_copy(curproc, np);
-
+  */
 
   return pid;
 }
