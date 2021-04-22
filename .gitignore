@@ -74,3 +74,12 @@ fs.img
 kernelmemfs
 xv6memfs.img
 mkfs
+server.o
+request.o
+helper.o
+client.o
+helper.o
+server
+client
+output.cgi
+stat_process
