@@ -8,7 +8,7 @@ CLIENT_OBJS = client.o helper.o
 CC = gcc
 CFLAGS = -g -Werror -Wall -Wno-format-overflow -Wno-restrict
 
-LIBS = -lpthread 
+LIBS = -lpthread -lrt
 
 .SUFFIXES: .c .o 
 

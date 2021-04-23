@@ -23,7 +23,7 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-
+#include <time.h>
 
 /* Default file permissions are DEF_MODE & ~DEF_UMASK */
 /* $begin createmasks */
@@ -120,5 +120,13 @@ int open_listenfd(int portno);
 /* Wrappers for client/server helper functions */
 int Open_clientfd(char *hostname, int port);
 int Open_listenfd(int port); 
+
+typedef struct {
+    int thread_id;
+    int http_req;
+    int static_req;
+    int dynmaic_req;
+} slot_t;
+
 
 #endif /* __HELPER_H__ */
