@@ -15,3 +15,4 @@ git merge new-repo/master --allow-unrelated-histories
 git remote rm new-repo
 ```
 
+For those who are bored, read my sometimes funny and anxiety filled commit messages. 

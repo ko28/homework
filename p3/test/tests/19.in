@@ -1,7 +1,0 @@
-alias ls /bin/ls tests
-alias
-ls
-alias ls /bin/cat tests/19.desc
-alias
-ls
-exit

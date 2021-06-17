@@ -1,4 +1,0 @@
-alias ls /bin/ls
-unalias
-alias
-exit

@@ -1,3 +1,0 @@
-alias catthat /bin/cat tests-out/tmp.txt
-/bin/echo hello there >tests-out/tmp.txt
-catthat
